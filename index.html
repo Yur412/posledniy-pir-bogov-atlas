@@ -547,23 +547,23 @@ body:has(.bestiary-page:target) #world,body:has(.bestiary-page:target) .characte
     }catch(e){}
   }
 
-  // Hook into the existing dice roll function; this does not alter the random result.
+  // Start the sound on pointerdown: mobile Safari can suspend audio until a direct gesture.
   const oldRollCards = Array.from(document.querySelectorAll('.die-card'));
   oldRollCards.forEach(card => {
-    card.addEventListener('click', playDiceClatter, {capture:true});
+    card.addEventListener('pointerdown', playDiceClatter, {capture:true});
   });
   const allButton = document.querySelector('.dice-roll-all');
-  if(allButton) allButton.addEventListener('click', playDiceClatter, {capture:true});
+  if(allButton) allButton.addEventListener('pointerdown', playDiceClatter, {capture:true});
 })();
 </script><script>
 (function(){
  const AC=window.AudioContext||window.webkitAudioContext;
  let ctx=null;
- function uiClick(){
+ async function uiClick(){
   if(!AC) return;
   try{
    if(!ctx) ctx=new AC();
-   if(ctx.state==='suspended') ctx.resume();
+   if(ctx.state==='suspended') await ctx.resume();
    const now=ctx.currentTime;
    const osc=ctx.createOscillator(), gain=ctx.createGain(), filter=ctx.createBiquadFilter();
    osc.type='triangle'; osc.frequency.setValueAtTime(740,now);
@@ -576,8 +576,8 @@ body:has(.bestiary-page:target) #world,body:has(.bestiary-page:target) .characte
    osc.start(now); osc.stop(now+0.06);
   }catch(e){}
  }
- document.addEventListener('click',function(event){
-  const el=event.target.closest('a, summary, .back, nav.tabs a');
+ document.addEventListener('pointerdown',function(event){
+  const el=event.target.closest('a, summary, button, .back, nav.tabs a');
   if(!el || el.id==='sound-toggle' || el.closest('#dice')) return;
   uiClick();
  },true);
