@@ -445,7 +445,7 @@ body:has(.bestiary-page:target) #world,body:has(.bestiary-page:target) .characte
 
   async function startMusic(){
     if(!soundEnabled) return;
-    music.volume = 0.04;
+    music.volume = 1;
     try{
       await music.play();
       if(soundEnabled){
@@ -504,7 +504,7 @@ body:has(.bestiary-page:target) #world,body:has(.bestiary-page:target) .characte
       if(!musicSource){
         musicSource = ctx.createMediaElementSource(music);
         musicGain = ctx.createGain();
-        musicGain.gain.setValueAtTime(0.045, ctx.currentTime);
+        musicGain.gain.setValueAtTime(0.8, ctx.currentTime);
         musicSource.connect(musicGain);
         musicGain.connect(ctx.destination);
       }
