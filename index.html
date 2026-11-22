@@ -80,8 +80,21 @@ body:has(.dice-page:target) .detail{display:none}
 #dice-history li strong{font-size:16px;color:#f1cc7d}
 #dice-history .dice-empty{display:block;text-align:center;color:#908674;padding:15px}
 @media(max-width:600px){.dice-page{margin:6px;padding:10px}.dice-grid{gap:7px}.die-card{padding:10px 5px}.die-gem{width:84px;height:82px}.die-name{font-size:21px}.die-label{font-size:9px;min-height:34px}.die-result{font-size:26px;min-width:55px;min-height:45px;padding:3px 10px}.dice-title{font-size:25px}.dice-roll-all{font-size:14px;padding:10px 12px}}
+
+/* Bestiary screen */
+.bestiary-page{display:none;max-width:1200px;margin:12px auto;padding:14px;border:3px ridge #a77b3c;background:linear-gradient(145deg,#1c1b22,#10151d);box-shadow:0 0 0 2px #3b2b1d inset}
+.bestiary-page:target{display:block}
+body:has(.bestiary-page:target) #world,body:has(.bestiary-page:target) .characters,body:has(.bestiary-page:target) .dice-page,body:has(.bestiary-page:target) .detail{display:none}
+.bestiary-title{text-align:center;color:#f0d29a;font-size:30px;font-weight:normal;margin:8px 0}
+.bestiary-intro{text-align:center;font:13px/1.5 system-ui;color:#c8b99b;max-width:720px;margin:0 auto 20px}
+.bestiary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.bestiary-category{min-width:0;min-height:190px;padding:18px 14px;border:3px ridge #98703b;background:linear-gradient(145deg,#29252a,#141820);color:#eadfca;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.bestiary-symbol{font-size:38px;line-height:1.2;color:#d8ad63;text-shadow:2px 2px #3b211c;margin-bottom:10px}
+.bestiary-category h3{font-size:21px;font-weight:normal;letter-spacing:.08em;color:#f0d29a;margin:4px 0 9px}
+.bestiary-category p{font:13px/1.5 system-ui;color:#c8b99b;margin:0;max-width:390px}
+@media(max-width:600px){.bestiary-page{margin:6px;padding:10px}.bestiary-grid{gap:8px}.bestiary-category{min-height:165px;padding:12px 8px}.bestiary-category h3{font-size:16px}.bestiary-category p{font-size:11px}.bestiary-symbol{font-size:30px}.bestiary-title{font-size:25px}}
 </style></head><body><audio id="bg-music" loop="" playsinline="" preload="auto"><source src="atlasdata:a001" type="audio/mpeg"/></audio>
-<header><div class="brand">✦ Последний пир богов ✦</div><nav class="tabs"><a href="#world">Карта мира</a><a href="#characters">Персонажи</a><a href="#dice">Кубики</a></nav><button aria-pressed="true" id="sound-toggle" title="Включить или выключить фоновую музыку и звук кубиков" type="button">♫ Включить музыку</button></header>
+<header><div class="brand">✦ Последний пир богов ✦</div><nav class="tabs"><a href="#world">Карта мира</a><a href="#characters">Персонажи</a><a href="#bestiary">Бестиарий</a><a href="#dice">Кубики</a></nav><button aria-pressed="true" id="sound-toggle" title="Включить или выключить фоновую музыку и звук кубиков" type="button">♫ Включить музыку</button></header>
 <main class="layout" id="world"><section class="mapbox"><div class="maphead">КАРТА ОСТРОВА · ВЫБЕРИ МЕСТО</div><div class="map">
 <a class="pin" href="#loc-veyr" style="left:48%;top:51%">Вейр</a>
 <a class="pin" href="#loc-sanctuary" style="left:34%;top:68%">Пепельное святилище Диониса</a>
@@ -295,7 +308,17 @@ body:has(.dice-page:target) .detail{display:none}
 <p><strong>Способности:</strong> Крылатый рывок — быстро меняет позицию. Когтистая расправа — атака D8. Птичий крик — резкий крик, способный ошеломить.</p>
 <p><strong>Недостаток:</strong> Тянется к украшениям и не умеет хранить секреты дольше пяти минут.</p>
 <p><strong>Снаряжение:</strong> Два коротких клинка, кожаный жилет, украденные украшения.</p>
-<p><strong>Цель:</strong> Вернуть украденный сундук, не зная, что находится внутри.</p></div></article></section><section class="dice-page" id="dice">
+<p><strong>Цель:</strong> Вернуть украденный сундук, не зная, что находится внутри.</p></div></article></section><section class="bestiary-page" id="bestiary">
+<a class="back" href="#world">← Вернуться к карте острова</a>
+<h2 class="bestiary-title">Бестиарий</h2>
+<p class="bestiary-intro">Каталог богов, чудовищ и других существ мира «Последнего пира богов». Выбери раздел, чтобы открыть его будущие записи.</p>
+<div class="bestiary-grid">
+<article class="bestiary-category"><div class="bestiary-symbol" aria-hidden="true">♜</div><h3>БОГИ</h3><p>Божества и обитатели божественного мира, известные смертным и влияющие на судьбы мира.</p></article>
+<article class="bestiary-category"><div class="bestiary-symbol" aria-hidden="true">⚔</div><h3>МОНСТРЫ</h3><p>Опасные чудовища и фантастические создания, с которыми можно столкнуться в путешествии.</p></article>
+<article class="bestiary-category"><div class="bestiary-symbol" aria-hidden="true">☽</div><h3>ДУХИ</h3><p>Духи и сверхъестественные сущности, существующие за пределами привычного мира.</p></article>
+<article class="bestiary-category"><div class="bestiary-symbol" aria-hidden="true">✧</div><h3>ДРУГИЕ СУЩЕСТВА</h3><p>Необычные обитатели мира, которые не относятся к первым трём разделам.</p></article>
+</div>
+</section><section class="dice-page" id="dice">
 <a class="back" href="#world">← Вернуться к карте острова</a>
 <h2 class="dice-title">Кости судьбы</h2>
 <p class="dice-intro">Выбери нужный кубик и нажми на него. Он прокрутится и покажет случайный результат. Можно бросить сразу все три.</p><p id="sound-hint">Музыка начнёт играть после первого нажатия — браузеры iPhone блокируют автозапуск звука.</p>
