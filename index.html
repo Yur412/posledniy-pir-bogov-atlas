@@ -504,7 +504,7 @@ body:has(.bestiary-page:target) #world,body:has(.bestiary-page:target) .characte
       if(!musicSource){
         musicSource = ctx.createMediaElementSource(music);
         musicGain = ctx.createGain();
-        musicGain.gain.setValueAtTime(0.8, ctx.currentTime);
+        musicGain.gain.setValueAtTime(0.65, ctx.currentTime);
         musicSource.connect(musicGain);
         musicGain.connect(ctx.destination);
       }
