@@ -82,6 +82,19 @@ body:has(.dice-page:target) .detail{display:none}
 @media(max-width:600px){.dice-page{margin:6px;padding:10px}.dice-grid{gap:7px}.die-card{padding:10px 5px}.die-gem{width:84px;height:82px}.die-name{font-size:21px}.die-label{font-size:9px;min-height:34px}.die-result{font-size:26px;min-width:55px;min-height:45px;padding:3px 10px}.dice-title{font-size:25px}.dice-roll-all{font-size:14px;padding:10px 12px}}
 
 /* Bestiary screen */
+.god-page{display:none;max-width:1100px;margin:12px auto;padding:16px;border:3px ridge #a77b3c;background:linear-gradient(145deg,#1c1b22,#10151d);box-shadow:0 0 0 2px #3b2b1d inset;color:#eadfca}
+.god-page:target{display:block}
+body:has(.god-page:target) #world,body:has(.god-page:target) .characters,body:has(.god-page:target) .dice-page,body:has(.god-page:target) .detail,body:has(.god-page:target) .bestiary-page{display:none}
+.god-title{text-align:center;color:#f0d29a;font-size:30px;font-weight:normal;margin:8px 0 20px}
+.god-entry{display:grid;grid-template-columns:minmax(180px,34%) 1fr;gap:20px;align-items:start}
+.god-portrait{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border:3px ridge #98703b;box-shadow:0 4px 18px #000}
+.god-copy h3{color:#f0d29a;font-size:25px;font-weight:normal;margin:0 0 5px}
+.god-copy h4{color:#e2b96e;font-size:17px;font-weight:normal;margin:18px 0 6px}
+.god-copy p,.god-copy li{font:14px/1.65 system-ui;color:#d6c9b0}
+.god-copy ul{padding-left:22px}
+.god-subtitle{font-style:italic;color:#c8b99b!important;margin-top:0}
+.bestiary-category[href]{text-decoration:none}
+@media(max-width:650px){.god-entry{grid-template-columns:1fr}.god-portrait{max-width:360px;justify-self:center}.god-copy p,.god-copy li{font-size:13px}}
 .bestiary-page{display:none;max-width:1200px;margin:12px auto;padding:14px;border:3px ridge #a77b3c;background:linear-gradient(145deg,#1c1b22,#10151d);box-shadow:0 0 0 2px #3b2b1d inset}
 .bestiary-page:target{display:block}
 body:has(.bestiary-page:target) #world,body:has(.bestiary-page:target) .characters,body:has(.bestiary-page:target) .dice-page,body:has(.bestiary-page:target) .detail{display:none}
@@ -313,12 +326,32 @@ body:has(.bestiary-page:target) #world,body:has(.bestiary-page:target) .characte
 <h2 class="bestiary-title">Бестиарий</h2>
 <p class="bestiary-intro">Каталог богов, чудовищ и других существ мира «Последнего пира богов». Выбери раздел, чтобы открыть его будущие записи.</p>
 <div class="bestiary-grid">
-<article class="bestiary-category"><div class="bestiary-symbol" aria-hidden="true">♜</div><h3>БОГИ</h3><p>Божества и обитатели божественного мира, известные смертным и влияющие на судьбы мира.</p></article>
+<a class="bestiary-category" href="#gods"><div class="bestiary-symbol" aria-hidden="true">♜</div><h3>БОГИ</h3><p>Божества и обитатели божественного мира. Открыть записи.</p></a>
 <article class="bestiary-category"><div class="bestiary-symbol" aria-hidden="true">⚔</div><h3>МОНСТРЫ</h3><p>Опасные чудовища и фантастические создания, с которыми можно столкнуться в путешествии.</p></article>
 <article class="bestiary-category"><div class="bestiary-symbol" aria-hidden="true">☽</div><h3>ДУХИ</h3><p>Духи и сверхъестественные сущности, существующие за пределами привычного мира.</p></article>
 <article class="bestiary-category"><div class="bestiary-symbol" aria-hidden="true">✧</div><h3>ДРУГИЕ СУЩЕСТВА</h3><p>Необычные обитатели мира, которые не относятся к первым трём разделам.</p></article>
 </div>
-</section><section class="dice-page" id="dice">
+</section><section class="god-page" id="gods">
+<a class="back" href="#bestiary">← Вернуться к бестиарию</a>
+<h2 class="god-title">Боги Олимпа</h2>
+<article class="god-entry">
+<img class="god-portrait" src="assets/zeus.jpg" alt="Зевс — верховный бог Олимпа" loading="eager"/>
+<div class="god-copy">
+<h3>ЗЕВС</h3>
+<p class="god-subtitle">Верховный бог Олимпа. Повелитель грома, молний и небес.</p>
+<h4>Внешность</h4>
+<p>Зевс — маленький, толстый, совершенно лысый старикашка с отвратительной внешностью. Его лицо покрыто глубокими морщинами, кожа рыхлая и нездоровая, нос большой и красный, а редкие седые волоски торчат по бокам головы. У него маленькие мутные глазки, постоянно оценивающе разглядывающие окружающих, и мерзкая ухмылка, которая практически никогда не исчезает с лица. Одевается в дорогие, но безвкусные одеяния, обвешивается золотыми украшениями и носит корону из лавровых ветвей. Несмотря на свой жалкий вид, Зевс считает себя невероятно привлекательным и не упускает возможности напомнить окружающим о своей божественной красоте.</p>
+<h4>Характер</h4>
+<p>Зевс — высокомерный, похотливый, капризный и крайне неприятный тип. Он привык получать всё, чего пожелает, и совершенно не понимает отказов. Обожает власть, лесть, роскошь и внимание к собственной персоне. Может часами рассказывать о своих великих подвигах, преувеличивая каждую мелочь, а любое несогласие воспринимает как личное оскорбление. Злопамятен, мелочен и совершенно не стесняется использовать своё положение, чтобы унижать остальных.</p>
+<p>К смертным относится как к ничтожным букашкам. Их молитвы и страдания его практически не интересуют, хотя иногда он может обратить на кого-нибудь внимание, если тот покажется ему забавным или полезным. Любит вмешиваться в чужие дела, особенно когда речь идёт о соблазнении очередной красавицы или наказании того, кто посмел задеть его самолюбие.</p>
+<h4>Божественные способности</h4>
+<p>Зевс обладает властью над небом, бурями, громом и молниями. Способен призывать чудовищные грозы, обрушивать молнии на целые города, управлять ветрами и менять погоду по собственной прихоти. Его оружие — божественная молния, способная испепелять практически всё, к чему прикоснётся. Несмотря на свою нелепую внешность, Зевс обладает колоссальной силой, а его гнев способен обернуться настоящей катастрофой.</p>
+<h4>Особенности и причуды</h4>
+<ul><li>Искренне считает себя самым красивым существом во вселенной.</li><li>Терпеть не может, когда его перебивают.</li><li>Обожает, когда ему кланяются и целуют руки.</li><li>Постоянно пытается флиртовать, даже когда ситуация совершенно неподходящая.</li><li>Называет себя отцом всего сущего и регулярно напоминает об этом окружающим.</li><li>Может устроить страшную бурю из-за сущей мелочи.</li><li>Особенно не любит Аида, поскольку тот совершенно не впечатляется его величием и разговаривает с ним как с обычным неприятным знакомым.</li></ul>
+<h4>Отношение к остальным богам</h4>
+<p>Зевс считает себя безусловным главой пантеона и ожидает, что остальные будут исполнять его желания. Одних он терпит, других презирает, третьих побаивается, но никогда в этом не признается. Аид раздражает его своим спокойствием и отсутствием подобострастия. Афродиту он считает воплощением совершенства и, разумеется, периодически пытается обратить на себя её внимание.</p>
+</div></article></section>
+<section class="dice-page" id="dice">
 <a class="back" href="#world">← Вернуться к карте острова</a>
 <h2 class="dice-title">Кости судьбы</h2>
 <p class="dice-intro">Выбери нужный кубик и нажми на него. Он прокрутится и покажет случайный результат. Можно бросить сразу все три.</p><p id="sound-hint">Музыка начнёт играть после первого нажатия — браузеры iPhone блокируют автозапуск звука.</p>
