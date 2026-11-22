@@ -493,6 +493,25 @@ body:has(.bestiary-page:target) #world,body:has(.bestiary-page:target) .characte
     return audioContext;
   }
 
+  // iOS Safari may ignore HTMLMediaElement.volume. Route background music
+  // through a dedicated Web Audio gain node after the first user gesture.
+  let musicSource = null;
+  let musicGain = null;
+  document.addEventListener('pointerdown', async function(){
+    try{
+      const ctx = getAudioContext();
+      if(!ctx) return;
+      if(!musicSource){
+        musicSource = ctx.createMediaElementSource(music);
+        musicGain = ctx.createGain();
+        musicGain.gain.setValueAtTime(0.045, ctx.currentTime);
+        musicSource.connect(musicGain);
+        musicGain.connect(ctx.destination);
+      }
+      if(ctx.state === 'suspended') await ctx.resume();
+    }catch(e){}
+  }, {once:true, capture:true});
+
   function tap(ctx, when, strength, pitch){
     const duration = 0.055;
     const length = Math.max(1, Math.floor(ctx.sampleRate * duration));
