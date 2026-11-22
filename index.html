@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+
+<html lang="ru"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><meta content="#090e16" name="theme-color"/><title>Последний пир богов — карта мира</title><style>
+*{box-sizing:border-box}body{margin:0;background:#090e16;color:#eadfca;font-family:Georgia,serif}header{height:auto;padding:12px 18px;border-bottom:2px solid #866333;background:linear-gradient(#17151a,#090e16);display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}.brand{font-size:clamp(19px,3vw,30px);color:#e8bd6b;text-shadow:2px 2px #512b20}.tabs{display:flex;gap:8px;flex-wrap:wrap}.tabs span{border:2px solid #9a713a;padding:8px 12px;background:#211a1b;color:#e7d5b2;font-size:13px}.tabs span:first-child{background:#692b30}.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:10px;max-width:1600px;margin:auto}.mapbox,.side{border:3px ridge #a77b3c;background:#171821;box-shadow:0 0 0 2px #3b2b1d inset;min-width:0}.maphead{padding:9px 12px;color:#e7c47e;letter-spacing:.18em;font-size:12px;border-bottom:1px solid #77552e}.map{position:relative;aspect-ratio:1000/720;background-image:url('atlasdata:a000');background-size:100% 100%;overflow:hidden}.pin{position:absolute;transform:translate(-50%,-50%);text-decoration:none;color:#20170f;background:#ead29b;border:2px solid #5e3c20;padding:4px 7px;font:bold 11px Georgia,serif;box-shadow:2px 3px #0b0b0b;white-space:nowrap}.pin:before{content:"";display:inline-block;width:9px;height:9px;background:#b52e2b;border:2px solid #f4d28a;border-radius:50%;margin-right:5px;vertical-align:middle}.pin:hover,.pin:focus{background:#fff0bd;outline:2px solid #e4b657;z-index:2}.side{padding:12px}.side h2{font-size:25px;text-align:center;color:#f0d29a;margin:4px 0 12px}.side .lede{font:13px/1.45 system-ui;color:#d4c6ad;margin:10px 2px 14px}.city-art{width:100%;height:150px;object-fit:cover;image-rendering:pixelated;border:3px ridge #a77b3c;background:#28313b}.loc-title{font-size:13px;letter-spacing:.14em;text-align:center;color:#e4bd71;margin:15px 0 9px}.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.tile{display:block;text-decoration:none;color:#eee0c7;background:#191820;border:2px ridge #98703b;overflow:hidden}.tile img{display:block;width:100%;aspect-ratio:16/8;object-fit:cover;image-rendering:pixelated}.tile b{display:block;text-align:center;padding:6px 4px;font-size:12px;font-weight:normal}.detail{display:none;max-width:1100px;margin:10px auto;padding:15px;border:3px ridge #a77b3c;background:#171821}.detail:target{display:block}.detail h2{color:#f0d29a;text-align:center;font-size:26px;margin:5px}.detail p{font:14px/1.5 system-ui;color:#d4c6ad}.detail .subtiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.detail .tile img{aspect-ratio:16/9}.back{display:inline-block;color:#f0d29a;text-decoration:none;border:1px solid #98703b;padding:8px 12px;margin:6px 0}.foot{text-align:center;color:#81745f;font:11px system-ui;padding:18px}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.mapbox{order:1}.side{order:2}.map{min-height:300px}.pin{font-size:9px;padding:3px 4px}.side .city-art{height:190px}}
+@media(max-width:480px){header{padding:10px}.layout{padding:6px}.pin{font-size:7px;padding:2px 3px;border-width:1px}.pin:before{width:6px;height:6px;margin-right:2px}.side .city-art{height:140px}.detail .subtiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.tabs a{display:inline-block;border:2px solid #9a713a;padding:8px 12px;background:#211a1b;color:#e7d5b2;font-size:13px;text-decoration:none}
+.tabs a:first-child{background:#692b30}.tabs a:hover,.tabs a:focus{background:#794b2e;outline:2px solid #e8bd6b}
+.characters{display:none;max-width:1500px;margin:12px auto;padding:14px;border:3px ridge #a77b3c;background:#171821}
+.characters:target{display:block}
+body:has(.characters:target) #world{display:none}
+.char-head{text-align:center;color:#e8bd6b;font-size:26px;margin:6px 0 4px}
+.char-intro{text-align:center;color:#c8b99b;font:13px/1.5 system-ui;margin:0 0 16px}
+.char-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.char-card{display:grid;grid-template-columns:130px 1fr;gap:12px;border:2px ridge #8f6a39;background:linear-gradient(145deg,#26232a,#141820);padding:10px;min-width:0}
+.char-portrait{width:100%;align-self:start;image-rendering:pixelated;border:2px solid #a77b3c;background:#252833}
+.char-card h3{font-size:20px;color:#f0d29a;margin:0 0 4px}
+.char-race{font:11px system-ui;letter-spacing:.12em;color:#c59b5d;margin-bottom:8px}
+.char-stats{display:flex;gap:8px;flex-wrap:wrap;margin:7px 0 9px}
+.char-stats b{font:12px system-ui;color:#f2d9a4;border:1px solid #73572f;padding:5px 7px;background:#211d1c}
+.char-card p{font:12px/1.45 system-ui;color:#d1c5b0;margin:6px 0}
+.char-card strong{color:#e6bd78;font-weight:600}
+@media(max-width:650px){.char-grid{grid-template-columns:1fr}.char-card{grid-template-columns:100px 1fr;gap:9px;padding:8px}.char-card h3{font-size:17px}.characters{margin:6px;padding:9px}}
+
+.location-hero{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated;border:3px ridge #a77b3c;background:#202a32;margin:12px 0 5px}
+.public-caption{font:13px/1.45 system-ui;color:#d4c6ad;text-align:center;margin:4px 8px 14px}
+.tile small{display:block;padding:0 8px 9px;text-align:center;font:11px/1.35 system-ui;color:#bfb29a;min-height:42px}
+.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+.tile img{aspect-ratio:16/9}
+.scene-hero{margin-top:16px}
+.detail>p{font:14px/1.5 system-ui;color:#d4c6ad}
+@media(max-width:480px){.tile small{font-size:10px;min-height:48px}.location-hero{border-width:2px}}
+
+.location-hero{width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated;border:3px ridge #a77b3c;background:#202a32;display:block;margin:12px 0 6px}
+.tile img{width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated;display:block}
+.tile small{display:block;padding:0 8px 9px;text-align:center;color:#c9b99d;font:11px/1.4 system-ui;min-height:42px}
+.public-caption{font:13px/1.5 system-ui;color:#d8c9ad;text-align:center;margin:5px 6px 14px}
+.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:520px){.tile small{font-size:10px;min-height:48px}.detail{padding:10px}.location-hero{border-width:2px}}
+
+/* Character portraits */
+.char-card{grid-template-columns:172px minmax(0,1fr);align-items:start}
+.char-portrait{width:100%;height:auto;aspect-ratio:279/405;object-fit:cover;object-position:center top;border:3px ridge #bd9148;box-shadow:0 0 14px #0009;image-rendering:auto;background:#20232c}
+.char-card h3{font-size:21px}
+@media(max-width:650px){.char-card{grid-template-columns:112px minmax(0,1fr)}.char-portrait{border-width:2px}.char-card h3{font-size:17px}}
+/* Dice screen */
+.tabs a{display:inline-block;border:2px solid #9a713a;padding:8px 12px;background:#211a1b;color:#e7d5b2;font-size:13px;text-decoration:none}
+.tabs a:hover,.tabs a:focus{background:#794b2e;outline:2px solid #e8bd6b}
+.dice-page{display:none;max-width:1120px;margin:12px auto;padding:14px;border:3px ridge #a77b3c;background:linear-gradient(145deg,#1c1b22,#10151d);box-shadow:0 0 0 2px #3b2b1d inset}
+.dice-page:target{display:block}
+body:has(.dice-page:target) #world{display:none}
+body:has(.dice-page:target) .characters{display:none}
+body:has(.dice-page:target) .detail{display:none}
+.dice-title{text-align:center;color:#f0d29a;font-size:30px;font-weight:normal;margin:8px 0}
+.dice-intro{text-align:center;font:13px/1.5 system-ui;color:#c8b99b;max-width:680px;margin:0 auto 20px}
+.dice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.die-card{display:flex;flex-direction:column;align-items:center;gap:7px;min-width:0;border:2px ridge #9a713a;background:linear-gradient(180deg,#29252a,#151820);color:#eedbb5;padding:14px 10px 13px;cursor:pointer;transition:filter .2s,transform .2s;box-shadow:0 5px 14px #0007}
+.die-card:active{transform:translateY(2px)}
+.die-card:hover{filter:brightness(1.16)}
+.die-label{font:10px/1.35 system-ui;color:#c1b18e;min-height:28px;text-align:center}
+.die-gem{display:grid;place-items:center;width:132px;height:122px;max-width:100%}
+.die-gem svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 7px 5px #0009)}
+.die-name{font-size:27px;color:#f3d18a;letter-spacing:.08em}
+.die-range{font:11px system-ui;color:#aaa08b}
+.die-result{display:grid;place-items:center;min-width:78px;min-height:56px;padding:2px 16px;border:1px solid #815f35;background:#0f121a;color:#ffe4a8;font-size:34px;line-height:1;text-shadow:0 0 9px #d99e48}
+.die-card.rolling .die-gem{animation:dice-tumble .86s cubic-bezier(.2,.75,.25,1)}
+.die-card.rolling .die-gem svg{animation:dice-spin .86s ease-in-out}
+@keyframes dice-tumble{0%{transform:translateY(0) rotate(0) scale(1)}20%{transform:translateY(-22px) rotate(100deg) scale(1.12)}45%{transform:translateY(7px) rotate(240deg) scale(.92)}70%{transform:translateY(-10px) rotate(420deg) scale(1.06)}100%{transform:translateY(0) rotate(720deg) scale(1)}}
+@keyframes dice-spin{0%{filter:brightness(1)}40%{filter:brightness(1.8)}100%{filter:brightness(1)}}
+.dice-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:18px 0}
+.dice-roll-all,.dice-clear{border:2px ridge #a77b3c;padding:12px 18px;background:#65282e;color:#ffe7b3;font:16px Georgia,serif;cursor:pointer}
+.dice-clear{background:#252630;color:#d0c2a8;font-size:13px}
+.dice-history-box{border:1px solid #795b36;background:#121720;padding:12px 14px;margin-top:18px}
+.dice-history-head{display:flex;align-items:center;justify-content:space-between;gap:8px;border-bottom:1px solid #55432c;padding-bottom:8px}
+.dice-history-head h3{margin:0;color:#edca88;font-size:18px;font-weight:normal}
+.dice-history-head span{font:11px system-ui;color:#b4a486}
+#dice-history{list-style:none;margin:0;padding:0;max-height:260px;overflow:auto}
+#dice-history li{display:flex;justify-content:space-between;gap:10px;padding:9px 4px;border-bottom:1px solid #34333a;color:#d8cbb3;font:13px system-ui}
+#dice-history li strong{font-size:16px;color:#f1cc7d}
+#dice-history .dice-empty{display:block;text-align:center;color:#908674;padding:15px}
+@media(max-width:600px){.dice-page{margin:6px;padding:10px}.dice-grid{gap:7px}.die-card{padding:10px 5px}.die-gem{width:84px;height:82px}.die-name{font-size:21px}.die-label{font-size:9px;min-height:34px}.die-result{font-size:26px;min-width:55px;min-height:45px;padding:3px 10px}.dice-title{font-size:25px}.dice-roll-all{font-size:14px;padding:10px 12px}}
+</style></head><body><audio id="bg-music" loop="" playsinline="" preload="auto"><source src="atlasdata:a001" type="audio/mpeg"/></audio>
+<header><div class="brand">✦ Последний пир богов ✦</div><nav class="tabs"><a href="#world">Карта мира</a><a href="#characters">Персонажи</a><a href="#dice">Кубики</a></nav><button aria-pressed="true" id="sound-toggle" title="Включить или выключить фоновую музыку и звук кубиков" type="button">♫ Включить музыку</button></header>
+<main class="layout" id="world"><section class="mapbox"><div class="maphead">КАРТА ОСТРОВА · ВЫБЕРИ МЕСТО</div><div class="map">
+<a class="pin" href="#loc-veyr" style="left:48%;top:51%">Вейр</a>
+<a class="pin" href="#loc-sanctuary" style="left:34%;top:68%">Пепельное святилище Диониса</a>
+<a class="pin" href="#loc-archive" style="left:66%;top:25%">Архив Молчаливых Имен</a>
+<a class="pin" href="#loc-orhad" style="left:52%;top:37%">Ор-Хад</a>
+<a class="pin" href="#loc-fortress" style="left:19%;top:78%">Крепость Семерых Врат</a>
+<a class="pin" href="#loc-hallfinal" style="left:79%;top:82%">Чертог Пустого Места</a>
+<a class="pin" href="#loc-village" style="left:22%;top:44%">Липовый Брод</a>
+<a class="pin" href="#loc-blackport" style="left:12%;top:57%">Чёрная Пристань</a>
+<a class="pin" href="#loc-mines" style="left:15%;top:67%">Соляные Карьеры</a>
+<a class="pin" href="#loc-swamp" style="left:20%;top:57%">Пепельная Топь</a>
+<a class="pin" href="#loc-pass" style="left:30%;top:17%">Костяной Перевал</a>
+<a class="pin" href="#loc-sunken" style="left:78%;top:58%">Затонувшая Часовня</a>
+<a class="pin" href="#loc-manor" style="left:72%;top:35%">Охотничий Дом князя</a>
+<a class="pin" href="#loc-grove" style="left:60%;top:65%">Разорённая Дубрава</a>
+<a class="pin" href="#loc-fair" style="left:72%;top:47%">Ярмарка Девяти Дорог</a>
+</div></section></main>
+<section class="detail" id="loc-veyr"><a class="back" href="#">← К карте острова</a><h2>Вейр — город тысячи сделок</h2><img alt="Крупный вольный город у залива: тесные кварталы, каменные башни, торговые площади и гавань, полная парусных судов." class="location-hero" src="atlasdata:a002"/><p class="public-caption">Крупный вольный город у залива: тесные кварталы, каменные башни, торговые площади и гавань, полная парусных судов.</p><p>Вольный торговый город, где пересекаются купцы, наёмники и искатели приключений.</p><div class="subtiles">
+<a class="tile" href="#scene-veyr-0"><img alt="Мощёная площадь с рядами навесов, телегами, прилавками и каменным колодцем." src="atlasdata:a003"/><b>Рыночная площадь</b><small>Мощёная площадь с рядами навесов, телегами, прилавками и каменным колодцем.</small></a>
+<a class="tile" href="#scene-veyr-1"><img alt="Двухэтажный трактир с деревянной вывеской, тёплыми окнами, широкими дверями и дымящей трубой." src="atlasdata:a004"/><b>Трактир «Последняя кружка»</b><small>Двухэтажный трактир с деревянной вывеской, тёплыми окнами, широкими дверями и дымящей трубой.</small></a>
+<a class="tile" href="#scene-veyr-2"><img alt="Каменное здание с гербами купеческих домов, арочными окнами и внутренним двором." src="atlasdata:a005"/><b>Гильдия торговцев</b><small>Каменное здание с гербами купеческих домов, арочными окнами и внутренним двором.</small></a>
+<a class="tile" href="#scene-veyr-3"><img alt="Тёмные подвальные проходы, низкие двери, закрытые лавки и тусклые фонари." src="atlasdata:a006"/><b>Чёрный рынок</b><small>Тёмные подвальные проходы, низкие двери, закрытые лавки и тусклые фонари.</small></a>
+<a class="tile" href="#scene-veyr-4"><img alt="Небольшой каменный храм с колоннами, внутренним двориком и простым алтарём." src="atlasdata:a007"/><b>Городской храм</b><small>Небольшой каменный храм с колоннами, внутренним двориком и простым алтарём.</small></a>
+<a class="tile" href="#scene-veyr-5"><img alt="Деревянные пирсы, пришвартованные суда, краны, канаты и ряды грузовых складов." src="atlasdata:a008"/><b>Порт и пристани</b><small>Деревянные пирсы, пришвартованные суда, краны, канаты и ряды грузовых складов.</small></a>
+<a class="tile" href="#scene-veyr-6"><img alt="Высокие каменные ворота с башнями, решёткой, караульными нишами и дорогой за стенами." src="atlasdata:a009"/><b>Городские ворота</b><small>Высокие каменные ворота с башнями, решёткой, караульными нишами и дорогой за стенами.</small></a>
+<a class="tile" href="#scene-veyr-7"><img alt="Каменное банное здание с паром над бассейнами, внутренним двориком и низкими сводами." src="atlasdata:a010"/><b>Общественные бани</b><small>Каменное банное здание с паром над бассейнами, внутренним двориком и низкими сводами.</small></a>
+</div></section>
+<section class="detail" id="scene-veyr-0"><a class="back" href="#loc-veyr">← К Вейр</a><h2>Рыночная площадь</h2><img alt="Мощёная площадь с рядами навесов, телегами, прилавками и каменным колодцем." class="location-hero scene-hero" src="atlasdata:a003"/><p class="public-caption">Мощёная площадь с рядами навесов, телегами, прилавками и каменным колодцем.</p><img alt="" class="city-art" src="atlasdata:a011"/><p>Торговые ряды, менялы и шумные сделки.</p></section>
+<section class="detail" id="scene-veyr-1"><a class="back" href="#loc-veyr">← К Вейр</a><h2>Трактир «Последняя кружка»</h2><img alt="Двухэтажный трактир с деревянной вывеской, тёплыми окнами, широкими дверями и дымящей трубой." class="location-hero scene-hero" src="atlasdata:a004"/><p class="public-caption">Двухэтажный трактир с деревянной вывеской, тёплыми окнами, широкими дверями и дымящей трубой.</p><img alt="" class="city-art" src="atlasdata:a012"/><p>Постоялый двор, слухи и сомнительные знакомства.</p></section>
+<section class="detail" id="scene-veyr-2"><a class="back" href="#loc-veyr">← К Вейр</a><h2>Гильдия торговцев</h2><img alt="Каменное здание с гербами купеческих домов, арочными окнами и внутренним двором." class="location-hero scene-hero" src="atlasdata:a005"/><p class="public-caption">Каменное здание с гербами купеческих домов, арочными окнами и внутренним двором.</p><img alt="" class="city-art" src="atlasdata:a013"/><p>Контора купеческих домов и место официальных договоров.</p></section>
+<section class="detail" id="scene-veyr-3"><a class="back" href="#loc-veyr">← К Вейр</a><h2>Чёрный рынок</h2><img alt="Тёмные подвальные проходы, низкие двери, закрытые лавки и тусклые фонари." class="location-hero scene-hero" src="atlasdata:a006"/><p class="public-caption">Тёмные подвальные проходы, низкие двери, закрытые лавки и тусклые фонари.</p><img alt="" class="city-art" src="atlasdata:a014"/><p>Подпольные лавки, контрабанда и редкие артефакты.</p></section>
+<section class="detail" id="scene-veyr-4"><a class="back" href="#loc-veyr">← К Вейр</a><h2>Городской храм</h2><img alt="Небольшой каменный храм с колоннами, внутренним двориком и простым алтарём." class="location-hero scene-hero" src="atlasdata:a007"/><p class="public-caption">Небольшой каменный храм с колоннами, внутренним двориком и простым алтарём.</p><img alt="" class="city-art" src="atlasdata:a015"/><p>Святилище, куда приходят за советом и исцелением.</p></section>
+<section class="detail" id="scene-veyr-5"><a class="back" href="#loc-veyr">← К Вейр</a><h2>Порт и пристани</h2><img alt="Деревянные пирсы, пришвартованные суда, краны, канаты и ряды грузовых складов." class="location-hero scene-hero" src="atlasdata:a008"/><p class="public-caption">Деревянные пирсы, пришвартованные суда, краны, канаты и ряды грузовых складов.</p><img alt="" class="city-art" src="atlasdata:a016"/><p>Склады, корабли и речные торговцы.</p></section>
+<section class="detail" id="scene-veyr-6"><a class="back" href="#loc-veyr">← К Вейр</a><h2>Городские ворота</h2><img alt="Высокие каменные ворота с башнями, решёткой, караульными нишами и дорогой за стенами." class="location-hero scene-hero" src="atlasdata:a009"/><p class="public-caption">Высокие каменные ворота с башнями, решёткой, караульными нишами и дорогой за стенами.</p><img alt="" class="city-art" src="atlasdata:a017"/><p>Караульный пост и дорога в глубь острова.</p></section>
+<section class="detail" id="scene-veyr-7"><a class="back" href="#loc-veyr">← К Вейр</a><h2>Общественные бани</h2><img alt="Каменное банное здание с паром над бассейнами, внутренним двориком и низкими сводами." class="location-hero scene-hero" src="atlasdata:a010"/><p class="public-caption">Каменное банное здание с паром над бассейнами, внутренним двориком и низкими сводами.</p><img alt="" class="city-art" src="atlasdata:a018"/><p>Место отдыха, сплетен и тайных встреч.</p></section>
+<section class="detail" id="loc-sanctuary"><a class="back" href="#">← К карте острова</a><h2>Пепельное святилище Диониса</h2><img alt="Старинный храмовый комплекс среди виноградных склонов, с колоннадой, каменными двориками и заросшими террасами." class="location-hero" src="atlasdata:a019"/><p class="public-caption">Старинный храмовый комплекс среди виноградных склонов, с колоннадой, каменными двориками и заросшими террасами.</p><p>Храм среди старых виноградников; здесь хранят записи о древнем пире.</p><div class="subtiles">
+<a class="tile" href="#scene-sanctuary-0"><img alt="Виноградные террасы" src="atlasdata:a020"/><b>Виноградные террасы</b><small>Ряды виноградных лоз спускаются по зелёному склону между каменными подпорными стенами.</small></a>
+<a class="tile" href="#scene-sanctuary-1"><img alt="Внешний двор" src="atlasdata:a021"/><b>Внешний двор</b><small>Тихий храмовый двор с колоннадой, чашей для омовений и каменными плитами.</small></a>
+<a class="tile" href="#scene-sanctuary-2"><img alt="Зал пиров" src="atlasdata:a022"/><b>Зал пиров</b><small>Длинный каменный зал с массивными столами, факелами, нишами и выцветшими фресками.</small></a>
+<a class="tile" href="#scene-sanctuary-3"><img alt="Подвальный архив" src="atlasdata:a023"/><b>Подвальный архив</b><small>Прохладный подвал с деревянными полками, глиняными сосудами и связками свитков.</small></a>
+</div></section>
+<section class="detail" id="scene-sanctuary-0"><a class="back" href="#loc-sanctuary">← К Пепельное святилище Диониса</a><h2>Виноградные террасы</h2><img alt="Виноградные террасы" class="location-hero scene-hero" src="atlasdata:a020"/><p class="public-caption">Ряды виноградных лоз спускаются по зелёному склону между каменными подпорными стенами.</p><img alt="" class="city-art" src="atlasdata:a024"/><p>Заброшенные ряды лоз и сторожевые домики.</p></section>
+<section class="detail" id="scene-sanctuary-1"><a class="back" href="#loc-sanctuary">← К Пепельное святилище Диониса</a><h2>Внешний двор</h2><img alt="Внешний двор" class="location-hero scene-hero" src="atlasdata:a021"/><p class="public-caption">Тихий храмовый двор с колоннадой, чашей для омовений и каменными плитами.</p><img alt="" class="city-art" src="atlasdata:a025"/><p>Алтарь и колоннада для паломников.</p></section>
+<section class="detail" id="scene-sanctuary-2"><a class="back" href="#loc-sanctuary">← К Пепельное святилище Диониса</a><h2>Зал пиров</h2><img alt="Зал пиров" class="location-hero scene-hero" src="atlasdata:a022"/><p class="public-caption">Длинный каменный зал с массивными столами, факелами, нишами и выцветшими фресками.</p><img alt="" class="city-art" src="atlasdata:a026"/><p>Место старых религиозных празднеств.</p></section>
+<section class="detail" id="scene-sanctuary-3"><a class="back" href="#loc-sanctuary">← К Пепельное святилище Диониса</a><h2>Подвальный архив</h2><img alt="Подвальный архив" class="location-hero scene-hero" src="atlasdata:a023"/><p class="public-caption">Прохладный подвал с деревянными полками, глиняными сосудами и связками свитков.</p><img alt="" class="city-art" src="atlasdata:a027"/><p>Запечатанные записи и сосуды с надписями.</p></section>
+<section class="detail" id="loc-archive"><a class="back" href="#">← К карте острова</a><h2>Архив Молчаливых Имен</h2><img alt="Архив Молчаливых Имен" class="location-hero" src="atlasdata:a028"/><p class="public-caption">Строгое каменное хранилище с высокими окнами, внутренним двором и рядами старых корпусов.</p><p>Хранилище документов о забытых жертвах и первых хранителях печати.</p><div class="subtiles">
+<a class="tile" href="#scene-archive-0"><img alt="Зал каталогов" src="atlasdata:a029"/><b>Зал каталогов</b><small>Высокий зал с галереями книжных полок, лестницами и длинными столами.</small></a>
+<a class="tile" href="#scene-archive-1"><img alt="Комната переписчиков" src="atlasdata:a030"/><b>Комната переписчиков</b><small>Небольшая рабочая комната с письменными столами, чернильницами, перьями и свитками.</small></a>
+<a class="tile" href="#scene-archive-2"><img alt="Запечатанное хранилище" src="atlasdata:a031"/><b>Запечатанное хранилище</b><small>Тяжёлая каменная дверь ведёт в тесное хранилище с сундуками и полками.</small></a>
+</div></section>
+<section class="detail" id="scene-archive-0"><a class="back" href="#loc-archive">← К Архив Молчаливых Имен</a><h2>Зал каталогов</h2><img alt="Зал каталогов" class="location-hero scene-hero" src="atlasdata:a029"/><p class="public-caption">Высокий зал с галереями книжных полок, лестницами и длинными столами.</p><img alt="" class="city-art" src="atlasdata:a032"/><p>Стеллажи с именами и родословными.</p></section>
+<section class="detail" id="scene-archive-1"><a class="back" href="#loc-archive">← К Архив Молчаливых Имен</a><h2>Комната переписчиков</h2><img alt="Комната переписчиков" class="location-hero scene-hero" src="atlasdata:a030"/><p class="public-caption">Небольшая рабочая комната с письменными столами, чернильницами, перьями и свитками.</p><img alt="" class="city-art" src="atlasdata:a033"/><p>Столы, чернила и незаконченные свитки.</p></section>
+<section class="detail" id="scene-archive-2"><a class="back" href="#loc-archive">← К Архив Молчаливых Имен</a><h2>Запечатанное хранилище</h2><img alt="Запечатанное хранилище" class="location-hero scene-hero" src="atlasdata:a031"/><p class="public-caption">Тяжёлая каменная дверь ведёт в тесное хранилище с сундуками и полками.</p><img alt="" class="city-art" src="atlasdata:a034"/><p>Документы, к которым нет открытого доступа.</p></section>
+<section class="detail" id="loc-orhad"><a class="back" href="#">← К карте острова</a><h2>Ор-Хад — город под землёй</h2><img alt="Ор-Хад — город под землёй" class="location-hero" src="atlasdata:a035"/><p class="public-caption">Гигантский подземный город, вырубленный в скале: уступы домов, мосты, лестницы и огромные тёмные пустоты.</p><p>Древний подземный город, где люди впервые обнаружили Голод.</p><div class="subtiles">
+<a class="tile" href="#scene-orhad-0"><img alt="Верхние ворота" src="atlasdata:a036"/><b>Верхние ворота</b><small>Гигантские каменные створки встроены в скалу; по бокам расположены старые сторожевые ниши.</small></a>
+<a class="tile" href="#scene-orhad-1"><img alt="Жилые террасы" src="atlasdata:a037"/><b>Жилые террасы</b><small>Многоярусные дома и балконы вырублены прямо в стенах огромной подземной пещеры.</small></a>
+<a class="tile" href="#scene-orhad-2"><img alt="Зал каменного стола" src="atlasdata:a038"/><b>Зал каменного стола</b><small>Просторная подземная камера с длинным монолитным столом и каменными сиденьями.</small></a>
+<a class="tile" href="#scene-orhad-3"><img alt="Нижний провал" src="atlasdata:a039"/><b>Нижний провал</b><small>Глубокая трещина разрезает каменный пол; вниз уходят узкие лестницы и обрывающиеся мостки.</small></a>
+</div></section>
+<section class="detail" id="scene-orhad-0"><a class="back" href="#loc-orhad">← К Ор-Хад</a><h2>Верхние ворота</h2><img alt="Верхние ворота" class="location-hero scene-hero" src="atlasdata:a036"/><p class="public-caption">Гигантские каменные створки встроены в скалу; по бокам расположены старые сторожевые ниши.</p><img alt="" class="city-art" src="atlasdata:a017"/><p>Старый вход в подземные кварталы.</p></section>
+<section class="detail" id="scene-orhad-1"><a class="back" href="#loc-orhad">← К Ор-Хад</a><h2>Жилые террасы</h2><img alt="Жилые террасы" class="location-hero scene-hero" src="atlasdata:a037"/><p class="public-caption">Многоярусные дома и балконы вырублены прямо в стенах огромной подземной пещеры.</p><img alt="" class="city-art" src="atlasdata:a040"/><p>Пустые дома древнего города.</p></section>
+<section class="detail" id="scene-orhad-2"><a class="back" href="#loc-orhad">← К Ор-Хад</a><h2>Зал каменного стола</h2><img alt="Зал каменного стола" class="location-hero scene-hero" src="atlasdata:a038"/><p class="public-caption">Просторная подземная камера с длинным монолитным столом и каменными сиденьями.</p><img alt="" class="city-art" src="atlasdata:a026"/><p>Место, связанное с одинаковыми снами.</p></section>
+<section class="detail" id="scene-orhad-3"><a class="back" href="#loc-orhad">← К Ор-Хад</a><h2>Нижний провал</h2><img alt="Нижний провал" class="location-hero scene-hero" src="atlasdata:a039"/><p class="public-caption">Глубокая трещина разрезает каменный пол; вниз уходят узкие лестницы и обрывающиеся мостки.</p><img alt="" class="city-art" src="atlasdata:a041"/><p>Спуск к древним слоям под городом.</p></section>
+<section class="detail" id="loc-fortress"><a class="back" href="#">← К карте острова</a><h2>Крепость Семерых Врат</h2><img alt="Крепость Семерых Врат" class="location-hero" src="atlasdata:a042"/><p class="public-caption">Массивная средневековая крепость на скалистом проходе, окружённая стенами, башнями и караульными дворами.</p><p>Спорное укрепление, охраняющее один из элементов древней защиты.</p><div class="subtiles">
+<a class="tile" href="#scene-fortress-0"><img alt="Внешний двор" src="atlasdata:a043"/><b>Внешний двор</b><small>Военный двор с казармами, тренировочными стойками, конюшнями и каменной мостовой.</small></a>
+<a class="tile" href="#scene-fortress-1"><img alt="Зал совета" src="atlasdata:a044"/><b>Зал совета</b><small>Строгая каменная комната с длинным столом, картами, лавками и гербами на стенах.</small></a>
+<a class="tile" href="#scene-fortress-2"><img alt="Старинные укреплённые ворота из тёмного камня с массивными створками и выщербленными стенами." src="atlasdata:a045"/><b>Старые ворота</b><small>Старинные укреплённые ворота из тёмного камня с массивными створками и выщербленными стенами.</small></a>
+<a class="tile" href="#scene-fortress-3"><img alt="Небольшая часовня под крепостью с каменными нишами, колоннами и тусклым светом." src="atlasdata:a046"/><b>Подземная часовня</b><small>Небольшая часовня под крепостью с каменными нишами, колоннами и тусклым светом.</small></a>
+</div></section>
+<section class="detail" id="scene-fortress-0"><a class="back" href="#loc-fortress">← К Крепость Семерых Врат</a><h2>Внешний двор</h2><img alt="Внешний двор" class="location-hero scene-hero" src="atlasdata:a043"/><p class="public-caption">Военный двор с казармами, тренировочными стойками, конюшнями и каменной мостовой.</p><img alt="" class="city-art" src="atlasdata:a047"/><p>Казармы и плац гарнизона.</p></section>
+<section class="detail" id="scene-fortress-1"><a class="back" href="#loc-fortress">← К Крепость Семерых Врат</a><h2>Зал совета</h2><img alt="Зал совета" class="location-hero scene-hero" src="atlasdata:a044"/><p class="public-caption">Строгая каменная комната с длинным столом, картами, лавками и гербами на стенах.</p><img alt="" class="city-art" src="atlasdata:a048"/><p>Комната командования и переговоров.</p></section>
+<section class="detail" id="scene-fortress-2"><a class="back" href="#loc-fortress">← К Крепость Семерых Врат</a><h2>Старые ворота</h2><img alt="Старинные укреплённые ворота из тёмного камня с массивными створками и выщербленными стенами." class="location-hero scene-hero" src="atlasdata:a045"/><p class="public-caption">Старинные укреплённые ворота из тёмного камня с массивными створками и выщербленными стенами.</p><img alt="" class="city-art" src="atlasdata:a017"/><p>Первый рубеж обороны крепости.</p></section>
+<section class="detail" id="scene-fortress-3"><a class="back" href="#loc-fortress">← К Крепость Семерых Врат</a><h2>Подземная часовня</h2><img alt="Небольшая часовня под крепостью с каменными нишами, колоннами и тусклым светом." class="location-hero scene-hero" src="atlasdata:a046"/><p class="public-caption">Небольшая часовня под крепостью с каменными нишами, колоннами и тусклым светом.</p><img alt="" class="city-art" src="atlasdata:a049"/><p>Забытое святилище внутри стен.</p></section>
+<section class="detail" id="loc-hallfinal"><a class="back" href="#">← К карте острова</a><h2>Чертог Пустого Места</h2><img alt="Древний каменный комплекс среди суровых скал, с разрушенными колоннами и монументальными залами." class="location-hero" src="atlasdata:a050"/><p class="public-caption">Древний каменный комплекс среди суровых скал, с разрушенными колоннами и монументальными залами.</p><p>Место заключительного ритуала Саверна Веля.</p><div class="subtiles">
+<a class="tile" href="#scene-hallfinal-0"><img alt="Обвалившиеся колонны и широкая каменная лестница ведут к древнему фасаду." src="atlasdata:a051"/><b>Разрушенный портик</b><small>Обвалившиеся колонны и широкая каменная лестница ведут к древнему фасаду.</small></a>
+<a class="tile" href="#scene-hallfinal-1"><img alt="Монументальный зал с длинной перспективой, высоким помостом и одиноким пустым местом." src="atlasdata:a052"/><b>Зал пустого трона</b><small>Монументальный зал с длинной перспективой, высоким помостом и одиноким пустым местом.</small></a>
+<a class="tile" href="#scene-hallfinal-2"><img alt="Круглая каменная площадка с концентрическими линиями и плитами, уходящими в пол." src="atlasdata:a053"/><b>Круг печатей</b><small>Круглая каменная площадка с концентрическими линиями и плитами, уходящими в пол.</small></a>
+</div></section>
+<section class="detail" id="scene-hallfinal-0"><a class="back" href="#loc-hallfinal">← К Чертог Пустого Места</a><h2>Разрушенный портик</h2><img alt="Обвалившиеся колонны и широкая каменная лестница ведут к древнему фасаду." class="location-hero scene-hero" src="atlasdata:a051"/><p class="public-caption">Обвалившиеся колонны и широкая каменная лестница ведут к древнему фасаду.</p><img alt="" class="city-art" src="atlasdata:a054"/><p>Вход в древний комплекс.</p></section>
+<section class="detail" id="scene-hallfinal-1"><a class="back" href="#loc-hallfinal">← К Чертог Пустого Места</a><h2>Зал пустого трона</h2><img alt="Монументальный зал с длинной перспективой, высоким помостом и одиноким пустым местом." class="location-hero scene-hero" src="atlasdata:a052"/><p class="public-caption">Монументальный зал с длинной перспективой, высоким помостом и одиноким пустым местом.</p><img alt="" class="city-art" src="atlasdata:a055"/><p>Центральная камера ритуала.</p></section>
+<section class="detail" id="scene-hallfinal-2"><a class="back" href="#loc-hallfinal">← К Чертог Пустого Места</a><h2>Круг печатей</h2><img alt="Круглая каменная площадка с концентрическими линиями и плитами, уходящими в пол." class="location-hero scene-hero" src="atlasdata:a053"/><p class="public-caption">Круглая каменная площадка с концентрическими линиями и плитами, уходящими в пол.</p><img alt="" class="city-art" src="atlasdata:a056"/><p>Остатки защитного ритуала.</p></section>
+<section class="detail" id="loc-village"><a class="back" href="#">← К карте острова</a><h2>Липовый Брод</h2><img alt="Небольшая деревня у речного брода: деревянные дома, огороды, амбары и грунтовая дорога." class="location-hero" src="atlasdata:a057"/><p class="public-caption">Небольшая деревня у речного брода: деревянные дома, огороды, амбары и грунтовая дорога.</p><p>Деревня с исчезнувшими семьями и одинаковыми снами.</p><div class="subtiles">
+<a class="tile" href="#scene-village-0"><img alt="Главная улица" src="atlasdata:a058"/><b>Главная улица</b><small>Грунтовая улица между деревянными домами, заборами, амбарами и небольшими огородами.</small></a>
+<a class="tile" href="#scene-village-1"><img alt="Дом старосты" src="atlasdata:a059"/><b>Дом старосты</b><small>Крепкий деревенский дом с широким крыльцом, ставнями и хозяйственными постройками.</small></a>
+<a class="tile" href="#scene-village-2"><img alt="Старый колодец" src="atlasdata:a060"/><b>Старый колодец</b><small>Каменный колодец стоит на открытом перекрёстке деревенских дорожек.</small></a>
+</div></section>
+<section class="detail" id="scene-village-0"><a class="back" href="#loc-village">← К Липовый Брод</a><h2>Главная улица</h2><img alt="Главная улица" class="location-hero scene-hero" src="atlasdata:a058"/><p class="public-caption">Грунтовая улица между деревянными домами, заборами, амбарами и небольшими огородами.</p><img alt="" class="city-art" src="atlasdata:a061"/><p>Пустые дворы и запертые дома.</p></section>
+<section class="detail" id="scene-village-1"><a class="back" href="#loc-village">← К Липовый Брод</a><h2>Дом старосты</h2><img alt="Дом старосты" class="location-hero scene-hero" src="atlasdata:a059"/><p class="public-caption">Крепкий деревенский дом с широким крыльцом, ставнями и хозяйственными постройками.</p><img alt="" class="city-art" src="atlasdata:a062"/><p>Последние записи о пропавших жителях.</p></section>
+<section class="detail" id="scene-village-2"><a class="back" href="#loc-village">← К Липовый Брод</a><h2>Старый колодец</h2><img alt="Старый колодец" class="location-hero scene-hero" src="atlasdata:a060"/><p class="public-caption">Каменный колодец стоит на открытом перекрёстке деревенских дорожек.</p><img alt="" class="city-art" src="atlasdata:a063"/><p>Место странных звуков по ночам.</p></section>
+<section class="detail" id="loc-blackport"><a class="back" href="#">← К карте острова</a><h2>Чёрная Пристань</h2><img alt="Скрытая речная пристань с деревянными причалами, складами, лодками и тесными постройками у воды." class="location-hero" src="atlasdata:a064"/><p class="public-caption">Скрытая речная пристань с деревянными причалами, складами, лодками и тесными постройками у воды.</p><p>Речной контрабандный узел и рынок артефактов.</p><div class="subtiles">
+<a class="tile" href="#scene-blackport-0"><img alt="Скрытый деревянный причал под стенами складов, к которому подходят небольшие лодки." src="atlasdata:a065"/><b>Контрабандный причал</b><small>Скрытый деревянный причал под стенами складов, к которому подходят небольшие лодки.</small></a>
+<a class="tile" href="#scene-blackport-1"><img alt="Большой тёмный склад с широкими воротами, деревянными балками и высокими штабелями ящиков." src="atlasdata:a066"/><b>Склад номер семь</b><small>Большой тёмный склад с широкими воротами, деревянными балками и высокими штабелями ящиков.</small></a>
+<a class="tile" href="#scene-blackport-2"><img alt="Низкая таверна у воды с покосившейся вывеской, причалом за стеной и тёплым светом окон." src="atlasdata:a067"/><b>Таверна «Мокрый крюк»</b><small>Низкая таверна у воды с покосившейся вывеской, причалом за стеной и тёплым светом окон.</small></a>
+</div></section>
+<section class="detail" id="scene-blackport-0"><a class="back" href="#loc-blackport">← К Чёрная Пристань</a><h2>Контрабандный причал</h2><img alt="Скрытый деревянный причал под стенами складов, к которому подходят небольшие лодки." class="location-hero scene-hero" src="atlasdata:a065"/><p class="public-caption">Скрытый деревянный причал под стенами складов, к которому подходят небольшие лодки.</p><img alt="" class="city-art" src="atlasdata:a068"/><p>Тайная разгрузка ночных судов.</p></section>
+<section class="detail" id="scene-blackport-1"><a class="back" href="#loc-blackport">← К Чёрная Пристань</a><h2>Склад номер семь</h2><img alt="Большой тёмный склад с широкими воротами, деревянными балками и высокими штабелями ящиков." class="location-hero scene-hero" src="atlasdata:a066"/><p class="public-caption">Большой тёмный склад с широкими воротами, деревянными балками и высокими штабелями ящиков.</p><img alt="" class="city-art" src="atlasdata:a069"/><p>Закрытый склад с чужими печатями.</p></section>
+<section class="detail" id="scene-blackport-2"><a class="back" href="#loc-blackport">← К Чёрная Пристань</a><h2>Таверна «Мокрый крюк»</h2><img alt="Низкая таверна у воды с покосившейся вывеской, причалом за стеной и тёплым светом окон." class="location-hero scene-hero" src="atlasdata:a067"/><p class="public-caption">Низкая таверна у воды с покосившейся вывеской, причалом за стеной и тёплым светом окон.</p><img alt="" class="city-art" src="atlasdata:a012"/><p>Пристанище перевозчиков и беглых людей.</p></section>
+<section class="detail" id="loc-mines"><a class="back" href="#">← К карте острова</a><h2>Соляные Карьеры</h2><img alt="Заброшенные соляные выработки у белёсого склона, с деревянными опорами, шахтными входами и подъёмными механизмами." class="location-hero" src="atlasdata:a070"/><p class="public-caption">Заброшенные соляные выработки у белёсого склона, с деревянными опорами, шахтными входами и подъёмными механизмами.</p><p>Заброшенные выработки, используемые Братством для тайных перевозок.</p><div class="subtiles">
+<a class="tile" href="#scene-mines-0"><img alt="Широкий шахтный вход в белёсом склоне, укреплённый грубыми деревянными рамами." src="atlasdata:a071"/><b>Вход в карьеры</b><small>Широкий шахтный вход в белёсом склоне, укреплённый грубыми деревянными рамами.</small></a>
+<a class="tile" href="#scene-mines-1"><img alt="Узкий подземный коридор с соляными стенами, подпорками и рельсами для тележек." src="atlasdata:a072"/><b>Шахтный штрек</b><small>Узкий подземный коридор с соляными стенами, подпорками и рельсами для тележек.</small></a>
+<a class="tile" href="#scene-mines-2"><img alt="Деревянная грузовая платформа висит на толстых канатах над шахтным колодцем." src="atlasdata:a073"/><b>Подъёмник</b><small>Деревянная грузовая платформа висит на толстых канатах над шахтным колодцем.</small></a>
+<a class="tile" href="#scene-mines-3"><img alt="Подземная камера с деревянными настилами, ящиками и нишами в каменных стенах." src="atlasdata:a074"/><b>Подземный склад</b><small>Подземная камера с деревянными настилами, ящиками и нишами в каменных стенах.</small></a>
+</div></section>
+<section class="detail" id="scene-mines-0"><a class="back" href="#loc-mines">← К Соляные Карьеры</a><h2>Вход в карьеры</h2><img alt="Широкий шахтный вход в белёсом склоне, укреплённый грубыми деревянными рамами." class="location-hero scene-hero" src="atlasdata:a071"/><p class="public-caption">Широкий шахтный вход в белёсом склоне, укреплённый грубыми деревянными рамами.</p><img alt="" class="city-art" src="atlasdata:a075"/><p>Заброшенный вход в соляные выработки.</p></section>
+<section class="detail" id="scene-mines-1"><a class="back" href="#loc-mines">← К Соляные Карьеры</a><h2>Шахтный штрек</h2><img alt="Узкий подземный коридор с соляными стенами, подпорками и рельсами для тележек." class="location-hero scene-hero" src="atlasdata:a072"/><p class="public-caption">Узкий подземный коридор с соляными стенами, подпорками и рельсами для тележек.</p><img alt="" class="city-art" src="atlasdata:a076"/><p>Узкий проход в глубине выработок.</p></section>
+<section class="detail" id="scene-mines-2"><a class="back" href="#loc-mines">← К Соляные Карьеры</a><h2>Подъёмник</h2><img alt="Деревянная грузовая платформа висит на толстых канатах над шахтным колодцем." class="location-hero scene-hero" src="atlasdata:a073"/><p class="public-caption">Деревянная грузовая платформа висит на толстых канатах над шахтным колодцем.</p><img alt="" class="city-art" src="atlasdata:a077"/><p>Старый грузовой подъёмник.</p></section>
+<section class="detail" id="scene-mines-3"><a class="back" href="#loc-mines">← К Соляные Карьеры</a><h2>Подземный склад</h2><img alt="Подземная камера с деревянными настилами, ящиками и нишами в каменных стенах." class="location-hero scene-hero" src="atlasdata:a074"/><p class="public-caption">Подземная камера с деревянными настилами, ящиками и нишами в каменных стенах.</p><img alt="" class="city-art" src="atlasdata:a069"/><p>Тайное место хранения и перегрузки.</p></section>
+<section class="detail" id="loc-swamp"><a class="back" href="#">← К карте острова</a><h2>Пепельная Топь</h2><img alt="Пепельная Топь" class="location-hero" src="atlasdata:a078"/><p class="public-caption">Тёмное болото с чёрной водой, кочками, корнями деревьев, туманом и редкими сухими островками.</p><p>Опасное болото с травниками, странными следами и древним существом.</p><div class="subtiles">
+<a class="tile" href="#scene-swamp-0"><img alt="Узкая тропа из сухих кочек и жердей проходит среди тёмной болотной воды." src="atlasdata:a079"/><b>Тропа на кочках</b><small>Узкая тропа из сухих кочек и жердей проходит среди тёмной болотной воды.</small></a>
+<a class="tile" href="#scene-swamp-1"><img alt="Небольшая хижина на сухом островке, окружённая сушильными рамами и пучками растений." src="atlasdata:a080"/><b>Дом травницы</b><small>Небольшая хижина на сухом островке, окружённая сушильными рамами и пучками растений.</small></a>
+<a class="tile" href="#scene-swamp-2"><img alt="Старые каменные плиты образуют круг среди болотной воды и камышей." src="atlasdata:a081"/><b>Затопленный круг</b><small>Старые каменные плиты образуют круг среди болотной воды и камышей.</small></a>
+</div></section>
+<section class="detail" id="scene-swamp-0"><a class="back" href="#loc-swamp">← К Пепельная Топь</a><h2>Тропа на кочках</h2><img alt="Узкая тропа из сухих кочек и жердей проходит среди тёмной болотной воды." class="location-hero scene-hero" src="atlasdata:a079"/><p class="public-caption">Узкая тропа из сухих кочек и жердей проходит среди тёмной болотной воды.</p><img alt="" class="city-art" src="atlasdata:a082"/><p>Единственный относительно безопасный путь.</p></section>
+<section class="detail" id="scene-swamp-1"><a class="back" href="#loc-swamp">← К Пепельная Топь</a><h2>Дом травницы</h2><img alt="Небольшая хижина на сухом островке, окружённая сушильными рамами и пучками растений." class="location-hero scene-hero" src="atlasdata:a080"/><p class="public-caption">Небольшая хижина на сухом островке, окружённая сушильными рамами и пучками растений.</p><img alt="" class="city-art" src="atlasdata:a083"/><p>Хижина среди чёрных ив.</p></section>
+<section class="detail" id="scene-swamp-2"><a class="back" href="#loc-swamp">← К Пепельная Топь</a><h2>Затопленный круг</h2><img alt="Старые каменные плиты образуют круг среди болотной воды и камышей." class="location-hero scene-hero" src="atlasdata:a081"/><p class="public-caption">Старые каменные плиты образуют круг среди болотной воды и камышей.</p><img alt="" class="city-art" src="atlasdata:a084"/><p>Камни, выступающие из трясины.</p></section>
+<section class="detail" id="loc-pass"><a class="back" href="#">← К карте острова</a><h2>Костяной Перевал</h2><img alt="Костяной Перевал" class="location-hero" src="atlasdata:a085"/><p class="public-caption">Высокий горный перевал с узкой дорогой, каменными осыпями, снежными вершинами и заброшенной сторожевой башней.</p><p>Горная дорога и возможные следы легендарного зверя Филимона.</p><div class="subtiles">
+<a class="tile" href="#scene-pass-0"><img alt="Сторожевая башня" src="atlasdata:a086"/><b>Сторожевая башня</b><small>Одинокая каменная башня стоит на горном уступе над узкой дорогой.</small></a>
+<a class="tile" href="#scene-pass-1"><img alt="Костяная осыпь" src="atlasdata:a087"/><b>Костяная осыпь</b><small>Крутой каменистый склон усыпан крупными костями и обломками скал.</small></a>
+<a class="tile" href="#scene-pass-2"><img alt="Пещера следопыта" src="atlasdata:a088"/><b>Пещера следопыта</b><small>Неглубокая горная пещера с очагом, сухим уступом и грубыми отметками на стенах.</small></a>
+</div></section>
+<section class="detail" id="scene-pass-0"><a class="back" href="#loc-pass">← К Костяной Перевал</a><h2>Сторожевая башня</h2><img alt="Сторожевая башня" class="location-hero scene-hero" src="atlasdata:a086"/><p class="public-caption">Одинокая каменная башня стоит на горном уступе над узкой дорогой.</p><img alt="" class="city-art" src="atlasdata:a089"/><p>Заброшенный пост на старой дороге.</p></section>
+<section class="detail" id="scene-pass-1"><a class="back" href="#loc-pass">← К Костяной Перевал</a><h2>Костяная осыпь</h2><img alt="Костяная осыпь" class="location-hero scene-hero" src="atlasdata:a087"/><p class="public-caption">Крутой каменистый склон усыпан крупными костями и обломками скал.</p><img alt="" class="city-art" src="atlasdata:a090"/><p>Склон, усеянный останками животных.</p></section>
+<section class="detail" id="scene-pass-2"><a class="back" href="#loc-pass">← К Костяной Перевал</a><h2>Пещера следопыта</h2><img alt="Пещера следопыта" class="location-hero scene-hero" src="atlasdata:a088"/><p class="public-caption">Неглубокая горная пещера с очагом, сухим уступом и грубыми отметками на стенах.</p><img alt="" class="city-art" src="atlasdata:a091"/><p>Укрытие охотников и проводников.</p></section>
+<section class="detail" id="loc-sunken"><a class="back" href="#">← К карте острова</a><h2>Затонувшая Часовня</h2><img alt="Частично затопленная каменная часовня, выступающая из озера; над водой видны колонны и верхушка колокольни." class="location-hero" src="atlasdata:a092"/><p class="public-caption">Частично затопленная каменная часовня, выступающая из озера; над водой видны колонны и верхушка колокольни.</p><p>Затопленное святилище с реликвиями и опасным водным обитателем.</p><div class="subtiles">
+<a class="tile" href="#scene-sunken-0"><img alt="Каменный двор скрыт под прозрачной водой; над поверхностью выступают обломки колонн." src="atlasdata:a093"/><b>Затопленный двор</b><small>Каменный двор скрыт под прозрачной водой; над поверхностью выступают обломки колонн.</small></a>
+<a class="tile" href="#scene-sunken-1"><img alt="Старая колокольня поднимается над озером, её нижние ярусы затоплены." src="atlasdata:a094"/><b>Колокольня</b><small>Старая колокольня поднимается над озером, её нижние ярусы затоплены.</small></a>
+<a class="tile" href="#scene-sunken-2"><img alt="Затопленная каменная камера с массивным алтарём и нишами в стенах." src="atlasdata:a095"/><b>Подводный алтарь</b><small>Затопленная каменная камера с массивным алтарём и нишами в стенах.</small></a>
+</div></section>
+<section class="detail" id="scene-sunken-0"><a class="back" href="#loc-sunken">← К Затонувшая Часовня</a><h2>Затопленный двор</h2><img alt="Каменный двор скрыт под прозрачной водой; над поверхностью выступают обломки колонн." class="location-hero scene-hero" src="atlasdata:a093"/><p class="public-caption">Каменный двор скрыт под прозрачной водой; над поверхностью выступают обломки колонн.</p><img alt="" class="city-art" src="atlasdata:a096"/><p>Верхняя часть святилища под водой.</p></section>
+<section class="detail" id="scene-sunken-1"><a class="back" href="#loc-sunken">← К Затонувшая Часовня</a><h2>Колокольня</h2><img alt="Старая колокольня поднимается над озером, её нижние ярусы затоплены." class="location-hero scene-hero" src="atlasdata:a094"/><p class="public-caption">Старая колокольня поднимается над озером, её нижние ярусы затоплены.</p><img alt="" class="city-art" src="atlasdata:a097"/><p>Колокол, который слышно под водой.</p></section>
+<section class="detail" id="scene-sunken-2"><a class="back" href="#loc-sunken">← К Затонувшая Часовня</a><h2>Подводный алтарь</h2><img alt="Затопленная каменная камера с массивным алтарём и нишами в стенах." class="location-hero scene-hero" src="atlasdata:a095"/><p class="public-caption">Затопленная каменная камера с массивным алтарём и нишами в стенах.</p><img alt="" class="city-art" src="atlasdata:a098"/><p>Место хранения древней реликвии.</p></section>
+<section class="detail" id="loc-manor"><a class="back" href="#">← К карте острова</a><h2>Охотничий Дом князя</h2><img alt="Богатое загородное поместье с каменным господским домом, конюшнями, внутренним двором и охотничьими угодьями." class="location-hero" src="atlasdata:a099"/><p class="public-caption">Богатое загородное поместье с каменным господским домом, конюшнями, внутренним двором и охотничьими угодьями.</p><p>Поместье знати, где скрывают исчезновения и незаконные охоты.</p><div class="subtiles">
+<a class="tile" href="#scene-manor-0"><img alt="Ухоженный двор перед господским домом с конюшнями, экипажами и каменной дорожкой." src="atlasdata:a100"/><b>Парадный двор</b><small>Ухоженный двор перед господским домом с конюшнями, экипажами и каменной дорожкой.</small></a>
+<a class="tile" href="#scene-manor-1"><img alt="Высокий зал поместья с камином, длинным столом, гербами и охотничьими полотнами." src="atlasdata:a101"/><b>Большой зал</b><small>Высокий зал поместья с камином, длинным столом, гербами и охотничьими полотнами.</small></a>
+<a class="tile" href="#scene-manor-2"><img alt="Длинная галерея с трофеями, оружием, картами и деревянными панелями." src="atlasdata:a102"/><b>Охотничья галерея</b><small>Длинная галерея с трофеями, оружием, картами и деревянными панелями.</small></a>
+<a class="tile" href="#scene-manor-3"><img alt="Низкие каменные помещения с бочками, полками, ящиками и сводчатым потолком." src="atlasdata:a103"/><b>Служебный подвал</b><small>Низкие каменные помещения с бочками, полками, ящиками и сводчатым потолком.</small></a>
+</div></section>
+<section class="detail" id="scene-manor-0"><a class="back" href="#loc-manor">← К Охотничий Дом князя</a><h2>Парадный двор</h2><img alt="Ухоженный двор перед господским домом с конюшнями, экипажами и каменной дорожкой." class="location-hero scene-hero" src="atlasdata:a100"/><p class="public-caption">Ухоженный двор перед господским домом с конюшнями, экипажами и каменной дорожкой.</p><img alt="" class="city-art" src="atlasdata:a047"/><p>Въезд и конюшни поместья.</p></section>
+<section class="detail" id="scene-manor-1"><a class="back" href="#loc-manor">← К Охотничий Дом князя</a><h2>Большой зал</h2><img alt="Высокий зал поместья с камином, длинным столом, гербами и охотничьими полотнами." class="location-hero scene-hero" src="atlasdata:a101"/><p class="public-caption">Высокий зал поместья с камином, длинным столом, гербами и охотничьими полотнами.</p><img alt="" class="city-art" src="atlasdata:a026"/><p>Место приёмов и охотничьих ужинов.</p></section>
+<section class="detail" id="scene-manor-2"><a class="back" href="#loc-manor">← К Охотничий Дом князя</a><h2>Охотничья галерея</h2><img alt="Длинная галерея с трофеями, оружием, картами и деревянными панелями." class="location-hero scene-hero" src="atlasdata:a102"/><p class="public-caption">Длинная галерея с трофеями, оружием, картами и деревянными панелями.</p><img alt="" class="city-art" src="atlasdata:a104"/><p>Трофеи и карты угодий.</p></section>
+<section class="detail" id="scene-manor-3"><a class="back" href="#loc-manor">← К Охотничий Дом князя</a><h2>Служебный подвал</h2><img alt="Низкие каменные помещения с бочками, полками, ящиками и сводчатым потолком." class="location-hero scene-hero" src="atlasdata:a103"/><p class="public-caption">Низкие каменные помещения с бочками, полками, ящиками и сводчатым потолком.</p><img alt="" class="city-art" src="atlasdata:a105"/><p>Ходы прислуги и запертые кладовые.</p></section>
+<section class="detail" id="loc-grove"><a class="back" href="#">← К карте острова</a><h2>Разорённая Дубрава</h2><img alt="Заросшие руины сгоревшего поселения среди дубов: почерневшие стены, обвалившиеся крыши и заросшая площадь." class="location-hero" src="atlasdata:a106"/><p class="public-caption">Заросшие руины сгоревшего поселения среди дубов: почерневшие стены, обвалившиеся крыши и заросшая площадь.</p><p>Остатки поселения и следы неудачного ритуала.</p><div class="subtiles">
+<a class="tile" href="#scene-grove-0"><img alt="Заросшая площадь с почерневшими фундаментами, обломками колодца и остатками домов." src="atlasdata:a107"/><b>Сгоревшая площадь</b><small>Заросшая площадь с почерневшими фундаментами, обломками колодца и остатками домов.</small></a>
+<a class="tile" href="#scene-grove-1"><img alt="Полусгоревший деревенский дом с уцелевшей кладовой и полками для трав." src="atlasdata:a108"/><b>Дом знахаря</b><small>Полусгоревший деревенский дом с уцелевшей кладовой и полками для трав.</small></a>
+<a class="tile" href="#scene-grove-2"><img alt="Круглая выемка за поселением, обложенная тёмными камнями." src="atlasdata:a109"/><b>Ритуальная яма</b><small>Круглая выемка за поселением, обложенная тёмными камнями.</small></a>
+</div></section>
+<section class="detail" id="scene-grove-0"><a class="back" href="#loc-grove">← К Разорённая Дубрава</a><h2>Сгоревшая площадь</h2><img alt="Заросшая площадь с почерневшими фундаментами, обломками колодца и остатками домов." class="location-hero scene-hero" src="atlasdata:a107"/><p class="public-caption">Заросшая площадь с почерневшими фундаментами, обломками колодца и остатками домов.</p><img alt="" class="city-art" src="atlasdata:a110"/><p>Центр бывшего поселения.</p></section>
+<section class="detail" id="scene-grove-1"><a class="back" href="#loc-grove">← К Разорённая Дубрава</a><h2>Дом знахаря</h2><img alt="Полусгоревший деревенский дом с уцелевшей кладовой и полками для трав." class="location-hero scene-hero" src="atlasdata:a108"/><p class="public-caption">Полусгоревший деревенский дом с уцелевшей кладовой и полками для трав.</p><img alt="" class="city-art" src="atlasdata:a062"/><p>Остатки лечебных записей и трав.</p></section>
+<section class="detail" id="scene-grove-2"><a class="back" href="#loc-grove">← К Разорённая Дубрава</a><h2>Ритуальная яма</h2><img alt="Круглая выемка за поселением, обложенная тёмными камнями." class="location-hero scene-hero" src="atlasdata:a109"/><p class="public-caption">Круглая выемка за поселением, обложенная тёмными камнями.</p><img alt="" class="city-art" src="atlasdata:a111"/><p>Следы обряда, который пошёл не так.</p></section>
+<section class="detail" id="loc-fair"><a class="back" href="#">← К карте острова</a><h2>Ярмарка Девяти Дорог</h2><img alt="Большой временный торговый лагерь с разноцветными шатрами, повозками, флагами и кострами на перекрёстке дорог." class="location-hero" src="atlasdata:a112"/><p class="public-caption">Большой временный торговый лагерь с разноцветными шатрами, повозками, флагами и кострами на перекрёстке дорог.</p><p>Временный торговый лагерь, где встречаются купцы, наёмники, воры и слухи.</p><div class="subtiles">
+<a class="tile" href="#scene-fair-0"><img alt="Широкий ярмарочный ряд с навесами, флагами, прилавками и пёстрыми товарами." src="atlasdata:a113"/><b>Главный торг</b><small>Широкий ярмарочный ряд с навесами, флагами, прилавками и пёстрыми товарами.</small></a>
+<a class="tile" href="#scene-fair-1"><img alt="Ряды походных шатров, костров, оружейных стоек и припаркованных телег." src="atlasdata:a114"/><b>Лагерь наёмников</b><small>Ряды походных шатров, костров, оружейных стоек и припаркованных телег.</small></a>
+<a class="tile" href="#scene-fair-2"><img alt="Небольшой деревянный помост на открытой площадке, украшенный флагами и фонарями." src="atlasdata:a115"/><b>Площадка представлений</b><small>Небольшой деревянный помост на открытой площадке, украшенный флагами и фонарями.</small></a>
+<a class="tile" href="#scene-fair-3"><img alt="Большая огороженная стоянка с повозками, тягловыми животными и навесами." src="atlasdata:a116"/><b>Караванный двор</b><small>Большая огороженная стоянка с повозками, тягловыми животными и навесами.</small></a>
+</div></section>
+<section class="detail" id="scene-fair-0"><a class="back" href="#loc-fair">← К Ярмарка Девяти Дорог</a><h2>Главный торг</h2><img alt="Широкий ярмарочный ряд с навесами, флагами, прилавками и пёстрыми товарами." class="location-hero scene-hero" src="atlasdata:a113"/><p class="public-caption">Широкий ярмарочный ряд с навесами, флагами, прилавками и пёстрыми товарами.</p><img alt="" class="city-art" src="atlasdata:a011"/><p>Ряды торговцев и зазывал.</p></section>
+<section class="detail" id="scene-fair-1"><a class="back" href="#loc-fair">← К Ярмарка Девяти Дорог</a><h2>Лагерь наёмников</h2><img alt="Ряды походных шатров, костров, оружейных стоек и припаркованных телег." class="location-hero scene-hero" src="atlasdata:a114"/><p class="public-caption">Ряды походных шатров, костров, оружейных стоек и припаркованных телег.</p><img alt="" class="city-art" src="atlasdata:a117"/><p>Стоянка охранников и искателей работы.</p></section>
+<section class="detail" id="scene-fair-2"><a class="back" href="#loc-fair">← К Ярмарка Девяти Дорог</a><h2>Площадка представлений</h2><img alt="Небольшой деревянный помост на открытой площадке, украшенный флагами и фонарями." class="location-hero scene-hero" src="atlasdata:a115"/><p class="public-caption">Небольшой деревянный помост на открытой площадке, украшенный флагами и фонарями.</p><img alt="" class="city-art" src="atlasdata:a118"/><p>Музыканты, фокусники и странствующие артисты.</p></section>
+<section class="detail" id="scene-fair-3"><a class="back" href="#loc-fair">← К Ярмарка Девяти Дорог</a><h2>Караванный двор</h2><img alt="Большая огороженная стоянка с повозками, тягловыми животными и навесами." class="location-hero scene-hero" src="atlasdata:a116"/><p class="public-caption">Большая огороженная стоянка с повозками, тягловыми животными и навесами.</p><img alt="" class="city-art" src="atlasdata:a119"/><p>Повозки, тягловые животные и склады.</p></section>
+<section class="characters" id="characters"><a class="back" href="#world">← Вернуться к карте острова</a><h2 class="char-head">Герои Последнего пира</h2><p class="char-intro">Шесть кандидатов для трёх игроков. Нажмите на имя или портрет, чтобы рассмотреть героя. Характеристики и способности соответствуют утверждённым правилам кампании.</p><div class="char-grid"></div><article class="char-card">
+<img alt="Портрет персонажа: Борислав «Три кишки»" class="char-portrait" loading="eager" src="atlasdata:a120"/>
+<div><h3>Борислав «Три кишки»</h3><div class="char-race">Минотавр · воин</div>
+<div class="char-stats"><b>HP · 28</b><b>СИЛА · 6</b></div>
+<p><strong>Внешность:</strong> Огромный минотавр с тремя рогами, подёргивающимся глазом, большим животом и ожерельем из чужих зубов.</p>
+<p><strong>История:</strong> Бывший королевский палач. Его уволили после того, как он казнил не того человека, а затем потребовал доплату за повторную казнь.</p>
+<p><strong>Способности:</strong> Бычий натиск — мощная атака (D8). Крепкая туша — стойкость к тяжёлым ударам. Последний аргумент — живой таран.</p>
+<p><strong>Недостаток:</strong> Не умеет отступать; оскорбления встречает физически.</p>
+<p><strong>Снаряжение:</strong> Двуручный топор, ржавая кольчуга, фляга самогона.</p>
+<p><strong>Цель:</strong> Накопить на собственную похоронную церемонию, которую хочет провести при жизни.</p></div></article><article class="char-card">
+<img alt="Портрет персонажа: Жоппер Кривозуб" class="char-portrait" loading="eager" src="atlasdata:a121"/>
+<div><h3>Жоппер Кривозуб</h3><div class="char-race">Гоблин · плут</div>
+<div class="char-stats"><b>HP · 16</b><b>СИЛА · 3</b></div>
+<p><strong>Внешность:</strong> Маленький горбатый гоблин с двумя рядами зубов, третьей ноздрёй на лбу, длинным языком и кожей с наростами.</p>
+<p><strong>История:</strong> Вор и контрабандист, привыкший выживать среди тех, кто крупнее и сильнее.</p>
+<p><strong>Способности:</strong> Крысин пролаз — пробирается в тесные места. Карманная хирургия — ловкие манипуляции и сомнительные процедуры. Грязный фокус — плевок D4, способный ослепить.</p>
+<p><strong>Недостаток:</strong> Не может удержаться от кражи всего блестящего.</p>
+<p><strong>Снаряжение:</strong> Два кинжала, отмычки, верёвка, сомнительные инструменты.</p>
+<p><strong>Цель:</strong> Найти величайшее сокровище мира и доказать, что он не просто крыса.</p></div></article><article class="char-card">
+<img alt="Портрет персонажа: Отец Пузаний" class="char-portrait" loading="eager" src="atlasdata:a122"/>
+<div><h3>Отец Пузаний</h3><div class="char-race">Человек · жрец и полевой лекарь</div>
+<div class="char-stats"><b>HP · 24</b><b>СИЛА · 4</b></div>
+<p><strong>Внешность:</strong> Необъятный мужчина с обвисшими щеками, шестью пальцами на каждой руке и большим шрамом на животе. Носит обветшалые священные одежды.</p>
+<p><strong>История:</strong> Бывший служитель храма Диониса, изгнанный за чрезмерное усердие в религиозных праздниках.</p>
+<p><strong>Способности:</strong> Священный подзатыльник — удар D8. Полевой хирург — лечит союзника на D4. Божественное красноречие — умеет убеждать от имени веры.</p>
+<p><strong>Недостаток:</strong> Считает, что почти любую проблему решат обряд и выпивка.</p>
+<p><strong>Снаряжение:</strong> Тяжёлый посох, хирургические инструменты, бинты, символы, фляга вина.</p>
+<p><strong>Цель:</strong> Получить личную аудиенцию у Диониса.</p></div></article><article class="char-card">
+<img alt="Портрет персонажа: Прокопий Заклинатель" class="char-portrait" loading="eager" src="atlasdata:a123"/>
+<div><h3>Прокопий Заклинатель</h3><div class="char-race">Человек · колдун</div>
+<div class="char-stats"><b>HP · 18</b><b>СИЛА · 3</b></div>
+<p><strong>Внешность:</strong> Худой человек с тремя глазами (один на шее), пальцами разной длины и волосами, которые иногда шевелятся сами.</p>
+<p><strong>История:</strong> Последний ученик закрытой магической школы после того, как комиссия превратилась в коз.</p>
+<p><strong>Способности:</strong> Громовая отрыжка — магическая атака D8. Кривое проклятие — накладывает странные эффекты. Случайная магия — мощный эффект с риском побочного последствия.</p>
+<p><strong>Недостаток:</strong> Серьёзная магия требует платы: колдун может получить урон или неприятный побочный эффект.</p>
+<p><strong>Снаряжение:</strong> Потрёпанный гримуар, посох, мешочек костей, сломанный амулет.</p>
+<p><strong>Цель:</strong> Восстановить имя и доказать, что превращение комиссии в коз было осознанным экспериментом.</p></div></article><article class="char-card">
+<img alt="Портрет персонажа: Филимон Четыре Подковы" class="char-portrait" loading="eager" src="atlasdata:a124"/>
+<div><h3>Филимон Четыре Подковы</h3><div class="char-race">Кентавр · охотник</div>
+<div class="char-stats"><b>HP · 24</b><b>СИЛА · 5</b></div>
+<p><strong>Внешность:</strong> Жилистый бородатый мужчина с нижней частью тела огромного старого жеребца. На спине — дополнительная пара маленьких сосков; о происхождении не говорит.</p>
+<p><strong>История:</strong> Двадцать лет был следопытом. Потерял весь караван, но сохранил лошадиную часть репутации.</p>
+<p><strong>Способности:</strong> Меткий выстрел — арбалетный выстрел D8. Чутьё зверя — замечает следы и опасность. Копытный привет — удар D8.</p>
+<p><strong>Недостаток:</strong> Обычная мебель и узкие проходы создают проблемы; болезненно реагирует на шутки о внешности.</p>
+<p><strong>Снаряжение:</strong> Арбалет, нож, верёвка, ловушки.</p>
+<p><strong>Цель:</strong> Найти легендарного невиданного зверя и продать его голову за состояние.</p></div></article><article class="char-card">
+<img alt="Портрет персонажа: Клавдия Клювоносная" class="char-portrait" loading="eager" src="atlasdata:a125"/>
+<div><h3>Клавдия Клювоносная</h3><div class="char-race">Гарпия · боевая плутовка</div>
+<div class="char-stats"><b>HP · 20</b><b>СИЛА · 4</b></div>
+<p><strong>Внешность:</strong> Высокая гарпия с человеческим торсом, птичьими ногами, кривым клювом, огромными глазами и жирным налётом на перьях.</p>
+<p><strong>История:</strong> Бывшая воздушная разбойница. Украла не тот сундук, и теперь за ней охотится половина местного духовенства.</p>
+<p><strong>Способности:</strong> Крылатый рывок — быстро меняет позицию. Когтистая расправа — атака D8. Птичий крик — резкий крик, способный ошеломить.</p>
+<p><strong>Недостаток:</strong> Тянется к украшениям и не умеет хранить секреты дольше пяти минут.</p>
+<p><strong>Снаряжение:</strong> Два коротких клинка, кожаный жилет, украденные украшения.</p>
+<p><strong>Цель:</strong> Вернуть украденный сундук, не зная, что находится внутри.</p></div></article></section><section class="dice-page" id="dice">
+<a class="back" href="#world">← Вернуться к карте острова</a>
+<h2 class="dice-title">Кости судьбы</h2>
+<p class="dice-intro">Выбери нужный кубик и нажми на него. Он прокрутится и покажет случайный результат. Можно бросить сразу все три.</p><p id="sound-hint">Музыка начнёт играть после первого нажатия — браузеры iPhone блокируют автозапуск звука.</p>
+<div class="dice-grid">
+<button aria-label="Бросить двадцатигранный кубик D20" class="die-card die-d20" data-sides="20" type="button">
+<span class="die-label">Проверки · атаки · защита</span>
+<span class="die-gem">
+<svg aria-hidden="true" viewbox="0 0 140 130"><polygon fill="#792d30" points="70,5 119,32 133,82 97,121 43,121 7,82 21,32" stroke="#e5b45c" stroke-width="6"></polygon><path d="M70 5L70 121M21 32L119 32M7 82L133 82M21 32L43 121M119 32L97 121M70 5L7 82M70 5L133 82" fill="none" stroke="#f0cc7b" stroke-width="3"></path><text fill="#fff0c7" font-family="Georgia" font-size="34" font-weight="bold" text-anchor="middle" x="70" y="76">20</text></svg>
+</span>
+<span class="die-name">D20</span><span class="die-range">1–20</span><output aria-live="polite" class="die-result">—</output>
+</button>
+<button aria-label="Бросить восьмигранный кубик D8" class="die-card die-d8" data-sides="8" type="button">
+<span class="die-label">Основной урон</span>
+<span class="die-gem">
+<svg aria-hidden="true" viewbox="0 0 140 130"><polygon fill="#403c70" points="70,5 124,42 70,125 16,42" stroke="#c0b7ee" stroke-width="6"></polygon><path d="M70 5V125M16 42H124M16 42L70 72 124 42" fill="none" stroke="#e1d9ff" stroke-width="3"></path><text fill="#fff0ff" font-family="Georgia" font-size="34" font-weight="bold" text-anchor="middle" x="70" y="82">8</text></svg>
+</span>
+<span class="die-name">D8</span><span class="die-range">1–8</span><output aria-live="polite" class="die-result">—</output>
+</button>
+<button aria-label="Бросить четырёхгранный кубик D4" class="die-card die-d4" data-sides="4" type="button">
+<span class="die-label">Небольшой урон · эффекты</span>
+<span class="die-gem">
+<svg aria-hidden="true" viewbox="0 0 140 130"><polygon fill="#345d43" points="70,6 132,112 8,112" stroke="#b6d28b" stroke-width="6"></polygon><path d="M70 6L70 112M8 112L70 65 132 112" fill="none" stroke="#e2eeb7" stroke-width="3"></path><text fill="#f4ffd9" font-family="Georgia" font-size="30" font-weight="bold" text-anchor="middle" x="70" y="100">4</text></svg>
+</span>
+<span class="die-name">D4</span><span class="die-range">1–4</span><output aria-live="polite" class="die-result">—</output>
+</button>
+</div>
+<div class="dice-actions">
+<button class="dice-roll-all" type="button">Бросить все три кубика</button>
+<button class="dice-clear" type="button">Очистить историю</button>
+</div>
+<div class="dice-history-box">
+<div class="dice-history-head"><h3>История бросков</h3><span id="dice-count">0 бросков</span></div>
+<ol id="dice-history"><li class="dice-empty">Здесь появятся результаты твоих бросков.</li></ol>
+</div>
+</section><div class="foot">Автономный игровой атлас · карта и сцены встроены в HTML · 16-bit pixel-art эстетика</div><script>
+(function(){
+  const cards = Array.from(document.querySelectorAll('.die-card'));
+  const history = document.getElementById('dice-history');
+  const countNode = document.getElementById('dice-count');
+  let rolls = [];
+  let activeAnimations = 0;
+
+  function secureRoll(sides){
+    if(window.crypto && typeof window.crypto.getRandomValues === 'function'){
+      const range = 0x100000000;
+      const limit = Math.floor(range / sides) * sides;
+      const buffer = new Uint32Array(1);
+      let value;
+      do { window.crypto.getRandomValues(buffer); value = buffer[0]; } while(value >= limit);
+      return (value % sides) + 1;
+    }
+    return Math.floor(Math.random() * sides) + 1;
+  }
+
+  function addHistory(sides, result){
+    const entry = {sides, result, time:new Date()};
+    rolls.unshift(entry);
+    rolls = rolls.slice(0,25);
+    history.innerHTML = '';
+    rolls.forEach(item=>{
+      const li = document.createElement('li');
+      const left = document.createElement('span');
+      const right = document.createElement('strong');
+      left.textContent = 'D' + item.sides + ' · ' + item.time.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+      right.textContent = item.result;
+      li.append(left,right);
+      history.append(li);
+    });
+    countNode.textContent = rolls.length + (rolls.length===1 ? ' бросок' : rolls.length<5 ? ' броска' : ' бросков');
+  }
+
+  function roll(card){
+    if(card.classList.contains('rolling')) return;
+    const sides = Number(card.dataset.sides);
+    const output = card.querySelector('.die-result');
+    card.classList.add('rolling');
+    card.disabled = true;
+    output.textContent = '…';
+    activeAnimations++;
+    window.setTimeout(()=>{
+      const result = secureRoll(sides);
+      output.textContent = String(result);
+      card.classList.remove('rolling');
+      card.disabled = false;
+      activeAnimations--;
+      addHistory(sides,result);
+    }, 880);
+  }
+
+  cards.forEach(card=>card.addEventListener('click',()=>roll(card)));
+  document.querySelector('.dice-roll-all').addEventListener('click',()=>{
+    cards.forEach(card=>roll(card));
+  });
+  document.querySelector('.dice-clear').addEventListener('click',()=>{
+    rolls=[];
+    history.innerHTML='<li class="dice-empty">История очищена. Следующие броски появятся здесь.</li>';
+    countNode.textContent='0 бросков';
+    cards.forEach(card=>{card.querySelector('.die-result').textContent='—';});
+  });
+})();
+</script><script>
+(function(){
+  const music = document.getElementById('bg-music');
+  const soundButton = document.getElementById('sound-toggle');
+  const hint = document.getElementById('sound-hint');
+  if(!music || !soundButton) return;
+
+  let soundEnabled = true;
+  let musicStarted = false;
+  let audioContext = null;
+
+  function updateButton(){
+    const playing = musicStarted && !music.paused;
+    if(!soundEnabled){
+      soundButton.textContent = '♫ Звук: выключен';
+      soundButton.classList.remove('sound-on');
+      soundButton.setAttribute('aria-pressed','false');
+    }else{
+      soundButton.textContent = playing ? '♫ Выключить звук' : '♫ Включить музыку';
+      soundButton.classList.toggle('sound-on', playing);
+      soundButton.setAttribute('aria-pressed','true');
+    }
+  }
+
+  async function startMusic(){
+    if(!soundEnabled) return;
+    music.volume = 0.11;
+    try{
+      await music.play();
+      if(soundEnabled){
+        musicStarted = true;
+        if(hint) hint.textContent = 'Фоновая мелодия повторяется автоматически.';
+      }else{
+        music.pause();
+        musicStarted = false;
+      }
+    }catch(err){
+      // Expected on mobile browsers until a direct user gesture.
+      if(hint) hint.textContent = 'Нажми «Включить музыку» вверху страницы, чтобы запустить фоновую мелодию.';
+    }
+    updateButton();
+  }
+
+  soundButton.addEventListener('click', async function(){
+    if(musicStarted && !music.paused){
+      soundEnabled = false;
+      music.pause();
+      musicStarted = false;
+      updateButton();
+      if(hint) hint.textContent = 'Звук выключен. Нажми кнопку сверху, чтобы снова включить музыку и эффекты.';
+    }else{
+      soundEnabled = true;
+      await startMusic();
+      if(audioContext && audioContext.state === 'suspended'){
+        try{ await audioContext.resume(); }catch(e){}
+      }
+    }
+  });
+
+  // Try immediately; mobile Safari may reject it. First non-control tap starts playback.
+  startMusic();
+  document.addEventListener('click', function(event){
+    if(event.target.closest('#sound-toggle')) return;
+    if(soundEnabled && !musicStarted) startMusic();
+  }, {once:true, capture:true});
+  updateButton();
+
+  function getAudioContext(){
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if(!Ctx) return null;
+    if(!audioContext) audioContext = new Ctx();
+    return audioContext;
+  }
+
+  function tap(ctx, when, strength, pitch){
+    const duration = 0.055;
+    const length = Math.max(1, Math.floor(ctx.sampleRate * duration));
+    const buffer = ctx.createBuffer(1, length, ctx.sampleRate);
+    const channel = buffer.getChannelData(0);
+    for(let i=0;i<length;i++){
+      const fade = 1 - i/length;
+      channel[i] = (Math.random()*2-1) * fade * fade;
+    }
+    const noise = ctx.createBufferSource();
+    noise.buffer = buffer;
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.setValueAtTime(pitch, when);
+    filter.Q.setValueAtTime(1.1, when);
+    const noiseGain = ctx.createGain();
+    noiseGain.gain.setValueAtTime(0.0001, when);
+    noiseGain.gain.exponentialRampToValueAtTime(0.11*strength, when+0.004);
+    noiseGain.gain.exponentialRampToValueAtTime(0.0001, when+duration);
+    noise.connect(filter); filter.connect(noiseGain); noiseGain.connect(ctx.destination);
+    noise.start(when); noise.stop(when+duration);
+
+    const osc = ctx.createOscillator();
+    const oscGain = ctx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(pitch*0.42, when);
+    osc.frequency.exponentialRampToValueAtTime(Math.max(75,pitch*0.2), when+0.075);
+    oscGain.gain.setValueAtTime(0.0001, when);
+    oscGain.gain.exponentialRampToValueAtTime(0.055*strength, when+0.003);
+    oscGain.gain.exponentialRampToValueAtTime(0.0001, when+0.09);
+    osc.connect(oscGain); oscGain.connect(ctx.destination);
+    osc.start(when); osc.stop(when+0.095);
+  }
+
+  async function playDiceClatter(){
+    if(!soundEnabled) return;
+    const ctx = getAudioContext();
+    if(!ctx) return;
+    try{
+      if(ctx.state === 'suspended') await ctx.resume();
+      const start = ctx.currentTime + 0.015;
+      // Quick irregular rattle followed by a heavier final clack.
+      const count = 8;
+      for(let i=0;i<count;i++){
+        const jitter = (Math.random()-0.5)*0.035;
+        const when = start + i*0.086 + jitter;
+        const strength = i === count-1 ? 1.35 : 0.72 + Math.random()*0.38;
+        const pitch = 520 + Math.random()*1050;
+        tap(ctx, when, strength, pitch);
+      }
+      tap(ctx, start + 0.76, 1.6, 370 + Math.random()*220);
+    }catch(e){}
+  }
+
+  // Hook into the existing dice roll function; this does not alter the random result.
+  const oldRollCards = Array.from(document.querySelectorAll('.die-card'));
+  oldRollCards.forEach(card => {
+    card.addEventListener('click', playDiceClatter, {capture:true});
+  });
+  const allButton = document.querySelector('.dice-roll-all');
+  if(allButton) allButton.addEventListener('click', playDiceClatter, {capture:true});
+})();
+</script><script>
+(function(){
+ const AC=window.AudioContext||window.webkitAudioContext;
+ let ctx=null;
+ function uiClick(){
+  if(!AC) return;
+  try{
+   if(!ctx) ctx=new AC();
+   if(ctx.state==='suspended') ctx.resume();
+   const now=ctx.currentTime;
+   const osc=ctx.createOscillator(), gain=ctx.createGain(), filter=ctx.createBiquadFilter();
+   osc.type='triangle'; osc.frequency.setValueAtTime(740,now);
+   osc.frequency.exponentialRampToValueAtTime(330,now+0.04);
+   filter.type='lowpass'; filter.frequency.setValueAtTime(1200,now);
+   gain.gain.setValueAtTime(0.0001,now);
+   gain.gain.exponentialRampToValueAtTime(0.045,now+0.004);
+   gain.gain.exponentialRampToValueAtTime(0.0001,now+0.055);
+   osc.connect(filter); filter.connect(gain); gain.connect(ctx.destination);
+   osc.start(now); osc.stop(now+0.06);
+  }catch(e){}
+ }
+ document.addEventListener('click',function(event){
+  const el=event.target.closest('a, summary, .back, nav.tabs a');
+  if(!el || el.id==='sound-toggle' || el.closest('#dice')) return;
+  uiClick();
+ },true);
+})();
+</script>
+<style>.layout{grid-template-columns:minmax(0,1fr)!important}.side{display:none!important}
+#sound-toggle{border:2px ridge #a77b3c;padding:8px 12px;background:#24212a;color:#f0d29a;font:13px Georgia,serif;cursor:pointer;white-space:nowrap}
+#sound-toggle:active{transform:translateY(1px)}
+#sound-toggle.sound-on{background:#4e3326;border-color:#d2a65d;box-shadow:0 0 10px #9c6a2f55}
+#sound-hint{font:11px/1.45 system-ui;color:#9f927a;text-align:center;margin:-12px auto 18px}
+@media(max-width:650px){header{align-items:stretch}.tabs{flex:1}.tabs a{flex:1;text-align:center}#sound-toggle{width:100%;padding:9px}}
+
+.char-card{grid-template-columns:180px minmax(0,1fr);align-items:start}
+.char-portrait{display:block;width:100%;height:auto;aspect-ratio:320/468;object-fit:cover;object-position:center top;image-rendering:pixelated;border:3px ridge #bd9148;box-shadow:0 0 14px #0009;background:#20232c}
+.char-card h3{color:#f0d29a}
+@media(max-width:650px){.char-card{grid-template-columns:108px minmax(0,1fr)}.char-portrait{border-width:2px}}
+
+.location-hero{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated;border:3px ridge #a77b3c;background:#202a32}
+.tile img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated}
+.tile small{display:block}
+
+.location-hero{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated;border:3px ridge #a77b3c;background:#202a32;margin:12px 0 6px}
+.tile img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated}
+.public-caption{font:13px/1.5 system-ui;color:#d8c9ad;text-align:center;margin:5px 6px 14px}
+@media(max-width:520px){.location-hero{border-width:2px}}
+
+.location-hero{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated;border:3px ridge #a77b3c;background:#202a32;margin:12px 0 6px}
+.tile img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated}
+.public-caption{font:13px/1.5 system-ui;color:#d8c9ad;text-align:center;margin:5px 6px 14px}
+@media(max-width:520px){.location-hero{border-width:2px}}
+
+.char-card p{line-height:1.5}
+.char-card p strong{color:#e6bd78}
+
+.location-hero{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated;border:3px ridge #a77b3c;background:#202a32;margin:12px 0 6px}
+.tile img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated}
+
+.location-hero{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated;border:3px ridge #a77b3c;background:#202a32;margin:12px 0 6px}
+.tile img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated}
+</style>
+<script src="assets-1.js"></script>
+<script src="assets-2.js"></script>
+<script>
+(()=>{const A=window.__ATLAS_ASSETS||{};const re=/atlasdata:(a\d{3})/g;const fix=v=>v.replace(re,(_,k)=>A[k]||_);
+for(const el of document.querySelectorAll('*')){for(const at of [...el.attributes]){if(at.value.includes('atlasdata:'))el.setAttribute(at.name,fix(at.value));}}
+for(const st of document.querySelectorAll('style')){if(st.textContent.includes('atlasdata:'))st.textContent=fix(st.textContent);}
+})();
+</script>
+</body></html>
