@@ -193,6 +193,28 @@ body:has(.bestiary-page:target) #world,body:has(.bestiary-page:target) .characte
 .god-sprite.sprite-11{background-position:50% 0%!important}
 .god-sprite.sprite-12{background-position:100% 100%!important}
 
+
+/* FIX: miniboss section must exist only inside Bestiary > Monsters */
+.monster-page{display:none!important}
+.monster-page:target{display:block!important}
+.monster-page:has(.monster-detail:target){display:block!important}
+.monster-detail{display:none!important}
+.monster-detail:target{display:block!important}
+body:has(.monster-page:target) #world,
+body:has(.monster-page:target) .characters,
+body:has(.monster-page:target) .dice-page,
+body:has(.monster-page:target) .detail,
+body:has(.monster-page:target) .bestiary-page,
+body:has(.monster-page:target) .god-page,
+body:has(.monster-page:target) .god-detail{display:none!important}
+body:has(.monster-detail:target) #world,
+body:has(.monster-detail:target) .characters,
+body:has(.monster-detail:target) .dice-page,
+body:has(.monster-detail:target) .detail,
+body:has(.monster-detail:target) .bestiary-page,
+body:has(.monster-detail:target) .god-page,
+body:has(.monster-detail:target) .god-detail{display:none!important}
+
 </style></head><body><audio id="bg-music" loop="" playsinline="" preload="auto"><source src="atlasdata:a001" type="audio/mpeg"/></audio>
 <header><div class="brand">✦ Последний пир богов ✦</div><nav class="tabs"><a href="#world">Карта мира</a><a href="#characters">Персонажи</a><a href="#bestiary">Бестиарий</a><a href="#dice">Кубики</a></nav><button aria-pressed="true" id="sound-toggle" title="Включить или выключить фоновую музыку и звук кубиков" type="button">♫ Включить музыку</button></header>
 <main class="layout" id="world"><section class="mapbox"><div class="maphead">КАРТА ОСТРОВА · ВЫБЕРИ МЕСТО</div><div class="map">
