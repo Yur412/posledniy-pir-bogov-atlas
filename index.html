@@ -174,40 +174,26 @@ body:has(.bestiary-page:target) #world,body:has(.bestiary-page:target) .characte
 .bestiary-category p{font:13px/1.5 system-ui;color:#c8b99b;margin:0;max-width:390px}
 @media(max-width:600px){.bestiary-page{margin:6px;padding:10px}.bestiary-grid{gap:8px}.bestiary-category{min-height:165px;padding:12px 8px}.bestiary-category h3{font-size:16px}.bestiary-category p{font-size:11px}.bestiary-symbol{font-size:30px}.bestiary-title{font-size:25px}}
 
-/* Zoom each sprite cell so the decorative frame inside the source sheet is cropped out. */
-.god-sprite{background-image:url('https://at.adobe.com/nnaNLMILIqpE9lN2')!important;background-size:500% 500%!important;background-repeat:no-repeat!important;image-rendering:auto!important}
-.god-sprite.sprite-0{background-position:3.125% 3.125%!important}
-.god-sprite.sprite-1{background-position:34.375% 3.125%!important}
-.god-sprite.sprite-2{background-position:65.625% 3.125%!important}
-.god-sprite.sprite-3{background-position:96.875% 3.125%!important}
-.god-sprite.sprite-4{background-position:3.125% 34.375%!important}
-.god-sprite.sprite-5{background-position:34.375% 34.375%!important}
-.god-sprite.sprite-6{background-position:65.625% 34.375%!important}
-.god-sprite.sprite-7{background-position:96.875% 34.375%!important}
-.god-sprite.sprite-8{background-position:3.125% 65.625%!important}
-.god-sprite.sprite-9{background-position:34.375% 65.625%!important}
-.god-sprite.sprite-10{background-position:65.625% 65.625%!important}
-.god-sprite.sprite-11{background-position:96.875% 65.625%!important}
-.god-sprite.sprite-12{background-position:3.125% 96.875%!important}
-
-
-/* First batch: individual full-resolution god portraits */
-.god-sprite.sprite-0{background-image:url('https://at.adobe.com/NkQ5gTPIY96qCrZf')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
-.god-sprite.sprite-1{background-image:url('https://at.adobe.com/zBTiNbNXeBdRMd7m')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
-.god-sprite.sprite-2{background-image:url('https://at.adobe.com/mhKtIaKKVbsfwPFR')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
-.god-sprite.sprite-3{background-image:url('https://at.adobe.com/lCE6O3p0nOG3npC4')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
-.god-sprite.sprite-4{background-image:url('https://at.adobe.com/AMyr9BKPtatavIxQ')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
-.god-sprite.sprite-5{background-image:url('https://at.adobe.com/kbakR9vmQ3znFRko')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
-.god-sprite.sprite-6{background-image:url('https://at.adobe.com/ssiVCnjArpIqidJc')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
-.god-sprite.sprite-7{background-image:url('https://at.adobe.com/ZAyd39Bs1AxPi128')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
-.god-sprite.sprite-8{background-image:url('https://at.adobe.com/UEwdY5AEteSniay4')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
-.god-sprite.sprite-9{background-image:url('https://at.adobe.com/ptnr32Z4jUUg1Sit')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
-
-
-/* Final three individual high-quality god portraits */
-.god-sprite.sprite-10{background-image:url('https://at.adobe.com/cGhI3Xqb6htQ9cfk')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
-.god-sprite.sprite-11{background-image:url('https://at.adobe.com/zPZ1MRtZt7Syqoj4')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
-.god-sprite.sprite-12{background-image:url('https://at.adobe.com/PkckokODQ5SMOUNq')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+/* Restored original verified god portrait sprite mapping. */
+.god-sprite{
+ background-image:url('https://at.adobe.com/nnaNLMILIqpE9lN2')!important;
+ background-size:400% 400%!important;
+ background-repeat:no-repeat!important;
+ image-rendering:auto!important;
+}
+.god-sprite.sprite-0{background-position:0% 0%!important}
+.god-sprite.sprite-1{background-position:33.333% 0%!important}
+.god-sprite.sprite-2{background-position:66.666% 0%!important}
+.god-sprite.sprite-3{background-position:100% 0%!important}
+.god-sprite.sprite-4{background-position:0% 33.333%!important}
+.god-sprite.sprite-5{background-position:33.333% 33.333%!important}
+.god-sprite.sprite-6{background-position:66.666% 33.333%!important}
+.god-sprite.sprite-7{background-position:100% 33.333%!important}
+.god-sprite.sprite-8{background-position:0% 66.666%!important}
+.god-sprite.sprite-9{background-position:33.333% 66.666%!important}
+.god-sprite.sprite-10{background-position:66.666% 66.666%!important}
+.god-sprite.sprite-11{background-position:100% 66.666%!important}
+.god-sprite.sprite-12{background-position:0% 100%!important}
 
 /* FIX: miniboss section must exist only inside Bestiary > Monsters */
 .monster-page{display:none!important}
