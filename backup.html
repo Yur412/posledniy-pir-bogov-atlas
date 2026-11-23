@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+
+<html lang="ru"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><meta content="#090e16" name="theme-color"/>
+<meta name="description" content="Резервная копия игрового атласа «Последний пир богов»."/><title>Последний пир богов — резервная HTML-копия</title><style>
+*{box-sizing:border-box}body{margin:0;background:#090e16;color:#eadfca;font-family:Georgia,serif}header{height:auto;padding:12px 18px;border-bottom:2px solid #866333;background:linear-gradient(#17151a,#090e16);display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}.brand{font-size:clamp(19px,3vw,30px);color:#e8bd6b;text-shadow:2px 2px #512b20}.tabs{display:flex;gap:8px;flex-wrap:wrap}.tabs span{border:2px solid #9a713a;padding:8px 12px;background:#211a1b;color:#e7d5b2;font-size:13px}.tabs span:first-child{background:#692b30}.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:10px;max-width:1600px;margin:auto}.mapbox,.side{border:3px ridge #a77b3c;background:#171821;box-shadow:0 0 0 2px #3b2b1d inset;min-width:0}.maphead{padding:9px 12px;color:#e7c47e;letter-spacing:.18em;font-size:12px;border-bottom:1px solid #77552e}.map{position:relative;aspect-ratio:1000/720;background-image:url('atlasdata:a000');background-size:100% 100%;overflow:hidden}.pin{position:absolute;transform:translate(-50%,-50%);text-decoration:none;color:#20170f;background:#ead29b;border:2px solid #5e3c20;padding:4px 7px;font:bold 11px Georgia,serif;box-shadow:2px 3px #0b0b0b;white-space:nowrap}.pin:before{content:"";display:inline-block;width:9px;height:9px;background:#b52e2b;border:2px solid #f4d28a;border-radius:50%;margin-right:5px;vertical-align:middle}.pin:hover,.pin:focus{background:#fff0bd;outline:2px solid #e4b657;z-index:2}.side{padding:12px}.side h2{font-size:25px;text-align:center;color:#f0d29a;margin:4px 0 12px}.side .lede{font:13px/1.45 system-ui;color:#d4c6ad;margin:10px 2px 14px}.city-art{width:100%;height:150px;object-fit:cover;image-rendering:auto;border:3px ridge #a77b3c;background:#28313b}.loc-title{font-size:13px;letter-spacing:.14em;text-align:center;color:#e4bd71;margin:15px 0 9px}.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.tile{display:block;text-decoration:none;color:#eee0c7;background:#191820;border:2px ridge #98703b;overflow:hidden}.tile img{display:block;width:100%;aspect-ratio:16/8;object-fit:cover;image-rendering:pixelated}.tile b{display:block;text-align:center;padding:6px 4px;font-size:12px;font-weight:normal}.detail{display:none;max-width:1100px;margin:10px auto;padding:15px;border:3px ridge #a77b3c;background:#171821}.detail:target{display:block}.detail h2{color:#f0d29a;text-align:center;font-size:26px;margin:5px}.detail p{font:14px/1.5 system-ui;color:#d4c6ad}.detail .subtiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.detail .tile img{aspect-ratio:16/9}.back{display:inline-block;color:#f0d29a;text-decoration:none;border:1px solid #98703b;padding:8px 12px;margin:6px 0}.foot{text-align:center;color:#81745f;font:11px system-ui;padding:18px}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.mapbox{order:1}.side{order:2}.map{min-height:300px}.pin{font-size:9px;padding:3px 4px}.side .city-art{height:190px}}
+@media(max-width:480px){header{padding:10px}.layout{padding:6px}.pin{font-size:7px;padding:2px 3px;border-width:1px}.pin:before{width:6px;height:6px;margin-right:2px}.side .city-art{height:140px}.detail .subtiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.tabs a{display:inline-block;border:2px solid #9a713a;padding:8px 12px;background:#211a1b;color:#e7d5b2;font-size:13px;text-decoration:none}
+.tabs a:first-child{background:#692b30}.tabs a:hover,.tabs a:focus{background:#794b2e;outline:2px solid #e8bd6b}
+.characters{display:none;max-width:1500px;margin:12px auto;padding:14px;border:3px ridge #a77b3c;background:#171821}
+.characters:target{display:block}
+body:has(.characters:target) #world{display:none}
+.char-head{text-align:center;color:#e8bd6b;font-size:26px;margin:6px 0 4px}
+.char-intro{text-align:center;color:#c8b99b;font:13px/1.5 system-ui;margin:0 0 16px}
+.char-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.char-card{display:grid;grid-template-columns:130px 1fr;gap:12px;border:2px ridge #8f6a39;background:linear-gradient(145deg,#26232a,#141820);padding:10px;min-width:0}
+.char-portrait{width:100%;align-self:start;image-rendering:pixelated;border:2px solid #a77b3c;background:#252833}
+.char-card h3{font-size:20px;color:#f0d29a;margin:0 0 4px}
+.char-race{font:11px system-ui;letter-spacing:.12em;color:#c59b5d;margin-bottom:8px}
+.char-stats{display:flex;gap:8px;flex-wrap:wrap;margin:7px 0 9px}
+.char-stats b{font:12px system-ui;color:#f2d9a4;border:1px solid #73572f;padding:5px 7px;background:#211d1c}
+.char-card p{font:12px/1.45 system-ui;color:#d1c5b0;margin:6px 0}
+.char-card strong{color:#e6bd78;font-weight:600}
+@media(max-width:650px){.char-grid{grid-template-columns:1fr}.char-card{grid-template-columns:100px 1fr;gap:9px;padding:8px}.char-card h3{font-size:17px}.characters{margin:6px;padding:9px}}
+
+.location-hero{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated;border:3px ridge #a77b3c;background:#202a32;margin:12px 0 5px}
+.public-caption{font:13px/1.45 system-ui;color:#d4c6ad;text-align:center;margin:4px 8px 14px}
+.tile small{display:block;padding:0 8px 9px;text-align:center;font:11px/1.35 system-ui;color:#bfb29a;min-height:42px}
+.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+.tile img{aspect-ratio:16/9}
+.scene-hero{margin-top:16px}
+.detail>p{font:14px/1.5 system-ui;color:#d4c6ad}
+@media(max-width:480px){.tile small{font-size:10px;min-height:48px}.location-hero{border-width:2px}}
+
+.location-hero{width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated;border:3px ridge #a77b3c;background:#202a32;display:block;margin:12px 0 6px}
+.tile img{width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated;display:block}
+.tile small{display:block;padding:0 8px 9px;text-align:center;color:#c9b99d;font:11px/1.4 system-ui;min-height:42px}
+.public-caption{font:13px/1.5 system-ui;color:#d8c9ad;text-align:center;margin:5px 6px 14px}
+.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:520px){.tile small{font-size:10px;min-height:48px}.detail{padding:10px}.location-hero{border-width:2px}}
+
+/* Character portraits */
+.char-card{grid-template-columns:172px minmax(0,1fr);align-items:start}
+.char-portrait{width:100%;height:auto;aspect-ratio:279/405;object-fit:cover;object-position:center top;border:3px ridge #bd9148;box-shadow:0 0 14px #0009;image-rendering:auto;background:#20232c}
+.char-card h3{font-size:21px}
+@media(max-width:650px){.char-card{grid-template-columns:112px minmax(0,1fr)}.char-portrait{border-width:2px}.char-card h3{font-size:17px}}
+/* Dice screen */
+.tabs a{display:inline-block;border:2px solid #9a713a;padding:8px 12px;background:#211a1b;color:#e7d5b2;font-size:13px;text-decoration:none}
+.tabs a:hover,.tabs a:focus{background:#794b2e;outline:2px solid #e8bd6b}
+.dice-page{display:none;max-width:1120px;margin:12px auto;padding:14px;border:3px ridge #a77b3c;background:linear-gradient(145deg,#1c1b22,#10151d);box-shadow:0 0 0 2px #3b2b1d inset}
+.dice-page:target{display:block}
+body:has(.dice-page:target) #world{display:none}
+body:has(.dice-page:target) .characters{display:none}
+body:has(.dice-page:target) .detail{display:none}
+.dice-title{text-align:center;color:#f0d29a;font-size:30px;font-weight:normal;margin:8px 0}
+.dice-intro{text-align:center;font:13px/1.5 system-ui;color:#c8b99b;max-width:680px;margin:0 auto 20px}
+.dice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.die-card{display:flex;flex-direction:column;align-items:center;gap:7px;min-width:0;border:2px ridge #9a713a;background:linear-gradient(180deg,#29252a,#151820);color:#eedbb5;padding:14px 10px 13px;cursor:pointer;transition:filter .2s,transform .2s;box-shadow:0 5px 14px #0007}
+.die-card:active{transform:translateY(2px)}
+.die-card:hover{filter:brightness(1.16)}
+.die-label{font:10px/1.35 system-ui;color:#c1b18e;min-height:28px;text-align:center}
+.die-gem{display:grid;place-items:center;width:132px;height:122px;max-width:100%}
+.die-gem svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 7px 5px #0009)}
+.die-name{font-size:27px;color:#f3d18a;letter-spacing:.08em}
+.die-range{font:11px system-ui;color:#aaa08b}
+.die-result{display:grid;place-items:center;min-width:78px;min-height:56px;padding:2px 16px;border:1px solid #815f35;background:#0f121a;color:#ffe4a8;font-size:34px;line-height:1;text-shadow:0 0 9px #d99e48}
+.die-card.rolling .die-gem{animation:dice-tumble .86s cubic-bezier(.2,.75,.25,1)}
+.die-card.rolling .die-gem svg{animation:dice-spin .86s ease-in-out}
+@keyframes dice-tumble{0%{transform:translateY(0) rotate(0) scale(1)}20%{transform:translateY(-22px) rotate(100deg) scale(1.12)}45%{transform:translateY(7px) rotate(240deg) scale(.92)}70%{transform:translateY(-10px) rotate(420deg) scale(1.06)}100%{transform:translateY(0) rotate(720deg) scale(1)}}
+@keyframes dice-spin{0%{filter:brightness(1)}40%{filter:brightness(1.8)}100%{filter:brightness(1)}}
+.dice-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:18px 0}
+.dice-roll-all,.dice-clear{border:2px ridge #a77b3c;padding:12px 18px;background:#65282e;color:#ffe7b3;font:16px Georgia,serif;cursor:pointer}
+.dice-clear{background:#252630;color:#d0c2a8;font-size:13px}
+.dice-history-box{border:1px solid #795b36;background:#121720;padding:12px 14px;margin-top:18px}
+.dice-history-head{display:flex;align-items:center;justify-content:space-between;gap:8px;border-bottom:1px solid #55432c;padding-bottom:8px}
+.dice-history-head h3{margin:0;color:#edca88;font-size:18px;font-weight:normal}
+.dice-history-head span{font:11px system-ui;color:#b4a486}
+#dice-history{list-style:none;margin:0;padding:0;max-height:260px;overflow:auto}
+#dice-history li{display:flex;justify-content:space-between;gap:10px;padding:9px 4px;border-bottom:1px solid #34333a;color:#d8cbb3;font:13px system-ui}
+#dice-history li strong{font-size:16px;color:#f1cc7d}
+#dice-history .dice-empty{display:block;text-align:center;color:#908674;padding:15px}
+@media(max-width:600px){.dice-page{margin:6px;padding:10px}.dice-grid{gap:7px}.die-card{padding:10px 5px}.die-gem{width:84px;height:82px}.die-name{font-size:21px}.die-label{font-size:9px;min-height:34px}.die-result{font-size:26px;min-width:55px;min-height:45px;padding:3px 10px}.dice-title{font-size:25px}.dice-roll-all{font-size:14px;padding:10px 12px}}
+
+/* Bestiary screen */
+.god-page{display:none;max-width:1100px;margin:12px auto;padding:16px;border:3px ridge #a77b3c;background:linear-gradient(145deg,#1c1b22,#10151d);box-shadow:0 0 0 2px #3b2b1d inset;color:#eadfca}
+.god-page:target{display:block}
+body:has(.god-page:target) #world,body:has(.god-page:target) .characters,body:has(.god-page:target) .dice-page,body:has(.god-page:target) .detail,body:has(.god-page:target) .monster-page{display:none;max-width:1100px;margin:12px auto;padding:14px;border:3px ridge #a77b3c;background:linear-gradient(145deg,#1c1b22,#10151d);box-shadow:0 0 0 2px #3b2b1d inset;color:#eadfca}
+.monster-page:target{display:block}.monster-image{background-image:url('https://yur412.github.io/posledniy-pir-bogov-atlas/assets/monsters/monsters-strip.jpg');background-size:500% 200%;background-repeat:no-repeat;image-rendering:auto}
+.monster-image.monster-set-2{background-image:url('https://yur412.github.io/posledniy-pir-bogov-atlas/assets/monsters/monsters-strip-2.jpg')!important}
+.monster-image.monster-1{background-position:0% 0%!important}
+.monster-image.monster-2{background-position:25% 0%!important}
+.monster-image.monster-3{background-position:50% 0%!important}
+.monster-image.monster-4{background-position:75% 0%!important}
+.monster-image.monster-5{background-position:100% 0%!important}
+.monster-image.monster-set-2.monster-1{background-position:0% 100%!important}
+.monster-image.monster-set-2.monster-2{background-position:25% 100%!important}
+.monster-image.monster-set-2.monster-3{background-position:50% 100%!important}
+.monster-image.monster-set-2.monster-4{background-position:75% 100%!important}
+.monster-image.monster-set-2.monster-5{background-position:100% 100%!important}
+.monster-1{background-position:0% 0%}.monster-2{background-position:25% 0%}.monster-3{background-position:50% 0%}.monster-4{background-position:75% 0%}.monster-5{background-position:100% 0%}
+.monster-image.monster-set-2.monster-1{background-position:0% 100%}.monster-image.monster-set-2.monster-2{background-position:25% 100%}.monster-image.monster-set-2.monster-3{background-position:50% 100%}.monster-image.monster-set-2.monster-4{background-position:75% 100%}.monster-image.monster-set-2.monster-5{background-position:100% 100%}
+.monster-card{text-decoration:none;display:block;cursor:pointer;transition:transform .15s,border-color .15s}
+.monster-card:hover{transform:translateY(-2px);border-color:#e2b96e}
+.monster-detail{display:none;max-width:1100px;margin:12px auto;padding:14px;border:3px ridge #a77b3c;background:linear-gradient(145deg,#1c1b22,#10151d);color:#eadfca}
+.monster-detail:target{display:block}
+.monster-page:has(.monster-detail:target){display:block}
+body:has(.monster-detail:target) #world,body:has(.monster-detail:target) .characters,body:has(.monster-detail:target) .dice-page,body:has(.monster-detail:target) .detail,body:has(.monster-detail:target) .bestiary-page,body:has(.monster-detail:target) .god-page,body:has(.monster-detail:target) .god-detail{display:none}
+.monster-entry{display:grid;grid-template-columns:minmax(220px,38%) 1fr;gap:20px;align-items:start;margin-top:12px}
+.monster-detail-image{aspect-ratio:3/4;max-height:680px}
+.monster-copy h3{color:#f0d29a;font-size:26px;font-weight:normal;margin:0 0 12px}
+.monster-copy p{font:15px/1.65 system-ui;color:#d6c9b0}
+.monster-copy .monster-stats{font-size:14px}
+@media(max-width:650px){.monster-entry{grid-template-columns:1fr}.monster-detail-image{max-width:360px;width:100%;justify-self:center}.monster-copy h3{font-size:21px}}
+
+body:has(.monster-page:target) #world,body:has(.monster-page:target) .characters,body:has(.monster-page:target) .dice-page,body:has(.monster-page:target) .detail,body:has(.monster-page:target) .bestiary-page,body:has(.monster-page:target) .god-page,body:has(.monster-page:target) .god-detail{display:none}
+.monster-title{text-align:center;color:#f0d29a;font-size:30px;font-weight:normal;margin:8px 0}
+.monster-intro{text-align:center;color:#c8b99b;font:13px/1.5 system-ui;margin:0 auto 18px}
+.monster-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.monster-card{min-width:0;padding:9px;border:3px ridge #98703b;background:linear-gradient(145deg,#29252a,#141820)}
+.monster-image{width:100%;aspect-ratio:3/4;background-image:url('https://yur412.github.io/posledniy-pir-bogov-atlas/assets/monsters/monsters-strip.jpg');background-size:500% 100%;background-repeat:no-repeat;border:1px solid #6f512f;image-rendering:pixelated}
+.monster-1{background-position:0% center}.monster-2{background-position:25% center}.monster-3{background-position:50% center}.monster-4{background-position:75% center}.monster-5{background-position:100% center}.monster-image.monster-set-2{background-image:url('https://yur412.github.io/posledniy-pir-bogov-atlas/assets/monsters/monsters-strip-2.jpg')}
+.monster-card h3{font-size:16px;line-height:1.25;color:#f0d29a;font-weight:normal;margin:9px 0 6px}
+.monster-card p{font:13px/1.5 system-ui;color:#d6c9b0;margin:7px 0}
+.monster-stats{width:100%;border-collapse:collapse;margin:9px 0;background:#17171b;font:12px system-ui}
+.monster-stats th,.monster-stats td{border:1px solid #70532f;padding:5px 7px;text-align:left}
+.monster-stats th{color:#e2b96e;font-weight:normal;width:43%}.monster-stats td{color:#f0e4cb}
+.monster-card b{color:#e2b96e}
+@media(max-width:650px){.monster-grid{gap:8px}.monster-card{padding:6px}.monster-card h3{font-size:13px}.monster-card p{font-size:12px}.monster-stats{font-size:11px}.monster-stats th,.monster-stats td{padding:4px}}
+.bestiary-page{display:none}
+.god-title{text-align:center;color:#f0d29a;font-size:30px;font-weight:normal;margin:8px 0 20px}
+.god-entry{display:grid;grid-template-columns:minmax(180px,34%) 1fr;gap:20px;align-items:start}
+.god-portrait{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border:3px ridge #98703b;box-shadow:0 4px 18px #000}
+.god-copy h3{color:#f0d29a;font-size:25px;font-weight:normal;margin:0 0 5px}
+.god-copy h4{color:#e2b96e;font-size:17px;font-weight:normal;margin:18px 0 6px}
+.god-copy p,.god-copy li{font:14px/1.65 system-ui;color:#d6c9b0}
+.god-copy ul{padding-left:22px}
+.god-subtitle{font-style:italic;color:#c8b99b!important;margin-top:0}
+.bestiary-category[href]{text-decoration:none}
+@media(max-width:650px){.god-entry{grid-template-columns:1fr}.god-portrait{max-width:360px;justify-self:center}.god-copy p,.god-copy li{font-size:13px}}
+.god-page,.god-detail{display:none;max-width:1100px;margin:12px auto;padding:14px;border:3px ridge #a77b3c;background:linear-gradient(145deg,#1c1b22,#10151d);box-shadow:0 0 0 2px #3b2b1d inset;color:#eadfca}
+.god-page:target,.god-detail:target{display:block}
+body:has(.god-page:target) #world,body:has(.god-page:target) .characters,body:has(.god-page:target) .dice-page,body:has(.god-page:target) .detail,body:has(.god-page:target) .bestiary-page,body:has(.god-page:target) .god-detail{display:none}
+body:has(.god-detail:target) #world,body:has(.god-detail:target) .characters,body:has(.god-detail:target) .dice-page,body:has(.god-detail:target) .detail,body:has(.god-detail:target) .bestiary-page,body:has(.god-detail:target) .god-page{display:none}
+.god-title{text-align:center;color:#f0d29a;font-size:30px;font-weight:normal;margin:8px 0 8px}
+.god-list-intro{text-align:center;color:#c8b99b;font:13px/1.5 system-ui;margin:0 auto 18px}
+.god-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.god-card{display:block;min-width:0;padding:8px;border:3px ridge #98703b;background:linear-gradient(145deg,#29252a,#141820);text-decoration:none;text-align:center;color:#f0d29a}
+.god-card-image{width:100%;aspect-ratio:3/4;border:0;background-size:cover;background-position:center;background-repeat:no-repeat}
+.god-card h3{font-size:17px;font-weight:normal;letter-spacing:.07em;margin:8px 0 2px}
+.god-detail{max-width:1100px}
+.god-entry{display:grid;grid-template-columns:minmax(180px,34%) 1fr;gap:20px;align-items:start}
+.god-detail-portrait{width:100%;aspect-ratio:3/4;border:0;box-shadow:0 4px 18px #000;background-size:cover;background-position:center;background-repeat:no-repeat}
+.god-zeus{background-image:url('https://at.adobe.com/8qHuvMwdryN17rH9')!important}
+.god-sprite{background-image:url('https://yur412.github.io/posledniy-pir-bogov-atlas/assets/gods/portraits.jpg');background-size:435% 435%}
+.sprite-0{background-position:0% 0%}.sprite-1{background-position:32.54% 0%}.sprite-2{background-position:65.07% 0%}.sprite-3{background-position:97.61% 0%}
+.sprite-4{background-position:0% 32.54%}.sprite-5{background-position:32.54% 32.54%}.sprite-6{background-position:65.07% 32.54%}.sprite-7{background-position:97.61% 32.54%}
+.sprite-8{background-position:0% 65.07%}.sprite-9{background-position:32.54% 65.07%}.sprite-10{background-position:65.07% 65.07%}.sprite-11{background-position:97.61% 65.07%}.sprite-12{background-position:0% 97.61%}
+.god-copy h3{color:#f0d29a;font-size:25px;font-weight:normal;margin:0 0 5px}
+.god-copy h4{color:#e2b96e;font-size:17px;font-weight:normal;margin:18px 0 6px}
+.god-copy p,.god-copy li{font:14px/1.65 system-ui;color:#d6c9b0}
+.god-copy ul{padding-left:22px}
+.god-subtitle{font-style:italic;color:#c8b99b!important;margin-top:0}
+.bestiary-category[href]{text-decoration:none}
+@media(max-width:650px){.god-entry{grid-template-columns:1fr}.god-detail-portrait{max-width:360px;justify-self:center}.god-copy p,.god-copy li{font-size:13px}.god-grid{gap:8px}.god-card{padding:6px}.god-card h3{font-size:14px}}
+.bestiary-page{display:none;max-width:1200px;margin:12px auto;padding:14px;border:3px ridge #a77b3c;background:linear-gradient(145deg,#1c1b22,#10151d);box-shadow:0 0 0 2px #3b2b1d inset}
+.bestiary-page:target{display:block}
+body:has(.bestiary-page:target) #world,body:has(.bestiary-page:target) .characters,body:has(.bestiary-page:target) .dice-page,body:has(.bestiary-page:target) .detail{display:none}
+.bestiary-title{text-align:center;color:#f0d29a;font-size:30px;font-weight:normal;margin:8px 0}
+.bestiary-intro{text-align:center;font:13px/1.5 system-ui;color:#c8b99b;max-width:720px;margin:0 auto 20px}
+.bestiary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.bestiary-category{min-width:0;min-height:190px;padding:18px 14px;border:3px ridge #98703b;background:linear-gradient(145deg,#29252a,#141820);color:#eadfca;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.bestiary-symbol{font-size:38px;line-height:1.2;color:#d8ad63;text-shadow:2px 2px #3b211c;margin-bottom:10px}
+.bestiary-category h3{font-size:21px;font-weight:normal;letter-spacing:.08em;color:#f0d29a;margin:4px 0 9px}
+.bestiary-category p{font:13px/1.5 system-ui;color:#c8b99b;margin:0;max-width:390px}
+@media(max-width:600px){.bestiary-page{margin:6px;padding:10px}.bestiary-grid{gap:8px}.bestiary-category{min-height:165px;padding:12px 8px}.bestiary-category h3{font-size:16px}.bestiary-category p{font-size:11px}.bestiary-symbol{font-size:30px}.bestiary-title{font-size:25px}}
+
+/* FIX: miniboss section must exist only inside Bestiary > Monsters */
+.monster-page{display:none!important}
+.monster-page:target{display:block!important}
+.monster-page:has(.monster-detail:target){display:block!important}
+.monster-detail{display:none!important}
+.monster-detail:target{display:block!important}
+body:has(.monster-page:target) #world,
+body:has(.monster-page:target) .characters,
+body:has(.monster-page:target) .dice-page,
+body:has(.monster-page:target) .detail,
+body:has(.monster-page:target) .bestiary-page,
+body:has(.monster-page:target) .god-page,
+body:has(.monster-page:target) .god-detail{display:none!important}
+body:has(.monster-detail:target) #world,
+body:has(.monster-detail:target) .characters,
+body:has(.monster-detail:target) .dice-page,
+body:has(.monster-detail:target) .detail,
+body:has(.monster-detail:target) .bestiary-page,
+body:has(.monster-detail:target) .god-page,
+body:has(.monster-detail:target) .god-detail{display:none!important}
+
+
+/* Second five monster portraits: individual uploaded images, replacing sprite-sheet backgrounds. */
+.monster-image.monster-set-2.monster-1{background-image:url('https://at.adobe.com/3L3wd7sEmb3PToCO')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+.monster-image.monster-set-2.monster-2{background-image:url('https://at.adobe.com/urezDgKYYyUqAlpO')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+.monster-image.monster-set-2.monster-3{background-image:url('https://at.adobe.com/nBR26o14sOwRynre')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+.monster-image.monster-set-2.monster-4{background-image:url('https://at.adobe.com/sivOTU9xBXOD5Nbw')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+.monster-image.monster-set-2.monster-5{background-image:url('https://at.adobe.com/Cj1vRMC7FsqeQZhv')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+
+
+/* Main character detail pages */
+.char-card-link{display:grid;grid-template-columns:180px minmax(0,1fr);align-items:start;color:inherit;text-decoration:none;cursor:pointer;transition:transform .16s,border-color .16s,filter .16s}
+.char-card-link:hover,.char-card-link:focus{transform:translateY(-2px);border-color:#e2b96e;filter:brightness(1.08);outline:2px solid #d7aa5b;outline-offset:2px}
+.char-detail{display:none;max-width:1120px;margin:12px auto;padding:16px;border:3px ridge #a77b3c;background:linear-gradient(145deg,#1c1b22,#10151d);box-shadow:0 0 0 2px #3b2b1d inset;color:#eadfca}
+.char-detail:target{display:block}
+body:has(.char-detail:target) #world,
+body:has(.char-detail:target) .characters,
+body:has(.char-detail:target) .detail,
+body:has(.char-detail:target) .dice-page,
+body:has(.char-detail:target) .bestiary-page,
+body:has(.char-detail:target) .god-page,
+body:has(.char-detail:target) .god-detail,
+body:has(.char-detail:target) .monster-page{display:none}
+.char-detail-title{text-align:center;color:#f0d29a;font-size:30px;font-weight:normal;margin:8px 0 4px}
+.char-detail-subtitle{text-align:center;color:#c8b99b;font:13px system-ui;margin:0 0 18px}
+.char-detail-entry{display:grid;grid-template-columns:minmax(220px,36%) minmax(0,1fr);gap:22px;align-items:start}
+.char-detail-portrait{position:sticky;top:12px;display:grid;place-items:center;aspect-ratio:3/4;min-height:300px;border:3px ridge #bd9148;background:repeating-linear-gradient(135deg,#252833 0 12px,#20232c 12px 24px);color:#bca47b;text-align:center;font:12px/1.5 system-ui;letter-spacing:.13em;padding:18px;box-shadow:0 0 14px #0009}
+.char-detail-copy h3{font-size:18px;font-weight:normal;color:#e8bd6b;margin:18px 0 5px;border-bottom:1px solid #634d30;padding-bottom:5px}
+.char-detail-copy h3:first-of-type{margin-top:0}
+.char-detail-copy p{font:14px/1.65 system-ui;color:#d6c9b0;margin:6px 0 12px}
+.char-detail-stats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.char-detail-stats b{font:12px system-ui;color:#f2d9a4;border:1px solid #73572f;padding:7px 9px;background:#211d1c}
+@media(max-width:650px){.char-detail{margin:6px;padding:10px}.char-detail-title{font-size:24px}.char-detail-entry{grid-template-columns:1fr;gap:15px}.char-detail-portrait{position:static;min-height:230px;max-width:340px;width:100%;justify-self:center}.char-detail-copy p{font-size:13px}}
+
+
+<!-- LOCKED MONSTER PORTRAITS -->
+
+
+/* Monster portrait viewport: keep every photo clipped inside its own 3:4 frame. */
+.monster-card{min-width:0;overflow:hidden}
+.monster-card .monster-image,.monster-entry .monster-image{position:relative;display:block;width:100%;aspect-ratio:3/4;min-width:0;overflow:hidden;box-sizing:border-box}
+.monster-portrait-file{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:100%;max-height:100%;object-fit:cover;object-position:center;box-sizing:border-box;border:0;margin:0;padding:0}
+.monster-entry .monster-image{max-height:680px}
+@media(max-width:650px){.monster-entry .monster-image{max-width:360px;width:100%;justify-self:center}}
+
+/* Character roster: two cards per row on phones and larger screens. */
+@media(max-width:650px){
+  .char-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .char-card,.char-card-link{display:flex;flex-direction:column;align-items:stretch;gap:7px;padding:7px;min-width:0}
+  .char-portrait{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;image-rendering:auto;box-sizing:border-box}
+  .char-card h3{font-size:15px;line-height:1.2;overflow-wrap:anywhere}
+  .char-race{font-size:10px;letter-spacing:.04em}
+  .char-stats{gap:4px}
+  .char-stats b{font-size:10px;padding:4px}
+  .char-card p{font-size:11px;line-height:1.35}
+  .characters{margin:6px;padding:8px}
+}
+
+
+/* Stories tab */
+.stories-page{display:none;max-width:1200px;margin:12px auto;padding:14px;border:3px ridge #a77b3c;background:linear-gradient(145deg,#1c1b22,#10151d);box-shadow:0 0 0 2px #3b2b1d inset;color:#eadfca}
+.stories-page:target{display:block}
+body:has(.stories-page:target) #world,
+body:has(.stories-page:target) .characters,
+body:has(.stories-page:target) .detail,
+body:has(.stories-page:target) .bestiary-page,
+body:has(.stories-page:target) .god-page,
+body:has(.stories-page:target) .god-detail,
+body:has(.stories-page:target) .monster-page,
+body:has(.stories-page:target) .monster-detail,
+body:has(.stories-page:target) .dice-page{display:none!important}
+.stories-title{text-align:center;color:#f0d29a;font-size:30px;font-weight:normal;margin:8px 0}
+.stories-intro{text-align:center;color:#c8b99b;font:13px/1.5 system-ui;margin:0 auto 20px}
+.stories-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.story-card{min-width:0;padding:20px;border:3px ridge #98703b;background:linear-gradient(145deg,#29252a,#141820);color:#eadfca}
+.story-card h3{text-align:center;color:#f0d29a;font-size:22px;font-weight:normal;margin:6px 0 16px}
+.story-card p{font:14px/1.75 system-ui;color:#d6c9b0;text-align:left}
+.story-mark{text-align:center;color:#d8ad63;font-size:34px;line-height:1.2}
+.story-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;text-align:center;border-style:dashed;background:linear-gradient(145deg,#24222a,#141820)}
+.story-empty p{color:#9e927d;font-style:italic;text-align:center}
+@media(max-width:650px){.stories-page{margin:6px;padding:10px}.stories-grid{gap:8px}.story-card{padding:12px 10px}.story-card h3{font-size:17px}.story-card p{font-size:12px;line-height:1.6}.story-empty{min-height:220px}.stories-title{font-size:25px}}
+
+/* Story index and individual story pages */
+.story-button{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:220px;text-decoration:none;text-align:center;cursor:pointer;transition:transform .15s,border-color .15s}
+.story-button:hover{transform:translateY(-2px);border-color:#e2b96e}
+.story-open{display:inline-block;margin-top:12px;padding:9px 16px;border:1px solid #9a713a;background:#211a1b;color:#e7d5b2;font:12px system-ui;letter-spacing:.04em}
+.story-detail-page{display:none;max-width:1100px;margin:12px auto;padding:14px;border:3px ridge #a77b3c;background:linear-gradient(145deg,#1c1b22,#10151d);box-shadow:0 0 0 2px #3b2b1d inset;color:#eadfca}
+.story-detail-page:target{display:block}
+body:has(.story-detail-page:target) #world,
+body:has(.story-detail-page:target) .characters,
+body:has(.story-detail-page:target) .detail,
+body:has(.story-detail-page:target) .bestiary-page,
+body:has(.story-detail-page:target) .god-page,
+body:has(.story-detail-page:target) .god-detail,
+body:has(.story-detail-page:target) .monster-page,
+body:has(.story-detail-page:target) .monster-detail,
+body:has(.story-detail-page:target) .dice-page,
+body:has(.story-detail-page:target) .stories-page{display:none!important}
+.story-hero-art{width:100%;aspect-ratio:16/6;min-height:170px;margin:12px 0 20px;border:2px ridge #98703b;background:radial-gradient(ellipse at 50% 100%,#68432c 0%,#29232a 42%,#11151d 100%);position:relative;overflow:hidden}
+.story-hero-art:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,#080a10aa),radial-gradient(ellipse at 50% 80%,#d09a4c55,transparent 45%)}
+.story-full{max-width:850px;margin:0 auto;padding:4px 12px 18px}
+.story-full h3{color:#e8c58b;font-size:21px;font-weight:normal;margin:20px 0 8px}
+.story-full p{font:15px/1.8 system-ui;color:#d6c9b0;margin:0 0 14px}
+@media(max-width:650px){.story-button{min-height:180px;padding:12px 8px}.story-open{padding:7px 10px;font-size:11px}.story-detail-page{margin:6px;padding:10px}.story-hero-art{aspect-ratio:4/3;min-height:150px}.story-full{padding:0 4px}.story-full p{font-size:13px;line-height:1.65}}
+</style><style>
+/* User-confirmed deity portraits, fixed in upload order 1-14. */
+.god-img-1{background-image:url('https://at.adobe.com/C28QM1m5yVUXnkYC')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+.god-img-2{background-image:url('https://at.adobe.com/eLyTxij3fJA6JfoN')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+.god-img-3{background-image:url('https://at.adobe.com/7fCVOsJDPwik02vv')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+.god-img-4{background-image:url('https://at.adobe.com/iq0bG9xQy0SjqHH0')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+.god-img-5{background-image:url('https://at.adobe.com/GF5BEwqfWra9Puv6')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+.god-img-6{background-image:url('https://at.adobe.com/7CEXAKO9LHlkr86V')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+.god-img-7{background-image:url('https://at.adobe.com/4kDpDdlHobVAnjRc')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+.god-img-8{background-image:url('https://at.adobe.com/xMK8aHcab5x2wxIh')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+.god-img-9{background-image:url('https://at.adobe.com/7LSf2HvMpAjeQ2Kk')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+.god-img-10{background-image:url('https://at.adobe.com/UnblFwrvAXkDUYAd')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+.god-img-11{background-image:url('https://at.adobe.com/ICB3k9XbzwZODbhN')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+.god-img-12{background-image:url('https://at.adobe.com/xBDRwEmAPFMf97yR')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+.god-img-13{background-image:url('https://at.adobe.com/q52xxZM9HIwdpX6j')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+.god-img-14{background-image:url('https://at.adobe.com/brtLDCfkatqCMAE3')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+</style>
+</head><body><audio id="bg-music" loop="" playsinline="" preload="auto"><source src="atlasdata:a001" type="audio/mpeg"/></audio>
+<header><div class="brand">✦ Последний пир богов ✦</div><nav class="tabs"><a href="#world">Карта мира</a><a href="#characters">Персонажи</a><a href="#bestiary">Бестиарий</a><a href="#stories">Истории</a><a href="#dice">Кубики</a></nav><button aria-pressed="true" id="sound-toggle" title="Включить или выключить фоновую музыку и звук кубиков" type="button">♫ Включить музыку</button></header>
+<main class="layout" id="world"><section class="mapbox"><div class="maphead">КАРТА ОСТРОВА · ВЫБЕРИ МЕСТО</div><div class="map">
+<a class="pin" href="#loc-veyr" style="left:48%;top:51%">Вейр</a>
+<a class="pin" href="#loc-sanctuary" style="left:34%;top:68%">Пепельное святилище Диониса</a>
+<a class="pin" href="#loc-archive" style="left:66%;top:25%">Архив Молчаливых Имен</a>
+<a class="pin" href="#loc-orhad" style="left:52%;top:37%">Ор-Хад</a>
+<a class="pin" href="#loc-fortress" style="left:19%;top:78%">Крепость Семерых Врат</a>
+<a class="pin" href="#loc-hallfinal" style="left:79%;top:82%">Чертог Пустого Места</a>
+<a class="pin" href="#loc-village" style="left:22%;top:44%">Липовый Брод</a>
+<a class="pin" href="#loc-blackport" style="left:12%;top:57%">Чёрная Пристань</a>
+<a class="pin" href="#loc-mines" style="left:15%;top:67%">Соляные Карьеры</a>
+<a class="pin" href="#loc-swamp" style="left:20%;top:57%">Пепельная Топь</a>
+<a class="pin" href="#loc-pass" style="left:30%;top:17%">Костяной Перевал</a>
+<a class="pin" href="#loc-sunken" style="left:78%;top:58%">Затонувшая Часовня</a>
+<a class="pin" href="#loc-manor" style="left:72%;top:35%">Охотничий Дом князя</a>
+<a class="pin" href="#loc-grove" style="left:60%;top:65%">Разорённая Дубрава</a>
+<a class="pin" href="#loc-fair" style="left:72%;top:47%">Ярмарка Девяти Дорог</a>
+</div></section></main>
+<section class="detail" id="loc-veyr"><a class="back" href="#">← К карте острова</a><h2>Вейр — город тысячи сделок</h2><img alt="Крупный вольный город у залива: тесные кварталы, каменные башни, торговые площади и гавань, полная парусных судов." class="location-hero" src="atlasdata:a002"/><p class="public-caption">Крупный вольный город у залива: тесные кварталы, каменные башни, торговые площади и гавань, полная парусных судов.</p><p>Вольный торговый город, где пересекаются купцы, наёмники и искатели приключений.</p><div class="subtiles">
+<a class="tile" href="#scene-veyr-0"><img alt="Мощёная площадь с рядами навесов, телегами, прилавками и каменным колодцем." src="atlasdata:a003"/><b>Рыночная площадь</b><small>Мощёная площадь с рядами навесов, телегами, прилавками и каменным колодцем.</small></a>
+<a class="tile" href="#scene-veyr-1"><img alt="Двухэтажный трактир с деревянной вывеской, тёплыми окнами, широкими дверями и дымящей трубой." src="atlasdata:a004"/><b>Трактир «Последняя кружка»</b><small>Двухэтажный трактир с деревянной вывеской, тёплыми окнами, широкими дверями и дымящей трубой.</small></a>
+<a class="tile" href="#scene-veyr-2"><img alt="Каменное здание с гербами купеческих домов, арочными окнами и внутренним двором." src="atlasdata:a005"/><b>Гильдия торговцев</b><small>Каменное здание с гербами купеческих домов, арочными окнами и внутренним двором.</small></a>
+<a class="tile" href="#scene-veyr-3"><img alt="Тёмные подвальные проходы, низкие двери, закрытые лавки и тусклые фонари." src="atlasdata:a006"/><b>Чёрный рынок</b><small>Тёмные подвальные проходы, низкие двери, закрытые лавки и тусклые фонари.</small></a>
+<a class="tile" href="#scene-veyr-4"><img alt="Небольшой каменный храм с колоннами, внутренним двориком и простым алтарём." src="atlasdata:a007"/><b>Городской храм</b><small>Небольшой каменный храм с колоннами, внутренним двориком и простым алтарём.</small></a>
+<a class="tile" href="#scene-veyr-5"><img alt="Деревянные пирсы, пришвартованные суда, краны, канаты и ряды грузовых складов." src="atlasdata:a008"/><b>Порт и пристани</b><small>Деревянные пирсы, пришвартованные суда, краны, канаты и ряды грузовых складов.</small></a>
+<a class="tile" href="#scene-veyr-6"><img alt="Высокие каменные ворота с башнями, решёткой, караульными нишами и дорогой за стенами." src="atlasdata:a009"/><b>Городские ворота</b><small>Высокие каменные ворота с башнями, решёткой, караульными нишами и дорогой за стенами.</small></a>
+<a class="tile" href="#scene-veyr-7"><img alt="Каменное банное здание с паром над бассейнами, внутренним двориком и низкими сводами." src="atlasdata:a010"/><b>Общественные бани</b><small>Каменное банное здание с паром над бассейнами, внутренним двориком и низкими сводами.</small></a>
+</div></section>
+<section class="detail" id="scene-veyr-0"><a class="back" href="#loc-veyr">← К Вейр</a><h2>Рыночная площадь</h2><img alt="Мощёная площадь с рядами навесов, телегами, прилавками и каменным колодцем." class="location-hero scene-hero" src="atlasdata:a003"/><p class="public-caption">Мощёная площадь с рядами навесов, телегами, прилавками и каменным колодцем.</p><img alt="" class="city-art" src="atlasdata:a011"/><p>Торговые ряды, менялы и шумные сделки.</p></section>
+<section class="detail" id="scene-veyr-1"><a class="back" href="#loc-veyr">← К Вейр</a><h2>Трактир «Последняя кружка»</h2><img alt="Двухэтажный трактир с деревянной вывеской, тёплыми окнами, широкими дверями и дымящей трубой." class="location-hero scene-hero" src="atlasdata:a004"/><p class="public-caption">Двухэтажный трактир с деревянной вывеской, тёплыми окнами, широкими дверями и дымящей трубой.</p><img alt="" class="city-art" src="atlasdata:a012"/><p>Постоялый двор, слухи и сомнительные знакомства.</p></section>
+<section class="detail" id="scene-veyr-2"><a class="back" href="#loc-veyr">← К Вейр</a><h2>Гильдия торговцев</h2><img alt="Каменное здание с гербами купеческих домов, арочными окнами и внутренним двором." class="location-hero scene-hero" src="atlasdata:a005"/><p class="public-caption">Каменное здание с гербами купеческих домов, арочными окнами и внутренним двором.</p><img alt="" class="city-art" src="atlasdata:a013"/><p>Контора купеческих домов и место официальных договоров.</p></section>
+<section class="detail" id="scene-veyr-3"><a class="back" href="#loc-veyr">← К Вейр</a><h2>Чёрный рынок</h2><img alt="Тёмные подвальные проходы, низкие двери, закрытые лавки и тусклые фонари." class="location-hero scene-hero" src="atlasdata:a006"/><p class="public-caption">Тёмные подвальные проходы, низкие двери, закрытые лавки и тусклые фонари.</p><img alt="" class="city-art" src="atlasdata:a014"/><p>Подпольные лавки, контрабанда и редкие артефакты.</p></section>
+<section class="detail" id="scene-veyr-4"><a class="back" href="#loc-veyr">← К Вейр</a><h2>Городской храм</h2><img alt="Небольшой каменный храм с колоннами, внутренним двориком и простым алтарём." class="location-hero scene-hero" src="atlasdata:a007"/><p class="public-caption">Небольшой каменный храм с колоннами, внутренним двориком и простым алтарём.</p><img alt="" class="city-art" src="atlasdata:a015"/><p>Святилище, куда приходят за советом и исцелением.</p></section>
+<section class="detail" id="scene-veyr-5"><a class="back" href="#loc-veyr">← К Вейр</a><h2>Порт и пристани</h2><img alt="Деревянные пирсы, пришвартованные суда, краны, канаты и ряды грузовых складов." class="location-hero scene-hero" src="atlasdata:a008"/><p class="public-caption">Деревянные пирсы, пришвартованные суда, краны, канаты и ряды грузовых складов.</p><img alt="" class="city-art" src="atlasdata:a016"/><p>Склады, корабли и речные торговцы.</p></section>
+<section class="detail" id="scene-veyr-6"><a class="back" href="#loc-veyr">← К Вейр</a><h2>Городские ворота</h2><img alt="Высокие каменные ворота с башнями, решёткой, караульными нишами и дорогой за стенами." class="location-hero scene-hero" src="atlasdata:a009"/><p class="public-caption">Высокие каменные ворота с башнями, решёткой, караульными нишами и дорогой за стенами.</p><img alt="" class="city-art" src="atlasdata:a017"/><p>Караульный пост и дорога в глубь острова.</p></section>
+<section class="detail" id="scene-veyr-7"><a class="back" href="#loc-veyr">← К Вейр</a><h2>Общественные бани</h2><img alt="Каменное банное здание с паром над бассейнами, внутренним двориком и низкими сводами." class="location-hero scene-hero" src="atlasdata:a010"/><p class="public-caption">Каменное банное здание с паром над бассейнами, внутренним двориком и низкими сводами.</p><img alt="" class="city-art" src="atlasdata:a018"/><p>Место отдыха, сплетен и тайных встреч.</p></section>
+<section class="detail" id="loc-sanctuary"><a class="back" href="#">← К карте острова</a><h2>Пепельное святилище Диониса</h2><img alt="Старинный храмовый комплекс среди виноградных склонов, с колоннадой, каменными двориками и заросшими террасами." class="location-hero" src="atlasdata:a019"/><p class="public-caption">Старинный храмовый комплекс среди виноградных склонов, с колоннадой, каменными двориками и заросшими террасами.</p><p>Храм среди старых виноградников; здесь хранят записи о древнем пире.</p><div class="subtiles">
+<a class="tile" href="#scene-sanctuary-0"><img alt="Виноградные террасы" src="atlasdata:a020"/><b>Виноградные террасы</b><small>Ряды виноградных лоз спускаются по зелёному склону между каменными подпорными стенами.</small></a>
+<a class="tile" href="#scene-sanctuary-1"><img alt="Внешний двор" src="atlasdata:a021"/><b>Внешний двор</b><small>Тихий храмовый двор с колоннадой, чашей для омовений и каменными плитами.</small></a>
+<a class="tile" href="#scene-sanctuary-2"><img alt="Зал пиров" src="atlasdata:a022"/><b>Зал пиров</b><small>Длинный каменный зал с массивными столами, факелами, нишами и выцветшими фресками.</small></a>
+<a class="tile" href="#scene-sanctuary-3"><img alt="Подвальный архив" src="atlasdata:a023"/><b>Подвальный архив</b><small>Прохладный подвал с деревянными полками, глиняными сосудами и связками свитков.</small></a>
+</div></section>
+<section class="detail" id="scene-sanctuary-0"><a class="back" href="#loc-sanctuary">← К Пепельное святилище Диониса</a><h2>Виноградные террасы</h2><img alt="Виноградные террасы" class="location-hero scene-hero" src="atlasdata:a020"/><p class="public-caption">Ряды виноградных лоз спускаются по зелёному склону между каменными подпорными стенами.</p><img alt="" class="city-art" src="atlasdata:a024"/><p>Заброшенные ряды лоз и сторожевые домики.</p></section>
+<section class="detail" id="scene-sanctuary-1"><a class="back" href="#loc-sanctuary">← К Пепельное святилище Диониса</a><h2>Внешний двор</h2><img alt="Внешний двор" class="location-hero scene-hero" src="atlasdata:a021"/><p class="public-caption">Тихий храмовый двор с колоннадой, чашей для омовений и каменными плитами.</p><img alt="" class="city-art" src="atlasdata:a025"/><p>Алтарь и колоннада для паломников.</p></section>
+<section class="detail" id="scene-sanctuary-2"><a class="back" href="#loc-sanctuary">← К Пепельное святилище Диониса</a><h2>Зал пиров</h2><img alt="Зал пиров" class="location-hero scene-hero" src="atlasdata:a022"/><p class="public-caption">Длинный каменный зал с массивными столами, факелами, нишами и выцветшими фресками.</p><img alt="" class="city-art" src="atlasdata:a026"/><p>Место старых религиозных празднеств.</p></section>
+<section class="detail" id="scene-sanctuary-3"><a class="back" href="#loc-sanctuary">← К Пепельное святилище Диониса</a><h2>Подвальный архив</h2><img alt="Подвальный архив" class="location-hero scene-hero" src="atlasdata:a023"/><p class="public-caption">Прохладный подвал с деревянными полками, глиняными сосудами и связками свитков.</p><img alt="" class="city-art" src="atlasdata:a027"/><p>Запечатанные записи и сосуды с надписями.</p></section>
+<section class="detail" id="loc-archive"><a class="back" href="#">← К карте острова</a><h2>Архив Молчаливых Имен</h2><img alt="Архив Молчаливых Имен" class="location-hero" src="atlasdata:a028"/><p class="public-caption">Строгое каменное хранилище с высокими окнами, внутренним двором и рядами старых корпусов.</p><p>Хранилище документов о забытых жертвах и первых хранителях печати.</p><div class="subtiles">
+<a class="tile" href="#scene-archive-0"><img alt="Зал каталогов" src="atlasdata:a029"/><b>Зал каталогов</b><small>Высокий зал с галереями книжных полок, лестницами и длинными столами.</small></a>
+<a class="tile" href="#scene-archive-1"><img alt="Комната переписчиков" src="atlasdata:a030"/><b>Комната переписчиков</b><small>Небольшая рабочая комната с письменными столами, чернильницами, перьями и свитками.</small></a>
+<a class="tile" href="#scene-archive-2"><img alt="Запечатанное хранилище" src="atlasdata:a031"/><b>Запечатанное хранилище</b><small>Тяжёлая каменная дверь ведёт в тесное хранилище с сундуками и полками.</small></a>
+</div></section>
+<section class="detail" id="scene-archive-0"><a class="back" href="#loc-archive">← К Архив Молчаливых Имен</a><h2>Зал каталогов</h2><img alt="Зал каталогов" class="location-hero scene-hero" src="atlasdata:a029"/><p class="public-caption">Высокий зал с галереями книжных полок, лестницами и длинными столами.</p><img alt="" class="city-art" src="atlasdata:a032"/><p>Стеллажи с именами и родословными.</p></section>
+<section class="detail" id="scene-archive-1"><a class="back" href="#loc-archive">← К Архив Молчаливых Имен</a><h2>Комната переписчиков</h2><img alt="Комната переписчиков" class="location-hero scene-hero" src="atlasdata:a030"/><p class="public-caption">Небольшая рабочая комната с письменными столами, чернильницами, перьями и свитками.</p><img alt="" class="city-art" src="atlasdata:a033"/><p>Столы, чернила и незаконченные свитки.</p></section>
+<section class="detail" id="scene-archive-2"><a class="back" href="#loc-archive">← К Архив Молчаливых Имен</a><h2>Запечатанное хранилище</h2><img alt="Запечатанное хранилище" class="location-hero scene-hero" src="atlasdata:a031"/><p class="public-caption">Тяжёлая каменная дверь ведёт в тесное хранилище с сундуками и полками.</p><img alt="" class="city-art" src="atlasdata:a034"/><p>Документы, к которым нет открытого доступа.</p></section>
+<section class="detail" id="loc-orhad"><a class="back" href="#">← К карте острова</a><h2>Ор-Хад — город под землёй</h2><img alt="Ор-Хад — город под землёй" class="location-hero" src="atlasdata:a035"/><p class="public-caption">Гигантский подземный город, вырубленный в скале: уступы домов, мосты, лестницы и огромные тёмные пустоты.</p><p>Древний подземный город, где люди впервые обнаружили Голод.</p><div class="subtiles">
+<a class="tile" href="#scene-orhad-0"><img alt="Верхние ворота" src="atlasdata:a036"/><b>Верхние ворота</b><small>Гигантские каменные створки встроены в скалу; по бокам расположены старые сторожевые ниши.</small></a>
+<a class="tile" href="#scene-orhad-1"><img alt="Жилые террасы" src="atlasdata:a037"/><b>Жилые террасы</b><small>Многоярусные дома и балконы вырублены прямо в стенах огромной подземной пещеры.</small></a>
+<a class="tile" href="#scene-orhad-2"><img alt="Зал каменного стола" src="atlasdata:a038"/><b>Зал каменного стола</b><small>Просторная подземная камера с длинным монолитным столом и каменными сиденьями.</small></a>
+<a class="tile" href="#scene-orhad-3"><img alt="Нижний провал" src="atlasdata:a039"/><b>Нижний провал</b><small>Глубокая трещина разрезает каменный пол; вниз уходят узкие лестницы и обрывающиеся мостки.</small></a>
+</div></section>
+<section class="detail" id="scene-orhad-0"><a class="back" href="#loc-orhad">← К Ор-Хад</a><h2>Верхние ворота</h2><img alt="Верхние ворота" class="location-hero scene-hero" src="atlasdata:a036"/><p class="public-caption">Гигантские каменные створки встроены в скалу; по бокам расположены старые сторожевые ниши.</p><img alt="" class="city-art" src="atlasdata:a017"/><p>Старый вход в подземные кварталы.</p></section>
+<section class="detail" id="scene-orhad-1"><a class="back" href="#loc-orhad">← К Ор-Хад</a><h2>Жилые террасы</h2><img alt="Жилые террасы" class="location-hero scene-hero" src="atlasdata:a037"/><p class="public-caption">Многоярусные дома и балконы вырублены прямо в стенах огромной подземной пещеры.</p><img alt="" class="city-art" src="atlasdata:a040"/><p>Пустые дома древнего города.</p></section>
+<section class="detail" id="scene-orhad-2"><a class="back" href="#loc-orhad">← К Ор-Хад</a><h2>Зал каменного стола</h2><img alt="Зал каменного стола" class="location-hero scene-hero" src="atlasdata:a038"/><p class="public-caption">Просторная подземная камера с длинным монолитным столом и каменными сиденьями.</p><img alt="" class="city-art" src="atlasdata:a026"/><p>Место, связанное с одинаковыми снами.</p></section>
+<section class="detail" id="scene-orhad-3"><a class="back" href="#loc-orhad">← К Ор-Хад</a><h2>Нижний провал</h2><img alt="Нижний провал" class="location-hero scene-hero" src="atlasdata:a039"/><p class="public-caption">Глубокая трещина разрезает каменный пол; вниз уходят узкие лестницы и обрывающиеся мостки.</p><img alt="" class="city-art" src="atlasdata:a041"/><p>Спуск к древним слоям под городом.</p></section>
+<section class="detail" id="loc-fortress"><a class="back" href="#">← К карте острова</a><h2>Крепость Семерых Врат</h2><img alt="Крепость Семерых Врат" class="location-hero" src="atlasdata:a042"/><p class="public-caption">Массивная средневековая крепость на скалистом проходе, окружённая стенами, башнями и караульными дворами.</p><p>Спорное укрепление, охраняющее один из элементов древней защиты.</p><div class="subtiles">
+<a class="tile" href="#scene-fortress-0"><img alt="Внешний двор" src="atlasdata:a043"/><b>Внешний двор</b><small>Военный двор с казармами, тренировочными стойками, конюшнями и каменной мостовой.</small></a>
+<a class="tile" href="#scene-fortress-1"><img alt="Зал совета" src="atlasdata:a044"/><b>Зал совета</b><small>Строгая каменная комната с длинным столом, картами, лавками и гербами на стенах.</small></a>
+<a class="tile" href="#scene-fortress-2"><img alt="Старинные укреплённые ворота из тёмного камня с массивными створками и выщербленными стенами." src="atlasdata:a045"/><b>Старые ворота</b><small>Старинные укреплённые ворота из тёмного камня с массивными створками и выщербленными стенами.</small></a>
+<a class="tile" href="#scene-fortress-3"><img alt="Небольшая часовня под крепостью с каменными нишами, колоннами и тусклым светом." src="atlasdata:a046"/><b>Подземная часовня</b><small>Небольшая часовня под крепостью с каменными нишами, колоннами и тусклым светом.</small></a>
+</div></section>
+<section class="detail" id="scene-fortress-0"><a class="back" href="#loc-fortress">← К Крепость Семерых Врат</a><h2>Внешний двор</h2><img alt="Внешний двор" class="location-hero scene-hero" src="atlasdata:a043"/><p class="public-caption">Военный двор с казармами, тренировочными стойками, конюшнями и каменной мостовой.</p><img alt="" class="city-art" src="atlasdata:a047"/><p>Казармы и плац гарнизона.</p></section>
+<section class="detail" id="scene-fortress-1"><a class="back" href="#loc-fortress">← К Крепость Семерых Врат</a><h2>Зал совета</h2><img alt="Зал совета" class="location-hero scene-hero" src="atlasdata:a044"/><p class="public-caption">Строгая каменная комната с длинным столом, картами, лавками и гербами на стенах.</p><img alt="" class="city-art" src="atlasdata:a048"/><p>Комната командования и переговоров.</p></section>
+<section class="detail" id="scene-fortress-2"><a class="back" href="#loc-fortress">← К Крепость Семерых Врат</a><h2>Старые ворота</h2><img alt="Старинные укреплённые ворота из тёмного камня с массивными створками и выщербленными стенами." class="location-hero scene-hero" src="atlasdata:a045"/><p class="public-caption">Старинные укреплённые ворота из тёмного камня с массивными створками и выщербленными стенами.</p><img alt="" class="city-art" src="atlasdata:a017"/><p>Первый рубеж обороны крепости.</p></section>
+<section class="detail" id="scene-fortress-3"><a class="back" href="#loc-fortress">← К Крепость Семерых Врат</a><h2>Подземная часовня</h2><img alt="Небольшая часовня под крепостью с каменными нишами, колоннами и тусклым светом." class="location-hero scene-hero" src="atlasdata:a046"/><p class="public-caption">Небольшая часовня под крепостью с каменными нишами, колоннами и тусклым светом.</p><img alt="" class="city-art" src="atlasdata:a049"/><p>Забытое святилище внутри стен.</p></section>
+<section class="detail" id="loc-hallfinal"><a class="back" href="#">← К карте острова</a><h2>Чертог Пустого Места</h2><img alt="Древний каменный комплекс среди суровых скал, с разрушенными колоннами и монументальными залами." class="location-hero" src="atlasdata:a050"/><p class="public-caption">Древний каменный комплекс среди суровых скал, с разрушенными колоннами и монументальными залами.</p><p>Место заключительного ритуала Саверна Веля.</p><div class="subtiles">
+<a class="tile" href="#scene-hallfinal-0"><img alt="Обвалившиеся колонны и широкая каменная лестница ведут к древнему фасаду." src="atlasdata:a051"/><b>Разрушенный портик</b><small>Обвалившиеся колонны и широкая каменная лестница ведут к древнему фасаду.</small></a>
+<a class="tile" href="#scene-hallfinal-1"><img alt="Монументальный зал с длинной перспективой, высоким помостом и одиноким пустым местом." src="atlasdata:a052"/><b>Зал пустого трона</b><small>Монументальный зал с длинной перспективой, высоким помостом и одиноким пустым местом.</small></a>
+<a class="tile" href="#scene-hallfinal-2"><img alt="Круглая каменная площадка с концентрическими линиями и плитами, уходящими в пол." src="atlasdata:a053"/><b>Круг печатей</b><small>Круглая каменная площадка с концентрическими линиями и плитами, уходящими в пол.</small></a>
+</div></section>
+<section class="detail" id="scene-hallfinal-0"><a class="back" href="#loc-hallfinal">← К Чертог Пустого Места</a><h2>Разрушенный портик</h2><img alt="Обвалившиеся колонны и широкая каменная лестница ведут к древнему фасаду." class="location-hero scene-hero" src="atlasdata:a051"/><p class="public-caption">Обвалившиеся колонны и широкая каменная лестница ведут к древнему фасаду.</p><img alt="" class="city-art" src="atlasdata:a054"/><p>Вход в древний комплекс.</p></section>
+<section class="detail" id="scene-hallfinal-1"><a class="back" href="#loc-hallfinal">← К Чертог Пустого Места</a><h2>Зал пустого трона</h2><img alt="Монументальный зал с длинной перспективой, высоким помостом и одиноким пустым местом." class="location-hero scene-hero" src="atlasdata:a052"/><p class="public-caption">Монументальный зал с длинной перспективой, высоким помостом и одиноким пустым местом.</p><img alt="" class="city-art" src="atlasdata:a055"/><p>Центральная камера ритуала.</p></section>
+<section class="detail" id="scene-hallfinal-2"><a class="back" href="#loc-hallfinal">← К Чертог Пустого Места</a><h2>Круг печатей</h2><img alt="Круглая каменная площадка с концентрическими линиями и плитами, уходящими в пол." class="location-hero scene-hero" src="atlasdata:a053"/><p class="public-caption">Круглая каменная площадка с концентрическими линиями и плитами, уходящими в пол.</p><img alt="" class="city-art" src="atlasdata:a056"/><p>Остатки защитного ритуала.</p></section>
+<section class="detail" id="loc-village"><a class="back" href="#">← К карте острова</a><h2>Липовый Брод</h2><img alt="Небольшая деревня у речного брода: деревянные дома, огороды, амбары и грунтовая дорога." class="location-hero" src="atlasdata:a057"/><p class="public-caption">Небольшая деревня у речного брода: деревянные дома, огороды, амбары и грунтовая дорога.</p><p>Деревня с исчезнувшими семьями и одинаковыми снами.</p><div class="subtiles">
+<a class="tile" href="#scene-village-0"><img alt="Главная улица" src="atlasdata:a058"/><b>Главная улица</b><small>Грунтовая улица между деревянными домами, заборами, амбарами и небольшими огородами.</small></a>
+<a class="tile" href="#scene-village-1"><img alt="Дом старосты" src="atlasdata:a059"/><b>Дом старосты</b><small>Крепкий деревенский дом с широким крыльцом, ставнями и хозяйственными постройками.</small></a>
+<a class="tile" href="#scene-village-2"><img alt="Старый колодец" src="atlasdata:a060"/><b>Старый колодец</b><small>Каменный колодец стоит на открытом перекрёстке деревенских дорожек.</small></a>
+</div></section>
+<section class="detail" id="scene-village-0"><a class="back" href="#loc-village">← К Липовый Брод</a><h2>Главная улица</h2><img alt="Главная улица" class="location-hero scene-hero" src="atlasdata:a058"/><p class="public-caption">Грунтовая улица между деревянными домами, заборами, амбарами и небольшими огородами.</p><img alt="" class="city-art" src="atlasdata:a061"/><p>Пустые дворы и запертые дома.</p></section>
+<section class="detail" id="scene-village-1"><a class="back" href="#loc-village">← К Липовый Брод</a><h2>Дом старосты</h2><img alt="Дом старосты" class="location-hero scene-hero" src="atlasdata:a059"/><p class="public-caption">Крепкий деревенский дом с широким крыльцом, ставнями и хозяйственными постройками.</p><img alt="" class="city-art" src="atlasdata:a062"/><p>Последние записи о пропавших жителях.</p></section>
+<section class="detail" id="scene-village-2"><a class="back" href="#loc-village">← К Липовый Брод</a><h2>Старый колодец</h2><img alt="Старый колодец" class="location-hero scene-hero" src="atlasdata:a060"/><p class="public-caption">Каменный колодец стоит на открытом перекрёстке деревенских дорожек.</p><img alt="" class="city-art" src="atlasdata:a063"/><p>Место странных звуков по ночам.</p></section>
+<section class="detail" id="loc-blackport"><a class="back" href="#">← К карте острова</a><h2>Чёрная Пристань</h2><img alt="Скрытая речная пристань с деревянными причалами, складами, лодками и тесными постройками у воды." class="location-hero" src="atlasdata:a064"/><p class="public-caption">Скрытая речная пристань с деревянными причалами, складами, лодками и тесными постройками у воды.</p><p>Речной контрабандный узел и рынок артефактов.</p><div class="subtiles">
+<a class="tile" href="#scene-blackport-0"><img alt="Скрытый деревянный причал под стенами складов, к которому подходят небольшие лодки." src="atlasdata:a065"/><b>Контрабандный причал</b><small>Скрытый деревянный причал под стенами складов, к которому подходят небольшие лодки.</small></a>
+<a class="tile" href="#scene-blackport-1"><img alt="Большой тёмный склад с широкими воротами, деревянными балками и высокими штабелями ящиков." src="atlasdata:a066"/><b>Склад номер семь</b><small>Большой тёмный склад с широкими воротами, деревянными балками и высокими штабелями ящиков.</small></a>
+<a class="tile" href="#scene-blackport-2"><img alt="Низкая таверна у воды с покосившейся вывеской, причалом за стеной и тёплым светом окон." src="atlasdata:a067"/><b>Таверна «Мокрый крюк»</b><small>Низкая таверна у воды с покосившейся вывеской, причалом за стеной и тёплым светом окон.</small></a>
+</div></section>
+<section class="detail" id="scene-blackport-0"><a class="back" href="#loc-blackport">← К Чёрная Пристань</a><h2>Контрабандный причал</h2><img alt="Скрытый деревянный причал под стенами складов, к которому подходят небольшие лодки." class="location-hero scene-hero" src="atlasdata:a065"/><p class="public-caption">Скрытый деревянный причал под стенами складов, к которому подходят небольшие лодки.</p><img alt="" class="city-art" src="atlasdata:a068"/><p>Тайная разгрузка ночных судов.</p></section>
+<section class="detail" id="scene-blackport-1"><a class="back" href="#loc-blackport">← К Чёрная Пристань</a><h2>Склад номер семь</h2><img alt="Большой тёмный склад с широкими воротами, деревянными балками и высокими штабелями ящиков." class="location-hero scene-hero" src="atlasdata:a066"/><p class="public-caption">Большой тёмный склад с широкими воротами, деревянными балками и высокими штабелями ящиков.</p><img alt="" class="city-art" src="atlasdata:a069"/><p>Закрытый склад с чужими печатями.</p></section>
+<section class="detail" id="scene-blackport-2"><a class="back" href="#loc-blackport">← К Чёрная Пристань</a><h2>Таверна «Мокрый крюк»</h2><img alt="Низкая таверна у воды с покосившейся вывеской, причалом за стеной и тёплым светом окон." class="location-hero scene-hero" src="atlasdata:a067"/><p class="public-caption">Низкая таверна у воды с покосившейся вывеской, причалом за стеной и тёплым светом окон.</p><img alt="" class="city-art" src="atlasdata:a012"/><p>Пристанище перевозчиков и беглых людей.</p></section>
+<section class="detail" id="loc-mines"><a class="back" href="#">← К карте острова</a><h2>Соляные Карьеры</h2><img alt="Заброшенные соляные выработки у белёсого склона, с деревянными опорами, шахтными входами и подъёмными механизмами." class="location-hero" src="atlasdata:a070"/><p class="public-caption">Заброшенные соляные выработки у белёсого склона, с деревянными опорами, шахтными входами и подъёмными механизмами.</p><p>Заброшенные выработки, используемые Братством для тайных перевозок.</p><div class="subtiles">
+<a class="tile" href="#scene-mines-0"><img alt="Широкий шахтный вход в белёсом склоне, укреплённый грубыми деревянными рамами." src="atlasdata:a071"/><b>Вход в карьеры</b><small>Широкий шахтный вход в белёсом склоне, укреплённый грубыми деревянными рамами.</small></a>
+<a class="tile" href="#scene-mines-1"><img alt="Узкий подземный коридор с соляными стенами, подпорками и рельсами для тележек." src="atlasdata:a072"/><b>Шахтный штрек</b><small>Узкий подземный коридор с соляными стенами, подпорками и рельсами для тележек.</small></a>
+<a class="tile" href="#scene-mines-2"><img alt="Деревянная грузовая платформа висит на толстых канатах над шахтным колодцем." src="atlasdata:a073"/><b>Подъёмник</b><small>Деревянная грузовая платформа висит на толстых канатах над шахтным колодцем.</small></a>
+<a class="tile" href="#scene-mines-3"><img alt="Подземная камера с деревянными настилами, ящиками и нишами в каменных стенах." src="atlasdata:a074"/><b>Подземный склад</b><small>Подземная камера с деревянными настилами, ящиками и нишами в каменных стенах.</small></a>
+</div></section>
+<section class="detail" id="scene-mines-0"><a class="back" href="#loc-mines">← К Соляные Карьеры</a><h2>Вход в карьеры</h2><img alt="Широкий шахтный вход в белёсом склоне, укреплённый грубыми деревянными рамами." class="location-hero scene-hero" src="atlasdata:a071"/><p class="public-caption">Широкий шахтный вход в белёсом склоне, укреплённый грубыми деревянными рамами.</p><img alt="" class="city-art" src="atlasdata:a075"/><p>Заброшенный вход в соляные выработки.</p></section>
+<section class="detail" id="scene-mines-1"><a class="back" href="#loc-mines">← К Соляные Карьеры</a><h2>Шахтный штрек</h2><img alt="Узкий подземный коридор с соляными стенами, подпорками и рельсами для тележек." class="location-hero scene-hero" src="atlasdata:a072"/><p class="public-caption">Узкий подземный коридор с соляными стенами, подпорками и рельсами для тележек.</p><img alt="" class="city-art" src="atlasdata:a076"/><p>Узкий проход в глубине выработок.</p></section>
+<section class="detail" id="scene-mines-2"><a class="back" href="#loc-mines">← К Соляные Карьеры</a><h2>Подъёмник</h2><img alt="Деревянная грузовая платформа висит на толстых канатах над шахтным колодцем." class="location-hero scene-hero" src="atlasdata:a073"/><p class="public-caption">Деревянная грузовая платформа висит на толстых канатах над шахтным колодцем.</p><img alt="" class="city-art" src="atlasdata:a077"/><p>Старый грузовой подъёмник.</p></section>
+<section class="detail" id="scene-mines-3"><a class="back" href="#loc-mines">← К Соляные Карьеры</a><h2>Подземный склад</h2><img alt="Подземная камера с деревянными настилами, ящиками и нишами в каменных стенах." class="location-hero scene-hero" src="atlasdata:a074"/><p class="public-caption">Подземная камера с деревянными настилами, ящиками и нишами в каменных стенах.</p><img alt="" class="city-art" src="atlasdata:a069"/><p>Тайное место хранения и перегрузки.</p></section>
+<section class="detail" id="loc-swamp"><a class="back" href="#">← К карте острова</a><h2>Пепельная Топь</h2><img alt="Пепельная Топь" class="location-hero" src="atlasdata:a078"/><p class="public-caption">Тёмное болото с чёрной водой, кочками, корнями деревьев, туманом и редкими сухими островками.</p><p>Опасное болото с травниками, странными следами и древним существом.</p><div class="subtiles">
+<a class="tile" href="#scene-swamp-0"><img alt="Узкая тропа из сухих кочек и жердей проходит среди тёмной болотной воды." src="atlasdata:a079"/><b>Тропа на кочках</b><small>Узкая тропа из сухих кочек и жердей проходит среди тёмной болотной воды.</small></a>
+<a class="tile" href="#scene-swamp-1"><img alt="Небольшая хижина на сухом островке, окружённая сушильными рамами и пучками растений." src="atlasdata:a080"/><b>Дом травницы</b><small>Небольшая хижина на сухом островке, окружённая сушильными рамами и пучками растений.</small></a>
+<a class="tile" href="#scene-swamp-2"><img alt="Старые каменные плиты образуют круг среди болотной воды и камышей." src="atlasdata:a081"/><b>Затопленный круг</b><small>Старые каменные плиты образуют круг среди болотной воды и камышей.</small></a>
+</div></section>
+<section class="detail" id="scene-swamp-0"><a class="back" href="#loc-swamp">← К Пепельная Топь</a><h2>Тропа на кочках</h2><img alt="Узкая тропа из сухих кочек и жердей проходит среди тёмной болотной воды." class="location-hero scene-hero" src="atlasdata:a079"/><p class="public-caption">Узкая тропа из сухих кочек и жердей проходит среди тёмной болотной воды.</p><img alt="" class="city-art" src="atlasdata:a082"/><p>Единственный относительно безопасный путь.</p></section>
+<section class="detail" id="scene-swamp-1"><a class="back" href="#loc-swamp">← К Пепельная Топь</a><h2>Дом травницы</h2><img alt="Небольшая хижина на сухом островке, окружённая сушильными рамами и пучками растений." class="location-hero scene-hero" src="atlasdata:a080"/><p class="public-caption">Небольшая хижина на сухом островке, окружённая сушильными рамами и пучками растений.</p><img alt="" class="city-art" src="atlasdata:a083"/><p>Хижина среди чёрных ив.</p></section>
+<section class="detail" id="scene-swamp-2"><a class="back" href="#loc-swamp">← К Пепельная Топь</a><h2>Затопленный круг</h2><img alt="Старые каменные плиты образуют круг среди болотной воды и камышей." class="location-hero scene-hero" src="atlasdata:a081"/><p class="public-caption">Старые каменные плиты образуют круг среди болотной воды и камышей.</p><img alt="" class="city-art" src="atlasdata:a084"/><p>Камни, выступающие из трясины.</p></section>
+<section class="detail" id="loc-pass"><a class="back" href="#">← К карте острова</a><h2>Костяной Перевал</h2><img alt="Костяной Перевал" class="location-hero" src="atlasdata:a085"/><p class="public-caption">Высокий горный перевал с узкой дорогой, каменными осыпями, снежными вершинами и заброшенной сторожевой башней.</p><p>Горная дорога и возможные следы легендарного зверя Филимона.</p><div class="subtiles">
+<a class="tile" href="#scene-pass-0"><img alt="Сторожевая башня" src="atlasdata:a086"/><b>Сторожевая башня</b><small>Одинокая каменная башня стоит на горном уступе над узкой дорогой.</small></a>
+<a class="tile" href="#scene-pass-1"><img alt="Костяная осыпь" src="atlasdata:a087"/><b>Костяная осыпь</b><small>Крутой каменистый склон усыпан крупными костями и обломками скал.</small></a>
+<a class="tile" href="#scene-pass-2"><img alt="Пещера следопыта" src="atlasdata:a088"/><b>Пещера следопыта</b><small>Неглубокая горная пещера с очагом, сухим уступом и грубыми отметками на стенах.</small></a>
+</div></section>
+<section class="detail" id="scene-pass-0"><a class="back" href="#loc-pass">← К Костяной Перевал</a><h2>Сторожевая башня</h2><img alt="Сторожевая башня" class="location-hero scene-hero" src="atlasdata:a086"/><p class="public-caption">Одинокая каменная башня стоит на горном уступе над узкой дорогой.</p><img alt="" class="city-art" src="atlasdata:a089"/><p>Заброшенный пост на старой дороге.</p></section>
+<section class="detail" id="scene-pass-1"><a class="back" href="#loc-pass">← К Костяной Перевал</a><h2>Костяная осыпь</h2><img alt="Костяная осыпь" class="location-hero scene-hero" src="atlasdata:a087"/><p class="public-caption">Крутой каменистый склон усыпан крупными костями и обломками скал.</p><img alt="" class="city-art" src="atlasdata:a090"/><p>Склон, усеянный останками животных.</p></section>
+<section class="detail" id="scene-pass-2"><a class="back" href="#loc-pass">← К Костяной Перевал</a><h2>Пещера следопыта</h2><img alt="Пещера следопыта" class="location-hero scene-hero" src="atlasdata:a088"/><p class="public-caption">Неглубокая горная пещера с очагом, сухим уступом и грубыми отметками на стенах.</p><img alt="" class="city-art" src="atlasdata:a091"/><p>Укрытие охотников и проводников.</p></section>
+<section class="detail" id="loc-sunken"><a class="back" href="#">← К карте острова</a><h2>Затонувшая Часовня</h2><img alt="Частично затопленная каменная часовня, выступающая из озера; над водой видны колонны и верхушка колокольни." class="location-hero" src="atlasdata:a092"/><p class="public-caption">Частично затопленная каменная часовня, выступающая из озера; над водой видны колонны и верхушка колокольни.</p><p>Затопленное святилище с реликвиями и опасным водным обитателем.</p><div class="subtiles">
+<a class="tile" href="#scene-sunken-0"><img alt="Каменный двор скрыт под прозрачной водой; над поверхностью выступают обломки колонн." src="atlasdata:a093"/><b>Затопленный двор</b><small>Каменный двор скрыт под прозрачной водой; над поверхностью выступают обломки колонн.</small></a>
+<a class="tile" href="#scene-sunken-1"><img alt="Старая колокольня поднимается над озером, её нижние ярусы затоплены." src="atlasdata:a094"/><b>Колокольня</b><small>Старая колокольня поднимается над озером, её нижние ярусы затоплены.</small></a>
+<a class="tile" href="#scene-sunken-2"><img alt="Затопленная каменная камера с массивным алтарём и нишами в стенах." src="atlasdata:a095"/><b>Подводный алтарь</b><small>Затопленная каменная камера с массивным алтарём и нишами в стенах.</small></a>
+</div></section>
+<section class="detail" id="scene-sunken-0"><a class="back" href="#loc-sunken">← К Затонувшая Часовня</a><h2>Затопленный двор</h2><img alt="Каменный двор скрыт под прозрачной водой; над поверхностью выступают обломки колонн." class="location-hero scene-hero" src="atlasdata:a093"/><p class="public-caption">Каменный двор скрыт под прозрачной водой; над поверхностью выступают обломки колонн.</p><img alt="" class="city-art" src="atlasdata:a096"/><p>Верхняя часть святилища под водой.</p></section>
+<section class="detail" id="scene-sunken-1"><a class="back" href="#loc-sunken">← К Затонувшая Часовня</a><h2>Колокольня</h2><img alt="Старая колокольня поднимается над озером, её нижние ярусы затоплены." class="location-hero scene-hero" src="atlasdata:a094"/><p class="public-caption">Старая колокольня поднимается над озером, её нижние ярусы затоплены.</p><img alt="" class="city-art" src="atlasdata:a097"/><p>Колокол, который слышно под водой.</p></section>
+<section class="detail" id="scene-sunken-2"><a class="back" href="#loc-sunken">← К Затонувшая Часовня</a><h2>Подводный алтарь</h2><img alt="Затопленная каменная камера с массивным алтарём и нишами в стенах." class="location-hero scene-hero" src="atlasdata:a095"/><p class="public-caption">Затопленная каменная камера с массивным алтарём и нишами в стенах.</p><img alt="" class="city-art" src="atlasdata:a098"/><p>Место хранения древней реликвии.</p></section>
+<section class="detail" id="loc-manor"><a class="back" href="#">← К карте острова</a><h2>Охотничий Дом князя</h2><img alt="Богатое загородное поместье с каменным господским домом, конюшнями, внутренним двором и охотничьими угодьями." class="location-hero" src="atlasdata:a099"/><p class="public-caption">Богатое загородное поместье с каменным господским домом, конюшнями, внутренним двором и охотничьими угодьями.</p><p>Поместье знати, где скрывают исчезновения и незаконные охоты.</p><div class="subtiles">
+<a class="tile" href="#scene-manor-0"><img alt="Ухоженный двор перед господским домом с конюшнями, экипажами и каменной дорожкой." src="atlasdata:a100"/><b>Парадный двор</b><small>Ухоженный двор перед господским домом с конюшнями, экипажами и каменной дорожкой.</small></a>
+<a class="tile" href="#scene-manor-1"><img alt="Высокий зал поместья с камином, длинным столом, гербами и охотничьими полотнами." src="atlasdata:a101"/><b>Большой зал</b><small>Высокий зал поместья с камином, длинным столом, гербами и охотничьими полотнами.</small></a>
+<a class="tile" href="#scene-manor-2"><img alt="Длинная галерея с трофеями, оружием, картами и деревянными панелями." src="atlasdata:a102"/><b>Охотничья галерея</b><small>Длинная галерея с трофеями, оружием, картами и деревянными панелями.</small></a>
+<a class="tile" href="#scene-manor-3"><img alt="Низкие каменные помещения с бочками, полками, ящиками и сводчатым потолком." src="atlasdata:a103"/><b>Служебный подвал</b><small>Низкие каменные помещения с бочками, полками, ящиками и сводчатым потолком.</small></a>
+</div></section>
+<section class="detail" id="scene-manor-0"><a class="back" href="#loc-manor">← К Охотничий Дом князя</a><h2>Парадный двор</h2><img alt="Ухоженный двор перед господским домом с конюшнями, экипажами и каменной дорожкой." class="location-hero scene-hero" src="atlasdata:a100"/><p class="public-caption">Ухоженный двор перед господским домом с конюшнями, экипажами и каменной дорожкой.</p><img alt="" class="city-art" src="atlasdata:a047"/><p>Въезд и конюшни поместья.</p></section>
+<section class="detail" id="scene-manor-1"><a class="back" href="#loc-manor">← К Охотничий Дом князя</a><h2>Большой зал</h2><img alt="Высокий зал поместья с камином, длинным столом, гербами и охотничьими полотнами." class="location-hero scene-hero" src="atlasdata:a101"/><p class="public-caption">Высокий зал поместья с камином, длинным столом, гербами и охотничьими полотнами.</p><img alt="" class="city-art" src="atlasdata:a026"/><p>Место приёмов и охотничьих ужинов.</p></section>
+<section class="detail" id="scene-manor-2"><a class="back" href="#loc-manor">← К Охотничий Дом князя</a><h2>Охотничья галерея</h2><img alt="Длинная галерея с трофеями, оружием, картами и деревянными панелями." class="location-hero scene-hero" src="atlasdata:a102"/><p class="public-caption">Длинная галерея с трофеями, оружием, картами и деревянными панелями.</p><img alt="" class="city-art" src="atlasdata:a104"/><p>Трофеи и карты угодий.</p></section>
+<section class="detail" id="scene-manor-3"><a class="back" href="#loc-manor">← К Охотничий Дом князя</a><h2>Служебный подвал</h2><img alt="Низкие каменные помещения с бочками, полками, ящиками и сводчатым потолком." class="location-hero scene-hero" src="atlasdata:a103"/><p class="public-caption">Низкие каменные помещения с бочками, полками, ящиками и сводчатым потолком.</p><img alt="" class="city-art" src="atlasdata:a105"/><p>Ходы прислуги и запертые кладовые.</p></section>
+<section class="detail" id="loc-grove"><a class="back" href="#">← К карте острова</a><h2>Разорённая Дубрава</h2><img alt="Заросшие руины сгоревшего поселения среди дубов: почерневшие стены, обвалившиеся крыши и заросшая площадь." class="location-hero" src="atlasdata:a106"/><p class="public-caption">Заросшие руины сгоревшего поселения среди дубов: почерневшие стены, обвалившиеся крыши и заросшая площадь.</p><p>Остатки поселения и следы неудачного ритуала.</p><div class="subtiles">
+<a class="tile" href="#scene-grove-0"><img alt="Заросшая площадь с почерневшими фундаментами, обломками колодца и остатками домов." src="atlasdata:a107"/><b>Сгоревшая площадь</b><small>Заросшая площадь с почерневшими фундаментами, обломками колодца и остатками домов.</small></a>
+<a class="tile" href="#scene-grove-1"><img alt="Полусгоревший деревенский дом с уцелевшей кладовой и полками для трав." src="atlasdata:a108"/><b>Дом знахаря</b><small>Полусгоревший деревенский дом с уцелевшей кладовой и полками для трав.</small></a>
+<a class="tile" href="#scene-grove-2"><img alt="Круглая выемка за поселением, обложенная тёмными камнями." src="atlasdata:a109"/><b>Ритуальная яма</b><small>Круглая выемка за поселением, обложенная тёмными камнями.</small></a>
+</div></section>
+<section class="detail" id="scene-grove-0"><a class="back" href="#loc-grove">← К Разорённая Дубрава</a><h2>Сгоревшая площадь</h2><img alt="Заросшая площадь с почерневшими фундаментами, обломками колодца и остатками домов." class="location-hero scene-hero" src="atlasdata:a107"/><p class="public-caption">Заросшая площадь с почерневшими фундаментами, обломками колодца и остатками домов.</p><img alt="" class="city-art" src="atlasdata:a110"/><p>Центр бывшего поселения.</p></section>
+<section class="detail" id="scene-grove-1"><a class="back" href="#loc-grove">← К Разорённая Дубрава</a><h2>Дом знахаря</h2><img alt="Полусгоревший деревенский дом с уцелевшей кладовой и полками для трав." class="location-hero scene-hero" src="atlasdata:a108"/><p class="public-caption">Полусгоревший деревенский дом с уцелевшей кладовой и полками для трав.</p><img alt="" class="city-art" src="atlasdata:a062"/><p>Остатки лечебных записей и трав.</p></section>
+<section class="detail" id="scene-grove-2"><a class="back" href="#loc-grove">← К Разорённая Дубрава</a><h2>Ритуальная яма</h2><img alt="Круглая выемка за поселением, обложенная тёмными камнями." class="location-hero scene-hero" src="atlasdata:a109"/><p class="public-caption">Круглая выемка за поселением, обложенная тёмными камнями.</p><img alt="" class="city-art" src="atlasdata:a111"/><p>Следы обряда, который пошёл не так.</p></section>
+<section class="detail" id="loc-fair"><a class="back" href="#">← К карте острова</a><h2>Ярмарка Девяти Дорог</h2><img alt="Большой временный торговый лагерь с разноцветными шатрами, повозками, флагами и кострами на перекрёстке дорог." class="location-hero" src="atlasdata:a112"/><p class="public-caption">Большой временный торговый лагерь с разноцветными шатрами, повозками, флагами и кострами на перекрёстке дорог.</p><p>Временный торговый лагерь, где встречаются купцы, наёмники, воры и слухи.</p><div class="subtiles">
+<a class="tile" href="#scene-fair-0"><img alt="Широкий ярмарочный ряд с навесами, флагами, прилавками и пёстрыми товарами." src="atlasdata:a113"/><b>Главный торг</b><small>Широкий ярмарочный ряд с навесами, флагами, прилавками и пёстрыми товарами.</small></a>
+<a class="tile" href="#scene-fair-1"><img alt="Ряды походных шатров, костров, оружейных стоек и припаркованных телег." src="atlasdata:a114"/><b>Лагерь наёмников</b><small>Ряды походных шатров, костров, оружейных стоек и припаркованных телег.</small></a>
+<a class="tile" href="#scene-fair-2"><img alt="Небольшой деревянный помост на открытой площадке, украшенный флагами и фонарями." src="atlasdata:a115"/><b>Площадка представлений</b><small>Небольшой деревянный помост на открытой площадке, украшенный флагами и фонарями.</small></a>
+<a class="tile" href="#scene-fair-3"><img alt="Большая огороженная стоянка с повозками, тягловыми животными и навесами." src="atlasdata:a116"/><b>Караванный двор</b><small>Большая огороженная стоянка с повозками, тягловыми животными и навесами.</small></a>
+</div></section>
+<section class="detail" id="scene-fair-0"><a class="back" href="#loc-fair">← К Ярмарка Девяти Дорог</a><h2>Главный торг</h2><img alt="Широкий ярмарочный ряд с навесами, флагами, прилавками и пёстрыми товарами." class="location-hero scene-hero" src="atlasdata:a113"/><p class="public-caption">Широкий ярмарочный ряд с навесами, флагами, прилавками и пёстрыми товарами.</p><img alt="" class="city-art" src="atlasdata:a011"/><p>Ряды торговцев и зазывал.</p></section>
+<section class="detail" id="scene-fair-1"><a class="back" href="#loc-fair">← К Ярмарка Девяти Дорог</a><h2>Лагерь наёмников</h2><img alt="Ряды походных шатров, костров, оружейных стоек и припаркованных телег." class="location-hero scene-hero" src="atlasdata:a114"/><p class="public-caption">Ряды походных шатров, костров, оружейных стоек и припаркованных телег.</p><img alt="" class="city-art" src="atlasdata:a117"/><p>Стоянка охранников и искателей работы.</p></section>
+<section class="detail" id="scene-fair-2"><a class="back" href="#loc-fair">← К Ярмарка Девяти Дорог</a><h2>Площадка представлений</h2><img alt="Небольшой деревянный помост на открытой площадке, украшенный флагами и фонарями." class="location-hero scene-hero" src="atlasdata:a115"/><p class="public-caption">Небольшой деревянный помост на открытой площадке, украшенный флагами и фонарями.</p><img alt="" class="city-art" src="atlasdata:a118"/><p>Музыканты, фокусники и странствующие артисты.</p></section>
+<section class="detail" id="scene-fair-3"><a class="back" href="#loc-fair">← К Ярмарка Девяти Дорог</a><h2>Караванный двор</h2><img alt="Большая огороженная стоянка с повозками, тягловыми животными и навесами." class="location-hero scene-hero" src="atlasdata:a116"/><p class="public-caption">Большая огороженная стоянка с повозками, тягловыми животными и навесами.</p><img alt="" class="city-art" src="atlasdata:a119"/><p>Повозки, тягловые животные и склады.</p></section>
+<section class="characters" id="characters"><a class="back" href="#world">← Вернуться к карте острова</a><h2 class="char-head">Герои Последнего пира</h2><p class="char-intro">Шесть кандидатов для трёх игроков. Нажмите на имя или портрет, чтобы рассмотреть героя. Характеристики и способности соответствуют утверждённым правилам кампании.</p><div class="char-grid"><a class="char-card char-card-link" href="#character-borislav">
+<img alt="Портрет персонажа: Борислав «Три кишки»" class="char-portrait" loading="eager" src="https://at.adobe.com/g068PPGhqCCnpQlT"/>
+<div><h3>Борислав «Три кишки»</h3><div class="char-race">Минотавр · воин</div>
+<div class="char-stats"><b>HP · 28</b><b>СИЛА · 6</b></div>
+<p><strong>Внешность:</strong> Огромный минотавр с тремя рогами, подёргивающимся глазом, большим животом и ожерельем из чужих зубов.</p>
+<p><strong>История:</strong> Добродушный минотавр, которого из-за огромной силы сделали королевским палачом. После ошибочной казни и требования доплаты за повторную работу его уволили. Теперь он веган и старается избегать насилия.</p>
+<p><strong>Способности:</strong> Бычий натиск — мощная атака (D8). Крепкая туша — стойкость к тяжёлым ударам. Последний аргумент — живой таран. В бою может впасть в берсерк: глаза краснеют, и он перестаёт сдерживать свою силу.</p>
+<p><strong>Недостаток:</strong> Не любит насилие, но в бою теряет привычную миролюбивую сдержанность. При этом полностью помнит свои действия.</p>
+<p><strong>Снаряжение:</strong> Двуручный топор, ржавая кольчуга, фляга самогона.</p>
+<p><strong>Цель:</strong> Накопить на собственную похоронную церемонию, которую хочет провести при жизни.</p></div></a><a class="char-card char-card-link" href="#character-zhopper">
+<img alt="Портрет персонажа: Жоппер Кривозуб" class="char-portrait" loading="eager" src="https://at.adobe.com/UQuQfe66rjMQdMDQ"/>
+<div><h3>Жоппер Кривозуб</h3><div class="char-race">Гоблин · плут</div>
+<div class="char-stats"><b>HP · 16</b><b>СИЛА · 3</b></div>
+<p><strong>Внешность:</strong> Маленький горбатый гоблин с двумя рядами зубов, третьей ноздрёй на лбу, длинным языком и кожей с наростами.</p>
+<p><strong>История:</strong> Одиночка с рождения. Из-за врождённой мутации с третьей ноздрёй на лбу даже среди гоблинов считался уродцем. Выживал в одиночку, стал вором и контрабандистом и привык полагаться только на себя.</p>
+<p><strong>Способности:</strong> Крысин пролаз — пробирается в тесные места. Карманная хирургия — ловкие манипуляции и сомнительные процедуры. Грязный фокус — плевок D4, способный ослепить.</p>
+<p><strong>Недостаток:</strong> Не может удержаться от кражи всего блестящего.</p>
+<p><strong>Снаряжение:</strong> Два кинжала, отмычки, верёвка, сомнительные инструменты.</p>
+<p><strong>Цель:</strong> Найти величайшее сокровище мира и доказать, что он не просто крыса.</p></div></a><a class="char-card char-card-link" href="#character-otec-puzaniy">
+<img alt="Отец Пузаний — анимированный портрет" class="char-portrait" loading="eager" src="https://at.adobe.com/ghQqM8wXKG0uv9mK"/>
+<div><h3>Отец Пузаний</h3><div class="char-race">Человек · жрец и полевой лекарь</div>
+<div class="char-stats"><b>HP · 24</b><b>СИЛА · 4</b></div>
+<p><strong>Внешность:</strong> Необъятный мужчина с обвисшими щеками, шестью пальцами на каждой руке и большим шрамом на животе. Носит обветшалые священные одежды.</p>
+<p><strong>История:</strong> Искренний служитель Диониса, изгнанный из храма за чрезмерное усердие во время религиозных праздников. После изгнания продолжил странствовать, помогать людям и нести веру своему богу.</p>
+<p><strong>Способности:</strong> Священный подзатыльник — удар D8. Полевой хирург — лечит союзника на D4. Божественное красноречие — умеет убеждать от имени веры.</p>
+<p><strong>Недостаток:</strong> Считает, что почти любую проблему решат обряд и выпивка.</p>
+<p><strong>Снаряжение:</strong> Тяжёлый посох, хирургические инструменты, бинты, символы, фляга вина.</p>
+<p><strong>Цель:</strong> Получить личную аудиенцию у Диониса.</p></div></a><a class="char-card char-card-link" href="#character-prokopiy">
+<img alt="Портрет персонажа: Прокопий Заклинатель" class="char-portrait" loading="eager" src="https://at.adobe.com/EJaGSzVAFasZpDvN"/>
+<div><h3>Прокопий Заклинатель</h3><div class="char-race">Человек · колдун</div>
+<div class="char-stats"><b>HP · 18</b><b>СИЛА · 3</b></div>
+<p><strong>Внешность:</strong> Худой человек с тремя глазами (один на шее), пальцами разной длины и волосами, которые иногда шевелятся сами.</p>
+<p><strong>История:</strong> Талантливый и могущественный, но совершенно непредсказуемый колдун. Во время эксперимента случайно превратил экзаменационную комиссию в коз, после чего школу закрыли. Сам Прокопий не считает себя виноватым: комиссия сама виновата, что стояла слишком близко. Теперь он хочет восстановить доброе имя и доказать научную ценность своего эксперимента.</p>
+<p><strong>Способности:</strong> Громовая отрыжка — магическая атака D8. Кривое проклятие — накладывает странные эффекты. Случайная магия — мощный эффект с риском побочного последствия.</p>
+<p><strong>Недостаток:</strong> Серьёзная магия требует платы: колдун может получить урон или неприятный побочный эффект.</p>
+<p><strong>Снаряжение:</strong> Потрёпанный гримуар, посох, мешочек костей, сломанный амулет.</p>
+<p><strong>Цель:</strong> Восстановить имя и доказать, что превращение комиссии в коз было осознанным экспериментом.</p></div></a><a class="char-card char-card-link" href="#character-filimon">
+<img alt="Портрет персонажа: Филимон Четыре Подковы" class="char-portrait" loading="eager" src="https://at.adobe.com/oJ6TECMBnGVI3aSQ"/>
+<div><h3>Филимон Четыре Подковы</h3><div class="char-race">Кентавр · охотник</div>
+<div class="char-stats"><b>HP · 24</b><b>СИЛА · 5</b></div>
+<p><strong>Внешность:</strong> Жилистый бородатый мужчина с нижней частью тела огромного старого жеребца. На спине — дополнительная пара маленьких сосков; о происхождении не говорит.</p>
+<p><strong>История:</strong> Двадцать лет был следопытом. Во время одного из путешествий его караван бесследно исчез, а Филимон вернулся один. Он хранит личную вещь одного из пропавших и одержим поисками легендарного зверя, который, возможно, связан с исчезновением.</p>
+<p><strong>Способности:</strong> Меткий выстрел — арбалетный выстрел D8. Чутьё зверя — замечает следы и опасность. Копытный привет — удар D8.</p>
+<p><strong>Недостаток:</strong> Обычная мебель и узкие проходы создают проблемы; болезненно реагирует на шутки о внешности.</p>
+<p><strong>Снаряжение:</strong> Арбалет, нож, верёвка, ловушки.</p>
+<p><strong>Цель:</strong> Найти легендарного невиданного зверя и продать его голову за состояние.</p></div></a><a class="char-card char-card-link" href="#character-klavdia">
+<img alt="Портрет персонажа: Клавдия Клювоносная" class="char-portrait" loading="eager" src="https://at.adobe.com/n85Mc8zwiZPRHZOc"/>
+<div><h3>Клавдия Клювоносная</h3><div class="char-race">Гарпия · боевая плутовка</div>
+<div class="char-stats"><b>HP · 20</b><b>СИЛА · 4</b></div>
+<p><strong>Внешность:</strong> Высокая гарпия с человеческим торсом, птичьими ногами, кривым клювом, огромными глазами и жирным налётом на перьях.</p>
+<p><strong>История:</strong> С детства патологически ворует и делает это открыто. Набожные родители отказались от неё, после чего её подобрала шайка воров. Возненавидела богов и при каждом удобном случае богохульничает. Бывшая воздушная разбойница; украла не тот сундук, и теперь за ней охотится половина местного духовенства.</p>
+<p><strong>Способности:</strong> Крылатый рывок — быстро меняет позицию. Когтистая расправа — атака D8. Птичий крик — резкий крик, способный ошеломить. Богохульная ненависть — при атаке божественного существа дополнительно бросает D4 и прибавляет результат к основному урону.</p>
+<p><strong>Недостаток:</strong> Патологическая клептомания; тянется к украшениям и не умеет хранить секреты дольше пяти минут.</p>
+<p><strong>Снаряжение:</strong> Два коротких клинка, кожаный жилет, украденные украшения.</p>
+<p><strong>Цель:</strong> Вернуть украденный сундук, не зная, что находится внутри.</p></div></a></div></section>
+<section class="char-detail" id="character-borislav">
+<a class="back" href="#characters">← Ко всем персонажам</a>
+<h2 class="char-detail-title">Борислав «Три кишки»</h2>
+<p class="char-detail-subtitle">Минотавр · воин</p>
+<div class="char-detail-entry">
+<img class="char-detail-portrait" src="https://at.adobe.com/g068PPGhqCCnpQlT" alt="Борислав «Три кишки» — минотавр-воин" loading="eager"/>
+<div class="char-detail-copy">
+<div class="char-detail-stats"><b>ЗДОРОВЬЕ · 28</b><b>СИЛА · 6</b></div>
+<h3>Предыстория</h3>
+<p>Борислав вырос среди минотавров, для которых физическая сила считалась главным достоинством. С самого детства он был крупнее и мощнее многих сородичей, но характером совсем на них не походил. Пока другие мечтали о битвах и воинской славе, Борислав хотел спокойно жить, заботиться о животных и никого не обижать.</p>
+<p>Окружающие, однако, видели в нём прежде всего огромную силу. Его определили на королевскую службу, а со временем сделали палачом. Борислав не стремился к этой работе и не получал удовольствия от казней. Он просто считал, что раз приказ отдан королём, значит, его нужно выполнить.</p>
+<h3>Как он потерял службу</h3>
+<p>Однажды Борислав казнил не того человека. Когда ошибка обнаружилась, он не стал спорить с приговором или оправдываться, а совершенно серьёзно потребовал доплату за повторное исполнение работы. Королевский двор не оценил такой исполнительности. Борислава уволили, и с тех пор он больше не хочет иметь дела с казнями и бессмысленной жестокостью.</p>
+<h3>Характер и убеждения</h3>
+<p>Несмотря на устрашающую внешность, Борислав — добродушный, простоватый и миролюбивый великан. Он веган, любит животных и старается не причинять вреда живым существам. Драки ему неприятны, а конфликты он предпочитает решать спокойно. Его огромный размер и грозный вид часто заставляют окружающих ждать от него совсем другого поведения.</p>
+<h3>Берсерк</h3>
+<p>Когда начинается настоящая битва, Борислав может впасть в берсерк. Его глаза становятся красными, а сдерживаемая сила вырывается наружу: мирный великан превращается в яростного бойца. В этом состоянии он помнит всё, что делает. Он не становится другим человеком и не теряет память — просто перестаёт сдерживать свою боевую ярость.</p>
+<h3>Внешность</h3>
+<p>Огромный минотавр с тремя рогами, подёргивающимся глазом, большим животом и ожерельем из чужих зубов. Его внушительный облик резко контрастирует с мягким и добрым характером.</p>
+<h3>Способности</h3>
+<p>Бычий натиск — мощная атака (D8). Крепкая туша — стойкость к тяжёлым ударам. Последний аргумент — живой таран.</p>
+<h3>Недостаток</h3>
+<p>Борислав не любит насилие и старается избегать драк, но в бою его берсерк может взять верх над обычной сдержанностью. При этом он полностью помнит свои действия.</p>
+<h3>Снаряжение</h3>
+<p>Двуручный топор, ржавая кольчуга, фляга самогона.</p>
+<h3>Цель</h3>
+<p>Накопить на собственную похоронную церемонию, которую хочет провести при жизни.</p>
+</div></div></section>
+<section class="char-detail" id="character-zhopper">
+<a class="back" href="#characters">← Ко всем персонажам</a>
+<h2 class="char-detail-title">Жоппер Кривозуб</h2>
+<p class="char-detail-subtitle">Гоблин · плут</p>
+<div class="char-detail-entry">
+<img class="char-detail-portrait" src="https://at.adobe.com/UQuQfe66rjMQdMDQ" alt="Жоппер Кривозуб — гоблин-плут" loading="eager"/>
+<div class="char-detail-copy">
+<div class="char-detail-stats"><b>ЗДОРОВЬЕ · 16</b><b>СИЛА · 3</b></div>
+<h3>Предыстория</h3>
+<p>Жоппер с самого рождения отличался от остальных гоблинов. Из-за врождённой мутации у него появилась третья ноздря прямо на лбу. Даже среди его сородичей такая внешность вызывала насмешки и отталкивала окружающих. Он рано понял, что рассчитывать на чужую симпатию или поддержку не приходится.</p>
+<p>Жоппер всегда был одиноким. У него никогда не было собственной шайки или постоянных напарников. Он привык жить самостоятельно, не делиться добычей и не доверять свою судьбу чужим обещаниям. Одиночество стало для него не наказанием, а привычным способом существования.</p>
+<h3>Воровское ремесло</h3>
+<p>Чтобы выживать среди тех, кто крупнее и сильнее, Жоппер научился пользоваться тем, что у него получалось лучше всего: незаметностью, ловкостью и умением пролезать в самые тесные места. Сначала это были мелкие кражи и случайные находки, затем он освоил отмычки, тайные перевозки и контрабанду. Постепенно Жоппер стал вором и контрабандистом, способным пробраться туда, куда другие даже не сунутся, и исчезнуть прежде, чем его успеют схватить.</p>
+<p>Он не стал знаменитым преступником и не обзавёлся влиятельными знакомствами. Для крупных дельцов он оставался мелким исполнителем, а для остальных — подозрительным гоблином, которому нельзя доверять спину. Это только укрепило его привычку полагаться исключительно на себя.</p>
+<h3>Характер</h3>
+<p>Жоппер хитрый, подозрительный и жадный до чужих блестящих вещей. Он привык выкручиваться самостоятельно и не любит зависеть от других. Его одиночество не обязательно делает его несчастным: он просто не представляет, каково это — постоянно делить с кем-то добычу, решения и ответственность. При этом любопытство и жадность нередко оказываются сильнее осторожности.</p>
+<h3>Внешность</h3>
+<p>Маленький горбатый гоблин с двумя рядами зубов, третьей ноздрёй на лбу, длинным языком и кожей с наростами. Третья ноздря — врождённая особенность, появившаяся из-за мутации; никакими особыми магическими свойствами она не обладает.</p>
+<h3>Способности</h3>
+<p>Крысин пролаз — пробирается в тесные места. Карманная хирургия — ловкие манипуляции и сомнительные процедуры. Грязный фокус — плевок D4, способный ослепить.</p>
+<h3>Недостаток</h3>
+<p>Не может удержаться от кражи всего блестящего.</p>
+<h3>Снаряжение</h3>
+<p>Два кинжала, отмычки, верёвка, сомнительные инструменты.</p>
+<h3>Цель</h3>
+<p>Найти величайшее сокровище мира и доказать, что он не просто крыса.</p>
+</div></div></section>
+<section class="char-detail" id="character-otec-puzaniy">
+<a class="back" href="#characters">← Ко всем персонажам</a>
+<h2 class="char-detail-title">Отец Пузаний</h2>
+<p class="char-detail-subtitle">Человек · жрец и полевой лекарь</p>
+<div class="char-detail-entry">
+<img class="char-detail-portrait" src="https://at.adobe.com/ghQqM8wXKG0uv9mK" alt="Отец Пузаний — зацикленная GIF-анимация" style="display:block;width:100%;height:auto;min-height:0;aspect-ratio:3/4;object-fit:cover;padding:0;letter-spacing:normal;background:none"/>
+<div class="char-detail-copy">
+<div class="char-detail-stats"><b>ЗДОРОВЬЕ · 24</b><b>СИЛА · 4</b></div>
+<h3>История персонажа</h3>
+<p>Отец Пузаний никогда не сомневался в существовании богов. Особенно в существовании Диониса. Для него бог вина, веселья, безумия и жизненной силы был не просто одним из обитателей Олимпа, а настоящим покровителем, которому следовало посвящать каждый день своей жизни.</p>
+<p>Своё призвание Пузаний нашёл в служении храму Диониса. Он искренне верил в обряды, священные праздники и силу божественного благословения. При этом довольно быстро выяснилось, что представление Пузания о правильном религиозном празднике несколько отличается от представлений остальных служителей. Если полагалось провести торжественную службу, он старался превратить её в грандиозное празднество. Если требовалось почтить бога вином, Пузаний считал, что скромная чаша — это почти оскорбление. А если праздник заканчивался на рассвете, он искренне недоумевал, почему остальные уже хотят расходиться.</p>
+<p>Со временем его усердие стало настоящей проблемой для храма. Празднества затягивались, порядок нарушался, а некоторые обряды приобретали совершенно неожиданный размах. Сам Пузаний не видел в этом ничего дурного. Напротив, он был уверен, что Дионис должен быть доволен таким почитанием. Однако терпение остальных служителей однажды закончилось, и Пузания изгнали из храма.</p>
+<p>Изгнание не поколебало его веру ни на мгновение. Он не стал считать Диониса виноватым и не отвернулся от своего божества. В собственных глазах Пузаний остался верным жрецом, которого просто не поняли слишком строгие и скучные служители.</p>
+<p>После этого он продолжил странствовать, неся веру в Диониса туда, где о ней ещё не слышали или где людям требовалась помощь. Со временем к религиозному служению добавились обязанности лекаря. Пузаний освоил полевую хирургию, научился перевязывать раны и оказывать помощь тем, кто уже не мог самостоятельно подняться. Его методы нельзя назвать изящными, а медицинские процедуры иногда выглядят пугающе, но он действительно старается спасать жизни.</p>
+<p>Правда, даже во время лечения Пузаний редко обходится без проповеди. Он способен объяснять раненому, что тот непременно поправится благодаря божественному благословению, одновременно доставая хирургические инструменты. А если пациент начинает сомневаться, жрец может подкрепить свои слова весьма убедительным священным подзатыльником.</p>
+<p>Пузаний искренне считает, что почти любую проблему можно решить правильным обрядом, добрым словом и хорошей выпивкой. Он не видит противоречия между молитвой и застольем, между лечением ран и религиозным праздником. Для него всё это части одного служения.</p>
+<p>Но есть одна мечта, которая не даёт ему покоя. Отец Пузаний хочет получить личную аудиенцию у самого Диониса. Он уверен, что однажды бог обратит на него внимание, оценит его преданность и позволит предстать перед собой. Возможно, тогда Пузаний наконец сможет лично спросить, доволен ли Дионис его служением.</p>
+<p>До тех пор он продолжает путешествовать с тяжёлым посохом, хирургическими инструментами и флягой вина. И если на пути встречается человек, которому нужна помощь, Пузаний обязательно остановится. Ведь даже самый безнадёжный случай заслуживает попытки лечения, а иногда — хорошего религиозного обряда.</p>
+<h3>Внешность</h3><p>Необъятный мужчина с обвисшими щеками, шестью пальцами на каждой руке и большим шрамом на животе. Носит обветшалые священные одежды.</p>
+<h3>Способности</h3><p>Священный подзатыльник — удар D8. Полевой хирург — лечит союзника на D4. Божественное красноречие — умеет убеждать от имени веры.</p>
+<h3>Недостаток</h3><p>Считает, что почти любую проблему решат обряд и выпивка.</p>
+<h3>Снаряжение</h3><p>Тяжёлый посох, хирургические инструменты, бинты, символы, фляга вина.</p>
+<h3>Цель</h3><p>Получить личную аудиенцию у Диониса.</p>
+</div></div></section>
+<section class="char-detail" id="character-prokopiy">
+<a class="back" href="#characters">← Ко всем персонажам</a>
+<h2 class="char-detail-title">Прокопий Заклинатель</h2>
+<p class="char-detail-subtitle">Человек · колдун</p>
+<div class="char-detail-entry">
+<img class="char-detail-portrait" src="https://at.adobe.com/EJaGSzVAFasZpDvN" alt="Прокопий Заклинатель — зацикленная GIF-анимация" style="display:block;width:100%;height:auto;min-height:0;aspect-ratio:3/4;object-fit:cover;padding:0;letter-spacing:normal;background:none"/>
+<div class="char-detail-copy">
+<div class="char-detail-stats"><b>ЗДОРОВЬЕ · 18</b><b>СИЛА · 3</b></div>
+<h3>История персонажа</h3><p>Прокопий Заклинатель — талантливый и весьма могущественный колдун, чьи способности значительно превосходят его здравый смысл. Он способен обращаться с серьёзной магией и проводить необычные эксперименты, но предсказать результат его действий практически невозможно.</p><p>Сам Прокопий не знает, был ли таким с рождения или его разум постепенно изменился под влиянием магии. Впрочем, подобные вопросы его мало занимают: гораздо интереснее очередной эксперимент.</p><p>Последним местом обучения Прокопия стала закрытая магическая школа. Во время одного из экспериментов он совершенно случайно превратил всю экзаменационную комиссию в коз. После этого школу закрыли, а Прокопий остался её последним учеником.</p><p>Сам колдун не считает произошедшее своей ошибкой. По его мнению, комиссия сама виновата, что стояла слишком близко к месту проведения эксперимента. Теперь Прокопий намерен восстановить своё доброе имя и доказать окружающим, что превращение комиссии в коз было не провалом, а научным экспериментом.</p>
+<h3>Внешность</h3><p>Худой человек с тремя глазами (один на шее), пальцами разной длины и волосами, которые иногда шевелятся сами.</p>
+<h3>Способности</h3><p>Громовая отрыжка — магическая атака D8. Кривое проклятие — накладывает странные эффекты. Случайная магия — мощный эффект с риском побочного последствия.</p>
+<h3>Недостаток</h3><p>Серьёзная магия требует платы: колдун может получить урон или неприятный побочный эффект.</p>
+<h3>Снаряжение</h3><p>Потрёпанный гримуар, посох, мешочек костей, сломанный амулет.</p>
+<h3>Цель</h3><p>Восстановить имя и доказать, что превращение комиссии в коз было осознанным экспериментом.</p>
+</div></div></section>
+<section class="char-detail" id="character-filimon">
+<a class="back" href="#characters">← Ко всем персонажам</a>
+<h2 class="char-detail-title">Филимон Четыре Подковы</h2>
+<p class="char-detail-subtitle">Кентавр · охотник</p>
+<div class="char-detail-entry">
+<img class="char-detail-portrait" src="https://at.adobe.com/oJ6TECMBnGVI3aSQ" alt="Филимон Четыре Подковы — зацикленная GIF-анимация" style="display:block;width:100%;height:auto;min-height:0;aspect-ratio:3/4;object-fit:cover;padding:0;letter-spacing:normal;background:none"/>
+<div class="char-detail-copy">
+<div class="char-detail-stats"><b>ЗДОРОВЬЕ · 24</b><b>СИЛА · 5</b></div>
+<h3>История персонажа</h3><p>Филимон Четыре Подковы двадцать лет занимался следопытством. За это время он привык читать следы, находить дорогу и замечать то, что другие могли пропустить.</p><p>Но однажды во время путешествия его караван бесследно исчез. Филимон вернулся один. Что произошло с его спутниками и куда они пропали, он так и не выяснил. О случившемся он не любит говорить, но хранит личную вещь одного из пропавших. Что это за вещь, он не раскрывает.</p><p>С тех пор Филимон одержим поисками легендарного невиданного зверя. Он подозревает, что тот может быть связан с исчезновением каравана. Любой слух или след, который может привести к существу, способен заставить его бросить остальные дела и отправиться на поиски.</p><p>Филимон надеется наконец разобраться в судьбе своего каравана. А если ему удастся найти зверя, он намерен продать его голову за огромное состояние.</p>
+<h3>Внешность</h3><p>Жилистый бородатый мужчина с нижней частью тела огромного старого жеребца. На спине — дополнительная пара маленьких сосков; о происхождении не говорит.</p>
+<h3>Способности</h3><p>Меткий выстрел — арбалетный выстрел D8. Чутьё зверя — замечает следы и опасность. Копытный привет — удар D8.</p>
+<h3>Недостаток</h3><p>Обычная мебель и узкие проходы создают проблемы; болезненно реагирует на шутки о внешности.</p>
+<h3>Снаряжение</h3><p>Арбалет, нож, верёвка, ловушки.</p>
+<h3>Цель</h3><p>Найти легендарного невиданного зверя и продать его голову за состояние.</p>
+</div></div></section>
+<section class="char-detail" id="character-klavdia">
+<a class="back" href="#characters">← Ко всем персонажам</a>
+<h2 class="char-detail-title">Клавдия Клювоносная</h2>
+<p class="char-detail-subtitle">Гарпия · боевая плутовка</p>
+<div class="char-detail-entry">
+<img class="char-detail-portrait" src="https://at.adobe.com/n85Mc8zwiZPRHZOc" alt="Клавдия Клювоносная — анимированный портрет" loading="eager" decoding="async" style="display:block;width:100%;height:auto;min-height:0;aspect-ratio:3/4;object-fit:cover;padding:0;letter-spacing:normal;background:none"/>
+<div class="char-detail-copy">
+<div class="char-detail-stats"><b>ЗДОРОВЬЕ · 20</b><b>СИЛА · 4</b></div>
+<h3>Предыстория</h3>
+<p>С самого детства Клавдия была патологической воровкой. Она никогда не пыталась скрывать свои кражи: могла совершенно открыто забрать чужую вещь, даже не считая нужным оправдываться. Её привлекала не стоимость добычи и не возможность разбогатеть — сам процесс воровства стал для неё навязчивой потребностью. Кража вызывает у Клавдии сексуальное возбуждение и остаётся единственным способом, которым она способна испытать оргазм.</p>
+<p>Окружающие считали её ненормальной и испорченной. Родители Клавдии были набожными и не смогли принять поведение дочери. Когда она была ещё маленькой, они отказались от неё.</p>
+<h3>Шайка воров</h3>
+<p>После того как родители оставили её, Клавдию подобрала шайка воров. Среди них она и выросла, а позднее стала воздушной разбойницей. Привычка открыто присваивать чужое никуда не исчезла: Клавдия ворует не только ради добычи, но и потому, что не может сопротивляться самому желанию украсть.</p>
+<h3>Ненависть к богам</h3>
+<p>После отказа родителей Клавдия возненавидела богов. Она связывает своё изгнание с набожностью семьи и считает богов достойными презрения. При каждом удобном случае она богохульничает, оскорбляет божественное и не упускает возможности задеть верующих.</p>
+<h3>Неправильный сундук</h3>
+<p>Клавдия украла не тот сундук. Теперь за ней охотится половина местного духовенства. Она хочет вернуть украденный сундук, хотя сама не знает, что находится внутри.</p>
+<h3>Внешность</h3><p>Высокая гарпия с человеческим торсом, птичьими ногами, кривым клювом, огромными глазами и жирным налётом на перьях.</p>
+<h3>Способности</h3>
+<p>Крылатый рывок — быстро меняет позицию. Когтистая расправа — атака D8. Птичий крик — резкий крик, способный ошеломить.</p>
+<p><strong>Богохульная ненависть:</strong> при атаке божественного существа Клавдия дополнительно бросает D4 и прибавляет выпавшее значение к основному урону.</p>
+<h3>Недостатки</h3><p>Патологическая клептомания: Клавдия не умеет удерживаться от краж и делает это открыто. Тянется к украшениям и не умеет хранить секреты дольше пяти минут.</p>
+<h3>Снаряжение</h3><p>Два коротких клинка, кожаный жилет, украденные украшения.</p>
+<h3>Цель</h3><p>Вернуть украденный сундук, не зная, что находится внутри.</p>
+</div></div></section><section class="bestiary-page" id="bestiary">
+<a class="back" href="#world">← Вернуться к карте острова</a>
+<h2 class="bestiary-title">Бестиарий</h2>
+<p class="bestiary-intro">Каталог богов, чудовищ и других существ мира «Последнего пира богов». Выбери раздел, чтобы открыть его будущие записи.</p>
+<div class="bestiary-grid">
+<a class="bestiary-category" href="#gods"><div class="bestiary-symbol" aria-hidden="true">♜</div><h3>БОГИ</h3><p>Божества и обитатели божественного мира. Открыть записи.</p></a>
+<a class="bestiary-category" href="#monsters"><div class="bestiary-symbol" aria-hidden="true">⚔</div><h3>МОНСТРЫ</h3><p>Необычные чудовища и подбоссы. Открыть записи.</p></a>
+<article class="bestiary-category"><div class="bestiary-symbol" aria-hidden="true">☽</div><h3>ДУХИ</h3><p>Духи и сверхъестественные сущности, существующие за пределами привычного мира.</p></article>
+<article class="bestiary-category"><div class="bestiary-symbol" aria-hidden="true">✧</div><h3>ДРУГИЕ СУЩЕСТВА</h3><p>Необычные обитатели мира, которые не относятся к первым трём разделам.</p></article>
+</div>
+</section><section class="monster-page" id="monsters">
+<a class="back" href="#bestiary">← Вернуться к бестиарию</a>
+<h2 class="monster-title">МОНСТРЫ</h2>
+<p class="monster-intro">Десять странных монстров. Они опасны, но каждый уязвим — иногда победить можно не силой, а головой.</p>
+<div class="monster-grid"><a class="monster-card" href="#monster-1"><div class="monster-image"><img class="monster-portrait-file" src="https://at.adobe.com/klfJCeVfgGS9AeZ2" alt="Плачущий недоедок" loading="lazy" decoding="async"/></div><h3>ПЛАЧУЩИЙ НЕДОЕДОК</h3></a><a class="monster-card" href="#monster-2"><div class="monster-image"><img class="monster-portrait-file" src="https://at.adobe.com/hgmwYXE3eozba2S3" alt="Господин Обратная Сторона" loading="lazy" decoding="async"/></div><h3>ГОСПОДИН ОБРАТНАЯ СТОРОНА</h3></a><a class="monster-card" href="#monster-3"><div class="monster-image"><img class="monster-portrait-file" src="https://at.adobe.com/pprwOxEvwWRn828d" alt="Матушка Карман" loading="lazy" decoding="async"/></div><h3>МАТУШКА КАРМАН</h3></a><a class="monster-card" href="#monster-4"><div class="monster-image"><img class="monster-portrait-file" src="https://at.adobe.com/EZyy68qrRTfvQwQQ" alt="Хор из одного горла" loading="lazy" decoding="async"/></div><h3>ХОР ИЗ ОДНОГО ГОРЛА</h3></a><a class="monster-card" href="#monster-5"><div class="monster-image"><img class="monster-portrait-file" src="https://at.adobe.com/mX15lxwee3fZ4ABS" alt="Святой Иоанносник" loading="lazy" decoding="async"/></div><h3>СВЯТОЙ ИОАННОСНИК</h3></a><a class="monster-card" href="#monster-6"><div class="monster-image"><img class="monster-portrait-file" src="https://at.adobe.com/RUlDnXBi4ZbU0ivN" alt="Князь Зажирайло" loading="lazy" decoding="async"/></div><h3>КНЯЗЬ ЗАЖИРАЙЛО</h3></a><a class="monster-card" href="#monster-7"><div class="monster-image"><img class="monster-portrait-file" src="https://at.adobe.com/dfiMHgQePcPpfEZ6" alt="Цензор" loading="lazy" decoding="async"/></div><h3>ЦЕНЗОР</h3></a><a class="monster-card" href="#monster-8"><div class="monster-image"><img class="monster-portrait-file" src="https://at.adobe.com/qszFNJWZnG67NLQM" alt="Отходный Король" loading="lazy" decoding="async"/></div><h3>ОТХОДНЫЙ КОРОЛЬ</h3></a><a class="monster-card" href="#monster-9"><div class="monster-image"><img class="monster-portrait-file" src="https://at.adobe.com/DzfoOYqAwlyJj51D" alt="Кукуха" loading="lazy" decoding="async"/></div><h3>КУКУХА</h3></a><a class="monster-card" href="#monster-10"><div class="monster-image"><img class="monster-portrait-file" src="https://at.adobe.com/xeSAdC7LeY3fOIlP" alt="Банный дух" loading="lazy" decoding="async"/></div><h3>БАННЫЙ ДУХ</h3></a></div></section><section class="monster-detail" id="monster-1"><a class="back" href="#monsters">← Ко всем монстрам</a><article class="monster-entry"><div class="monster-image monster-detail-image"><img class="monster-portrait-file" src="https://at.adobe.com/klfJCeVfgGS9AeZ2" alt="Плачущий недоедок" loading="lazy" decoding="async"/></div><div class="monster-copy"><h3>ПЛАЧУЩИЙ НЕДОЕДОК</h3><p>Полупрозрачный мешок из плоти с десятками маленьких ртов. Вечно просит еды и проглатывает почти всё подряд. Проглоченные предметы и существа могут неожиданно вырваться наружу.</p><table class="monster-stats"><tr><th>Здоровье</th><td>114</td></tr><tr><th>Сила</th><td>3</td></tr><tr><th>Слабость</th><td>Переедание и холод</td></tr></table></div></article></section><section class="monster-detail" id="monster-2"><a class="back" href="#monsters">← Ко всем монстрам</a><article class="monster-entry"><div class="monster-image monster-detail-image"><img class="monster-portrait-file" src="https://at.adobe.com/hgmwYXE3eozba2S3" alt="Господин Обратная Сторона" loading="lazy" decoding="async"/></div><div class="monster-copy"><h3>ГОСПОДИН ОБРАТНАЯ СТОРОНА</h3><p>Вывернутое существо без постоянной передней и задней стороны. Его тело меняет ориентацию, а удары иногда выходят из неожиданных мест.</p><table class="monster-stats"><tr><th>Здоровье</th><td>112</td></tr><tr><th>Сила</th><td>3</td></tr><tr><th>Слабость</th><td>Путаница направлений</td></tr></table></div></article></section><section class="monster-detail" id="monster-3"><a class="back" href="#monsters">← Ко всем монстрам</a><article class="monster-entry"><div class="monster-image monster-detail-image"><img class="monster-portrait-file" src="https://at.adobe.com/pprwOxEvwWRn828d" alt="Матушка Карман" loading="lazy" decoding="async"/></div><div class="monster-copy"><h3>МАТУШКА КАРМАН</h3><p>Живая груда складок, мешков и карманов. Ворует вещи и прячет их в маленьких пространствах, скрытых внутри собственной плоти.</p><table class="monster-stats"><tr><th>Здоровье</th><td>116</td></tr><tr><th>Сила</th><td>2</td></tr><tr><th>Слабость</th><td>Жадность</td></tr></table></div></article></section><section class="monster-detail" id="monster-4"><a class="back" href="#monsters">← Ко всем монстрам</a><article class="monster-entry"><div class="monster-image monster-detail-image"><img class="monster-portrait-file" src="https://at.adobe.com/EZyy68qrRTfvQwQQ" alt="Хор из одного горла" loading="lazy" decoding="async"/></div><div class="monster-copy"><h3>ХОР ИЗ ОДНОГО ГОРЛА</h3><p>Парящее горло, окружённое плавающими зубами и языками. Говорит десятками голосов одновременно и сбивает путников с толку.</p><table class="monster-stats"><tr><th>Здоровье</th><td>112</td></tr><tr><th>Сила</th><td>4</td></tr><tr><th>Слабость</th><td>Полная тишина</td></tr></table></div></article></section><section class="monster-detail" id="monster-5"><a class="back" href="#monsters">← Ко всем монстрам</a><article class="monster-entry"><div class="monster-image monster-detail-image"><img class="monster-portrait-file" src="https://at.adobe.com/mX15lxwee3fZ4ABS" alt="Святой Иоанносник" loading="lazy" decoding="async"/></div><div class="monster-copy"><h3>СВЯТОЙ ИОАННОСНИК</h3><p>Летающая колокольная мерзость из грибницы, керамики и мокрой плоти. Каждый колокол звенит своим голосом, вызывая спазмы и головокружение.</p><table class="monster-stats"><tr><th>Здоровье</th><td>118</td></tr><tr><th>Сила</th><td>3</td></tr><tr><th>Слабость</th><td>Тишина и глухие покрытия</td></tr></table></div></article></section><section class="monster-detail" id="monster-6"><a class="back" href="#monsters">← Ко всем монстрам</a><article class="monster-entry"><div class="monster-image monster-detail-image"><img class="monster-portrait-file" src="https://at.adobe.com/RUlDnXBi4ZbU0ivN" alt="Князь Зажирайло" loading="lazy" decoding="async"/></div><div class="monster-copy"><h3>КНЯЗЬ ЗАЖИРАЙЛО</h3><p>Священная свинья гедонизма. Огромная розовая туша в короне из костей, с пивным брюхом и кружкой в копыте. Считает всех вокруг своими собутыльниками и требует продолжения банкета, пока не отключится.</p><table class="monster-stats"><tr><th>Здоровье</th><td>116</td></tr><tr><th>Сила</th><td>3</td></tr><tr><th>Слабость</th><td>Отрезвление</td></tr></table></div></article></section><section class="monster-detail" id="monster-7"><a class="back" href="#monsters">← Ко всем монстрам</a><article class="monster-entry"><div class="monster-image monster-detail-image"><img class="monster-portrait-file" src="https://at.adobe.com/dfiMHgQePcPpfEZ6" alt="Цензор" loading="lazy" decoding="async"/></div><div class="monster-copy"><h3>ЦЕНЗОР</h3><p>Живой свод запретных знаний: огромная книга с зубастой пастью, глазами на шарнирах и мокрым языком-закладкой. Поглощает тексты, людей и «непристойные мысли», но сам хранит самые грязные тайны Олимпа.</p><table class="monster-stats"><tr><th>Здоровье</th><td>113</td></tr><tr><th>Сила</th><td>2</td></tr><tr><th>Слабость</th><td>Неприличные истории</td></tr></table></div></article></section><section class="monster-detail" id="monster-8"><a class="back" href="#monsters">← Ко всем монстрам</a><article class="monster-entry"><div class="monster-image monster-detail-image"><img class="monster-portrait-file" src="https://at.adobe.com/qszFNJWZnG67NLQM" alt="Отходный Король" loading="lazy" decoding="async"/></div><div class="monster-copy"><h3>ОТХОДНЫЙ КОРОЛЬ</h3><p>Владыка объедков, испорченной еды и забытых пиршеств. Собирает всё, что осталось после банкетов, и лепит из этого себя. Пахнет так, что даже боги морщатся, но считает себя величайшим коллекционером мироздания.</p><table class="monster-stats"><tr><th>Здоровье</th><td>117</td></tr><tr><th>Сила</th><td>4</td></tr><tr><th>Слабость</th><td>Огонь и чистота</td></tr></table></div></article></section><section class="monster-detail" id="monster-9"><a class="back" href="#monsters">← Ко всем монстрам</a><article class="monster-entry"><div class="monster-image monster-detail-image"><img class="monster-portrait-file" src="https://at.adobe.com/DzfoOYqAwlyJj51D" alt="Кукуха" loading="lazy" decoding="async"/></div><div class="monster-copy"><h3>КУКУХА</h3><p>Существо с огромными старыми часами вместо головы, цепями вместо рук и кукушками, живущими внутри циферблата. Ненавидит опоздания, беспорядок и фразу «ещё пять минуточек», хотя само давно потеряло счёт времени.</p><table class="monster-stats"><tr><th>Здоровье</th><td>112</td></tr><tr><th>Сила</th><td>3</td></tr><tr><th>Слабость</th><td>Сбитый ритм</td></tr></table></div></article></section><section class="monster-detail" id="monster-10"><a class="back" href="#monsters">← Ко всем монстрам</a><article class="monster-entry"><div class="monster-image monster-detail-image"><img class="monster-portrait-file" src="https://at.adobe.com/xeSAdC7LeY3fOIlP" alt="Банный дух" loading="lazy" decoding="async"/></div><div class="monster-copy"><h3>БАННЫЙ ДУХ</h3><p>Дух общественной бани в виде огромной деревянной бочки с глазами, зубами и паровыми трубами. Заставляет жертв париться, скрабиться и «смывать грехи», пока те не начинают жалеть, что вообще родились.</p><table class="monster-stats"><tr><th>Здоровье</th><td>115</td></tr><tr><th>Сила</th><td>3</td></tr><tr><th>Слабость</th><td>Холод и отказ</td></tr></table></div></article></section><section class="god-page" id="gods"><a class="back" href="#bestiary">← Вернуться к бестиарию</a><h2 class="god-title">Боги Олимпа</h2><p class="god-list-intro">Выбери божество, чтобы открыть его описание.</p><div class="god-grid"><a class="god-card" href="#god-zeus"><div class="god-card-image god-img-1 " role="img" aria-label="ЗЕВС"></div><h3>ЗЕВС</h3></a><a class="god-card" href="#god-hades"><div class="god-card-image god-img-2 " role="img" aria-label="АИД"></div><h3>АИД</h3></a><a class="god-card" href="#god-aphrodite"><div class="god-card-image god-img-3 " role="img" aria-label="АФРОДИТА"></div><h3>АФРОДИТА</h3></a><a class="god-card" href="#god-poseidon"><div class="god-card-image god-img-4 " role="img" aria-label="ПОСЕЙДОН"></div><h3>ПОСЕЙДОН</h3></a><a class="god-card" href="#god-hera"><div class="god-card-image god-img-5 " role="img" aria-label="ГЕРА"></div><h3>ГЕРА</h3></a><a class="god-card" href="#god-athena"><div class="god-card-image god-img-6 " role="img" aria-label="АФИНА"></div><h3>АФИНА</h3></a><a class="god-card" href="#god-ares"><div class="god-card-image god-img-7 " role="img" aria-label="АРЕС"></div><h3>АРЕС</h3></a><a class="god-card" href="#god-apollo"><div class="god-card-image god-img-8 " role="img" aria-label="АПОЛЛОН"></div><h3>АПОЛЛОН</h3></a><a class="god-card" href="#god-artemis"><div class="god-card-image god-img-9 " role="img" aria-label="АРТЕМИДА"></div><h3>АРТЕМИДА</h3></a><a class="god-card" href="#god-dionysus"><div class="god-card-image god-img-10 " role="img" aria-label="ДИОНИС"></div><h3>ДИОНИС</h3></a><a class="god-card" href="#god-hermes"><div class="god-card-image god-img-11 " role="img" aria-label="ГЕРМЕС"></div><h3>ГЕРМЕС</h3></a><a class="god-card" href="#god-hephaestus"><div class="god-card-image god-img-12 " role="img" aria-label="ГЕФЕСТ"></div><h3>ГЕФЕСТ</h3></a><a class="god-card" href="#god-demeter"><div class="god-card-image god-img-13 " role="img" aria-label="ДЕМЕТРА"></div><h3>ДЕМЕТРА</h3></a><a class="god-card" href="#god-hestia"><div class="god-card-image god-img-14 " role="img" aria-label="ГЕСТИЯ"></div><h3>ГЕСТИЯ</h3></a></div></section><section class="god-detail" id="god-zeus"><a class="back" href="#gods">← Ко всем богам</a><article class="god-entry"><div class="god-detail-portrait god-img-1 " role="img" aria-label="ЗЕВС"></div><div class="god-copy"><h3>ЗЕВС</h3><p class="god-subtitle">Верховный бог Олимпа. Повелитель грома, молний и небес.</p><h4>Внешность</h4><p>Маленький, толстый и совершенно лысый старикашка. Глубокие морщины, рыхлая нездоровая кожа, большой красный нос, мутные глазки и липкая ухмылка. По бокам головы торчат редкие седые волоски. Носит дорогие, но безвкусные одежды, золотые украшения и лавровую корону. При всей своей уродливости искренне считает себя величайшим красавцем мироздания.</p><h4>Характер</h4><p>Высокомерный, похотливый, капризный и крайне неприятный тип. Обожает власть, лесть, роскошь и внимание. Не понимает отказов, преувеличивает собственные подвиги и любое несогласие принимает за оскорбление. К смертным относится как к ничтожным букашкам; их молитвы его почти не интересуют.</p><h4>Божественные способности</h4><p>Повелевает небом, бурями, громом и молниями. Может призывать чудовищные грозы, обрушивать молнии на города, управлять ветрами и менять погоду по прихоти. Его божественная молния способна испепелить почти всё, к чему прикоснётся.</p><h4>Особенности и причуды</h4><ul><li>Считает себя самым красивым существом во вселенной.</li><li>Требует поклонения и терпеть не может, когда его перебивают.</li><li>Постоянно флиртует, даже когда это совершенно неуместно.</li><li>Может устроить бурю из-за сущей мелочи.</li><li>Особенно раздражается, когда Аид разговаривает с ним как с обычным неприятным знакомым.</li></ul><h4>Отношение к остальным богам</h4><p>Считает себя безусловным главой пантеона. Афродиту объявляет воплощением совершенства и пытается привлечь её внимание. Спокойствие Аида воспринимает как личное оскорбление.</p></div></article></section><section class="god-detail" id="god-hades"><a class="back" href="#gods">← Ко всем богам</a><article class="god-entry"><div class="god-detail-portrait god-img-2 " role="img" aria-label="АИД"></div><div class="god-copy"><h3>АИД</h3><p class="god-subtitle">Владыка подземного мира, смерти и всего, что однажды заканчивается.</p><h4>Внешность</h4><p>Высокий, статный джентльмен конца XIX века. Безупречный тёмный фрак, жилет, белая рубашка, перчатки, начищенная обувь и карманные часы на цепочке. Аккуратная причёска, спокойный взгляд и вежливая улыбка.</p><h4>Характер</h4><p>Спокойный, рассудительный и удивительно вежливый. Не любит шум, лишние эмоции и бессмысленные конфликты. Всегда держит слово, уважает договоры и предпочитает решать дела мирно. К смертным относится без особого интереса, но способен проявить уважение к тем, кто ведёт себя достойно. Он не добряк и не спаситель — просто самый воспитанный среди богов.</p><h4>Божественные способности</h4><p>Обладает абсолютной властью в собственном царстве. Управляет душами умерших, может призывать и подчинять существ подземного мира, открывать и закрывать пути между миром живых и мёртвых. Его власть особенно сильна в пределах владений.</p><h4>Особенности и причуды</h4><ul><li>Ценит тишину, порядок, хороший чай и спокойные беседы.</li><li>Коллекционирует редкие погребальные реликвии.</li><li>Предпочитает лично провожать особенно интересных умерших.</li><li>Никогда не повышает голос без крайней необходимости.</li><li>Терпеть не может, когда нарушают заключённые договоры.</li></ul><h4>Отношение к остальным богам</h4><p>Старается держаться в стороне от олимпийских склок. Зевса считает шумным и утомительным. С Афиной может разговаривать на равных, а Диониса переносит с большим терпением, чем большинство.</p></div></article></section><section class="god-detail" id="god-aphrodite"><a class="back" href="#gods">← Ко всем богам</a><article class="god-entry"><div class="god-detail-portrait god-img-3 " role="img" aria-label="АФРОДИТА"></div><div class="god-copy"><h3>АФРОДИТА</h3><p class="god-subtitle">Богиня любви, красоты, желания и страсти.</p><h4>Внешность</h4><p>Ослепительная красавица с роскошными, очень пышными формами, безупречным лицом и густыми волосами. Носит изысканные наряды, драгоценности и украшения, которые подчёркивают её красоту. Её присутствие притягивает взгляды даже тогда, когда она этого не требует.</p><h4>Характер</h4><p>Самовлюблённая, капризная, тщеславная и опасно обаятельная. Уверена, что красота даёт ей право получать всё желаемое. Обожает восхищение, ревность, подарки и чужие признания. Чужие чувства для неё скорее игрушка, чем ценность.</p><h4>Божественные способности</h4><p>Управляет любовью, страстью, влечением и очарованием. Может пробуждать или гасить желание, связывать сердца, разжигать ревность и заставлять целые сообщества терять рассудок из-за любви или красоты.</p><h4>Особенности и причуды</h4><ul><li>Не терпит, когда внимание достаётся кому-то другому.</li><li>Может часами выбирать наряд, а затем объявить его недостаточно великолепным.</li><li>Считает комплименты обязательной формой приветствия.</li><li>Любит устраивать любовные интриги просто от скуки.</li></ul><h4>Отношение к остальным богам</h4><p>Считает большинство богов грубыми и недостаточно утончёнными. Зевса использует как источник развлечения и лестных слов, но не воспринимает всерьёз.</p></div></article></section><section class="god-detail" id="god-poseidon"><a class="back" href="#gods">← Ко всем богам</a><article class="god-entry"><div class="god-detail-portrait god-img-4 " role="img" aria-label="ПОСЕЙДОН"></div><div class="god-copy"><h3>ПОСЕЙДОН</h3><p class="god-subtitle">Владыка морей, штормов, землетрясений и глубин.</p><h4>Внешность</h4><p>Не имеет постоянного тела. Его явление напоминает гигантский водоворот из чёрно-бирюзовой воды, кораллов, морских костей и десятков светящихся глаз в толще волн. Иногда из водяной массы выступают короны из обломков кораблей и острые гребни, похожие на трезубцы.</p><h4>Характер</h4><p>Вспыльчивый, мстительный и крайне собственнический. Считает океан своей личной территорией, а всё, что плавает по его поверхности, — временным гостем. Не забывает обид и любит отвечать на мелкие оскорбления катастрофами.</p><h4>Божественные способности</h4><p>Поднимает цунами и штормы, меняет течения, дробит скалы, вызывает землетрясения и управляет всем, что скрывается в морской глубине. В океане его власть почти безгранична.</p><h4>Особенности и причуды</h4><ul><li>Не выносит мусор и обломки в своих водах, если они не принадлежат ему.</li><li>Разговаривает грохотом волн и скрежетом корабельных килей.</li><li>Может неделями преследовать того, кто однажды его рассердил.</li></ul><h4>Отношение к остальным богам</h4><p>Считает Зевса заносчивым выскочкой, хотя вынужден признавать его положение. С Аидом предпочитает не спорить без причины.</p></div></article></section><section class="god-detail" id="god-hera"><a class="back" href="#gods">← Ко всем богам</a><article class="god-entry"><div class="god-detail-portrait god-img-5 " role="img" aria-label="ГЕРА"></div><div class="god-copy"><h3>ГЕРА</h3><p class="god-subtitle">Богиня брака, царственности и нерушимых клятв.</p><h4>Внешность</h4><p>Вместо единого тела — величественная процессия из множества золотых масок, соединённых длинными пурпурными вуалями. Маски смотрят в разные стороны и шепчут одновременно; над ними парят павлиньи глаза, наблюдающие за каждым движением.</p><h4>Характер</h4><p>Царственная, язвительная, властная и злопамятная. Требует безукоризненного соблюдения обещаний, но сама трактует правила так, как ей удобно. Не прощает унижения и измены, особенно если они выставляют её смешной.</p><h4>Божественные способности</h4><p>Связывает и разрывает брачные клятвы, ощущает ложь в обещаниях, может наложить проклятие на нарушителя союза и заставить целые семьи расплачиваться за предательство.</p><h4>Особенности и причуды</h4><ul><li>Помнит каждое оскорбление, даже сказанное несколько тысяч лет назад.</li><li>Не терпит неопрятности на официальных приёмах.</li><li>Иногда разговаривает всеми масками сразу, перебивая саму себя.</li></ul><h4>Отношение к остальным богам</h4><p>Открыто презирает похождения Зевса, но не желает уступать ему власть. С Афродитой соперничает за влияние и внимание.</p></div></article></section><section class="god-detail" id="god-athena"><a class="back" href="#gods">← Ко всем богам</a><article class="god-entry"><div class="god-detail-portrait god-img-6 " role="img" aria-label="АФИНА"></div><div class="god-copy"><h3>АФИНА</h3><p class="god-subtitle">Богиня мудрости, стратегии, ремёсел и расчётливой войны.</p><h4>Внешность</h4><p>Живая математическая конструкция: множество тонких золотых колец, вращающихся вокруг закрытого глаза. В центре — неподвижная маска без рта. Кольца пересекаются под невозможными углами, складываясь в узоры, которые меняются в зависимости от того, кто на них смотрит.</p><h4>Характер</h4><p>Холодная, точная и беспощадно рациональная. Считает эмоции помехой, а хаос — задачей, которую нужно решить. Не повышает голос и редко угрожает: обычно она уже просчитала последствия за собеседника.</p><h4>Божественные способности</h4><p>Видит вероятные исходы решений, просчитывает стратегии, наделяет избранных мастерством и может превращать пространство вокруг себя в идеальную тактическую схему, где каждый шаг противника предсказан.</p><h4>Особенности и причуды</h4><ul><li>Не любит случайность и импровизацию.</li><li>Исправляет чужие планы прямо во время разговора.</li><li>Считает комплиментом фразу «ты была права».</li></ul><h4>Отношение к остальным богам</h4><p>Уважает Аида за последовательность и соблюдение договоров. Считает Зевса неэффективным руководителем, но пока не видит безупречного способа заменить его.</p></div></article></section><section class="god-detail" id="god-ares"><a class="back" href="#gods">← Ко всем богам</a><article class="god-entry"><div class="god-detail-portrait god-img-7 " role="img" aria-label="АРЕС"></div><div class="god-copy"><h3>АРЕС</h3><p class="god-subtitle">Бог войны, ярости, кровопролития и разрушения.</p><h4>Внешность</h4><p>Подвижная масса из ржавого железа, обломков копий, щитов, шипов и раскалённых суставов. Внутри бесконечно вращается красное ядро, похожее на раскалённое сердце. При каждом движении из него вылетают искры и звон металла.</p><h4>Характер</h4><p>Агрессивный, нетерпеливый и импульсивный. Обожает конфликт ради самого конфликта. Не особенно интересуется причинами войны — ему важны грохот, страх и момент столкновения.</p><h4>Божественные способности</h4><p>Усиливает ярость и боевой азарт, управляет оружием и металлом на поле боя, способен превращать страх в безудержную агрессию и разжигать сражения между армиями.</p><h4>Особенности и причуды</h4><ul><li>Скучает, если вокруг слишком долго никто не дерётся.</li><li>Считает переговоры разновидностью трусости.</li><li>Иногда забывает, с кем именно собирался сражаться.</li></ul><h4>Отношение к остальным богам</h4><p>Уважает только силу и считает Афину занудой, хотя вынужден признать её превосходство в стратегии. Зевса слушается, пока тот не мешает веселью.</p></div></article></section><section class="god-detail" id="god-apollo"><a class="back" href="#gods">← Ко всем богам</a><article class="god-entry"><div class="god-detail-portrait god-img-8 " role="img" aria-label="АПОЛЛОН"></div><div class="god-copy"><h3>АПОЛЛОН</h3><p class="god-subtitle">Бог света, пророчеств, музыки, искусства и исцеления.</p><h4>Внешность</h4><p>Сияющий солнечный механизм: золотой диск, окружённый тонкими лучами-струнами. В его центре открывается лицо, составленное из света и трещин, а вокруг вращаются прозрачные музыкальные дуги и крошечные зеркала.</p><h4>Характер</h4><p>Самовлюблённый эстет, убеждённый в собственном совершенстве. Любит искусство, но не терпит чужой критики. Может быть покровителем и целителем, пока его не утомили или не задели его вкус.</p><h4>Божественные способности</h4><p>Управляет солнечным светом, пророческими видениями, музыкой и исцелением. Его лучи могут лечить или испепелять, а мелодия способна открывать скрытые знаки будущего.</p><h4>Особенности и причуды</h4><ul><li>Не выносит фальшивых нот и плохого вкуса.</li><li>Считает любую собственную композицию шедевром.</li><li>Даёт пророчества в виде загадочных песен, даже когда его об этом не просят.</li></ul><h4>Отношение к остальным богам</h4><p>Считает Диониса слишком хаотичным, а Афину — слишком сухой. С Аидом поддерживает сдержанную вежливость.</p></div></article></section><section class="god-detail" id="god-artemis"><a class="back" href="#gods">← Ко всем богам</a><article class="god-entry"><div class="god-detail-portrait god-img-9 " role="img" aria-label="АРТЕМИДА"></div><div class="god-copy"><h3>АРТЕМИДА</h3><p class="god-subtitle">Богиня охоты, дикой природы, луны и независимости.</p><h4>Внешность</h4><p>Призрачный лесной силуэт из белых ветвей, костяных рогов, лунного света и тонких серебряных нитей. Вместо лица — тёмная пустота, в которой медленно открывается холодный лунный диск. Вокруг неё движутся ветви, словно стая бесшумных зверей.</p><h4>Характер</h4><p>Независимая, суровая и непреклонная. Не любит вторжений, навязчивого внимания и тех, кто считает природу своей собственностью. Не стремится нравиться и не объясняет свои решения.</p><h4>Божественные способности</h4><p>Управляет дикой природой, лунным светом и охотой. Может скрывать следы, направлять зверей, находить любую цель в лесу и поражать её невидимым выстрелом.</p><h4>Особенности и причуды</h4><ul><li>Не принимает приглашений без причины.</li><li>Не терпит охотников, убивающих ради забавы.</li><li>Может молча наблюдать за кем-то несколько дней, прежде чем решить, достоин ли он ответа.</li></ul><h4>Отношение к остальным богам</h4><p>Избегает олимпийских собраний. К Афине относится с уважением, а попытки Зевса командовать ею игнорирует.</p></div></article></section><section class="god-detail" id="god-dionysus"><a class="back" href="#gods">← Ко всем богам</a><article class="god-entry"><div class="god-detail-portrait god-img-10 " role="img" aria-label="ДИОНИС"></div><div class="god-copy"><h3>ДИОНИС</h3><p class="god-subtitle">Бог вина, экстаза, празднеств, безумия и театра.</p><h4>Внешность</h4><p>Пульсирующий клубок лоз, виноградных гроздей, театральных масок и множества глаз. Он постоянно распускается, цветёт, гниёт и снова расцветает. Изнутри доносятся смех, музыка и шёпот, который невозможно разобрать.</p><h4>Характер</h4><p>Непредсказуемый, заразительно весёлый и пугающе безответственный. Может быть обаятельным хозяином праздника, а через минуту превратить веселье в коллективное безумие. Не всегда различает шутку и катастрофу.</p><h4>Божественные способности</h4><p>Управляет вином, опьянением, экстазом, безумием и театральными иллюзиями. Может менять восприятие толпы, заставлять лозы подчиняться себе и превращать праздник в кошмарное видение.</p><h4>Особенности и причуды</h4><ul><li>Никогда не признаёт, что праздник окончен.</li><li>Общается загадками, тостами и театральными репликами.</li><li>Часто забывает, что именно натворил накануне.</li></ul><h4>Отношение к остальным богам</h4><p>Считает Зевса скучным, Аида — удивительно приятным собеседником, а Ареса — человеком, который не умеет веселиться без разрушений.</p></div></article></section><section class="god-detail" id="god-hermes"><a class="back" href="#gods">← Ко всем богам</a><article class="god-entry"><div class="god-detail-portrait god-img-11 " role="img" aria-label="ГЕРМЕС"></div><div class="god-copy"><h3>ГЕРМЕС</h3><p class="god-subtitle">Бог дорог, торговли, путешествий, хитрости и посланник богов.</p><h4>Внешность</h4><p>Летающий узел из перьев, тонких золотых цепей, свитков, монет и прозрачных крыльев. В центре вращается маленький глаз, а вокруг него постоянно открываются и закрываются крошечные дверцы, ведущие неизвестно куда.</p><h4>Характер</h4><p>Обаятельный мошенник, быстрый на язык и ещё быстрее на руку. Любит сделки, лазейки, секреты и чужую доверчивость. Может помочь совершенно бескорыстно, но обычно потом выясняется, что это тоже было частью сделки.</p><h4>Божественные способности</h4><p>Перемещается между далёкими местами и границами миров, открывает пути, передаёт послания, находит скрытые дороги и способен украсть или спрятать почти любой предмет.</p><h4>Особенности и причуды</h4><ul><li>Продаёт вещи, которые ещё не украл.</li><li>Не может пройти мимо незапертого сундука.</li><li>Уверяет, что любая проблема решается правильно составленным договором.</li></ul><h4>Отношение к остальным богам</h4><p>Ладит почти со всеми, пока видит выгоду. Аид ценит его услуги, но всегда перечитывает мелкий шрифт.</p></div></article></section><section class="god-detail" id="god-hephaestus"><a class="back" href="#gods">← Ко всем богам</a><article class="god-entry"><div class="god-detail-portrait god-img-12 " role="img" aria-label="ГЕФЕСТ"></div><div class="god-copy"><h3>ГЕФЕСТ</h3><p class="god-subtitle">Бог огня, кузнечного дела, мастерства и изобретений.</p><h4>Внешность</h4><p>Гигантская ходячая кузница из чёрного железа, дымоходов, шестерён и раскалённых печей. В глубине корпуса горит единственный огненный глаз. Из боков вырастают механические манипуляторы, каждый из которых занят отдельной работой.</p><h4>Характер</h4><p>Молчаливый, упрямый и сосредоточенный. Не любит светские беседы и бессмысленные просьбы. Может часами работать над одной деталью, но приходит в ярость, если кто-то трогает его инструменты.</p><h4>Божественные способности</h4><p>Создаёт божественные артефакты и живые механизмы, управляет огнём и металлом, способен перековать оружие, броню и даже отдельные свойства магических предметов.</p><h4>Особенности и причуды</h4><ul><li>Разговаривает с механизмами, будто они его дети.</li><li>Не выбрасывает сломанные детали — всё однажды пригодится.</li><li>Ненавидит, когда его отвлекают во время работы.</li></ul><h4>Отношение к остальным богам</h4><p>Предпочитает держаться подальше от споров Зевса и Геры. Аид — один из немногих, кто не мешает ему работать.</p></div></article></section><section class="god-detail" id="god-demeter"><a class="back" href="#gods">← Ко всем богам</a><article class="god-entry"><div class="god-detail-portrait god-img-13 " role="img" aria-label="ДЕМЕТРА"></div><div class="god-copy"><h3>ДЕМЕТРА</h3><p class="god-subtitle">Богиня урожая, плодородия, земледелия и смены сезонов.</p><h4>Внешность</h4><p>Огромная живая масса из корней, колосьев, цветов, семян и влажной земли. В её центре пульсирует красное семя-сердце, а из цветочной кроны смотрят десятки маленьких глаз. Где она проходит, растения мгновенно прорастают или увядают.</p><h4>Характер</h4><p>Заботливая до удушья, собственническая и переменчивая. Может одарить щедрым урожаем, а может лишить целую долину пищи из-за личной обиды. Любовь к близким у неё сильная, но совершенно не знает меры.</p><h4>Божественные способности</h4><p>Управляет ростом растений, плодородием почвы, урожаем и сезонными циклами. Может за несколько мгновений превратить пустошь в цветущий сад или сделать плодородные поля бесплодными.</p><h4>Особенности и причуды</h4><ul><li>Не переносит, когда вытаптывают ростки.</li><li>Считает сорняки личным оскорблением.</li><li>Может подарить урожай за хорошее отношение к земле, не спросив, нужен ли он.</li></ul><h4>Отношение к остальным богам</h4><p>Часто спорит с Гефестом из-за дыма и выжженной земли. К Аиду относится настороженно, но признаёт его власть над тем, что уходит под землю.</p></div></article></section><section class="god-detail" id="god-hestia"><a class="back" href="#gods">← Ко всем богам</a><article class="god-entry"><div class="god-detail-portrait god-img-14 " role="img" aria-label="ГЕСТИЯ"></div><div class="god-copy"><h3>ГЕСТИЯ</h3><p class="god-subtitle">Богиня домашнего очага, гостеприимства и священного огня.</p><h4>Внешность</h4><p>Небольшой, но бесконечно глубокий огонь, заключённый в старинной бронзовой жаровне. Пламя складывается в подобие лица лишь на мгновение; внутри него видны бесчисленные комнаты, столы и окна домов, где ещё горит свет.</p><h4>Характер</h4><p>Тихая, терпеливая и удивительно бескорыстная. Не любит власть и не вмешивается в чужие распри. Но её спокойствие не означает слабость: тот, кто осквернит гостеприимство или погасит чужой очаг, узнает, насколько страшным бывает её гнев.</p><h4>Божественные способности</h4><p>Хранит священный огонь, защищает дома и места гостеприимства, может поддерживать пламя на расстоянии и лишать убежища тех, кто нарушил закон гостя и хозяина.</p><h4>Особенности и причуды</h4><ul><li>Всегда оставляет место у огня для незнакомца.</li><li>Не любит громкие праздники, но никогда не прогоняет гостей.</li><li>Помнит каждый дом, в котором её огонь когда-либо горел.</li></ul><h4>Отношение к остальным богам</h4><p>Почти не участвует в олимпийских конфликтах. Аид уважает её тишину, а остальные боги редко вспоминают о ней, пока им не понадобится убежище.</p></div></article></section><section class="stories-page" id="stories">
+<a class="back" href="#world">← Вернуться к карте острова</a>
+<h2 class="stories-title">Истории</h2>
+<p class="stories-intro">Выбери историю, чтобы открыть её страницу.</p>
+<div class="stories-grid">
+<a class="story-card story-button" href="#story-last-feast">
+<div class="story-mark" aria-hidden="true">✦</div>
+<h3>Последний пир богов</h3>
+<span class="story-open">Открыть историю →</span>
+</a>
+<div class="story-card story-empty" aria-label="Вторая история пока не добавлена">
+<div class="story-mark" aria-hidden="true">◇</div>
+<h3>Вторая история</h3>
+<p>Пока пусто</p>
+</div>
+</div>
+</section>
+<section class="story-detail-page" id="story-last-feast">
+<a class="back" href="#stories">← Ко всем историям</a>
+<h2 class="stories-title">Последний пир богов</h2>
+<div class="story-hero-art" role="img" aria-label="Превью квеста «Последний пир богов»: шестеро героев перед древним порталом и Сундук Пустого Места" style="background-image:url('https://at.adobe.com/Nw04LInHj4NhC1NU');background-size:cover;background-position:center;"></div>
+<article class="story-full">
+<h3>История</h3>
+<p>Под землёй, глубже любых известных подземелий и древних руин, заключена сущность, которую называют Голодом. Это не бог, не демон и не чудовище в привычном смысле. Это сила, способная поглотить саму границу между жизнью, смертью и существованием. В далёком прошлом люди сумели остановить её: провели запретный обряд, использовали особые артефакты и принесли жертвы, о которых со временем постарались забыть. Голод оказался скован семью печатями.</p>
+<p>Прошли века. История о заточённой сущности превратилась в легенду, а знания о печатях рассыпались по миру. Но теперь древняя защита слабеет. Люди пропадают без следа, появляются существа, которым не должно быть места в этом мире, незнакомцы видят одни и те же сны, священные огни гаснут, а магия начинает вести себя непредсказуемо. Иногда исчезают даже имена — будто кто-то стирает саму память о тех, кто жил раньше.</p>
+<p>За происходящим стоит Саверн Вель — бывший королевский советник, знаток древней истории и глава Братства Пустого Места. Его последователи разыскивают старые реликвии и фрагменты печатей, подкупают чиновников, заставляют замолчать исследователей и похищают людей для запретных обрядов. Саверн хочет освободить Голода, потому что верит: уничтожение существующего порядка позволит построить новый мир. Он ошибается в главном — Голод не собирается ничего строить. Он способен только поглощать.</p>
+<p>Один из ключей к происходящему — Сундук Пустого Места. Это не сокровищница и не обычная древняя реликвия: внутри находится часть обряда, связанного с заточением Голода. Сам сундук способен открыть путь к печати, но для завершения ритуала нужны и другие элементы. Клавдия завладела им, сама не понимая, насколько опасная вещь оказалась у неё в руках. Теперь за сундуком охотятся те, кто знает его настоящее назначение.</p>
+<p>Шестеро героев оказываются рядом с этой историей не потому, что древнее пророчество назначило их спасителями мира. Каждый приходит к ней своей дорогой: Борислава связывают с происходящим последствия казни, Жоппера — след сокровищ, отца Пузания — запретные дионисийские записи, Прокопия — давний случай, изменивший его жизнь, Филимона — поиски легендарного зверя, а Клавдию — украденный сундук. Их личные дела постепенно оказываются частью куда более опасной загадки.</p>
+<p>Сначала героям предстоит понять, что представляет собой Сундук Пустого Места, почему за ним охотится Братство и что происходит с миром. Но расследование приведёт их к семи печатям и к правде о том, что именно удерживает Голода под землёй. Чем больше они узнают, тем яснее становится: остановить Саверна Веля — ещё не значит решить проблему. Само заточение древней сущности может оказаться куда сложнее, чем кажется.</p>
+<h3>Задача героев</h3>
+<p>Найти и защитить Сундук Пустого Места, разобраться в планах Братства, раскрыть тайну семи печатей и не дать Саверну Велю завершить обряд освобождения Голода. По мере путешествия героям придётся решать, кому доверять, какие тайны раскрывать и какую цену они готовы заплатить за спасение мира. А исход последнего пира ещё не предрешён.</p>
+</article>
+</section>
+<section class="dice-page" id="dice">
+<a class="back" href="#world">← Вернуться к карте острова</a>
+<h2 class="dice-title">Кости судьбы</h2>
+<p class="dice-intro">Выбери нужный кубик и нажми на него. Он прокрутится и покажет случайный результат. Можно бросить сразу все три.</p><p id="sound-hint">Музыка начнёт играть после первого нажатия — браузеры iPhone блокируют автозапуск звука.</p>
+<div class="dice-grid">
+<button aria-label="Бросить двадцатигранный кубик D20" class="die-card die-d20" data-sides="20" type="button">
+<span class="die-label">Проверки · атаки · защита</span>
+<span class="die-gem">
+<svg aria-hidden="true" viewbox="0 0 140 130"><polygon fill="#792d30" points="70,5 119,32 133,82 97,121 43,121 7,82 21,32" stroke="#e5b45c" stroke-width="6"></polygon><path d="M70 5L70 121M21 32L119 32M7 82L133 82M21 32L43 121M119 32L97 121M70 5L7 82M70 5L133 82" fill="none" stroke="#f0cc7b" stroke-width="3"></path><text fill="#fff0c7" font-family="Georgia" font-size="34" font-weight="bold" text-anchor="middle" x="70" y="76">20</text></svg>
+</span>
+<span class="die-name">D20</span><span class="die-range">1–20</span><output aria-live="polite" class="die-result">—</output>
+</button>
+<button aria-label="Бросить восьмигранный кубик D8" class="die-card die-d8" data-sides="8" type="button">
+<span class="die-label">Основной урон</span>
+<span class="die-gem">
+<svg aria-hidden="true" viewbox="0 0 140 130"><polygon fill="#403c70" points="70,5 124,42 70,125 16,42" stroke="#c0b7ee" stroke-width="6"></polygon><path d="M70 5V125M16 42H124M16 42L70 72 124 42" fill="none" stroke="#e1d9ff" stroke-width="3"></path><text fill="#fff0ff" font-family="Georgia" font-size="34" font-weight="bold" text-anchor="middle" x="70" y="82">8</text></svg>
+</span>
+<span class="die-name">D8</span><span class="die-range">1–8</span><output aria-live="polite" class="die-result">—</output>
+</button>
+<button aria-label="Бросить четырёхгранный кубик D4" class="die-card die-d4" data-sides="4" type="button">
+<span class="die-label">Небольшой урон · эффекты</span>
+<span class="die-gem">
+<svg aria-hidden="true" viewbox="0 0 140 130"><polygon fill="#345d43" points="70,6 132,112 8,112" stroke="#b6d28b" stroke-width="6"></polygon><path d="M70 6L70 112M8 112L70 65 132 112" fill="none" stroke="#e2eeb7" stroke-width="3"></path><text fill="#f4ffd9" font-family="Georgia" font-size="30" font-weight="bold" text-anchor="middle" x="70" y="100">4</text></svg>
+</span>
+<span class="die-name">D4</span><span class="die-range">1–4</span><output aria-live="polite" class="die-result">—</output>
+</button>
+</div>
+<div class="dice-actions">
+<button class="dice-roll-all" type="button">Бросить все три кубика</button>
+<button class="dice-clear" type="button">Очистить историю</button>
+</div>
+<div class="dice-history-box">
+<div class="dice-history-head"><h3>История бросков</h3><span id="dice-count">0 бросков</span></div>
+<ol id="dice-history"><li class="dice-empty">Здесь появятся результаты твоих бросков.</li></ol>
+</div>
+</section><div class="foot">Автономный игровой атлас · карта и сцены встроены в HTML · 16-bit pixel-art эстетика</div><script>
+(function(){
+  const cards = Array.from(document.querySelectorAll('.die-card'));
+  const history = document.getElementById('dice-history');
+  const countNode = document.getElementById('dice-count');
+  let rolls = [];
+  let activeAnimations = 0;
+
+  function secureRoll(sides){
+    if(window.crypto && typeof window.crypto.getRandomValues === 'function'){
+      const range = 0x100000000;
+      const limit = Math.floor(range / sides) * sides;
+      const buffer = new Uint32Array(1);
+      let value;
+      do { window.crypto.getRandomValues(buffer); value = buffer[0]; } while(value >= limit);
+      return (value % sides) + 1;
+    }
+    return Math.floor(Math.random() * sides) + 1;
+  }
+
+  function addHistory(sides, result){
+    const entry = {sides, result, time:new Date()};
+    rolls.unshift(entry);
+    rolls = rolls.slice(0,25);
+    history.innerHTML = '';
+    rolls.forEach(item=>{
+      const li = document.createElement('li');
+      const left = document.createElement('span');
+      const right = document.createElement('strong');
+      left.textContent = 'D' + item.sides + ' · ' + item.time.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+      right.textContent = item.result;
+      li.append(left,right);
+      history.append(li);
+    });
+    countNode.textContent = rolls.length + (rolls.length===1 ? ' бросок' : rolls.length<5 ? ' броска' : ' бросков');
+  }
+
+  function roll(card){
+    if(card.classList.contains('rolling')) return;
+    const sides = Number(card.dataset.sides);
+    const output = card.querySelector('.die-result');
+    card.classList.add('rolling');
+    card.disabled = true;
+    output.textContent = '…';
+    activeAnimations++;
+    window.setTimeout(()=>{
+      const result = secureRoll(sides);
+      output.textContent = String(result);
+      card.classList.remove('rolling');
+      card.disabled = false;
+      activeAnimations--;
+      addHistory(sides,result);
+    }, 880);
+  }
+
+  cards.forEach(card=>card.addEventListener('click',()=>roll(card)));
+  document.querySelector('.dice-roll-all').addEventListener('click',()=>{
+    cards.forEach(card=>roll(card));
+  });
+  document.querySelector('.dice-clear').addEventListener('click',()=>{
+    rolls=[];
+    history.innerHTML='<li class="dice-empty">История очищена. Следующие броски появятся здесь.</li>';
+    countNode.textContent='0 бросков';
+    cards.forEach(card=>{card.querySelector('.die-result').textContent='—';});
+  });
+})();
+</script><script>
+(function(){
+  const music = document.getElementById('bg-music');
+  const soundButton = document.getElementById('sound-toggle');
+  const hint = document.getElementById('sound-hint');
+  if(!music || !soundButton) return;
+
+  let soundEnabled = true;
+  let musicStarted = false;
+  let audioContext = null;
+
+  function updateButton(){
+    const playing = musicStarted && !music.paused;
+    if(!soundEnabled){
+      soundButton.textContent = '♫ Звук: выключен';
+      soundButton.classList.remove('sound-on');
+      soundButton.setAttribute('aria-pressed','false');
+    }else{
+      soundButton.textContent = playing ? '♫ Выключить звук' : '♫ Включить музыку';
+      soundButton.classList.toggle('sound-on', playing);
+      soundButton.setAttribute('aria-pressed','true');
+    }
+  }
+
+  async function startMusic(){
+    if(!soundEnabled) return;
+    music.volume = 1;
+    try{
+      await music.play();
+      if(soundEnabled){
+        musicStarted = true;
+        if(hint) hint.textContent = 'Фоновая мелодия повторяется автоматически.';
+      }else{
+        music.pause();
+        musicStarted = false;
+      }
+    }catch(err){
+      // Expected on mobile browsers until a direct user gesture.
+      if(hint) hint.textContent = 'Нажми «Включить музыку» вверху страницы, чтобы запустить фоновую мелодию.';
+    }
+    updateButton();
+  }
+
+  soundButton.addEventListener('click', async function(){
+    if(musicStarted && !music.paused){
+      soundEnabled = false;
+      music.pause();
+      musicStarted = false;
+      updateButton();
+      if(hint) hint.textContent = 'Звук выключен. Нажми кнопку сверху, чтобы снова включить музыку и эффекты.';
+    }else{
+      soundEnabled = true;
+      await startMusic();
+      if(audioContext && audioContext.state === 'suspended'){
+        try{ await audioContext.resume(); }catch(e){}
+      }
+    }
+  });
+
+  // Try immediately; mobile Safari may reject it. First non-control tap starts playback.
+  startMusic();
+  document.addEventListener('click', function(event){
+    if(event.target.closest('#sound-toggle')) return;
+    if(soundEnabled && !musicStarted) startMusic();
+  }, {once:true, capture:true});
+  updateButton();
+
+  function getAudioContext(){
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if(!Ctx) return null;
+    if(!audioContext) audioContext = new Ctx();
+    return audioContext;
+  }
+
+  // iOS Safari may ignore HTMLMediaElement.volume. Route background music
+  // through a dedicated Web Audio gain node after the first user gesture.
+  let musicSource = null;
+  let musicGain = null;
+  document.addEventListener('pointerdown', async function(){
+    try{
+      const ctx = getAudioContext();
+      if(!ctx) return;
+      if(!musicSource){
+        musicSource = ctx.createMediaElementSource(music);
+        musicGain = ctx.createGain();
+        musicGain.gain.setValueAtTime(0.55, ctx.currentTime);
+        musicSource.connect(musicGain);
+        musicGain.connect(ctx.destination);
+      }
+      if(ctx.state === 'suspended') await ctx.resume();
+    }catch(e){}
+  }, {once:true, capture:true});
+
+  function tap(ctx, when, strength, pitch){
+    const duration = 0.055;
+    const length = Math.max(1, Math.floor(ctx.sampleRate * duration));
+    const buffer = ctx.createBuffer(1, length, ctx.sampleRate);
+    const channel = buffer.getChannelData(0);
+    for(let i=0;i<length;i++){
+      const fade = 1 - i/length;
+      channel[i] = (Math.random()*2-1) * fade * fade;
+    }
+    const noise = ctx.createBufferSource();
+    noise.buffer = buffer;
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.setValueAtTime(pitch, when);
+    filter.Q.setValueAtTime(1.1, when);
+    const noiseGain = ctx.createGain();
+    noiseGain.gain.setValueAtTime(0.0001, when);
+    noiseGain.gain.exponentialRampToValueAtTime(0.11*strength, when+0.004);
+    noiseGain.gain.exponentialRampToValueAtTime(0.0001, when+duration);
+    noise.connect(filter); filter.connect(noiseGain); noiseGain.connect(ctx.destination);
+    noise.start(when); noise.stop(when+duration);
+
+    const osc = ctx.createOscillator();
+    const oscGain = ctx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(pitch*0.42, when);
+    osc.frequency.exponentialRampToValueAtTime(Math.max(75,pitch*0.2), when+0.075);
+    oscGain.gain.setValueAtTime(0.0001, when);
+    oscGain.gain.exponentialRampToValueAtTime(0.055*strength, when+0.003);
+    oscGain.gain.exponentialRampToValueAtTime(0.0001, when+0.09);
+    osc.connect(oscGain); oscGain.connect(ctx.destination);
+    osc.start(when); osc.stop(when+0.095);
+  }
+
+  async function playDiceClatter(){
+    if(!soundEnabled) return;
+    const ctx = getAudioContext();
+    if(!ctx) return;
+    try{
+      if(ctx.state === 'suspended') await ctx.resume();
+      const start = ctx.currentTime + 0.015;
+      // Quick irregular rattle followed by a heavier final clack.
+      const count = 8;
+      for(let i=0;i<count;i++){
+        const jitter = (Math.random()-0.5)*0.035;
+        const when = start + i*0.086 + jitter;
+        const strength = i === count-1 ? 1.35 : 0.72 + Math.random()*0.38;
+        const pitch = 520 + Math.random()*1050;
+        tap(ctx, when, strength, pitch);
+      }
+      tap(ctx, start + 0.76, 1.6, 370 + Math.random()*220);
+    }catch(e){}
+  }
+
+  // Start the sound on pointerdown: mobile Safari can suspend audio until a direct gesture.
+  const oldRollCards = Array.from(document.querySelectorAll('.die-card'));
+  oldRollCards.forEach(card => {
+    card.addEventListener('pointerdown', playDiceClatter, {capture:true});
+  });
+  const allButton = document.querySelector('.dice-roll-all');
+  if(allButton) allButton.addEventListener('pointerdown', playDiceClatter, {capture:true});
+})();
+</script><script>
+(function(){
+ const AC=window.AudioContext||window.webkitAudioContext;
+ let ctx=null;
+ async function uiClick(){
+  if(!AC) return;
+  try{
+   if(!ctx) ctx=new AC();
+   if(ctx.state==='suspended') await ctx.resume();
+   const now=ctx.currentTime;
+   const osc=ctx.createOscillator(), gain=ctx.createGain(), filter=ctx.createBiquadFilter();
+   osc.type='triangle'; osc.frequency.setValueAtTime(740,now);
+   osc.frequency.exponentialRampToValueAtTime(330,now+0.04);
+   filter.type='lowpass'; filter.frequency.setValueAtTime(1200,now);
+   gain.gain.setValueAtTime(0.0001,now);
+   gain.gain.exponentialRampToValueAtTime(0.045,now+0.004);
+   gain.gain.exponentialRampToValueAtTime(0.0001,now+0.055);
+   osc.connect(filter); filter.connect(gain); gain.connect(ctx.destination);
+   osc.start(now); osc.stop(now+0.06);
+  }catch(e){}
+ }
+ document.addEventListener('pointerdown',function(event){
+  const el=event.target.closest('a, summary, button, .back, nav.tabs a');
+  if(!el || el.id==='sound-toggle' || el.closest('#dice')) return;
+  uiClick();
+ },true);
+})();
+</script>
+<style>.layout{grid-template-columns:minmax(0,1fr)!important}.side{display:none!important}
+#sound-toggle{border:2px ridge #a77b3c;padding:8px 12px;background:#24212a;color:#f0d29a;font:13px Georgia,serif;cursor:pointer;white-space:nowrap}
+#sound-toggle:active{transform:translateY(1px)}
+#sound-toggle.sound-on{background:#4e3326;border-color:#d2a65d;box-shadow:0 0 10px #9c6a2f55}
+#sound-hint{font:11px/1.45 system-ui;color:#9f927a;text-align:center;margin:-12px auto 18px}
+@media(max-width:650px){header{align-items:stretch}.tabs{flex:1}.tabs a{flex:1;text-align:center}#sound-toggle{width:100%;padding:9px}}
+
+.char-card{grid-template-columns:180px minmax(0,1fr);align-items:start}
+.char-portrait{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center top;image-rendering:auto;border:3px ridge #bd9148;box-shadow:0 0 14px #0009;background:#20232c}
+.char-card h3{color:#f0d29a}
+@media(max-width:650px){
+  .char-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .char-card,.char-card-link{display:flex;flex-direction:column;align-items:stretch;gap:7px;padding:7px;min-width:0}
+  .char-portrait{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center top;border-width:2px}
+  .char-card h3{font-size:15px;line-height:1.2;overflow-wrap:anywhere}
+  .char-race{font-size:10px;letter-spacing:.04em}
+  .char-stats{gap:4px}
+  .char-stats b{font-size:10px;padding:4px}
+  .char-card p{font-size:11px;line-height:1.35}
+  .characters{margin:6px;padding:8px}
+}
+.char-card-link[href="#character-klavdia"] .char-portrait{object-fit:contain;object-position:center}
+#character-klavdia .char-detail-portrait{display:block;width:100%;max-width:100%;height:auto;min-height:0;aspect-ratio:3/4;object-fit:contain;object-position:center;padding:0;box-sizing:border-box;background:#20232c}
+
+.location-hero{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated;border:3px ridge #a77b3c;background:#202a32}
+.tile img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated}
+.tile small{display:block}
+
+.location-hero{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated;border:3px ridge #a77b3c;background:#202a32;margin:12px 0 6px}
+.tile img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated}
+.public-caption{font:13px/1.5 system-ui;color:#d8c9ad;text-align:center;margin:5px 6px 14px}
+@media(max-width:520px){.location-hero{border-width:2px}}
+
+.location-hero{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated;border:3px ridge #a77b3c;background:#202a32;margin:12px 0 6px}
+.tile img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated}
+.public-caption{font:13px/1.5 system-ui;color:#d8c9ad;text-align:center;margin:5px 6px 14px}
+@media(max-width:520px){.location-hero{border-width:2px}}
+
+.char-card p{line-height:1.5}
+.char-card p strong{color:#e6bd78}
+
+.location-hero{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated;border:3px ridge #a77b3c;background:#202a32;margin:12px 0 6px}
+.tile img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated}
+
+.location-hero{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated;border:3px ridge #a77b3c;background:#202a32;margin:12px 0 6px}
+.tile img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;image-rendering:pixelated}
+
+/* First five monsters use the local sprite sheet https://yur412.github.io/posledniy-pir-bogov-atlas/assets/monsters/monsters-strip.jpg. */
+
+/* Borisław animated portrait */
+#character-borislav .char-detail-portrait{display:block;width:100%;height:auto;min-height:0;aspect-ratio:3/4;object-fit:cover;padding:0;color:transparent;}
+
+/* Zhopper animated portrait */
+#character-zhopper .char-detail-portrait{display:block;width:100%;height:auto;min-height:0;aspect-ratio:3/4;object-fit:cover;padding:0;color:transparent;}
+
+</style>
+<script src="https://yur412.github.io/posledniy-pir-bogov-atlas/assets-1.js"></script>
+<script src="https://yur412.github.io/posledniy-pir-bogov-atlas/assets-2.js"></script>
+<script>
+(()=>{const A=window.__ATLAS_ASSETS||{};const re=/atlasdata:(a\d{3})/g;const fix=v=>v.replace(re,(_,k)=>A[k]||_);
+for(const el of document.querySelectorAll('*')){for(const at of [...el.attributes]){if(at.value.includes('atlasdata:'))el.setAttribute(at.name,fix(at.value));}}
+for(const st of document.querySelectorAll('style')){if(st.textContent.includes('atlasdata:'))st.textContent=fix(st.textContent);}
+})();
+</script>
+</body></html>
