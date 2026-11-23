@@ -30,7 +30,7 @@ for (const file of files) {
     }
     const clean = decodeURIComponent(ref.split(/[?#]/, 1)[0]);
     if (!clean) continue;
-    const target = path.resolve(path.dirname(file), clean);
+    const target = path.resolve(clean.startsWith("/") ? root : path.dirname(file), clean.startsWith("/") ? "." + clean : clean);
     if (!target.startsWith(root + path.sep) && target !== root) continue;
     localRefs.push({ file: path.relative(root, file), ref });
     if (!fs.existsSync(target)) missing.add(path.relative(root, target));
