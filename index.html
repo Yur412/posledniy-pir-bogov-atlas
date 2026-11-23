@@ -238,6 +238,20 @@ body:has(.char-detail:target) .monster-page{display:none}
 .monster-portrait-file{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:100%;max-height:100%;object-fit:cover;object-position:center;box-sizing:border-box;border:0;margin:0;padding:0}
 .monster-entry .monster-image{max-height:680px}
 @media(max-width:650px){.monster-entry .monster-image{max-width:360px;width:100%;justify-self:center}}
+
+/* Character roster: two cards per row on phones and larger screens. */
+@media(max-width:650px){
+  .char-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .char-card,.char-card-link{display:flex;flex-direction:column;align-items:stretch;gap:7px;padding:7px;min-width:0}
+  .char-portrait{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;image-rendering:auto;box-sizing:border-box}
+  .char-card h3{font-size:15px;line-height:1.2;overflow-wrap:anywhere}
+  .char-race{font-size:10px;letter-spacing:.04em}
+  .char-stats{gap:4px}
+  .char-stats b{font-size:10px;padding:4px}
+  .char-card p{font-size:11px;line-height:1.35}
+  .characters{margin:6px;padding:8px}
+}
+
 </style><style>
 /* User-confirmed deity portraits, fixed in upload order 1-14. */
 .god-img-1{background-image:url('https://at.adobe.com/C28QM1m5yVUXnkYC')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
