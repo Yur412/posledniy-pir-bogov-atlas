@@ -24,7 +24,7 @@ for (const file of files) {
   let m;
   while ((m = re.exec(text))) {
     const ref = (m[1] || m[2] || "").trim();
-    if (!ref || /^[a-z][a-z0-9+.-]*:|^#|^\\/\\//i.test(ref)) {
+    if (!ref || /^(?:[a-z][a-z0-9+.-]*:|#|\/\/)/i.test(ref)) {
       if (/^https?:\/\/(?:www\.)?at\.adobe\.com\//i.test(ref)) remoteAdobe.push({ file: path.relative(root, file), ref });
       continue;
     }
