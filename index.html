@@ -145,12 +145,12 @@ body:has(.god-detail:target) #world,body:has(.god-detail:target) .characters,bod
 .god-list-intro{text-align:center;color:#c8b99b;font:13px/1.5 system-ui;margin:0 auto 18px}
 .god-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .god-card{display:block;min-width:0;padding:8px;border:3px ridge #98703b;background:linear-gradient(145deg,#29252a,#141820);text-decoration:none;text-align:center;color:#f0d29a}
-.god-card-image{width:100%;aspect-ratio:3/4;border:1px solid #6f512f;background-size:cover;background-position:center;background-repeat:no-repeat}
+.god-card-image{width:100%;aspect-ratio:3/4;border:0;background-size:cover;background-position:center;background-repeat:no-repeat}
 .god-card h3{font-size:17px;font-weight:normal;letter-spacing:.07em;margin:8px 0 2px}
 .god-detail{max-width:1100px}
 .god-entry{display:grid;grid-template-columns:minmax(180px,34%) 1fr;gap:20px;align-items:start}
-.god-detail-portrait{width:100%;aspect-ratio:3/4;border:3px ridge #98703b;box-shadow:0 4px 18px #000;background-size:cover;background-position:center;background-repeat:no-repeat}
-.god-zeus{background-image:url('assets/zeus.jpg')}
+.god-detail-portrait{width:100%;aspect-ratio:3/4;border:0;box-shadow:0 4px 18px #000;background-size:cover;background-position:center;background-repeat:no-repeat}
+.god-zeus{background-image:url('https://at.adobe.com/6etz2bztgd34l8DJ')!important}
 .god-sprite{background-image:url('assets/gods/portraits.jpg');background-size:435% 435%}
 .sprite-0{background-position:0% 0%}.sprite-1{background-position:32.54% 0%}.sprite-2{background-position:65.07% 0%}.sprite-3{background-position:97.61% 0%}
 .sprite-4{background-position:0% 32.54%}.sprite-5{background-position:32.54% 32.54%}.sprite-6{background-position:65.07% 32.54%}.sprite-7{background-position:97.61% 32.54%}
@@ -174,26 +174,21 @@ body:has(.bestiary-page:target) #world,body:has(.bestiary-page:target) .characte
 .bestiary-category p{font:13px/1.5 system-ui;color:#c8b99b;margin:0;max-width:390px}
 @media(max-width:600px){.bestiary-page{margin:6px;padding:10px}.bestiary-grid{gap:8px}.bestiary-category{min-height:165px;padding:12px 8px}.bestiary-category h3{font-size:16px}.bestiary-category p{font-size:11px}.bestiary-symbol{font-size:30px}.bestiary-title{font-size:25px}}
 
-/* Each god is an exact 3:4 cell from a 4x4 sheet assembled from original portrait files. */
-.god-sprite{
- background-image:url('https://at.adobe.com/nnaNLMILIqpE9lN2')!important;
- background-size:400% 400%!important;
- background-repeat:no-repeat!important;
- image-rendering:auto!important;
-}
+/* Crop artwork edges; the card itself supplies the only frame. */
+.god-sprite{background-image:url('https://at.adobe.com/nnaNLMILIqpE9lN2')!important;background-size:435% 435%!important;background-repeat:no-repeat!important;image-rendering:auto!important}
 .god-sprite.sprite-0{background-position:0% 0%!important}
-.god-sprite.sprite-1{background-position:33.333% 0%!important}
-.god-sprite.sprite-2{background-position:66.666% 0%!important}
-.god-sprite.sprite-3{background-position:100% 0%!important}
-.god-sprite.sprite-4{background-position:0% 33.333%!important}
-.god-sprite.sprite-5{background-position:33.333% 33.333%!important}
-.god-sprite.sprite-6{background-position:66.666% 33.333%!important}
-.god-sprite.sprite-7{background-position:100% 33.333%!important}
-.god-sprite.sprite-8{background-position:0% 66.666%!important}
-.god-sprite.sprite-9{background-position:33.333% 66.666%!important}
-.god-sprite.sprite-10{background-position:66.666% 66.666%!important}
-.god-sprite.sprite-11{background-position:100% 66.666%!important}
-.god-sprite.sprite-12{background-position:0% 100%!important}
+.god-sprite.sprite-1{background-position:32.54% 0%!important}
+.god-sprite.sprite-2{background-position:65.07% 0%!important}
+.god-sprite.sprite-3{background-position:97.61% 0%!important}
+.god-sprite.sprite-4{background-position:0% 32.54%!important}
+.god-sprite.sprite-5{background-position:32.54% 32.54%!important}
+.god-sprite.sprite-6{background-position:65.07% 32.54%!important}
+.god-sprite.sprite-7{background-position:97.61% 32.54%!important}
+.god-sprite.sprite-8{background-position:0% 65.07%!important}
+.god-sprite.sprite-9{background-position:32.54% 65.07%!important}
+.god-sprite.sprite-10{background-position:65.07% 65.07%!important}
+.god-sprite.sprite-11{background-position:97.61% 65.07%!important}
+.god-sprite.sprite-12{background-position:0% 97.61%!important}
 
 /* FIX: miniboss section must exist only inside Bestiary > Monsters */
 .monster-page{display:none!important}
