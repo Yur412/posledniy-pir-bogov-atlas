@@ -174,33 +174,26 @@ body:has(.bestiary-page:target) #world,body:has(.bestiary-page:target) .characte
 .bestiary-category p{font:13px/1.5 system-ui;color:#c8b99b;margin:0;max-width:390px}
 @media(max-width:600px){.bestiary-page{margin:6px;padding:10px}.bestiary-grid{gap:8px}.bestiary-category{min-height:165px;padding:12px 8px}.bestiary-category h3{font-size:16px}.bestiary-category p{font-size:11px}.bestiary-symbol{font-size:30px}.bestiary-title{font-size:25px}}
 
-/* High-resolution deity collage portraits. Zeus keeps his original portrait. */
+/* Each god is an exact 3:4 cell from a 4x4 sheet assembled from original portrait files. */
 .god-sprite{
- background-image:url('https://at.adobe.com/Kgcq6W0ttkTfRxQS')!important;
+ background-image:url('https://at.adobe.com/nnaNLMILIqpE9lN2')!important;
+ background-size:400% 400%!important;
  background-repeat:no-repeat!important;
  image-rendering:auto!important;
 }
-/* First two rows of the collage: three panels per row */
-.god-sprite.sprite-2,.god-sprite.sprite-3,.god-sprite.sprite-4,.god-sprite.sprite-5,.god-sprite.sprite-11{
- background-size:400% auto!important;
-}
-.god-sprite.sprite-2{background-position:100% 0%!important}
-.god-sprite.sprite-3{background-position:50% 0%!important}
-.god-sprite.sprite-4{background-position:50% 33.333%!important}
-.god-sprite.sprite-5{background-position:100% 33.333%!important}
-.god-sprite.sprite-11{background-position:0% 33.333%!important}
-/* Third and fourth rows: four panels per row */
-.god-sprite.sprite-0,.god-sprite.sprite-1,.god-sprite.sprite-6,.god-sprite.sprite-7,.god-sprite.sprite-8,.god-sprite.sprite-9,.god-sprite.sprite-10,.god-sprite.sprite-12{
- background-size:400% auto!important;
-}
-.god-sprite.sprite-0{background-position:100% 100%!important}
-.god-sprite.sprite-1{background-position:0% 66.666%!important}
-.god-sprite.sprite-6{background-position:33.333% 66.666%!important}
-.god-sprite.sprite-7{background-position:66.666% 66.666%!important}
-.god-sprite.sprite-8{background-position:33.333% 100%!important}
-.god-sprite.sprite-9{background-position:0% 100%!important}
-.god-sprite.sprite-10{background-position:100% 66.666%!important}
-.god-sprite.sprite-12{background-position:66.666% 100%!important}
+.god-sprite.sprite-0{background-position:0% 0%!important}
+.god-sprite.sprite-1{background-position:33.333% 0%!important}
+.god-sprite.sprite-2{background-position:66.666% 0%!important}
+.god-sprite.sprite-3{background-position:100% 0%!important}
+.god-sprite.sprite-4{background-position:0% 33.333%!important}
+.god-sprite.sprite-5{background-position:33.333% 33.333%!important}
+.god-sprite.sprite-6{background-position:66.666% 33.333%!important}
+.god-sprite.sprite-7{background-position:100% 33.333%!important}
+.god-sprite.sprite-8{background-position:0% 66.666%!important}
+.god-sprite.sprite-9{background-position:33.333% 66.666%!important}
+.god-sprite.sprite-10{background-position:66.666% 66.666%!important}
+.god-sprite.sprite-11{background-position:100% 66.666%!important}
+.god-sprite.sprite-12{background-position:0% 100%!important}
 
 /* FIX: miniboss section must exist only inside Bestiary > Monsters */
 .monster-page{display:none!important}
