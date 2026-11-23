@@ -228,6 +228,20 @@ body:has(.char-detail:target) .monster-page{display:none}
 .char-detail-stats b{font:12px system-ui;color:#f2d9a4;border:1px solid #73572f;padding:7px 9px;background:#211d1c}
 @media(max-width:650px){.char-detail{margin:6px;padding:10px}.char-detail-title{font-size:24px}.char-detail-entry{grid-template-columns:1fr;gap:15px}.char-detail-portrait{position:static;min-height:230px;max-width:340px;width:100%;justify-self:center}.char-detail-copy p{font-size:13px}}
 
+
+/* Definitive monster portrait rules: both local sprite strips use five horizontal frames. */
+.monster-image{display:block;width:100%;aspect-ratio:3/4;background-repeat:no-repeat;background-size:500% 100%;background-position:center center;border:1px solid #6f512f;image-rendering:auto;}
+.monster-image.monster-1{background-position:0% center!important;background-image:url('assets/monsters/monsters-strip.jpg')!important}
+.monster-image.monster-2{background-position:25% center!important;background-image:url('assets/monsters/monsters-strip.jpg')!important}
+.monster-image.monster-3{background-position:50% center!important;background-image:url('assets/monsters/monsters-strip.jpg')!important}
+.monster-image.monster-4{background-position:75% center!important;background-image:url('assets/monsters/monsters-strip.jpg')!important}
+.monster-image.monster-5{background-position:100% center!important;background-image:url('assets/monsters/monsters-strip.jpg')!important}
+.monster-image.monster-set-2.monster-1{background-position:0% center!important;background-image:url('assets/monsters/monsters-strip-2.jpg')!important}
+.monster-image.monster-set-2.monster-2{background-position:25% center!important;background-image:url('assets/monsters/monsters-strip-2.jpg')!important}
+.monster-image.monster-set-2.monster-3{background-position:50% center!important;background-image:url('assets/monsters/monsters-strip-2.jpg')!important}
+.monster-image.monster-set-2.monster-4{background-position:75% center!important;background-image:url('assets/monsters/monsters-strip-2.jpg')!important}
+.monster-image.monster-set-2.monster-5{background-position:100% center!important;background-image:url('assets/monsters/monsters-strip-2.jpg')!important}
+.monster-detail-image{aspect-ratio:3/4;max-height:680px}
 </style><style>
 /* User-confirmed deity portraits, fixed in upload order 1-14. */
 .god-img-1{background-image:url('https://at.adobe.com/C28QM1m5yVUXnkYC')!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
