@@ -1,29 +1,26 @@
 # Реестр портретов монстров — ЗАКРЕПЛЕНО
 
-Этот файл — источник истины для привязок портретов монстров. Не менять порядок и не заменять URL по порядковому номеру спрайта. Изображения привязаны к постоянным ID монстров и используются одновременно в карточке бестиария и на отдельной странице.
+Источник истины для постоянных портретов бестиария. Все изображения хранятся в GitHub внутри `assets/bestiary/` и не зависят от Adobe.
 
-## Зафиксированные портреты
-
-| ID страницы | Монстр | Исходный файл | Adobe Asset ID | Публичный URL превью |
-|---|---|---|---|---|
-| monster-1 | Плачущий недоедок | 011A1963-EED3-45FA-B37A-C85535077772(3).jpeg | urn:aaid:sc:DEU1:b3e88d81-942a-4dc7-b6a1-7c43fc97d8d8 | https://at.adobe.com/klfJCeVfgGS9AeZ2 |
-| monster-2 | Господин Обратная Сторона | E10317CF-11D6-4F14-A471-BC064FAC99BF(2).jpeg | urn:aaid:sc:DEU1:989c0024-4af5-4f29-8b56-d153433bd9f0 | https://at.adobe.com/hgmwYXE3eozba2S3 |
-| monster-3 | Матушка Карман | B820731F-FD50-4B1A-AB09-03D0755036E4(2).jpeg | urn:aaid:sc:DEU1:9a4ac285-c446-4cb5-81f1-12911b87e356 | https://at.adobe.com/pprwOxEvwWRn828d |
-| monster-4 | Хор из одного горла | 6242126C-A771-48F5-8C56-DFF254012D80.jpeg | urn:aaid:sc:DEU1:20573e74-00a3-4d11-8930-c1bc61fddff7 | https://at.adobe.com/EZyy68qrRTfvQwQQ |
-| monster-5 | Святой Иоанносник | ФОТО НЕ ПОЛУЧЕНО | — | — |
-| monster-6 | Князь Зажирайло | 62053803-9232-40B6-8892-C2F7AF4E86F3(1).jpeg | urn:aaid:sc:DEU1:146d372a-c728-4400-b11a-0c6b14c7aada | https://at.adobe.com/RUlDnXBi4ZbU0ivN |
-| monster-7 | Цензор | 67CD5735-4D8F-4302-9D1F-BBCE0A67CD9B(1).jpeg | urn:aaid:sc:DEU1:f2e15168-8e00-49a9-a62e-fac28409ce74 | https://at.adobe.com/dfiMHgQePcPpfEZ6 |
-| monster-8 | Отходный Король | 176CC8EB-26C4-4848-9954-DA21A275D370(1).jpeg | urn:aaid:sc:DEU1:45686c49-aaf6-4969-b58f-cacf316e7322 | https://at.adobe.com/qszFNJWZnG67NLQM |
-| monster-9 | Кукуха | 95821F74-F0F6-455B-B6B1-1A5AD2143AE7(1).jpeg | urn:aaid:sc:DEU1:5076d4a0-ea18-438d-8c98-e642e071fb99 | https://at.adobe.com/DzfoOYqAwlyJj51D |
-| monster-10 | Банный дух | 2FA60EE3-B7D9-4B70-8DF0-C63213828A6D(1).jpeg | urn:aaid:sc:DEU1:93e81276-2df4-4233-b6af-92158d4cc0e6 | https://at.adobe.com/xeSAdC7LeY3fOIlP |
+| ID страницы | № | Монстр | Файл GitHub |
+|---|---:|---|---|
+| monster-1 | 01 | Плачущий недоедок | `assets/bestiary/monster-01-plachushchiy-nedoedok.webp` |
+| monster-2 | 02 | Господин Обратная Сторона | `assets/bestiary/monster-02-gospodin-obratnaya-storona.webp` |
+| monster-3 | 03 | Матушка Карман | `assets/bestiary/monster-03-matushka-karman.webp` |
+| monster-4 | 04 | Хор из одного горла | `assets/bestiary/monster-04-khor-iz-odnogo-gorla.webp` |
+| monster-5 | 05 | Святой Иоанносник | `assets/bestiary/monster-05-svyatoy-ioannosnik.webp` |
+| monster-6 | 06 | Князь Зажирайло | `assets/bestiary/monster-06-knyaz-zazhiraylo.webp` |
+| monster-7 | 07 | Цензор | `assets/bestiary/monster-07-tsenzor.webp` |
+| monster-8 | 08 | Отходный Король | `assets/bestiary/monster-08-otkhodny-korol.webp` |
+| monster-9 | 09 | Кукуха | `assets/bestiary/monster-09-kukukha.webp` |
+| monster-10 | 10 | Банный дух | `assets/bestiary/monster-10-banny-duk.webp` |
 
 ## Правила сохранения
 
-1. Каждая запись определяется по ID страницы, а не по месту в сетке и не по номеру в спрайт-листе.
-2. Один и тот же URL используется в карточке и на странице соответствующего монстра.
-3. При любых будущих изменениях сначала сверяться с этим реестром.
-4. Не использовать старые спрайты и старые изображения для карточек, где уже назначен индивидуальный портрет.
-5. Не менять портрет или Asset ID без прямого указания пользователя.
-6. Святой Иоанносник имеет собственный закреплённый портрет; не подменять его другим изображением.
+1. ID страницы и номер закреплены за конкретным монстром.
+2. Карточка бестиария и отдельная страница используют один и тот же файл GitHub.
+3. Не использовать Adobe URL или старые спрайты для этих десяти портретов.
+4. Не менять соответствие портрета и монстра без прямого указания пользователя.
+5. При добавлении монстров существующие номера не перенумеровывать.
 
-Статус: 9 из 10 портретов закреплены. Реестр соответствует HTML в том же коммите, где внесены текущие привязки.
+Статус: все 10 портретов назначены. Изображения получены от пользователя в указанном им порядке.

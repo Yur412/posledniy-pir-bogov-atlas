@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "folder": "assets/bestiary/",
+  "images": [
+    {
+      "number": 1,
+      "id": "monster-1",
+      "name": "Плачущий недоедок",
+      "file": "assets/bestiary/monster-01-plachushchiy-nedoedok.webp"
+    },
+    {
+      "number": 2,
+      "id": "monster-2",
+      "name": "Господин Обратная Сторона",
+      "file": "assets/bestiary/monster-02-gospodin-obratnaya-storona.webp"
+    },
+    {
+      "number": 3,
+      "id": "monster-3",
+      "name": "Матушка Карман",
+      "file": "assets/bestiary/monster-03-matushka-karman.webp"
+    },
+    {
+      "number": 4,
+      "id": "monster-4",
+      "name": "Хор из одного горла",
+      "file": "assets/bestiary/monster-04-khor-iz-odnogo-gorla.webp"
+    },
+    {
+      "number": 5,
+      "id": "monster-5",
+      "name": "Святой Иоанносник",
+      "file": "assets/bestiary/monster-05-svyatoy-ioannosnik.webp"
+    },
+    {
+      "number": 6,
+      "id": "monster-6",
+      "name": "Князь Зажирайло",
+      "file": "assets/bestiary/monster-06-knyaz-zazhiraylo.webp"
+    },
+    {
+      "number": 7,
+      "id": "monster-7",
+      "name": "Цензор",
+      "file": "assets/bestiary/monster-07-tsenzor.webp"
+    },
+    {
+      "number": 8,
+      "id": "monster-8",
+      "name": "Отходный Король",
+      "file": "assets/bestiary/monster-08-otkhodny-korol.webp"
+    },
+    {
+      "number": 9,
+      "id": "monster-9",
+      "name": "Кукуха",
+      "file": "assets/bestiary/monster-09-kukukha.webp"
+    },
+    {
+      "number": 10,
+      "id": "monster-10",
+      "name": "Банный дух",
+      "file": "assets/bestiary/monster-10-banny-duk.webp"
+    }
+  ]
+}
