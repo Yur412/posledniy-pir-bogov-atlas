@@ -293,6 +293,41 @@ body:has(.story-detail-page:target) .stories-page{display:none!important}
 .story-full h3{color:#e8c58b;font-size:21px;font-weight:normal;margin:20px 0 8px}
 .story-full p{font:15px/1.8 system-ui;color:#d6c9b0;margin:0 0 14px}
 @media(max-width:650px){.story-button{min-height:180px;padding:12px 8px}.story-open{padding:7px 10px;font-size:11px}.story-detail-page{margin:6px;padding:10px}.story-hero-art{aspect-ratio:4/3;min-height:150px}.story-full{padding:0 4px}.story-full p{font-size:13px;line-height:1.65}}
+
+/* Spirits in the Bestiary */
+.spirit-page,.spirit-detail{display:none;max-width:1200px;margin:12px auto;padding:14px;border:3px ridge #a77b3c;background:linear-gradient(145deg,#1c1b22,#10151d);box-shadow:0 0 0 2px #3b2b1d inset;color:#eadfca}
+.spirit-page:target,.spirit-detail:target{display:block!important}
+body:has(.spirit-page:target) #world,body:has(.spirit-page:target) .characters,body:has(.spirit-page:target) .dice-page,body:has(.spirit-page:target) .detail,body:has(.spirit-page:target) .bestiary-page,body:has(.spirit-page:target) .god-page,body:has(.spirit-page:target) .god-detail,body:has(.spirit-page:target) .monster-page,body:has(.spirit-page:target) .monster-detail{display:none!important}
+body:has(.spirit-detail:target) #world,body:has(.spirit-detail:target) .characters,body:has(.spirit-detail:target) .dice-page,body:has(.spirit-detail:target) .detail,body:has(.spirit-detail:target) .bestiary-page,body:has(.spirit-detail:target) .god-page,body:has(.spirit-detail:target) .god-detail,body:has(.spirit-detail:target) .monster-page,body:has(.spirit-detail:target) .monster-detail,body:has(.spirit-detail:target) .spirit-page{display:none!important}
+.spirit-title{text-align:center;color:#f0d29a;font-size:30px;font-weight:normal;margin:8px 0}
+.spirit-intro{text-align:center;color:#c8b99b;font:13px/1.6 system-ui;max-width:760px;margin:0 auto 20px}
+.spirit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.spirit-card{display:block;min-width:0;padding:9px;border:3px ridge #98703b;background:linear-gradient(145deg,#29252a,#141820);text-decoration:none;text-align:center;color:#f0d29a;transition:transform .15s,border-color .15s}
+.spirit-card:hover{transform:translateY(-2px);border-color:#e2b96e}
+.spirit-card-art{display:grid;place-items:center;width:100%;aspect-ratio:5/3;border:1px solid #6f512f;overflow:hidden;background:radial-gradient(ellipse at 50% 55%,#4a3b31 0%,#20202a 46%,#10151d 100%);color:#d8ad63;text-shadow:0 0 24px #d19b4b;font:clamp(54px,10vw,100px) Georgia,serif}
+.spirit-card:nth-child(2) .spirit-card-art{background:radial-gradient(ellipse at 50% 60%,#69502d 0%,#30252a 48%,#10151d 100%);color:#f1c56e}
+.spirit-card:nth-child(3) .spirit-card-art{background:radial-gradient(ellipse at 50% 60%,#294858 0%,#20212b 50%,#10151d 100%);color:#a9d3d4}
+.spirit-card:nth-child(4) .spirit-card-art{background:radial-gradient(ellipse at 50% 60%,#51405a 0%,#25212b 50%,#10151d 100%);color:#c6a6d6}
+.spirit-card h3{font-size:17px;font-weight:normal;letter-spacing:.04em;margin:9px 0 5px}
+.spirit-card p{font:12px/1.45 system-ui;color:#c8b99b;margin:0 2px 4px}
+.spirit-entry{display:grid;grid-template-columns:minmax(190px,32%) 1fr;gap:20px;align-items:start;margin-top:12px}
+.spirit-portrait{display:grid;place-items:center;aspect-ratio:3/4;border:3px ridge #98703b;background:radial-gradient(ellipse at 50% 50%,#4a3b31 0%,#20202a 48%,#10151d 100%);color:#d8ad63;text-shadow:0 0 28px #d19b4b;font:clamp(90px,16vw,170px) Georgia,serif;box-shadow:0 4px 18px #000}
+.spirit-portrait.candle{background:radial-gradient(ellipse at 50% 55%,#69502d 0%,#30252a 48%,#10151d 100%);color:#f1c56e}
+.spirit-portrait.water{background:radial-gradient(ellipse at 50% 55%,#294858 0%,#20212b 50%,#10151d 100%);color:#a9d3d4}
+.spirit-portrait.step{background:radial-gradient(ellipse at 50% 55%,#51405a 0%,#25212b 50%,#10151d 100%);color:#c6a6d6}
+.spirit-copy h3{color:#f0d29a;font-size:25px;font-weight:normal;margin:0 0 5px}
+.spirit-copy h4{color:#e2b96e;font-size:17px;font-weight:normal;margin:18px 0 6px}
+.spirit-copy p,.spirit-copy li{font:14px/1.65 system-ui;color:#d6c9b0}
+.spirit-copy ul{padding-left:22px}
+.spirit-subtitle{font-style:italic;color:#c8b99b!important;margin-top:0}
+.spirit-effects-wrap{width:100%;overflow-x:auto;margin:8px 0 12px}
+.spirit-effects{width:100%;min-width:520px;border-collapse:collapse;background:#17171b;font:12px/1.45 system-ui}
+.spirit-effects th,.spirit-effects td{border:1px solid #70532f;padding:7px 8px;text-align:left;vertical-align:top}
+.spirit-effects th{color:#e2b96e;font-weight:normal;width:23%}
+.spirit-effects td{color:#f0e4cb}
+.spirit-note{padding:10px 12px;border-left:2px solid #98703b;background:#171820;color:#c8b99b;font:12px/1.55 system-ui;margin:12px 0}
+@media(max-width:650px){.spirit-grid{gap:8px}.spirit-card{padding:6px}.spirit-card h3{font-size:14px}.spirit-card p{font-size:11px}.spirit-entry{grid-template-columns:1fr}.spirit-portrait{max-width:360px;width:100%;justify-self:center}.spirit-copy p,.spirit-copy li{font-size:13px}.spirit-title{font-size:25px}.spirit-page,.spirit-detail{margin:6px;padding:10px}}
+
 </style><style>
 /* Confirmed 14 deity portraits from the GitHub-hosted 4x4 sprite sheet. */
 .god-img-1,.god-img-2,.god-img-3,.god-img-4,.god-img-5,.god-img-6,.god-img-7,.god-img-8,.god-img-9,.god-img-10,.god-img-11,.god-img-12,.god-img-13,.god-img-14{background-image:url('assets/gods/gods-strip.jpg')!important;background-size:400% 400%!important;background-repeat:no-repeat!important}
@@ -1247,41 +1282,7 @@ body:has(.story-detail-page:target) .stories-page{display:none!important}
 
 </style>
 
-<style>
-/* Spirits in the Bestiary */
-.spirit-page,.spirit-detail{display:none;max-width:1200px;margin:12px auto;padding:14px;border:3px ridge #a77b3c;background:linear-gradient(145deg,#1c1b22,#10151d);box-shadow:0 0 0 2px #3b2b1d inset;color:#eadfca}
-.spirit-page:target,.spirit-detail:target{display:block!important}
-body:has(.spirit-page:target) #world,body:has(.spirit-page:target) .characters,body:has(.spirit-page:target) .dice-page,body:has(.spirit-page:target) .detail,body:has(.spirit-page:target) .bestiary-page,body:has(.spirit-page:target) .god-page,body:has(.spirit-page:target) .god-detail,body:has(.spirit-page:target) .monster-page,body:has(.spirit-page:target) .monster-detail{display:none!important}
-body:has(.spirit-detail:target) #world,body:has(.spirit-detail:target) .characters,body:has(.spirit-detail:target) .dice-page,body:has(.spirit-detail:target) .detail,body:has(.spirit-detail:target) .bestiary-page,body:has(.spirit-detail:target) .god-page,body:has(.spirit-detail:target) .god-detail,body:has(.spirit-detail:target) .monster-page,body:has(.spirit-detail:target) .monster-detail,body:has(.spirit-detail:target) .spirit-page{display:none!important}
-.spirit-title{text-align:center;color:#f0d29a;font-size:30px;font-weight:normal;margin:8px 0}
-.spirit-intro{text-align:center;color:#c8b99b;font:13px/1.6 system-ui;max-width:760px;margin:0 auto 20px}
-.spirit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.spirit-card{display:block;min-width:0;padding:9px;border:3px ridge #98703b;background:linear-gradient(145deg,#29252a,#141820);text-decoration:none;text-align:center;color:#f0d29a;transition:transform .15s,border-color .15s}
-.spirit-card:hover{transform:translateY(-2px);border-color:#e2b96e}
-.spirit-card-art{display:grid;place-items:center;width:100%;aspect-ratio:5/3;border:1px solid #6f512f;overflow:hidden;background:radial-gradient(ellipse at 50% 55%,#4a3b31 0%,#20202a 46%,#10151d 100%);color:#d8ad63;text-shadow:0 0 24px #d19b4b;font:clamp(54px,10vw,100px) Georgia,serif}
-.spirit-card:nth-child(2) .spirit-card-art{background:radial-gradient(ellipse at 50% 60%,#69502d 0%,#30252a 48%,#10151d 100%);color:#f1c56e}
-.spirit-card:nth-child(3) .spirit-card-art{background:radial-gradient(ellipse at 50% 60%,#294858 0%,#20212b 50%,#10151d 100%);color:#a9d3d4}
-.spirit-card:nth-child(4) .spirit-card-art{background:radial-gradient(ellipse at 50% 60%,#51405a 0%,#25212b 50%,#10151d 100%);color:#c6a6d6}
-.spirit-card h3{font-size:17px;font-weight:normal;letter-spacing:.04em;margin:9px 0 5px}
-.spirit-card p{font:12px/1.45 system-ui;color:#c8b99b;margin:0 2px 4px}
-.spirit-entry{display:grid;grid-template-columns:minmax(190px,32%) 1fr;gap:20px;align-items:start;margin-top:12px}
-.spirit-portrait{display:grid;place-items:center;aspect-ratio:3/4;border:3px ridge #98703b;background:radial-gradient(ellipse at 50% 50%,#4a3b31 0%,#20202a 48%,#10151d 100%);color:#d8ad63;text-shadow:0 0 28px #d19b4b;font:clamp(90px,16vw,170px) Georgia,serif;box-shadow:0 4px 18px #000}
-.spirit-portrait.candle{background:radial-gradient(ellipse at 50% 55%,#69502d 0%,#30252a 48%,#10151d 100%);color:#f1c56e}
-.spirit-portrait.water{background:radial-gradient(ellipse at 50% 55%,#294858 0%,#20212b 50%,#10151d 100%);color:#a9d3d4}
-.spirit-portrait.step{background:radial-gradient(ellipse at 50% 55%,#51405a 0%,#25212b 50%,#10151d 100%);color:#c6a6d6}
-.spirit-copy h3{color:#f0d29a;font-size:25px;font-weight:normal;margin:0 0 5px}
-.spirit-copy h4{color:#e2b96e;font-size:17px;font-weight:normal;margin:18px 0 6px}
-.spirit-copy p,.spirit-copy li{font:14px/1.65 system-ui;color:#d6c9b0}
-.spirit-copy ul{padding-left:22px}
-.spirit-subtitle{font-style:italic;color:#c8b99b!important;margin-top:0}
-.spirit-effects-wrap{width:100%;overflow-x:auto;margin:8px 0 12px}
-.spirit-effects{width:100%;min-width:520px;border-collapse:collapse;background:#17171b;font:12px/1.45 system-ui}
-.spirit-effects th,.spirit-effects td{border:1px solid #70532f;padding:7px 8px;text-align:left;vertical-align:top}
-.spirit-effects th{color:#e2b96e;font-weight:normal;width:23%}
-.spirit-effects td{color:#f0e4cb}
-.spirit-note{padding:10px 12px;border-left:2px solid #98703b;background:#171820;color:#c8b99b;font:12px/1.55 system-ui;margin:12px 0}
-@media(max-width:650px){.spirit-grid{gap:8px}.spirit-card{padding:6px}.spirit-card h3{font-size:14px}.spirit-card p{font-size:11px}.spirit-entry{grid-template-columns:1fr}.spirit-portrait{max-width:360px;width:100%;justify-self:center}.spirit-copy p,.spirit-copy li{font-size:13px}.spirit-title{font-size:25px}.spirit-page,.spirit-detail{margin:6px;padding:10px}}
-</style>
+
 
 <section class="spirit-page" id="spirits">
 <a class="back" href="#bestiary">← Вернуться к бестиарию</a>
