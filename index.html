@@ -341,11 +341,18 @@ body:has(.spirit-detail:target) #world,body:has(.spirit-detail:target) .characte
 
 
 
-/* Original animated tavern GIF on the atlas title screen */
+/* Original tavern GIF in a balanced, framed title-screen composition */
 header{overflow:visible;min-height:270px}
-.header-tavern-art{position:absolute;left:18px;top:68px;bottom:64px;width:calc(48% - 25px);height:calc(100% - 132px);object-fit:contain;object-position:center;display:block}
-@media(max-width:850px){header{min-height:280px}.header-tavern-art{left:12px;top:40%;bottom:auto;width:calc(48% - 18px);height:auto;aspect-ratio:1;transform:translateY(-50%)}}
-@media(max-width:480px){header{min-height:280px}.header-tavern-art{left:10px;top:40%;bottom:auto;width:calc(48% - 15px);height:auto;aspect-ratio:1;transform:translateY(-50%)}}
+.header-tavern-frame{position:absolute;left:18px;top:68px;bottom:64px;width:calc(48% - 25px);display:grid;place-items:center;padding:7px;border:4px ridge #a77b3c;background:linear-gradient(145deg,#27232a,#10151d);box-shadow:0 0 0 2px #3b2b1d, inset 0 0 0 1px #e0b76b,0 6px 16px #0009;overflow:hidden}
+.header-tavern-art{display:block;width:100%;height:100%;object-fit:contain;object-position:center;image-rendering:auto}
+@media(max-width:850px){
+ header{min-height:280px}
+ .header-tavern-frame{left:12px;top:76px;bottom:auto;width:calc(48% - 18px);max-width:330px;aspect-ratio:1;height:auto;padding:6px}
+}
+@media(max-width:480px){
+ header{min-height:280px}
+ .header-tavern-frame{left:10px;top:76px;bottom:auto;width:calc(48% - 15px);max-width:330px;aspect-ratio:1;height:auto;padding:5px}
+}
 /* Sound settings */
 header{position:relative;z-index:30}
 .sound-controls{display:flex;align-items:stretch;position:relative;flex:1 1 100%;width:100%}
@@ -425,7 +432,7 @@ header{position:relative;z-index:30}
 }
 </style>
 </head><body><audio id="bg-music" loop="" playsinline="" preload="auto"><source src="atlasdata:a001" type="audio/mpeg"/></audio>
-<header><div class="brand">✦ Последний пир богов ✦</div><img class="header-tavern-art" src="assets/tavern-sign.gif" alt="Анимированная вывеска средневековой таверны с фонарём"><nav class="tabs"><a href="#world">Карта мира</a><a href="#characters">Персонажи</a><a href="#bestiary">Бестиарий</a><a href="#stories">Истории</a><a href="#dice">Кубики</a></nav><div class="sound-controls">
+<header><div class="brand">✦ Последний пир богов ✦</div><div class="header-tavern-frame"><img class="header-tavern-art" src="assets/tavern-sign.gif" alt="Анимированная вывеска средневековой таверны с фонарём"></div><nav class="tabs"><a href="#world">Карта мира</a><a href="#characters">Персонажи</a><a href="#bestiary">Бестиарий</a><a href="#stories">Истории</a><a href="#dice">Кубики</a></nav><div class="sound-controls">
 <button aria-expanded="false" aria-controls="sound-settings" id="sound-settings-toggle" type="button">⚙ Настройки звука</button>
 <div id="sound-settings" class="sound-settings" hidden>
 <div class="sound-settings-title">НАСТРОЙКИ ЗВУКА</div>
