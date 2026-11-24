@@ -1513,21 +1513,21 @@ if(bgMusic) bgMusic.load();
 
 
 <style id="github-spirit-portraits">
-/* Four individual spirit portraits in a 2x2 GitHub-hosted sprite sheet. */
+/* Four original individual GitHub-hosted spirit portraits. No sprite sheet or downscaling. */
 .spirit-card-art,.spirit-portrait{
- background-image:url('assets/spirits/spirits-strip.jpg')!important;
- background-size:200% 200%!important;
  background-repeat:no-repeat!important;
+ background-size:cover!important;
+ background-position:center 35%!important;
  image-rendering:auto!important;
  color:transparent!important;
  text-shadow:none!important;
 }
 .spirit-card-art{aspect-ratio:3/4!important;font-size:0!important}
 .spirit-portrait{display:block!important;background-color:#151820!important}
-.spirit-card-art.bell,.spirit-portrait.bell{background-position:0% 0%!important}
-.spirit-card-art.candle,.spirit-portrait.candle{background-position:100% 0%!important}
-.spirit-card-art.water,.spirit-portrait.water{background-position:0% 100%!important}
-.spirit-card-art.step,.spirit-portrait.step{background-position:100% 100%!important}
+.spirit-card-art.bell,.spirit-portrait.bell{background-image:url('assets/spirits/spirit-bell.jpg')!important}
+.spirit-card-art.candle,.spirit-portrait.candle{background-image:url('assets/spirits/spirit-candle.jpg')!important}
+.spirit-card-art.water,.spirit-portrait.water{background-image:url('assets/spirits/spirit-water.jpg')!important}
+.spirit-card-art.step,.spirit-portrait.step{background-image:url('assets/spirits/spirit-step.jpg')!important}
 </style>
 
 </body></html>
