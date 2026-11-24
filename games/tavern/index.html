@@ -65,10 +65,10 @@ button{font:inherit;cursor:pointer}
 .seat.sleep .sprite{transform:rotate(90deg) translateY(8px)}
 .seat.winner .name{background:#8a622d;color:#fff0bd;box-shadow:0 0 12px #ffd77a}
 .mug-count{font:10px system-ui;color:#e8c78e;background:#2c1b17c9;padding:2px 5px}
-.panel{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:14px;background:linear-gradient(#201a1d,#11151c)}
+.panel{position:relative;z-index:10;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:14px;background:linear-gradient(#201a1d,#11151c)}
 .instructions{font:13px/1.5 system-ui;color:#d6c5a5}
 .controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-.action{border:2px ridge #b4874b;background:linear-gradient(#70472b,#43291e);color:#f6dfb1;padding:10px 14px;font:bold 12px system-ui;box-shadow:0 3px 0 #21140f}
+.action{position:relative;z-index:12;touch-action:manipulation;pointer-events:auto;border:2px ridge #b4874b;background:linear-gradient(#70472b,#43291e);color:#f6dfb1;padding:10px 14px;font:bold 12px system-ui;box-shadow:0 3px 0 #21140f}
 .action:hover{filter:brightness(1.2)}.action:disabled{opacity:.45;cursor:not-allowed}
 .action.primary{background:linear-gradient(#9a6934,#604021);color:#fff0c8}
 .action.reset{background:linear-gradient(#59333a,#321d24)}
@@ -115,7 +115,7 @@ button{font:inherit;cursor:pointer}
     <div class="instructions" id="instructions">За столом ждут трое завсегдатаев. Займи свободное место, выбери кубик и попробуй обыграть всю компанию.</div>
     <div class="die-select" id="die-select" hidden><span>Кубик:</span><button data-die="4" aria-pressed="false">d4</button><button data-die="8" aria-pressed="false">d8</button><button data-die="20" aria-pressed="true">d20</button></div>
    </div>
-   <div class="controls"><button class="action primary" id="sit">Сесть за стол</button><button class="action primary" id="roll" disabled>Бросить кубики</button><button class="action reset" id="reset">Сбросить игру</button></div>
+   <div class="controls"><button class="action primary" id="sit">Сесть за стол</button><button class="action primary" id="roll" disabled>Бросить кубики</button><button class="action reset" id="reset">Встать из-за стола</button></div>
   </section>
   <section class="scoreboard" aria-label="Счёт и уровень опьянения"><div class="scoreboard-title">СИСТЕМА ОПЬЯНЕНИЯ <span>Каждый раунд — минимум одна кружка. Проигравшие выпивают две.</span></div>
    <div class="score">Твой счёт<strong id="score-player">—</strong><small id="drink-player">Трезв</small><div class="intox-track"><span id="intox-player"></span></div></div>
@@ -138,7 +138,7 @@ button{font:inherit;cursor:pointer}
  const intoxEls={player:'intox-player',merc:'intox-merc',merchant:'intox-merchant',sailor:'intox-sailor'};
  const sit=document.getElementById('sit'),roll=document.getElementById('roll'),reset=document.getElementById('reset');
  const select=document.getElementById('die-select'),status=document.getElementById('status'),instructions=document.getElementById('instructions'),log=document.getElementById('log');
- let seated=false,round=0,die=20,busy=false,finished=false,gameVersion=0;
+ let seated=false,round=0,die=20,busy=false,finished=false,gameVersion=0,hasResults=false;
  let scores={player:0,merc:0,merchant:0,sailor:0},drinks={player:0,merc:0,merchant:0,sailor:0};
  const phrases={
   merc:['Хм. Бросок так себе.','Не радуйся раньше времени.','Я запомнил этот результат.','Кости сегодня на моей стороне.'],
@@ -157,9 +157,9 @@ button{font:inherit;cursor:pointer}
  }
  function update(){
   ids.forEach(id=>{
-   document.getElementById(scoreEls[id]).textContent=seated?scores[id]:'—';
-   document.getElementById(drinkEls[id]).textContent=seated?intoxLabel(drinks[id]):'Трезв';
-   document.getElementById(intoxEls[id]).style.width=(seated?(drinks[id]/6*100):0)+'%';
+   document.getElementById(scoreEls[id]).textContent=(seated||hasResults)?scores[id]:'—';
+   document.getElementById(drinkEls[id]).textContent=(seated||hasResults)?intoxLabel(drinks[id]):'Трезв';
+   document.getElementById(intoxEls[id]).style.width=((seated||hasResults)?(drinks[id]/6*100):0)+'%';
    const seat=document.getElementById(seats[id]);
    seat.querySelector('.mug-count').textContent=id==='player'?'Твой счёт: '+scores[id]:'Опьянение: '+drinks[id]+'/6';
    seat.classList.toggle('drunk',drinks[id]>=2&&drinks[id]<4);
@@ -177,7 +177,7 @@ button{font:inherit;cursor:pointer}
  document.querySelectorAll('[data-die]').forEach(b=>b.addEventListener('click',()=>{if(!busy&&seated&&!finished)setDie(Number(b.dataset.die))}));
  sit.addEventListener('click',()=>{
   if(seated)return;
-  seated=true;round=0;finished=false;scores={player:0,merc:0,merchant:0,sailor:0};drinks={player:0,merc:0,merchant:0,sailor:0};
+  seated=true;round=0;finished=false;hasResults=false;scores={player:0,merc:0,merchant:0,sailor:0};drinks={player:0,merc:0,merchant:0,sailor:0};
   document.querySelector('#seat-player .name').textContent='Ты за столом';
   document.getElementById('seat-player').classList.add('wobble');
   sit.disabled=true;select.hidden=false;roll.disabled=false;
@@ -186,50 +186,66 @@ button{font:inherit;cursor:pointer}
  });
  roll.addEventListener('click',async()=>{
   if(!seated||busy||finished)return;
-  busy=true;const activeVersion=gameVersion;roll.disabled=true;select.querySelectorAll('button').forEach(b=>b.disabled=true);
-  const results={};ids.forEach(id=>{const el=document.getElementById(faces[id]);el.className='die d'+die+' visible rolling';el.textContent='…'});
-  log.textContent='Кости гремят по столу…';
-  await new Promise(r=>setTimeout(r,900));
-  if(activeVersion!==gameVersion)return;
-  ids.forEach(id=>{results[id]=rnd(die);const el=document.getElementById(faces[id]);el.classList.remove('rolling');el.textContent=results[id]});
-  const high=Math.max(...Object.values(results));const winners=ids.filter(id=>results[id]===high);
-  winners.forEach(id=>scores[id]++);
-  // Everyone drinks one mug after a round; everyone who did not win drinks an extra mug.
-  ids.forEach(id=>{
-   drinks[id]=Math.min(6,drinks[id]+(winners.includes(id)?1:2));
-   const seat=document.getElementById(seats[id]);
-   seat.classList.toggle('winner',winners.includes(id));
-  });
-  round++;
-  ids.forEach(id=>say(id,phrases[id][rnd(4)-1]));
-  const resultLine=ids.map(id=>names[id]+' — '+results[id]).join(' · ');
-  log.innerHTML='<strong>Раунд '+round+':</strong> '+resultLine+'. Очки и опьянение обновлены. Общий победитель будет объявлен после третьего раунда.';
-  update();
-  if(round>=3){
-   finished=true;const best=Math.max(...Object.values(scores));const champions=ids.filter(id=>scores[id]===best);
-   const champion=champions.length===1?names[champions[0]]:champions.map(id=>names[id]).join(' и ');
-   instructions.textContent=champions.includes('player')?'Все три раунда сыграны. '+(champions.length===1?'Ты победил!':'У тебя ничья за первое место!'):'Все три раунда сыграны. Победитель: '+champion+'.';
-   log.innerHTML+='<br><strong>Бармен:</strong> «Победитель — '+champion+'! Остальные могут оплатить разбитые кружки».';
-   roll.disabled=true;select.querySelectorAll('button').forEach(b=>b.disabled=true);
-   ids.forEach(id=>document.getElementById(seats[id]).classList.remove('winner'));
-   const champ=champions[0];document.getElementById(seats[champ]).classList.add('winner');
-   status.textContent='Партия завершена · Победитель: '+champion;
-  }else{
-   instructions.textContent='Раунд '+round+' завершён. Можно продолжать! Выбери кубик для следующего раунда или оставь текущий.';
-   roll.textContent='Бросить следующий раз';
-   roll.disabled=false;
-   select.querySelectorAll('button').forEach(b=>b.disabled=false);
+  busy=true;const activeVersion=gameVersion;
+  roll.disabled=true;roll.setAttribute('aria-disabled','true');
+  select.querySelectorAll('button').forEach(b=>b.disabled=true);
+  try{
+   const results={};
+   ids.forEach(id=>{const el=document.getElementById(faces[id]);el.className='die d'+die+' visible rolling';el.textContent='…'});
+   log.textContent='Кости гремят по столу…';
+   await new Promise(r=>setTimeout(r,900));
+   if(activeVersion!==gameVersion||!seated)return;
+   ids.forEach(id=>{results[id]=rnd(die);const el=document.getElementById(faces[id]);el.classList.remove('rolling');el.textContent=results[id]});
+   const high=Math.max(...Object.values(results));const winners=ids.filter(id=>results[id]===high);
+   winners.forEach(id=>scores[id]++);
+   ids.forEach(id=>{
+    drinks[id]=Math.min(6,drinks[id]+(winners.includes(id)?1:2));
+    const seat=document.getElementById(seats[id]);
+    seat.classList.toggle('winner',winners.includes(id));
+   });
+   round++;hasResults=true;
+   ids.forEach(id=>say(id,phrases[id][rnd(4)-1]));
+   const resultLine=ids.map(id=>names[id]+' — '+results[id]).join(' · ');
+   log.innerHTML='<strong>Раунд '+round+':</strong> '+resultLine+'. Очки и опьянение обновлены. Общий победитель будет объявлен после третьего раунда.';
+   update();
+   if(round>=3){
+    finished=true;const best=Math.max(...Object.values(scores));const champions=ids.filter(id=>scores[id]===best);
+    const champion=champions.length===1?names[champions[0]]:champions.map(id=>names[id]).join(' и ');
+    instructions.textContent=champions.includes('player')?'Все три раунда сыграны. '+(champions.length===1?'Ты победил!':'У тебя ничья за первое место!'):'Все три раунда сыграны. Победитель: '+champion+'.';
+    log.innerHTML+='<br><strong>Бармен:</strong> «Победитель — '+champion+'! Остальные могут оплатить разбитые кружки».'; 
+    select.querySelectorAll('button').forEach(b=>b.disabled=true);
+    ids.forEach(id=>document.getElementById(seats[id]).classList.remove('winner'));
+    document.getElementById(seats[champions[0]]).classList.add('winner');
+    status.textContent='Партия завершена · Победитель: '+champion;
+    roll.textContent='Партия завершена';
+   }else{
+    instructions.textContent='Раунд '+round+' завершён. Можно продолжать! Выбери кубик для следующего раунда или оставь текущий.';
+    roll.textContent='Бросить следующий раз';
+    select.querySelectorAll('button').forEach(b=>b.disabled=false);
+   }
+  }catch(error){
+   log.textContent='Что-то помешало броску. Нажми кнопку ещё раз.';
+   console.error(error);
+  }finally{
+   if(activeVersion===gameVersion){
+    busy=false;
+    if(seated&&!finished){
+     roll.disabled=false;roll.removeAttribute('disabled');roll.setAttribute('aria-disabled','false');
+     select.querySelectorAll('button').forEach(b=>b.disabled=false);
+    }else{
+     roll.disabled=true;roll.setAttribute('aria-disabled','true');
+    }
+   }
   }
-  busy=false;
  });
  reset.addEventListener('click',()=>{
-  gameVersion++;busy=false;seated=false;round=0;finished=false;scores={player:0,merc:0,merchant:0,sailor:0};drinks={player:0,merc:0,merchant:0,sailor:0};
+  gameVersion++;busy=false;seated=false;round=0;finished=false;
   document.querySelector('#seat-player .name').textContent='Свободное место';
   document.getElementById('seat-player').classList.remove('wobble');
   ids.forEach(id=>{const seat=document.getElementById(seats[id]);seat.classList.remove('wobble','sleep','winner','talking','drunk','very-drunk','passed-out');seat.querySelector('.bubble').textContent='';const el=document.getElementById(faces[id]);el.className='die d20';el.textContent='?';});
-  sit.disabled=false;roll.disabled=true;roll.textContent='Бросить кубики';select.hidden=true;select.querySelectorAll('button').forEach(b=>b.disabled=false);
-  instructions.textContent='Место снова свободно. Следующий герой может занять его и сыграть новую партию.';
-  log.innerHTML='<strong>Бармен:</strong> «Ну вот, один ушёл. Кто следующий? Место свободно!»';
+  sit.disabled=false;roll.disabled=true;roll.setAttribute('aria-disabled','true');roll.textContent='Бросить кубики';select.hidden=true;select.querySelectorAll('button').forEach(b=>b.disabled=false);
+  instructions.textContent='Игрок встал из-за стола. Результаты предыдущей партии сохранены. Следующий игрок начнёт новую партию с чистого счёта.';
+  log.innerHTML='<strong>Бармен:</strong> «Ну вот, один ушёл. Результаты его партии записаны. Кто следующий?»';
   setDie(20);update();
  });
  update();
