@@ -949,7 +949,7 @@ header{position:relative;z-index:30}
 
 
   function sendSoundSettings(){
-    const values={type:'atlas-sound-settings',music:musicPercent,effects:effectsPercent};
+    const values={type:'atlas-sound-settings',music:musicPercent,effects:soundEnabled?effectsPercent:0};
     document.querySelectorAll('.tavern-embed iframe').forEach(frame=>{try{frame.contentWindow.postMessage(values,'*');}catch(e){}});
   }
   function applySoundSettings(){
@@ -1013,12 +1013,14 @@ header{position:relative;z-index:30}
   soundButton.addEventListener('click', async function(){
     if(musicStarted && !music.paused){
       soundEnabled = false;
+      applySoundSettings();
       music.pause();
       musicStarted = false;
       updateButton();
       if(hint) hint.textContent = 'Звук выключен. Нажми кнопку сверху, чтобы снова включить музыку и эффекты.';
     }else{
       soundEnabled = true;
+      applySoundSettings();
       await startMusic();
       if(audioContext && audioContext.state === 'suspended'){
         try{ await audioContext.resume(); }catch(e){}
