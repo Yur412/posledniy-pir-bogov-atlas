@@ -1073,6 +1073,11 @@ body:has(.story-detail-page:target) .stories-page{display:none!important}
 (()=>{const A=window.__ATLAS_ASSETS||{};const re=/atlasdata:(a\d{3})/g;const fix=v=>v.replace(re,(_,k)=>A[k]||_);
 for(const el of document.querySelectorAll('*')){for(const at of [...el.attributes]){if(at.value.includes('atlasdata:'))el.setAttribute(at.name,fix(at.value));}}
 for(const st of document.querySelectorAll('style')){if(st.textContent.includes('atlasdata:'))st.textContent=fix(st.textContent);}
+// The audio controller is initialized before this asset resolver. Reload the
+// media element after replacing its placeholder source so desktop browsers
+// re-select the now-resolved MP3 source.
+const bgMusic=document.getElementById('bg-music');
+if(bgMusic) bgMusic.load();
 })();
 </script>
 </body></html>
