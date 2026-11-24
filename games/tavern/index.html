@@ -142,9 +142,12 @@ button{font:inherit;cursor:pointer}
  let scores={player:0,merc:0,merchant:0,sailor:0},drinks={player:0,merc:0,merchant:0,sailor:0};
  const AC=window.AudioContext||window.webkitAudioContext;
  let sfxContext=null,sfxBus=null;
+ let musicPercent=15,effectsPercent=100;
+ window.addEventListener('message',event=>{const d=event.data;if(!d||d.type!=='atlas-sound-settings')return;musicPercent=Math.max(0,Math.min(100,Number(d.music)||0));effectsPercent=Math.max(0,Math.min(100,Number(d.effects)||0));if(sfxBus&&sfxContext)sfxBus.gain.setTargetAtTime(effectsPercent/100,sfxContext.currentTime,.025);});
+ window.parent!==window&&window.parent.postMessage({type:'atlas-tavern-ready'},'*');
  function audioOut(){
   if(!AC)return null;
-  if(!sfxContext){sfxContext=new AC();sfxBus=sfxContext.createGain();sfxBus.gain.value=1.10;sfxBus.connect(sfxContext.destination);}
+  if(!sfxContext){sfxContext=new AC();sfxBus=sfxContext.createGain();sfxBus.gain.value=effectsPercent/100;sfxBus.connect(sfxContext.destination);}
   if(sfxContext.state==='suspended')sfxContext.resume();
   return sfxContext;
  }
