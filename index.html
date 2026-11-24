@@ -404,7 +404,7 @@ body:has(.spirit-detail:target) #world,body:has(.spirit-detail:target) .characte
 }
 </style>
 </head><body><audio id="bg-music" loop="" playsinline="" preload="auto"><source src="atlasdata:a001" type="audio/mpeg"/></audio>
-<header><div class="brand">✦ Последний пир богов ✦</div><nav class="tabs"><a href="#world">Карта мира</a><a href="#characters">Персонажи</a><a href="#bestiary">Бестиарий</a><a href="#stories">Истории</a><a href="#dice">Кубики</a></nav><button aria-pressed="true" id="sound-toggle" title="Включить или выключить фоновую музыку и звук кубиков" type="button">♫ Включить музыку</button></header>
+<header><div class="brand">✦ Последний пир богов ✦</div><nav class="tabs"><a href="#world">Карта мира</a><a href="#characters">Персонажи</a><a href="#bestiary">Бестиарий</a><a href="#stories">Истории</a><a href="#dice">Кубики</a></nav><button aria-pressed="true" id="sound-toggle" title="Включить или выключить фоновую музыку и звуковые эффекты" type="button">♫ Включить музыку</button></header>
 <main class="layout" id="world"><section class="mapbox"><div class="maphead">КАРТА ОСТРОВА · ВЫБЕРИ МЕСТО</div><div class="map">
 <a class="pin" href="#loc-veyr" style="left:48%;top:51%">Вейр</a>
 <a class="pin" href="#loc-sanctuary" style="left:34%;top:68%">Пепельное святилище Диониса</a>
@@ -927,7 +927,7 @@ body:has(.spirit-detail:target) #world,body:has(.spirit-detail:target) .characte
 
   async function startMusic(){
     if(!soundEnabled) return;
-    music.volume = 1;
+    music.volume = 0.45;
     try{
       await music.play();
       if(soundEnabled){
@@ -975,6 +975,13 @@ body:has(.spirit-detail:target) #world,body:has(.spirit-detail:target) .characte
     return audioContext;
   }
 
+  // Separate gain buses keep the background melody quieter than sound effects.
+  let effectsBus = null;
+  function getEffectsOutput(ctx){
+    if(!effectsBus){effectsBus=ctx.createGain();effectsBus.gain.setValueAtTime(1.10,ctx.currentTime);effectsBus.connect(ctx.destination);}
+    return effectsBus;
+  }
+
   // iOS Safari may ignore HTMLMediaElement.volume. Route background music
   // through a dedicated Web Audio gain node after the first user gesture.
   let musicSource = null;
@@ -986,7 +993,7 @@ body:has(.spirit-detail:target) #world,body:has(.spirit-detail:target) .characte
       if(!musicSource){
         musicSource = ctx.createMediaElementSource(music);
         musicGain = ctx.createGain();
-        musicGain.gain.setValueAtTime(0.55, ctx.currentTime);
+        musicGain.gain.setValueAtTime(0.45, ctx.currentTime);
         musicSource.connect(musicGain);
         musicGain.connect(ctx.destination);
       }
@@ -1013,7 +1020,7 @@ body:has(.spirit-detail:target) #world,body:has(.spirit-detail:target) .characte
     noiseGain.gain.setValueAtTime(0.0001, when);
     noiseGain.gain.exponentialRampToValueAtTime(0.11*strength, when+0.004);
     noiseGain.gain.exponentialRampToValueAtTime(0.0001, when+duration);
-    noise.connect(filter); filter.connect(noiseGain); noiseGain.connect(ctx.destination);
+    noise.connect(filter); filter.connect(noiseGain); noiseGain.connect(getEffectsOutput(ctx));
     noise.start(when); noise.stop(when+duration);
 
     const osc = ctx.createOscillator();
@@ -1024,7 +1031,7 @@ body:has(.spirit-detail:target) #world,body:has(.spirit-detail:target) .characte
     oscGain.gain.setValueAtTime(0.0001, when);
     oscGain.gain.exponentialRampToValueAtTime(0.055*strength, when+0.003);
     oscGain.gain.exponentialRampToValueAtTime(0.0001, when+0.09);
-    osc.connect(oscGain); oscGain.connect(ctx.destination);
+    osc.connect(oscGain); oscGain.connect(getEffectsOutput(ctx));
     osc.start(when); osc.stop(when+0.095);
   }
 
@@ -1064,7 +1071,7 @@ body:has(.spirit-detail:target) #world,body:has(.spirit-detail:target) .characte
       master.gain.linearRampToValueAtTime(0.68,start+0.12);
       master.gain.setValueAtTime(0.68,start+2.2);
       master.gain.exponentialRampToValueAtTime(0.0001,start+3.55);
-      master.connect(ctx.destination);
+      master.connect(getEffectsOutput(ctx));
 
       function tone(freq,when,duration,amp,type='sine',endFreq=null,detune=0){
         const osc=ctx.createOscillator();
