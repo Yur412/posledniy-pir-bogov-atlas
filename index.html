@@ -1627,11 +1627,12 @@ if(bgMusic) bgMusic.load();
 </style>
 
 <style id="monster-desktop-card-sizing">
-/* Desktop only: keep monster catalog cards compact; detail pages and phones stay unchanged. */
+/* Desktop catalog: smaller portrait cards, without changing detail pages or mobile layout. */
 @media(min-width:900px){
-  .monster-page .monster-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-  .monster-page .monster-card{padding:8px}
-  .monster-page .monster-card .monster-image{aspect-ratio:4/3}
+  .monster-page:target{max-width:1000px}
+  .monster-page .monster-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+  .monster-page .monster-card{padding:7px}
+  .monster-page .monster-card .monster-image{aspect-ratio:3/4}
 }
 </style>
 </body></html>
