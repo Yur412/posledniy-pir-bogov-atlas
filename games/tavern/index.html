@@ -77,6 +77,7 @@ button{font:inherit;cursor:pointer}
 .die-select button[aria-pressed=true]{background:#8b592f;color:#fff1c9;outline:2px solid #e4bd75}
 .scoreboard{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;padding:10px;background:#0e1218;border-top:1px solid #75522e}
 .score{border:1px solid #684b2c;background:#211b1c;padding:7px;text-align:center;font:11px system-ui;color:#d9c7a5}
+.scoreboard-title{grid-column:1/-1;color:#f0d18f;font:bold 13px system-ui;letter-spacing:.12em;text-align:center;padding:2px 4px 7px;border-bottom:1px solid #684b2c}.scoreboard-title span{display:block;margin-top:4px;color:#b8a27f;font:11px/1.4 system-ui;letter-spacing:0}
 .score strong{display:block;color:#f0d18f;font: bold 20px Georgia;margin:3px}
 .score small{color:#b8a27f}
 .log{min-height:40px;padding:9px 14px;background:#11151b;color:#c7b795;border-top:1px solid #463323;font:12px/1.5 system-ui}
@@ -116,7 +117,7 @@ button{font:inherit;cursor:pointer}
    </div>
    <div class="controls"><button class="action primary" id="sit">Сесть за стол</button><button class="action primary" id="roll" disabled>Бросить кубики</button><button class="action reset" id="reset">Сбросить игру</button></div>
   </section>
-  <section class="scoreboard" aria-label="Счёт участников">
+  <section class="scoreboard" aria-label="Счёт и уровень опьянения"><div class="scoreboard-title">СИСТЕМА ОПЬЯНЕНИЯ <span>Каждый раунд — минимум одна кружка. Проигравшие выпивают две.</span></div>
    <div class="score">Твой счёт<strong id="score-player">—</strong><small id="drink-player">Трезв</small><div class="intox-track"><span id="intox-player"></span></div></div>
    <div class="score">Наёмник<strong id="score-merc">—</strong><small id="drink-merc">Трезв</small><div class="intox-track"><span id="intox-merc"></span></div></div>
    <div class="score">Купец<strong id="score-merchant">—</strong><small id="drink-merchant">Трезв</small><div class="intox-track"><span id="intox-merchant"></span></div></div>
