@@ -366,6 +366,32 @@ body:has(.spirit-detail:target) #world,body:has(.spirit-detail:target) .characte
 .monster-grid .monster-image.monster-9,.monster-entry .monster-image.monster-9{background-position:75% 100%!important}
 .monster-grid .monster-image.monster-10,.monster-entry .monster-image.monster-10{background-position:100% 100%!important}
 </style>
+<style id="spirit-layout-overflow-fix">
+/* Keep every spirit entry inside its frame on phones and narrow screens. */
+.spirit-page,.spirit-detail{width:calc(100% - 12px);max-width:1200px;min-width:0;box-sizing:border-box;overflow:hidden}
+.spirit-entry{display:grid;grid-template-columns:minmax(0, min(32%, 340px)) minmax(0,1fr);gap:20px;min-width:0;width:100%;box-sizing:border-box}
+.spirit-portrait,.spirit-copy{min-width:0;max-width:100%;box-sizing:border-box}
+.spirit-portrait{width:100%;aspect-ratio:3/4;overflow:hidden}
+.spirit-copy{overflow-wrap:anywhere;word-break:normal}
+.spirit-copy p,.spirit-copy li,.spirit-copy h3,.spirit-copy h4{max-width:100%;overflow-wrap:anywhere}
+.spirit-effects-wrap{display:block;width:100%;max-width:100%;min-width:0;overflow-x:auto;overscroll-behavior-x:contain}
+.spirit-effects{width:100%;min-width:520px;max-width:none;table-layout:fixed}
+.spirit-effects th,.spirit-effects td{overflow-wrap:anywhere;word-break:normal}
+@media(max-width:760px){
+ .spirit-page,.spirit-detail{width:calc(100% - 12px);margin:6px auto;padding:10px}
+ .spirit-entry{grid-template-columns:minmax(0,1fr);gap:14px}
+ .spirit-portrait{width:min(100%,320px);max-width:320px;max-height:427px;justify-self:center}
+ .spirit-copy{width:100%;min-width:0}
+ .spirit-copy h3{font-size:clamp(19px,5vw,25px);line-height:1.25}
+ .spirit-copy p,.spirit-copy li{font-size:13px;line-height:1.6}
+ .spirit-effects-wrap{margin-left:0;margin-right:0}
+}
+@media(max-width:380px){
+ .spirit-page,.spirit-detail{padding:8px}
+ .spirit-effects{min-width:480px}
+ .spirit-effects th,.spirit-effects td{padding:6px}
+}
+</style>
 </head><body><audio id="bg-music" loop="" playsinline="" preload="auto"><source src="atlasdata:a001" type="audio/mpeg"/></audio>
 <header><div class="brand">✦ Последний пир богов ✦</div><nav class="tabs"><a href="#world">Карта мира</a><a href="#characters">Персонажи</a><a href="#bestiary">Бестиарий</a><a href="#stories">Истории</a><a href="#dice">Кубики</a></nav><button aria-pressed="true" id="sound-toggle" title="Включить или выключить фоновую музыку и звук кубиков" type="button">♫ Включить музыку</button></header>
 <main class="layout" id="world"><section class="mapbox"><div class="maphead">КАРТА ОСТРОВА · ВЫБЕРИ МЕСТО</div><div class="map">
