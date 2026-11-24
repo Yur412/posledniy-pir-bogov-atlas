@@ -342,17 +342,18 @@ body:has(.spirit-detail:target) #world,body:has(.spirit-detail:target) .characte
 
 /* Sound settings */
 header{position:relative;z-index:30}
-.sound-controls{display:flex;align-items:center;gap:7px;position:relative;flex-wrap:wrap}
-#sound-toggle,#sound-settings-toggle{border:2px ridge #a77b3c;padding:8px 11px;background:#211a1b;color:#e7d5b2;font:13px Georgia,serif;cursor:pointer}
-#sound-toggle.sound-on{background:#2c392b;color:#e8e2bd}
+.sound-controls{display:flex;align-items:stretch;position:relative;flex:1 1 100%;width:100%}
+#sound-settings-toggle{display:block;width:100%;min-height:40px;border:2px ridge #a77b3c;padding:9px 12px;background:#211a1b;color:#e7d5b2;font:14px Georgia,serif;cursor:pointer}
+#sound-toggle{display:block;width:100%;margin:0 0 13px;border:2px ridge #a77b3c;padding:9px 12px;background:#2c392b;color:#e8e2bd;font:13px Georgia,serif;cursor:pointer}
+#sound-toggle[aria-pressed="false"]{background:#211a1b;color:#e7d5b2}
 #sound-settings-toggle[aria-expanded="true"]{background:#4a3424;border-color:#e0b76b}
-.sound-settings{position:absolute;right:0;top:calc(100% + 9px);z-index:1000;width:min(290px,calc(100vw - 24px));padding:14px;border:2px ridge #a77b3c;background:linear-gradient(145deg,#242129,#101720);box-shadow:0 8px 24px #000b;color:#eadfca}
+.sound-settings{position:absolute;right:0;left:0;top:calc(100% + 9px);z-index:1000;width:100%;padding:14px;border:2px ridge #a77b3c;background:linear-gradient(145deg,#242129,#101720);box-shadow:0 8px 24px #000b;color:#eadfca}
 .sound-settings[hidden]{display:none}
 .sound-settings-title{text-align:center;color:#f0d29a;font:14px Georgia,serif;letter-spacing:.12em;margin-bottom:13px}
 .sound-range-row{display:flex;justify-content:space-between;align-items:center;gap:12px;color:#e5d2ae;font:13px system-ui;margin:10px 0 5px}
 .sound-range-row output{color:#f0c878;font-variant-numeric:tabular-nums}
 .sound-settings input[type=range]{width:100%;accent-color:#d3a252;cursor:pointer;margin:0 0 7px}
-@media(max-width:700px){.sound-controls{width:100%;justify-content:center}.sound-settings{right:0;left:auto}.sound-settings input[type=range]{height:30px}}
+@media(max-width:700px){.sound-controls{width:100%}.sound-settings{right:0;left:0}.sound-settings input[type=range]{height:30px}}
 </style><style>
 /* Confirmed 14 deity portraits from the GitHub-hosted 4x4 sprite sheet. */
 .god-img-1,.god-img-2,.god-img-3,.god-img-4,.god-img-5,.god-img-6,.god-img-7,.god-img-8,.god-img-9,.god-img-10,.god-img-11,.god-img-12,.god-img-13,.god-img-14{background-image:url('assets/gods/gods-strip.jpg')!important;background-size:400% 400%!important;background-repeat:no-repeat!important}
@@ -419,10 +420,10 @@ header{position:relative;z-index:30}
 </style>
 </head><body><audio id="bg-music" loop="" playsinline="" preload="auto"><source src="atlasdata:a001" type="audio/mpeg"/></audio>
 <header><div class="brand">✦ Последний пир богов ✦</div><nav class="tabs"><a href="#world">Карта мира</a><a href="#characters">Персонажи</a><a href="#bestiary">Бестиарий</a><a href="#stories">Истории</a><a href="#dice">Кубики</a></nav><div class="sound-controls">
-<button aria-pressed="true" id="sound-toggle" title="Включить или выключить музыку и звуки" type="button">♫ Включить музыку</button>
 <button aria-expanded="false" aria-controls="sound-settings" id="sound-settings-toggle" type="button">⚙ Настройки звука</button>
 <div id="sound-settings" class="sound-settings" hidden>
 <div class="sound-settings-title">НАСТРОЙКИ ЗВУКА</div>
+<button aria-pressed="true" id="sound-toggle" title="Включить или выключить музыку и звуки" type="button">♫ Выключить звук</button>
 <label class="sound-range-row" for="music-volume"><span>Мелодия</span><output id="music-volume-value">15%</output></label>
 <input id="music-volume" type="range" min="0" max="100" step="1" value="15">
 <label class="sound-range-row" for="effects-volume"><span>Звуки</span><output id="effects-volume-value">100%</output></label>
@@ -981,11 +982,11 @@ header{position:relative;z-index:30}
   function updateButton(){
     const playing = musicStarted && !music.paused;
     if(!soundEnabled){
-      soundButton.textContent = '♫ Звук: выключен';
+      soundButton.textContent = '♫ Включить звук';
       soundButton.classList.remove('sound-on');
       soundButton.setAttribute('aria-pressed','false');
     }else{
-      soundButton.textContent = playing ? '♫ Выключить звук' : '♫ Включить музыку';
+      soundButton.textContent = playing ? '♫ Выключить звук' : '♫ Включить звук';
       soundButton.classList.toggle('sound-on', playing);
       soundButton.setAttribute('aria-pressed','true');
     }
