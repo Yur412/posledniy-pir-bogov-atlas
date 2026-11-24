@@ -955,7 +955,7 @@ header{position:relative;z-index:30}
   function applySoundSettings(){
     if(musicValue)musicValue.textContent=musicPercent+'%';
     if(effectsValue)effectsValue.textContent=effectsPercent+'%';
-    music.volume=musicPercent/100;
+    music.volume=musicGain ? 1 : musicPercent/100;
     if(musicGain&&audioContext)musicGain.gain.setTargetAtTime(musicPercent/100,audioContext.currentTime,.025);
     if(effectsBus&&audioContext)effectsBus.gain.setTargetAtTime(effectsPercent/100,audioContext.currentTime,.025);
     try{localStorage.setItem('atlasMusicVolume',String(musicPercent));localStorage.setItem('atlasEffectsVolume',String(effectsPercent));}catch(e){}
@@ -995,7 +995,7 @@ header{position:relative;z-index:30}
 
   async function startMusic(){
     if(!soundEnabled) return;
-    music.volume = musicPercent/100;
+    music.volume = musicGain ? 1 : musicPercent/100;
     try{
       await music.play();
       if(soundEnabled){
@@ -1061,6 +1061,7 @@ header{position:relative;z-index:30}
       if(!musicSource){
         musicSource = ctx.createMediaElementSource(music);
         musicGain = ctx.createGain();
+        music.volume = 1;
         musicGain.gain.setValueAtTime(musicPercent/100, ctx.currentTime);
         musicSource.connect(musicGain);
         musicGain.connect(ctx.destination);
