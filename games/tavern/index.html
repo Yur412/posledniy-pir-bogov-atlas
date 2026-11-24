@@ -86,6 +86,14 @@ button{font:inherit;cursor:pointer}
  body{padding:4px}.topbar{padding:8px}.scene{min-height:520px}.wall{height:64px}.window{left:4%;width:68px;height:42px}.shelf{right:4%;width:115px;height:30px}.bar{top:82px;width:30%;height:58px}.bar:after{top:16px;font-size:9px}.fireplace{width:86px;height:100px;left:3%;bottom:5%}.rug{width:90%;height:55%}.table{width:64%;height:205px;top:54%}.seat{width:92px}.seat .name{font-size:10px}.seat .sprite{transform:scale(.85)}.seat.merc{left:0;top:37%}.seat.merchant{right:0;top:37%}.seat.sailor{top:5%}.seat.player{bottom:1%}.seat .bubble{font-size:9px;max-width:115px}.die{width:48px;height:48px;font-size:18px}.die.d4{width:42px;height:42px}.dice-zone{gap:8px}.panel{grid-template-columns:1fr}.controls{justify-content:flex-start}.action{padding:9px 10px}.scoreboard{grid-template-columns:repeat(2,1fr)}.instructions{font-size:12px}
 }
 @media(max-width:390px){.scene{min-height:480px}.table{width:68%;height:180px}.seat{width:82px}.seat.merc,.seat.merchant{top:39%}.brand{font-size:17px}.status{font-size:10px}}
+
+.intox-track{height:7px;margin-top:6px;border:1px solid #75522e;background:#0b0d11;overflow:hidden}
+.intox-track span{display:block;width:0;height:100%;background:linear-gradient(90deg,#65a36c 0 30%,#d1a44e 55%,#c65a48 100%);transition:width .35s steps(5)}
+.seat.drunk .sprite{animation:wobble .48s steps(3) infinite}
+.seat.very-drunk .sprite{animation:wobble .28s steps(2) infinite;filter:drop-shadow(3px 4px 0 #20120e) saturate(.7)}
+.seat.passed-out .sprite{animation:none;transform:rotate(90deg) translateY(8px);filter:grayscale(.45)}
+.seat.passed-out .name{color:#c3b49b}
+
 </style>
 </head>
 <body>
@@ -109,10 +117,10 @@ button{font:inherit;cursor:pointer}
    <div class="controls"><button class="action primary" id="sit">Сесть за стол</button><button class="action primary" id="roll" disabled>Бросить кубики</button><button class="action reset" id="reset">Сбросить игру</button></div>
   </section>
   <section class="scoreboard" aria-label="Счёт участников">
-   <div class="score">Твой счёт<strong id="score-player">—</strong><small id="drink-player">Трезв</small></div>
-   <div class="score">Наёмник<strong id="score-merc">—</strong><small id="drink-merc">Трезв</small></div>
-   <div class="score">Купец<strong id="score-merchant">—</strong><small id="drink-merchant">Трезв</small></div>
-   <div class="score">Моряк<strong id="score-sailor">—</strong><small id="drink-sailor">Трезв</small></div>
+   <div class="score">Твой счёт<strong id="score-player">—</strong><small id="drink-player">Трезв</small><div class="intox-track"><span id="intox-player"></span></div></div>
+   <div class="score">Наёмник<strong id="score-merc">—</strong><small id="drink-merc">Трезв</small><div class="intox-track"><span id="intox-merc"></span></div></div>
+   <div class="score">Купец<strong id="score-merchant">—</strong><small id="drink-merchant">Трезв</small><div class="intox-track"><span id="intox-merchant"></span></div></div>
+   <div class="score">Моряк<strong id="score-sailor">—</strong><small id="drink-sailor">Трезв</small><div class="intox-track"><span id="intox-sailor"></span></div></div>
   </section>
   <div class="log" id="log" role="status" aria-live="polite">Бармен: «Ну что, путник? Покажешь, как бросают кости в приличном обществе?»</div>
   <div class="footer">Автономная мини-игра атласа · собственные кубики · партия не меняет состояние основной кампании</div>
@@ -126,6 +134,7 @@ button{font:inherit;cursor:pointer}
  const seats={player:'seat-player',merc:'seat-merc',merchant:'seat-merchant',sailor:'seat-sailor'};
  const scoreEls={player:'score-player',merc:'score-merc',merchant:'score-merchant',sailor:'score-sailor'};
  const drinkEls={player:'drink-player',merc:'drink-merc',merchant:'drink-merchant',sailor:'drink-sailor'};
+ const intoxEls={player:'intox-player',merc:'intox-merc',merchant:'intox-merchant',sailor:'intox-sailor'};
  const sit=document.getElementById('sit'),roll=document.getElementById('roll'),reset=document.getElementById('reset');
  const select=document.getElementById('die-select'),status=document.getElementById('status'),instructions=document.getElementById('instructions'),log=document.getElementById('log');
  let seated=false,round=0,die=20,busy=false,finished=false,gameVersion=0;
@@ -138,8 +147,24 @@ button{font:inherit;cursor:pointer}
  };
  function say(id,text){const el=document.getElementById(seats[id]);el.classList.add('talking');el.querySelector('.bubble').textContent=text;setTimeout(()=>el.classList.remove('talking'),1500)}
  function rnd(max){if(window.crypto&&crypto.getRandomValues){const a=new Uint32Array(1);const lim=Math.floor(4294967296/max)*max;do{crypto.getRandomValues(a)}while(a[0]>=lim);return a[0]%max+1}return Math.floor(Math.random()*max)+1}
+ function intoxLabel(level){
+  if(level===0)return 'Трезв';
+  if(level===1)return 'Разогрелся · '+level+'/6';
+  if(level<=3)return 'Весёлый · '+level+'/6';
+  if(level<=5)return 'Сильно пьян · '+level+'/6';
+  return 'Отключился · 6/6';
+ }
  function update(){
-  ids.forEach(id=>{document.getElementById(scoreEls[id]).textContent=seated?scores[id]:'—';document.getElementById(drinkEls[id]).textContent=seated?(drinks[id]===0?'Трезв':drinks[id]+' кружки'):'Трезв';const seat=document.getElementById(seats[id]);seat.querySelector('.mug-count').textContent=id==='player'?'Твой счёт: '+scores[id]:'Кружек: '+drinks[id]});
+  ids.forEach(id=>{
+   document.getElementById(scoreEls[id]).textContent=seated?scores[id]:'—';
+   document.getElementById(drinkEls[id]).textContent=seated?intoxLabel(drinks[id]):'Трезв';
+   document.getElementById(intoxEls[id]).style.width=(seated?(drinks[id]/6*100):0)+'%';
+   const seat=document.getElementById(seats[id]);
+   seat.querySelector('.mug-count').textContent=id==='player'?'Твой счёт: '+scores[id]:'Опьянение: '+drinks[id]+'/6';
+   seat.classList.toggle('drunk',drinks[id]>=2&&drinks[id]<4);
+   seat.classList.toggle('very-drunk',drinks[id]>=4&&drinks[id]<6);
+   seat.classList.toggle('passed-out',drinks[id]>=6);
+  });
   status.textContent=!seated?'Место свободно · 3 раунда':finished?'Партия завершена': 'Раунд '+(round+1)+' из 3 · Выбран d'+die;
  }
  function setDie(sides){
@@ -168,25 +193,30 @@ button{font:inherit;cursor:pointer}
   ids.forEach(id=>{results[id]=rnd(die);const el=document.getElementById(faces[id]);el.classList.remove('rolling');el.textContent=results[id]});
   const high=Math.max(...Object.values(results));const winners=ids.filter(id=>results[id]===high);
   winners.forEach(id=>scores[id]++);
-  ids.forEach(id=>{drinks[id]=Math.min(6,drinks[id]+1);const seat=document.getElementById(seats[id]);seat.classList.toggle('wobble',drinks[id]>=3);seat.classList.toggle('sleep',drinks[id]>=6);seat.classList.toggle('winner',winners.includes(id))});
+  // Everyone drinks one mug after a round; everyone who did not win drinks an extra mug.
+  ids.forEach(id=>{
+   drinks[id]=Math.min(6,drinks[id]+(winners.includes(id)?1:2));
+   const seat=document.getElementById(seats[id]);
+   seat.classList.toggle('winner',winners.includes(id));
+  });
   round++;
   ids.forEach(id=>say(id,phrases[id][rnd(4)-1]));
   const resultLine=ids.map(id=>names[id]+' — '+results[id]).join(' · ');
-  const winnerText=winners.length===1?names[winners[0]]:winners.map(id=>names[id]).join(' и ');
-  log.innerHTML='<strong>Раунд '+round+':</strong> '+resultLine+'. <strong>'+winnerText+'</strong> забирает очко!';
+  log.innerHTML='<strong>Раунд '+round+':</strong> '+resultLine+'. Очки и опьянение обновлены. Общий победитель будет объявлен после третьего раунда.';
   update();
   if(round>=3){
    finished=true;const best=Math.max(...Object.values(scores));const champions=ids.filter(id=>scores[id]===best);
    const champion=champions.length===1?names[champions[0]]:champions.map(id=>names[id]).join(' и ');
-   instructions.textContent=champions.includes('player')?'Партия окончена. '+(champions.length===1?'Ты победил!':'У тебя ничья за первое место!'):'Партия окончена. Победитель: '+champion+'.';
+   instructions.textContent=champions.includes('player')?'Все три раунда сыграны. '+(champions.length===1?'Ты победил!':'У тебя ничья за первое место!'):'Все три раунда сыграны. Победитель: '+champion+'.';
    log.innerHTML+='<br><strong>Бармен:</strong> «Победитель — '+champion+'! Остальные могут оплатить разбитые кружки».';
    roll.disabled=true;select.querySelectorAll('button').forEach(b=>b.disabled=true);
    ids.forEach(id=>document.getElementById(seats[id]).classList.remove('winner'));
    const champ=champions[0];document.getElementById(seats[champ]).classList.add('winner');
    status.textContent='Партия завершена · Победитель: '+champion;
   }else{
-   instructions.textContent='Раунд '+round+' завершён. Выбери кубик для следующего броска или оставь текущий.';
-   roll.textContent='Следующий бросок';
+   instructions.textContent='Раунд '+round+' завершён. Можно продолжать! Выбери кубик для следующего раунда или оставь текущий.';
+   roll.textContent='Бросить следующий раз';
+   roll.disabled=false;
    select.querySelectorAll('button').forEach(b=>b.disabled=false);
   }
   busy=false;
@@ -195,7 +225,7 @@ button{font:inherit;cursor:pointer}
   gameVersion++;busy=false;seated=false;round=0;finished=false;scores={player:0,merc:0,merchant:0,sailor:0};drinks={player:0,merc:0,merchant:0,sailor:0};
   document.querySelector('#seat-player .name').textContent='Свободное место';
   document.getElementById('seat-player').classList.remove('wobble');
-  ids.forEach(id=>{const seat=document.getElementById(seats[id]);seat.classList.remove('wobble','sleep','winner','talking');seat.querySelector('.bubble').textContent='';const el=document.getElementById(faces[id]);el.className='die d20';el.textContent='?';});
+  ids.forEach(id=>{const seat=document.getElementById(seats[id]);seat.classList.remove('wobble','sleep','winner','talking','drunk','very-drunk','passed-out');seat.querySelector('.bubble').textContent='';const el=document.getElementById(faces[id]);el.className='die d20';el.textContent='?';});
   sit.disabled=false;roll.disabled=true;roll.textContent='Бросить кубики';select.hidden=true;select.querySelectorAll('button').forEach(b=>b.disabled=false);
   instructions.textContent='Место снова свободно. Следующий герой может занять его и сыграть новую партию.';
   log.innerHTML='<strong>Бармен:</strong> «Ну вот, один ушёл. Кто следующий? Место свободно!»';
