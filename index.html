@@ -687,7 +687,7 @@ body:has(.story-detail-page:target) .stories-page{display:none!important}
 <div class="bestiary-grid">
 <a class="bestiary-category" href="#gods"><div class="bestiary-symbol" aria-hidden="true">♜</div><h3>БОГИ</h3><p>Божества и обитатели божественного мира. Открыть записи.</p></a>
 <a class="bestiary-category" href="#monsters"><div class="bestiary-symbol" aria-hidden="true">⚔</div><h3>МОНСТРЫ</h3><p>Необычные чудовища и подбоссы. Открыть записи.</p></a>
-<article class="bestiary-category"><div class="bestiary-symbol" aria-hidden="true">☽</div><h3>ДУХИ</h3><p>Духи и сверхъестественные сущности, существующие за пределами привычного мира.</p></article>
+<a class="bestiary-category" href="#spirits"><div class="bestiary-symbol" aria-hidden="true">☽</div><h3>ДУХИ</h3><p>Духи и сверхъестественные сущности, которые вмешиваются в судьбы героев. Открыть записи.</p></a>
 <article class="bestiary-category"><div class="bestiary-symbol" aria-hidden="true">✧</div><h3>ДРУГИЕ СУЩЕСТВА</h3><p>Необычные обитатели мира, которые не относятся к первым трём разделам.</p></article>
 </div>
 </section><section class="monster-page" id="monsters">
@@ -1246,6 +1246,125 @@ body:has(.story-detail-page:target) .stories-page{display:none!important}
 @media(prefers-reduced-motion:reduce){.chest-opening,.chest-opening-subtitle{transition-duration:.15s}.opening-chest.is-rattling{animation-duration:.2s}.opening-lock.is-broken{animation-duration:.2s}.opening-lid.is-open{animation-duration:.3s}.opening-light.is-burst{animation-duration:.3s}.chest-opening-rays.is-on{animation-duration:.3s}.opening-dust.is-on i{animation-duration:.3s}.chest-opening-status.is-shown{animation-duration:.2s}}
 
 </style>
+
+<style>
+/* Spirits in the Bestiary */
+.spirit-page,.spirit-detail{display:none;max-width:1200px;margin:12px auto;padding:14px;border:3px ridge #a77b3c;background:linear-gradient(145deg,#1c1b22,#10151d);box-shadow:0 0 0 2px #3b2b1d inset;color:#eadfca}
+.spirit-page:target,.spirit-detail:target{display:block!important}
+body:has(.spirit-page:target) #world,body:has(.spirit-page:target) .characters,body:has(.spirit-page:target) .dice-page,body:has(.spirit-page:target) .detail,body:has(.spirit-page:target) .bestiary-page,body:has(.spirit-page:target) .god-page,body:has(.spirit-page:target) .god-detail,body:has(.spirit-page:target) .monster-page,body:has(.spirit-page:target) .monster-detail{display:none!important}
+body:has(.spirit-detail:target) #world,body:has(.spirit-detail:target) .characters,body:has(.spirit-detail:target) .dice-page,body:has(.spirit-detail:target) .detail,body:has(.spirit-detail:target) .bestiary-page,body:has(.spirit-detail:target) .god-page,body:has(.spirit-detail:target) .god-detail,body:has(.spirit-detail:target) .monster-page,body:has(.spirit-detail:target) .monster-detail,body:has(.spirit-detail:target) .spirit-page{display:none!important}
+.spirit-title{text-align:center;color:#f0d29a;font-size:30px;font-weight:normal;margin:8px 0}
+.spirit-intro{text-align:center;color:#c8b99b;font:13px/1.6 system-ui;max-width:760px;margin:0 auto 20px}
+.spirit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.spirit-card{display:block;min-width:0;padding:9px;border:3px ridge #98703b;background:linear-gradient(145deg,#29252a,#141820);text-decoration:none;text-align:center;color:#f0d29a;transition:transform .15s,border-color .15s}
+.spirit-card:hover{transform:translateY(-2px);border-color:#e2b96e}
+.spirit-card-art{display:grid;place-items:center;width:100%;aspect-ratio:5/3;border:1px solid #6f512f;overflow:hidden;background:radial-gradient(ellipse at 50% 55%,#4a3b31 0%,#20202a 46%,#10151d 100%);color:#d8ad63;text-shadow:0 0 24px #d19b4b;font:clamp(54px,10vw,100px) Georgia,serif}
+.spirit-card:nth-child(2) .spirit-card-art{background:radial-gradient(ellipse at 50% 60%,#69502d 0%,#30252a 48%,#10151d 100%);color:#f1c56e}
+.spirit-card:nth-child(3) .spirit-card-art{background:radial-gradient(ellipse at 50% 60%,#294858 0%,#20212b 50%,#10151d 100%);color:#a9d3d4}
+.spirit-card:nth-child(4) .spirit-card-art{background:radial-gradient(ellipse at 50% 60%,#51405a 0%,#25212b 50%,#10151d 100%);color:#c6a6d6}
+.spirit-card h3{font-size:17px;font-weight:normal;letter-spacing:.04em;margin:9px 0 5px}
+.spirit-card p{font:12px/1.45 system-ui;color:#c8b99b;margin:0 2px 4px}
+.spirit-entry{display:grid;grid-template-columns:minmax(190px,32%) 1fr;gap:20px;align-items:start;margin-top:12px}
+.spirit-portrait{display:grid;place-items:center;aspect-ratio:3/4;border:3px ridge #98703b;background:radial-gradient(ellipse at 50% 50%,#4a3b31 0%,#20202a 48%,#10151d 100%);color:#d8ad63;text-shadow:0 0 28px #d19b4b;font:clamp(90px,16vw,170px) Georgia,serif;box-shadow:0 4px 18px #000}
+.spirit-portrait.candle{background:radial-gradient(ellipse at 50% 55%,#69502d 0%,#30252a 48%,#10151d 100%);color:#f1c56e}
+.spirit-portrait.water{background:radial-gradient(ellipse at 50% 55%,#294858 0%,#20212b 50%,#10151d 100%);color:#a9d3d4}
+.spirit-portrait.step{background:radial-gradient(ellipse at 50% 55%,#51405a 0%,#25212b 50%,#10151d 100%);color:#c6a6d6}
+.spirit-copy h3{color:#f0d29a;font-size:25px;font-weight:normal;margin:0 0 5px}
+.spirit-copy h4{color:#e2b96e;font-size:17px;font-weight:normal;margin:18px 0 6px}
+.spirit-copy p,.spirit-copy li{font:14px/1.65 system-ui;color:#d6c9b0}
+.spirit-copy ul{padding-left:22px}
+.spirit-subtitle{font-style:italic;color:#c8b99b!important;margin-top:0}
+.spirit-effects-wrap{width:100%;overflow-x:auto;margin:8px 0 12px}
+.spirit-effects{width:100%;min-width:520px;border-collapse:collapse;background:#17171b;font:12px/1.45 system-ui}
+.spirit-effects th,.spirit-effects td{border:1px solid #70532f;padding:7px 8px;text-align:left;vertical-align:top}
+.spirit-effects th{color:#e2b96e;font-weight:normal;width:23%}
+.spirit-effects td{color:#f0e4cb}
+.spirit-note{padding:10px 12px;border-left:2px solid #98703b;background:#171820;color:#c8b99b;font:12px/1.55 system-ui;margin:12px 0}
+@media(max-width:650px){.spirit-grid{gap:8px}.spirit-card{padding:6px}.spirit-card h3{font-size:14px}.spirit-card p{font-size:11px}.spirit-entry{grid-template-columns:1fr}.spirit-portrait{max-width:360px;width:100%;justify-self:center}.spirit-copy p,.spirit-copy li{font-size:13px}.spirit-title{font-size:25px}.spirit-page,.spirit-detail{margin:6px;padding:10px}}
+</style>
+
+<section class="spirit-page" id="spirits">
+<a class="back" href="#bestiary">← Вернуться к бестиарию</a>
+<h2 class="spirit-title">ДУХИ</h2>
+<p class="spirit-intro">Это не противники и не чудовища, которых нужно победить. Духи появляются на пути героев, вступают с ними в собственные игры и могут оставить после встречи проклятие или дар. Одно и то же существо воздействует на каждого героя по-разному.</p>
+<div class="spirit-grid">
+<a class="spirit-card" href="#spirit-bell"><div class="spirit-card-art" aria-hidden="true">♟</div><h3>БЕЗЛИКИЙ ЗВОНАРЬ</h3><p>Молчаливый вестник погребального звона. Его проклятие у каждого своё.</p></a>
+<a class="spirit-card" href="#spirit-candle"><div class="spirit-card-art" aria-hidden="true">♜</div><h3>ГОСПОЖА ПОСЛЕДНЯЯ СВЕЧА</h3><p>Загадочная женщина, способная одарить героя маленьким чудом.</p></a>
+<a class="spirit-card" href="#spirit-water"><div class="spirit-card-art" aria-hidden="true">◉</div><h3>ТОТ, КТО СИДИТ ПОД ВОДОЙ</h3><p>Неподвижная фигура на дне. Забирает одно, оставляет другое.</p></a>
+<a class="spirit-card" href="#spirit-step"><div class="spirit-card-art" aria-hidden="true">↟</div><h3>ГОСПОДИН ЧУЖОЙ ШАГ</h3><p>Капризный спутник, который предлагает обменяться шагами.</p></a>
+</div>
+</section>
+
+<section class="spirit-detail" id="spirit-bell">
+<div class="monster-navigation"><a class="back" href="#spirits">← Ко всем духам</a><a class="back" href="#bestiary">← К бестиарию</a></div>
+<article class="spirit-entry"><div class="spirit-portrait" role="img" aria-label="Безликий звонарь">♟</div><div class="spirit-copy">
+<h3>БЕЗЛИКИЙ ЗВОНАРЬ</h3><p class="spirit-subtitle">Враждебная сущность</p>
+<h4>Внешность</h4><p>Высокая фигура в старом монашеском облачении. Вместо головы — пустой капюшон, внутри которого висит маленький бронзовый колокольчик. В руках он держит тяжёлый погребальный колокол. Лица, кожи и даже ног у него никто не видел.</p>
+<h4>Поведение</h4><p>Не разговаривает, не нападает и не преследует героев. Он просто появляется и начинает звонить. Если кто-то отвечает ему звуком, пытается позвонить в ответ или произносит своё имя после третьего удара — звонарь выбирает жертву.</p>
+<h4>Проклятие</h4><p>Каждый герой получает собственное последствие:</p>
+<div class="spirit-effects-wrap"><table class="spirit-effects"><tr><th>Герой</th><th>Что забирает звонарь</th></tr>
+<tr><td>Борислав «Три кишки»</td><td>Его оружие иногда издаёт тихий погребальный звон. Когда он пытается скрыться, этот звук может выдать его положение.</td></tr>
+<tr><td>Жоппер Кривозуб</td><td>Он больше не может бесшумно красться: при попытке скрытного передвижения иногда звенит невидимый колокольчик.</td></tr>
+<tr><td>Отец Пузаний</td><td>Алкоголь больше не приносит ему привычного удовольствия. Он по-прежнему может пить, но вкус кажется ему пресным.</td></tr>
+<tr><td>Прокопий Заклинатель</td><td>Каждый раз при произнесении заклинания слышит второй голос, повторяющий последние слова его заклинания.</td></tr>
+<tr><td>Филимон Четыре Подковы</td><td>Иногда слышит звон там, где поблизости нет ни колоколов, ни людей. Звук сбивает его с толку во время выслеживания.</td></tr>
+<tr><td>Клавдия Клювоносная</td><td>Её голос иногда становится похож на погребальный шёпот. При разговоре с незнакомцами те могут испытывать необъяснимую тревогу.</td></tr>
+</table></div>
+<p class="spirit-note">Проклятия не наносят урон и не лишают персонажей основных способностей. Это неприятные спутники на всё оставшееся приключение.</p>
+</div></article></section>
+
+<section class="spirit-detail" id="spirit-candle">
+<div class="monster-navigation"><a class="back" href="#spirits">← Ко всем духам</a><a class="back" href="#bestiary">← К бестиарию</a></div>
+<article class="spirit-entry"><div class="spirit-portrait candle" role="img" aria-label="Госпожа Последняя Свеча">♜</div><div class="spirit-copy">
+<h3>ГОСПОЖА ПОСЛЕДНЯЯ СВЕЧА</h3><p class="spirit-subtitle">Благосклонная сущность</p>
+<h4>Внешность</h4><p>Женщина в старинном платье с длинным шлейфом. Лицо закрыто полупрозрачной вуалью. Вместо глаз — два маленьких огонька. В руке она держит свечу, которая никогда не сгорает.</p>
+<h4>Поведение</h4><p>Появляется, когда в помещении гаснет последний источник света. Не любит громких разговоров, грубости и попыток прикоснуться к её свече. Может предложить герою зажечь от неё свою свечу или попросить рассказать воспоминание о ком-то дорогом.</p>
+<h4>Благословение</h4><p>Если герой проявляет уважение и выполняет её небольшую просьбу, она одаривает его:</p>
+<div class="spirit-effects-wrap"><table class="spirit-effects"><tr><th>Герой</th><th>Что дарует госпожа</th></tr>
+<tr><td>Борислав «Три кишки»</td><td>Один раз за всю кампанию его оружие не сломается и не потеряется в критический момент.</td></tr>
+<tr><td>Жоппер Кривозуб</td><td>Раз за приключение он может найти одну небольшую полезную вещь среди старого хлама, которую раньше не заметил.</td></tr>
+<tr><td>Отец Пузаний</td><td>Один раз может выпить любой напиток и восстановить силы после тяжёлого дня, даже если напиток совершенно отвратительный.</td></tr>
+<tr><td>Прокопий Заклинатель</td><td>Один раз может почувствовать, что рядом используется магия, даже если не видит её источника.</td></tr>
+<tr><td>Филимон Четыре Подковы</td><td>Один раз может безошибочно определить направление, в котором недавно прошёл нужный ему человек или зверь.</td></tr>
+<tr><td>Клавдия Клювоносная</td><td>Один раз может почувствовать, что кто-то из присутствующих скрывает от неё важную правду.</td></tr>
+</table></div>
+<p class="spirit-note">Подарки не превращают героев в сверхсильных персонажей. Каждый получает небольшое преимущество, которое может пригодиться в нужный момент.</p>
+</div></article></section>
+
+<section class="spirit-detail" id="spirit-water">
+<div class="monster-navigation"><a class="back" href="#spirits">← Ко всем духам</a><a class="back" href="#bestiary">← К бестиарию</a></div>
+<article class="spirit-entry"><div class="spirit-portrait water" role="img" aria-label="Тот, кто сидит под водой">◉</div><div class="spirit-copy">
+<h3>ТОТ, КТО СИДИТ ПОД ВОДОЙ</h3><p class="spirit-subtitle">Непредсказуемая сущность</p>
+<h4>Внешность</h4><p>Бледная человеческая фигура, сидящая на дне затопленного помещения. Руки непропорционально длинные, волосы плавают вокруг головы, а лицо постоянно меняется. Иногда оно напоминает знакомого героя, иногда — совершенно незнакомого человека.</p>
+<h4>Поведение</h4><p>Не двигается, пока на него смотрят. Повторяет последние слова собеседников, но иногда произносит фразы, которые никто не говорил. Может протянуть руку из воды и предложить герою прикоснуться к ней.</p>
+<h4>Обмен</h4><p>Он не злой и не добрый. Он забирает у каждого что-то незначительное, но взамен оставляет необычный дар. Герой не выбирает, что именно получит.</p>
+<div class="spirit-effects-wrap"><table class="spirit-effects"><tr><th>Герой</th><th>Что забирает</th><th>Что дарует</th></tr>
+<tr><td>Борислав «Три кишки»</td><td>На время забывает одну незначительную историю из своего прошлого.</td><td>Иногда чувствует приближение опасности за несколько мгновений до её появления.</td></tr>
+<tr><td>Жоппер Кривозуб</td><td>Теряет способность запоминать лица незнакомцев.</td><td>Начинает замечать небольшие тайники и спрятанные вещи.</td></tr>
+<tr><td>Отец Пузаний</td><td>На некоторое время теряет способность чувствовать вкус еды.</td><td>Может определить, безопасна ли жидкость для питья.</td></tr>
+<tr><td>Прокопий Заклинатель</td><td>Забывает одно простое слово, которое периодически не может вспомнить.</td><td>Начинает различать магические следы, оставленные совсем недавно.</td></tr>
+<tr><td>Филимон Четыре Подковы</td><td>На время теряет способность узнавать один знакомый запах.</td><td>Может находить следы даже там, где их почти невозможно заметить.</td></tr>
+<tr><td>Клавдия Клювоносная</td><td>Забывает один незначительный фрагмент недавнего разговора.</td><td>Иногда видит во сне обрывки чужих воспоминаний.</td></tr>
+</table></div>
+</div></article></section>
+
+<section class="spirit-detail" id="spirit-step">
+<div class="monster-navigation"><a class="back" href="#spirits">← Ко всем духам</a><a class="back" href="#bestiary">← К бестиарию</a></div>
+<article class="spirit-entry"><div class="spirit-portrait step" role="img" aria-label="Господин Чужой Шаг">↟</div><div class="spirit-copy">
+<h3>ГОСПОДИН ЧУЖОЙ ШАГ</h3><p class="spirit-subtitle">Капризная сущность</p>
+<h4>Внешность</h4><p>Худой силуэт в длинном плаще. Ноги непропорционально длинные, ступни вывернуты назад. Лица нет, вместо него гладкая тёмная поверхность. Передвигается странными широкими шагами, будто расстояние для него ничего не значит.</p>
+<h4>Поведение</h4><p>Появляется позади группы и начинает повторять шаги последнего идущего. Если остановиться — продолжает идти. Если обернуться — исчезает. Иногда оставляет на земле следы, ведущие в противоположную сторону.</p>
+<h4>Игра</h4><p>Может предложить каждому герою обменяться одним шагом. Если герой соглашается, сущность забирает часть его привычной походки и взамен оставляет небольшое преимущество. Он любит, когда с ним разговаривают, но терпеть не может, когда его называют человеком.</p>
+<div class="spirit-effects-wrap"><table class="spirit-effects"><tr><th>Герой</th><th>Что забирает</th><th>Что дарует</th></tr>
+<tr><td>Борислав «Три кишки»</td><td>Иногда спотыкается на ровном месте.</td><td>Один раз может сделать невероятно длинный прыжок.</td></tr>
+<tr><td>Жоппер Кривозуб</td><td>Его шаги иногда звучат громче, чем должны.</td><td>Может один раз пройти по узкой поверхности, не потеряв равновесия.</td></tr>
+<tr><td>Отец Пузаний</td><td>Иногда начинает идти не в ту сторону, куда собирался.</td><td>Может пройти длинное расстояние, практически не уставая.</td></tr>
+<tr><td>Прокопий Заклинатель</td><td>Иногда непроизвольно делает шаг назад при произнесении заклинаний.</td><td>Может один раз мгновенно переместиться на несколько шагов в пределах видимости.</td></tr>
+<tr><td>Филимон Четыре Подковы</td><td>Его следы иногда выглядят так, будто он двигался в обратную сторону.</td><td>Может один раз пройти по чужим следам, не оставляя собственных.</td></tr>
+<tr><td>Клавдия Клювоносная</td><td>Иногда её тень движется с небольшим опозданием.</td><td>Может один раз бесшумно переместиться на небольшое расстояние.</td></tr>
+</table></div>
+</div></article></section>
+
 <script src="assets-1.js"></script>
 <script src="assets-2.js"></script>
 <script>
