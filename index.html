@@ -344,8 +344,8 @@ body:has(.spirit-detail:target) #world,body:has(.spirit-detail:target) .characte
 /* Original animated tavern GIF on the atlas title screen */
 header{overflow:visible;min-height:270px}
 .header-tavern-art{position:absolute;left:18px;top:68px;bottom:64px;width:calc(48% - 25px);height:calc(100% - 132px);object-fit:contain;object-position:center;display:block}
-@media(max-width:850px){header{min-height:280px}.header-tavern-art{left:12px;top:70px;bottom:65px;width:calc(48% - 18px);height:calc(100% - 135px)}}
-@media(max-width:480px){header{min-height:280px}.header-tavern-art{left:10px;top:70px;bottom:65px;width:calc(48% - 15px);height:calc(100% - 135px)}}
+@media(max-width:850px){header{min-height:280px}.header-tavern-art{left:12px;top:40%;bottom:auto;width:calc(48% - 18px);height:auto;aspect-ratio:1;transform:translateY(-50%)}}
+@media(max-width:480px){header{min-height:280px}.header-tavern-art{left:10px;top:40%;bottom:auto;width:calc(48% - 15px);height:auto;aspect-ratio:1;transform:translateY(-50%)}}
 /* Sound settings */
 header{position:relative;z-index:30}
 .sound-controls{display:flex;align-items:stretch;position:relative;flex:1 1 100%;width:100%}
