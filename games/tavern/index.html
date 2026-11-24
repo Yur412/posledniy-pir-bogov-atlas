@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Пьяная таверна — Последний пир богов</title>
+<style>
+:root{color-scheme:dark;--gold:#e9bd70;--wood:#6f4228;--cream:#f0dfbd;--ink:#171018}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#0b1017;color:var(--cream);font-family:Georgia,serif}
+body{padding:12px}
+button{font:inherit;cursor:pointer}
+.game{max-width:1120px;margin:auto;border:4px ridge #a77b3c;background:#15151b;box-shadow:0 0 0 3px #38291e,0 12px 35px #0009}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:linear-gradient(#29212a,#17151c);border-bottom:3px solid #77532f}
+.brand{color:var(--gold);font-size:clamp(18px,3vw,26px);text-shadow:2px 2px #542b25;letter-spacing:.05em}
+.status{font:12px system-ui;color:#d6c39f;text-align:right}
+.scene{position:relative;min-height:590px;overflow:hidden;isolation:isolate;background-color:#463022;background-image:linear-gradient(90deg,#0002 1px,transparent 1px),linear-gradient(#0002 1px,transparent 1px),repeating-linear-gradient(0deg,#69432c 0 28px,#5c3825 28px 56px);background-size:28px 28px,28px 28px,100% 56px;border-bottom:4px solid #241811;image-rendering:pixelated}
+.scene:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 48%,#f2ad4930,transparent 52%),linear-gradient(90deg,#160d0b88,transparent 17%,transparent 83%,#160d0b88);pointer-events:none;z-index:-0}
+.wall{position:absolute;left:0;right:0;top:0;height:82px;background:repeating-linear-gradient(90deg,#302027 0 54px,#46302b 54px 58px);border-bottom:10px solid #241714;box-shadow:0 7px 0 #8a5a31}
+.window{position:absolute;top:12px;left:7%;width:100px;height:55px;border:7px solid #4b2d20;background:linear-gradient(#192a39,#526477 58%,#253343);box-shadow:inset 0 0 0 3px #c08a4b}
+.window:before,.window:after{content:"";position:absolute;background:#6e4729}.window:before{width:6px;top:0;bottom:0;left:40px}.window:after{height:5px;left:0;right:0;top:22px}
+.shelf{position:absolute;top:22px;right:7%;width:190px;height:38px;border:6px solid #4b2d20;background:repeating-linear-gradient(90deg,#8b5834 0 22px,#44291e 22px 27px)}
+.shelf:after{content:"";position:absolute;left:-10px;right:-10px;bottom:-12px;height:7px;background:#a36b3d}
+.fireplace{position:absolute;left:5%;bottom:8%;width:126px;height:132px;background:#33201b;border:9px solid #79502e;box-shadow:inset 0 0 0 5px #1b1414}
+.fireplace:before{content:"";position:absolute;left:22px;right:22px;bottom:15px;height:55px;background:radial-gradient(ellipse at 50% 100%,#fff3a2 0 8%,#ffbd48 9% 27%,#d84b22 28% 55%,transparent 57%);animation:flame .7s steps(3) infinite alternate;filter:drop-shadow(0 0 10px #f58a2d)}
+.fireplace:after{content:"";position:absolute;left:12px;right:12px;bottom:9px;height:8px;background:#68432b;box-shadow:0 -10px #3c2920}
+@keyframes flame{to{transform:scale(.88,1.12);filter:drop-shadow(0 0 17px #ffb13b)}}
+.lantern{position:absolute;top:92px;left:50%;width:24px;height:34px;transform:translateX(-50%);background:#d58b38;border:4px solid #53301c;box-shadow:0 0 28px 12px #ffb84b55;animation:glow 2s steps(2) infinite}
+@keyframes glow{50%{box-shadow:0 0 18px 7px #ffb84b33}}
+.bar{position:absolute;right:4%;top:102px;width:25%;height:75px;background:repeating-linear-gradient(90deg,#6b3d25 0 30px,#81502f 30px 35px);border:8px solid #3b241b;box-shadow:0 8px 0 #291711}
+.bar:after{content:"ТРАКТИР";position:absolute;left:0;right:0;top:22px;text-align:center;color:#e9bd70;font:bold 12px Georgia;letter-spacing:.2em}
+.barrel{position:absolute;right:8%;top:205px;width:55px;height:64px;border-radius:8px;background:repeating-linear-gradient(90deg,#58331f 0 12px,#81502f 12px 17px);border:5px solid #3a241a}
+.barrel:after{content:"";position:absolute;left:-5px;right:-5px;top:15px;height:6px;background:#b17b43;box-shadow:0 26px #b17b43}
+.rug{position:absolute;left:50%;top:50%;width:66%;height:56%;transform:translate(-50%,-43%);border:8px ridge #9b6337;background:repeating-linear-gradient(45deg,#71352f 0 12px,#824b36 12px 24px);box-shadow:0 0 0 5px #3b241c}
+.table{position:absolute;left:50%;top:53%;width:min(48%,470px);height:245px;transform:translate(-50%,-50%);border-radius:48% 48% 43% 43%;background:radial-gradient(ellipse at 50% 35%,#a87542,#744426 65%,#42261b 68%);border:12px solid #3b2118;box-shadow:inset 0 0 0 5px #bd8950,0 17px 0 #291710,0 23px 12px #0009;z-index:2}
+.table:before{content:"";position:absolute;left:10%;right:10%;top:18%;height:5px;background:#d6a15c55;box-shadow:0 120px #301b1666}
+.table-label{position:absolute;left:0;right:0;top:42%;text-align:center;color:#e5bd7b;font:bold 12px Georgia;letter-spacing:.18em;text-shadow:2px 2px #4a2719}
+.dice-zone{position:absolute;left:50%;top:55%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;gap:18px;z-index:5;width:75%}
+.die{position:relative;display:grid;place-items:center;width:62px;height:62px;color:#fff0c8;font:bold 23px Georgia;text-shadow:2px 2px #321b16;background:linear-gradient(145deg,#b84a40,#6c242c);border:4px solid #edc16e;box-shadow:4px 5px 0 #341a18,0 0 0 2px #542b24;image-rendering:pixelated;clip-path:polygon(50% 0,88% 16%,100% 55%,74% 100%,24% 100%,0 55%,12% 16%);opacity:0;transform:translateY(-35px) rotate(0);transition:opacity .2s}
+.die.visible{opacity:1}
+.die.rolling{animation:roll .82s steps(8) both}
+@keyframes roll{0%{transform:translateY(-55px) rotate(0) scale(.6)}45%{transform:translateY(8px) rotate(250deg) scale(1.15)}75%{transform:translateY(-5px) rotate(520deg) scale(.95)}100%{transform:translateY(0) rotate(720deg) scale(1)}}
+.die.d4{width:55px;height:55px;background:linear-gradient(140deg,#4d8b68,#1d4d3b);clip-path:polygon(50% 0,100% 90%,0 90%)}
+.die.d8{background:linear-gradient(140deg,#547eaf,#243c72);clip-path:polygon(50% 0,90% 20%,100% 60%,50% 100%,0 60%,10% 20%)}
+.die.d20{background:linear-gradient(140deg,#b64c43,#68252e)}
+.seat{position:absolute;z-index:6;display:flex;flex-direction:column;align-items:center;gap:4px;width:118px;text-align:center}
+.seat .name{font:bold 12px Georgia;color:#f5dba8;text-shadow:2px 2px #2c1711;background:#2c1b17d9;padding:3px 7px;border:1px solid #9b6c3a;white-space:nowrap}
+.seat .sprite{position:relative;width:48px;height:48px;image-rendering:pixelated;filter:drop-shadow(3px 4px 0 #20120e)}
+.sprite:before{content:"";position:absolute;left:10px;top:4px;width:28px;height:24px;background:#c18b59;border:4px solid #38231b;box-shadow:0 18px 0 -3px #4a5b68,0 25px 0 -2px #30231e}
+.sprite:after{content:"";position:absolute;left:18px;top:14px;width:4px;height:4px;background:#201513;box-shadow:9px 0 #201513}
+.seat.player .sprite:before{background:#d6ad83;box-shadow:0 18px 0 -3px #476c85,0 25px 0 -2px #30231e}
+.seat.merc .sprite:before{background:#b48a64;box-shadow:0 18px 0 -3px #59634d,0 25px 0 -2px #30231e}
+.seat.merchant .sprite:before{background:#e0b36d;box-shadow:0 18px 0 -3px #8a4b35,0 25px 0 -2px #30231e}
+.seat.sailor .sprite:before{background:#9e795d;box-shadow:0 18px 0 -3px #52647c,0 25px 0 -2px #30231e}
+.seat .mug{position:absolute;width:13px;height:14px;right:3px;bottom:4px;background:#bd8a44;border:3px solid #50301d;box-shadow:0 -5px 0 -2px #f0d18b}
+.seat.player{left:50%;bottom:3%;transform:translateX(-50%)}
+.seat.merc{left:3%;top:35%}
+.seat.merchant{right:3%;top:35%}
+.seat.sailor{left:50%;top:7%;transform:translateX(-50%)}
+.seat .bubble{display:none;max-width:150px;padding:5px 7px;background:#f1dfb9;color:#38251b;border:2px solid #6b4329;font:11px/1.25 system-ui;box-shadow:2px 3px #1d120e}
+.seat.talking .bubble{display:block;animation:pop .2s steps(2)}
+@keyframes pop{from{transform:scale(.5)}to{transform:scale(1)}}
+.seat.wobble .sprite{animation:wobble .55s steps(3) infinite}
+@keyframes wobble{0%,100%{transform:rotate(-5deg) translateY(0)}50%{transform:rotate(6deg) translateY(-3px)}}
+.seat.sleep .sprite{transform:rotate(90deg) translateY(8px)}
+.seat.winner .name{background:#8a622d;color:#fff0bd;box-shadow:0 0 12px #ffd77a}
+.mug-count{font:10px system-ui;color:#e8c78e;background:#2c1b17c9;padding:2px 5px}
+.panel{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:14px;background:linear-gradient(#201a1d,#11151c)}
+.instructions{font:13px/1.5 system-ui;color:#d6c5a5}
+.controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.action{border:2px ridge #b4874b;background:linear-gradient(#70472b,#43291e);color:#f6dfb1;padding:10px 14px;font:bold 12px system-ui;box-shadow:0 3px 0 #21140f}
+.action:hover{filter:brightness(1.2)}.action:disabled{opacity:.45;cursor:not-allowed}
+.action.primary{background:linear-gradient(#9a6934,#604021);color:#fff0c8}
+.action.reset{background:linear-gradient(#59333a,#321d24)}
+.die-select{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:9px}
+.die-select button{border:1px solid #a77b3c;background:#211b1c;color:#e9d6b3;padding:6px 12px;font:bold 12px system-ui}
+.die-select button[aria-pressed=true]{background:#8b592f;color:#fff1c9;outline:2px solid #e4bd75}
+.scoreboard{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;padding:10px;background:#0e1218;border-top:1px solid #75522e}
+.score{border:1px solid #684b2c;background:#211b1c;padding:7px;text-align:center;font:11px system-ui;color:#d9c7a5}
+.score strong{display:block;color:#f0d18f;font: bold 20px Georgia;margin:3px}
+.score small{color:#b8a27f}
+.log{min-height:40px;padding:9px 14px;background:#11151b;color:#c7b795;border-top:1px solid #463323;font:12px/1.5 system-ui}
+.log strong{color:#eac37d}
+.footer{padding:8px;text-align:center;color:#8e7a5d;background:#11151b;font:10px system-ui}
+@media(max-width:700px){
+ body{padding:4px}.topbar{padding:8px}.scene{min-height:520px}.wall{height:64px}.window{left:4%;width:68px;height:42px}.shelf{right:4%;width:115px;height:30px}.bar{top:82px;width:30%;height:58px}.bar:after{top:16px;font-size:9px}.fireplace{width:86px;height:100px;left:3%;bottom:5%}.rug{width:90%;height:55%}.table{width:64%;height:205px;top:54%}.seat{width:92px}.seat .name{font-size:10px}.seat .sprite{transform:scale(.85)}.seat.merc{left:0;top:37%}.seat.merchant{right:0;top:37%}.seat.sailor{top:5%}.seat.player{bottom:1%}.seat .bubble{font-size:9px;max-width:115px}.die{width:48px;height:48px;font-size:18px}.die.d4{width:42px;height:42px}.dice-zone{gap:8px}.panel{grid-template-columns:1fr}.controls{justify-content:flex-start}.action{padding:9px 10px}.scoreboard{grid-template-columns:repeat(2,1fr)}.instructions{font-size:12px}
+}
+@media(max-width:390px){.scene{min-height:480px}.table{width:68%;height:180px}.seat{width:82px}.seat.merc,.seat.merchant{top:39%}.brand{font-size:17px}.status{font-size:10px}}
+</style>
+</head>
+<body>
+<div class="game">
+ <header class="topbar"><div class="brand">✦ ПЬЯНАЯ ТАВЕРНА ✦</div><div class="status" id="status">Место свободно · 3 раунда</div></header>
+ <main>
+  <section class="scene" aria-label="Пиксельная таверна, вид сверху">
+   <div class="wall"></div><div class="window"></div><div class="shelf"></div><div class="lantern"></div><div class="bar"></div><div class="barrel"></div><div class="fireplace"></div><div class="rug"></div>
+   <div class="table"><div class="table-label">ИГРА В КОСТИ</div></div>
+   <div class="dice-zone" id="dice-zone"><div class="die d20" id="die-player">?</div><div class="die d20" id="die-merc">?</div><div class="die d20" id="die-merchant">?</div><div class="die d20" id="die-sailor">?</div></div>
+   <div class="seat sailor" id="seat-sailor"><span class="name">Старый моряк</span><div class="sprite"><i class="mug"></i></div><span class="mug-count">Кружек: 0</span><div class="bubble"></div></div>
+   <div class="seat merc" id="seat-merc"><span class="name">Угрюмый наёмник</span><div class="sprite"><i class="mug"></i></div><span class="mug-count">Кружек: 0</span><div class="bubble"></div></div>
+   <div class="seat merchant" id="seat-merchant"><span class="name">Жирный купец</span><div class="sprite"><i class="mug"></i></div><span class="mug-count">Кружек: 0</span><div class="bubble"></div></div>
+   <div class="seat player" id="seat-player"><span class="name">Свободное место</span><div class="sprite"><i class="mug"></i></div><span class="mug-count">Твой счёт: 0</span><div class="bubble"></div></div>
+  </section>
+  <section class="panel">
+   <div>
+    <div class="instructions" id="instructions">За столом ждут трое завсегдатаев. Займи свободное место, выбери кубик и попробуй обыграть всю компанию.</div>
+    <div class="die-select" id="die-select" hidden><span>Кубик:</span><button data-die="4" aria-pressed="false">d4</button><button data-die="8" aria-pressed="false">d8</button><button data-die="20" aria-pressed="true">d20</button></div>
+   </div>
+   <div class="controls"><button class="action primary" id="sit">Сесть за стол</button><button class="action primary" id="roll" disabled>Бросить кубики</button><button class="action reset" id="reset">Сбросить игру</button></div>
+  </section>
+  <section class="scoreboard" aria-label="Счёт участников">
+   <div class="score">Твой счёт<strong id="score-player">—</strong><small id="drink-player">Трезв</small></div>
+   <div class="score">Наёмник<strong id="score-merc">—</strong><small id="drink-merc">Трезв</small></div>
+   <div class="score">Купец<strong id="score-merchant">—</strong><small id="drink-merchant">Трезв</small></div>
+   <div class="score">Моряк<strong id="score-sailor">—</strong><small id="drink-sailor">Трезв</small></div>
+  </section>
+  <div class="log" id="log" role="status" aria-live="polite">Бармен: «Ну что, путник? Покажешь, как бросают кости в приличном обществе?»</div>
+  <div class="footer">Автономная мини-игра атласа · собственные кубики · партия не меняет состояние основной кампании</div>
+ </main>
+</div>
+<script>
+(()=>{
+ const ids=['player','merc','merchant','sailor'];
+ const names={player:'Ты',merc:'Наёмник',merchant:'Купец',sailor:'Моряк'};
+ const faces={player:'die-player',merc:'die-merc',merchant:'die-merchant',sailor:'die-sailor'};
+ const seats={player:'seat-player',merc:'seat-merc',merchant:'seat-merchant',sailor:'seat-sailor'};
+ const scoreEls={player:'score-player',merc:'score-merc',merchant:'score-merchant',sailor:'score-sailor'};
+ const drinkEls={player:'drink-player',merc:'drink-merc',merchant:'drink-merchant',sailor:'drink-sailor'};
+ const sit=document.getElementById('sit'),roll=document.getElementById('roll'),reset=document.getElementById('reset');
+ const select=document.getElementById('die-select'),status=document.getElementById('status'),instructions=document.getElementById('instructions'),log=document.getElementById('log');
+ let seated=false,round=0,die=20,busy=false,finished=false;
+ let scores={player:0,merc:0,merchant:0,sailor:0},drinks={player:0,merc:0,merchant:0,sailor:0};
+ const phrases={
+  merc:['Хм. Бросок так себе.','Не радуйся раньше времени.','Я запомнил этот результат.','Кости сегодня на моей стороне.'],
+  merchant:['Ставлю две кружки, что сейчас повезёт!','Ха! Видали? Вот это удача!','Это была разминка.','Бармен, запиши на мой счёт!'],
+  sailor:['На корабле кости бросали честнее… ик!','Море качает меньше, чем этот стол.','Я это… почти попал.','Клянусь штормом, кубик жульничает!'],
+  player:['Неплохо!','Вот это бросок!','Кажется, сегодня мой день.','Ещё посмотрим, кто тут лучший.']
+ };
+ function say(id,text){const el=document.getElementById(seats[id]);el.classList.add('talking');el.querySelector('.bubble').textContent=text;setTimeout(()=>el.classList.remove('talking'),1500)}
+ function rnd(max){if(window.crypto&&crypto.getRandomValues){const a=new Uint32Array(1);const lim=Math.floor(4294967296/max)*max;do{crypto.getRandomValues(a)}while(a[0]>=lim);return a[0]%max+1}return Math.floor(Math.random()*max)+1}
+ function update(){
+  ids.forEach(id=>{document.getElementById(scoreEls[id]).textContent=seated?scores[id]:'—';document.getElementById(drinkEls[id]).textContent=seated?(drinks[id]===0?'Трезв':drinks[id]+' кружки'):'Трезв';const seat=document.getElementById(seats[id]);seat.querySelector('.mug-count').textContent=id==='player'?'Твой счёт: '+scores[id]:'Кружек: '+drinks[id]});
+  status.textContent=!seated?'Место свободно · 3 раунда':finished?'Партия завершена': 'Раунд '+(round+1)+' из 3 · Выбран d'+die;
+ }
+ function setDie(sides){
+  die=sides;
+  document.querySelectorAll('[data-die]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.die)===die)));
+  ids.forEach(id=>{const el=document.getElementById(faces[id]);el.className='die d'+die;el.textContent='?';el.classList.remove('visible','rolling')});
+  update();
+ }
+ document.querySelectorAll('[data-die]').forEach(b=>b.addEventListener('click',()=>{if(!busy&&seated&&!finished)setDie(Number(b.dataset.die))}));
+ sit.addEventListener('click',()=>{
+  if(seated)return;
+  seated=true;round=0;finished=false;scores={player:0,merc:0,merchant:0,sailor:0};drinks={player:0,merc:0,merchant:0,sailor:0};
+  document.querySelector('#seat-player .name').textContent='Ты за столом';
+  document.querySelector('#seat-player .sprite').classList.add('wobble');
+  sit.disabled=true;select.hidden=false;roll.disabled=false;
+  instructions.textContent='Выбери один кубик. Все четверо бросят именно его. У кого результат выше — тот забирает раунд.';
+  log.innerHTML='<strong>Бармен:</strong> «Ставки сделаны? Тогда бросаем!»';say('merchant','Ну что, новичок? Сейчас проверим!');update();
+ });
+ roll.addEventListener('click',async()=>{
+  if(!seated||busy||finished)return;
+  busy=true;roll.disabled=true;select.querySelectorAll('button').forEach(b=>b.disabled=true);
+  const results={};ids.forEach(id=>{const el=document.getElementById(faces[id]);el.className='die d'+die+' visible rolling';el.textContent='…'});
+  log.textContent='Кости гремят по столу…';
+  await new Promise(r=>setTimeout(r,900));
+  ids.forEach(id=>{results[id]=rnd(die);const el=document.getElementById(faces[id]);el.classList.remove('rolling');el.textContent=results[id]});
+  const high=Math.max(...Object.values(results));const winners=ids.filter(id=>results[id]===high);
+  winners.forEach(id=>scores[id]++);
+  ids.forEach(id=>{drinks[id]=Math.min(6,drinks[id]+1);const seat=document.getElementById(seats[id]);seat.classList.toggle('wobble',drinks[id]>=3);seat.classList.toggle('sleep',drinks[id]>=6);seat.classList.toggle('winner',winners.includes(id))});
+  round++;
+  ids.forEach(id=>say(id,phrases[id][rnd(4)-1]));
+  const resultLine=ids.map(id=>names[id]+' — '+results[id]).join(' · ');
+  const winnerText=winners.length===1?names[winners[0]]:winners.map(id=>names[id]).join(' и ');
+  log.innerHTML='<strong>Раунд '+round+':</strong> '+resultLine+'. <strong>'+winnerText+'</strong> забирает очко!';
+  update();
+  if(round>=3){
+   finished=true;const best=Math.max(...Object.values(scores));const champions=ids.filter(id=>scores[id]===best);
+   const champion=champions.length===1?names[champions[0]]:champions.map(id=>names[id]).join(' и ');
+   instructions.textContent=champions.includes('player')?'Партия окончена. '+(champions.length===1?'Ты победил!':'У тебя ничья за первое место!'):'Партия окончена. Победитель: '+champion+'.';
+   log.innerHTML+='<br><strong>Бармен:</strong> «Победитель — '+champion+'! Остальные могут оплатить разбитые кружки».';
+   roll.disabled=true;select.querySelectorAll('button').forEach(b=>b.disabled=true);
+   ids.forEach(id=>document.getElementById(seats[id]).classList.remove('winner'));
+   const champ=champions[0];document.getElementById(seats[champ]).classList.add('winner');
+   status.textContent='Партия завершена · Победитель: '+champion;
+  }else{
+   instructions.textContent='Раунд '+round+' завершён. Выбери кубик для следующего броска или оставь текущий.';
+   roll.textContent='Следующий бросок';
+   select.querySelectorAll('button').forEach(b=>b.disabled=false);
+  }
+  busy=false;
+ });
+ reset.addEventListener('click',()=>{
+  busy=false;seated=false;round=0;finished=false;scores={player:0,merc:0,merchant:0,sailor:0};drinks={player:0,merc:0,merchant:0,sailor:0};
+  document.querySelector('#seat-player .name').textContent='Свободное место';
+  document.querySelector('#seat-player .sprite').classList.remove('wobble');
+  ids.forEach(id=>{const seat=document.getElementById(seats[id]);seat.classList.remove('wobble','sleep','winner','talking');seat.querySelector('.bubble').textContent='';const el=document.getElementById(faces[id]);el.className='die d20';el.textContent='?';});
+  sit.disabled=false;roll.disabled=true;roll.textContent='Бросить кубики';select.hidden=true;select.querySelectorAll('button').forEach(b=>b.disabled=false);
+  instructions.textContent='Место снова свободно. Следующий герой может занять его и сыграть новую партию.';
+  log.innerHTML='<strong>Бармен:</strong> «Ну вот, один ушёл. Кто следующий? Место свободно!»';
+  setDie(20);update();
+ });
+ update();
+})();
+</script>
+</body></html>
