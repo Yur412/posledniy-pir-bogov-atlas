@@ -1626,4 +1626,12 @@ if(bgMusic) bgMusic.load();
 .spirit-card-art.step,.spirit-portrait.step{background-image:url('assets/spirits/spirit-step.jpg')!important}
 </style>
 
+<style id="monster-desktop-card-sizing">
+/* Desktop only: keep monster catalog cards compact; detail pages and phones stay unchanged. */
+@media(min-width:900px){
+  .monster-page .monster-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  .monster-page .monster-card{padding:8px}
+  .monster-page .monster-card .monster-image{aspect-ratio:4/3}
+}
+</style>
 </body></html>
