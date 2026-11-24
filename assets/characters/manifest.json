@@ -1,0 +1,68 @@
+[
+  {
+    "file": "character-01-borislav-tri-kishki.gif",
+    "source_size": 983119,
+    "sha256": "bbf04704b5d229f52d5fe90dbb54fd8ef13aeb6576d84758493c6c63c88cc390",
+    "width": 357,
+    "height": 478,
+    "frames": 9,
+    "durations_ms": [
+      250
+    ]
+  },
+  {
+    "file": "character-02-zhopper-krivzub.gif",
+    "source_size": 951758,
+    "sha256": "49df6493a4cfc2456a4b012f03b087be5746d40a1daa9aee836244ef3b549bfc",
+    "width": 355,
+    "height": 475,
+    "frames": 9,
+    "durations_ms": [
+      220
+    ]
+  },
+  {
+    "file": "character-03-otec-puzaniy.gif",
+    "source_size": 2473151,
+    "sha256": "12da9b188e1b2511e38ea87a803be93d4949fc092a73db59831bba2cc4f33d3e",
+    "width": 362,
+    "height": 483,
+    "frames": 16,
+    "durations_ms": [
+      180
+    ]
+  },
+  {
+    "file": "character-04-prokopiy-zaklinatel.gif",
+    "source_size": 876539,
+    "sha256": "d64f23df4ff942653496e7bcdeb9abda68c0f1b12050fe01ce6c3859d6bebbcb",
+    "width": 347,
+    "height": 478,
+    "frames": 9,
+    "durations_ms": [
+      180
+    ]
+  },
+  {
+    "file": "character-05-filimon-chetyre-podkovy.gif",
+    "source_size": 2173243,
+    "sha256": "3145ff5beba4ca003a741440564c28353d389dc677133f154857c380ac38c1c7",
+    "width": 480,
+    "height": 640,
+    "frames": 9,
+    "durations_ms": [
+      180
+    ]
+  },
+  {
+    "file": "character-06-klavdia-klyuvonosnaya.gif",
+    "source_size": 1018451,
+    "sha256": "c72ede68539f87784b1615ebe7ad6f390a7de403f3bcfa84c30403707c1699c6",
+    "width": 358,
+    "height": 475,
+    "frames": 9,
+    "durations_ms": [
+      180
+    ]
+  }
+]
