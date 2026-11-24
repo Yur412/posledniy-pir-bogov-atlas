@@ -341,31 +341,11 @@ body:has(.spirit-detail:target) #world,body:has(.spirit-detail:target) .characte
 
 
 
-/* Animated pixel-art tavern sign for the atlas title screen */
+/* Original animated tavern GIF on the atlas title screen */
 header{overflow:visible;min-height:270px}
-.header-tavern-art{position:absolute;left:18px;top:68px;bottom:64px;width:calc(48% - 25px);min-height:150px;overflow:hidden;isolation:isolate;border:1px solid #57432e;background:linear-gradient(180deg,#111a2a 0%,#1b2637 56%,#10151d 100%);box-shadow:inset 0 0 22px #000b,0 0 0 2px #17131a;image-rendering:pixelated}
-.tavern-night-moon{position:absolute;right:12%;top:9%;width:42px;height:42px;border-radius:50%;background:#a9b9d1;box-shadow:0 0 17px #a8c5e877}
-.tavern-night-castle{position:absolute;right:5%;bottom:23%;width:60px;height:62px;background:#182333;clip-path:polygon(0 35%,20% 35%,20% 17%,32% 17%,32% 0,43% 0,43% 35%,61% 35%,61% 12%,73% 12%,73% 35%,100% 35%,100% 100%,0 100%)}
-.tavern-night-castle:after{content:"";position:absolute;left:45%;bottom:0;width:9px;height:22px;background:#e6a64d;box-shadow:0 0 8px #f3a84a}
-.tavern-sign-beam{position:absolute;left:10%;top:17%;width:65%;height:12px;background:repeating-linear-gradient(90deg,#55301e 0 12px,#754326 12px 19px);border:2px solid #a56b37;box-shadow:0 3px 4px #0009}
-.tavern-sign-chain{position:absolute;top:24%;height:25%;width:3px;background:repeating-linear-gradient(180deg,#c18b49 0 4px,#4b3829 4px 7px);transform-origin:top center;z-index:2}
-.chain-left{left:28%}.chain-right{left:60%}
-.tavern-hanging-sign{position:absolute;z-index:3;left:19%;top:42%;width:47%;height:40%;display:grid;place-items:center;background:linear-gradient(90deg,#4b281a,#89502a 18%,#6b3a20 50%,#92552d 82%,#482518);border:4px ridge #bd8749;clip-path:polygon(0 8%,100% 8%,100% 83%,50% 100%,0 83%);box-shadow:0 5px 9px #000b;animation:tavern-sign-swing 4.8s ease-in-out infinite}
-.tavern-hanging-sign:before{content:"";position:absolute;inset:5px;border:1px solid #d5a45d;opacity:.8}
-.tavern-mug{position:relative;z-index:1;font-size:clamp(30px,5vw,48px);filter:drop-shadow(2px 3px 1px #28160d)}
-.tavern-wheat{position:absolute;right:8%;bottom:20%;font-size:clamp(17px,3vw,26px);color:#e6bd70}
-.tavern-hanging-lantern{position:absolute;z-index:4;right:12%;top:27%;width:25px;height:39px;border:3px ridge #a9783d;border-radius:8px 8px 5px 5px;background:linear-gradient(90deg,#70401e,#f3bd58 50%,#74421e);box-shadow:0 0 13px #ffb64d99;animation:tavern-lantern-sway 3.4s ease-in-out infinite}
-.tavern-hanging-lantern:before{content:"";position:absolute;left:8px;top:-15px;width:3px;height:15px;background:#b68b4d}
-.tavern-hanging-lantern i{position:absolute;inset:6px 5px;background:#ffe6a0;box-shadow:0 0 13px #ffbd55;animation:tavern-lantern-flicker .22s steps(2,end) infinite alternate}
-.tavern-art-glow{position:absolute;inset:0;z-index:5;pointer-events:none;background:radial-gradient(ellipse at 75% 54%,#ffb34b20,transparent 38%);animation:tavern-glow 2.2s ease-in-out infinite alternate}
-@keyframes tavern-sign-swing{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
-@keyframes tavern-lantern-sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(4deg)}}
-@keyframes tavern-lantern-flicker{from{opacity:.72}to{opacity:1}}
-@keyframes tavern-glow{from{opacity:.55}to{opacity:1}}
-@media(max-width:850px){header{min-height:280px}.header-tavern-art{left:12px;top:70px;bottom:65px;width:calc(48% - 18px)}}
-@media(max-width:480px){header{min-height:280px}.header-tavern-art{left:10px;top:70px;bottom:65px;width:calc(48% - 15px);min-height:145px}.tavern-hanging-sign{left:15%;width:54%}.tavern-mug{font-size:34px}.tavern-night-moon{width:32px;height:32px}}
-@media(prefers-reduced-motion:reduce){.tavern-hanging-sign,.tavern-hanging-lantern,.tavern-hanging-lantern i,.tavern-art-glow{animation:none}}
-
+.header-tavern-art{position:absolute;left:18px;top:68px;bottom:64px;width:calc(48% - 25px);height:calc(100% - 132px);object-fit:contain;object-position:center;display:block}
+@media(max-width:850px){header{min-height:280px}.header-tavern-art{left:12px;top:70px;bottom:65px;width:calc(48% - 18px);height:calc(100% - 135px)}}
+@media(max-width:480px){header{min-height:280px}.header-tavern-art{left:10px;top:70px;bottom:65px;width:calc(48% - 15px);height:calc(100% - 135px)}}
 /* Sound settings */
 header{position:relative;z-index:30}
 .sound-controls{display:flex;align-items:stretch;position:relative;flex:1 1 100%;width:100%}
@@ -445,14 +425,7 @@ header{position:relative;z-index:30}
 }
 </style>
 </head><body><audio id="bg-music" loop="" playsinline="" preload="auto"><source src="atlasdata:a001" type="audio/mpeg"/></audio>
-<header><div class="brand">✦ Последний пир богов ✦</div><div class="header-tavern-art" aria-hidden="true">
-<div class="tavern-night-moon"></div><div class="tavern-night-castle"><i></i><b></b><em></em></div>
-<div class="tavern-wall-vines"></div><div class="tavern-sign-beam"></div>
-<div class="tavern-sign-chain chain-left"></div><div class="tavern-sign-chain chain-right"></div>
-<div class="tavern-hanging-sign"><span class="tavern-mug">🍺</span><span class="tavern-wheat">❧</span></div>
-<div class="tavern-hanging-lantern"><i></i></div>
-<div class="tavern-art-glow"></div>
-</div><nav class="tabs"><a href="#world">Карта мира</a><a href="#characters">Персонажи</a><a href="#bestiary">Бестиарий</a><a href="#stories">Истории</a><a href="#dice">Кубики</a></nav><div class="sound-controls">
+<header><div class="brand">✦ Последний пир богов ✦</div><img class="header-tavern-art" src="assets/tavern-sign.gif" alt="Анимированная вывеска средневековой таверны с фонарём"><nav class="tabs"><a href="#world">Карта мира</a><a href="#characters">Персонажи</a><a href="#bestiary">Бестиарий</a><a href="#stories">Истории</a><a href="#dice">Кубики</a></nav><div class="sound-controls">
 <button aria-expanded="false" aria-controls="sound-settings" id="sound-settings-toggle" type="button">⚙ Настройки звука</button>
 <div id="sound-settings" class="sound-settings" hidden>
 <div class="sound-settings-title">НАСТРОЙКИ ЗВУКА</div>
