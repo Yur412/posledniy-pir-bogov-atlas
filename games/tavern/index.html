@@ -140,6 +140,37 @@ button{font:inherit;cursor:pointer}
  const select=document.getElementById('die-select'),status=document.getElementById('status'),instructions=document.getElementById('instructions'),log=document.getElementById('log');
  let seated=false,round=0,die=20,busy=false,finished=false,gameVersion=0,hasResults=false;
  let scores={player:0,merc:0,merchant:0,sailor:0},drinks={player:0,merc:0,merchant:0,sailor:0};
+ const AC=window.AudioContext||window.webkitAudioContext;
+ let sfxContext=null,sfxBus=null;
+ function audioOut(){
+  if(!AC)return null;
+  if(!sfxContext){sfxContext=new AC();sfxBus=sfxContext.createGain();sfxBus.gain.value=1.10;sfxBus.connect(sfxContext.destination);}
+  if(sfxContext.state==='suspended')sfxContext.resume();
+  return sfxContext;
+ }
+ function tone(freq,when,duration,level,type='sine',endFreq=null){
+  const ctx=sfxContext;if(!ctx||!sfxBus)return;
+  const osc=ctx.createOscillator(),gain=ctx.createGain();
+  osc.type=type;osc.frequency.setValueAtTime(freq,when);
+  if(endFreq)osc.frequency.exponentialRampToValueAtTime(endFreq,when+duration);
+  gain.gain.setValueAtTime(.0001,when);gain.gain.linearRampToValueAtTime(level,when+.012);gain.gain.exponentialRampToValueAtTime(.0001,when+duration);
+  osc.connect(gain);gain.connect(sfxBus);osc.start(when);osc.stop(when+duration+.02);
+ }
+ function playRollSound(){
+  const ctx=audioOut();if(!ctx)return;const start=ctx.currentTime+.01;
+  for(let i=0;i<9;i++){const t=start+i*.075+(Math.random()-.5)*.025;tone(190+Math.random()*520,t,.065,.045+Math.random()*.025,'triangle',95+Math.random()*100);}
+  tone(125,start+.72,.14,.12,'sine',58);
+ }
+ function playMugSound(){
+  const ctx=audioOut();if(!ctx)return;const t=ctx.currentTime+.01;
+  tone(720,t,.18,.095,'sine',530);tone(1080,t+.035,.24,.055,'sine',850);tone(390,t+.025,.11,.06,'triangle',260);
+ }
+ function playWinSound(){
+  const ctx=audioOut();if(!ctx)return;const t=ctx.currentTime+.02;
+  [392,494,587,784].forEach((f,i)=>tone(f,t+i*.12,.55,.085,'sine',f*.995));
+  tone(196,t+.05,.8,.075,'triangle',145);
+ }
+
  const phrases={
   merc:['Хм. Бросок так себе.','Не радуйся раньше времени.','Я запомнил этот результат.','Кости сегодня на моей стороне.'],
   merchant:['Ставлю две кружки, что сейчас повезёт!','Ха! Видали? Вот это удача!','Это была разминка.','Бармен, запиши на мой счёт!'],
@@ -177,7 +208,7 @@ button{font:inherit;cursor:pointer}
  document.querySelectorAll('[data-die]').forEach(b=>b.addEventListener('click',()=>{if(!busy&&seated&&!finished)setDie(Number(b.dataset.die))}));
  sit.addEventListener('click',()=>{
   if(seated)return;
-  seated=true;round=0;finished=false;hasResults=false;scores={player:0,merc:0,merchant:0,sailor:0};drinks={player:0,merc:0,merchant:0,sailor:0};
+  audioOut();playMugSound();seated=true;round=0;finished=false;hasResults=false;scores={player:0,merc:0,merchant:0,sailor:0};drinks={player:0,merc:0,merchant:0,sailor:0};
   document.querySelector('#seat-player .name').textContent='Ты за столом';
   document.getElementById('seat-player').classList.add('wobble');
   sit.disabled=true;select.hidden=false;roll.disabled=false;
@@ -186,7 +217,7 @@ button{font:inherit;cursor:pointer}
  });
  roll.addEventListener('click',async()=>{
   if(!seated||busy||finished)return;
-  busy=true;const activeVersion=gameVersion;
+  audioOut();playRollSound();busy=true;const activeVersion=gameVersion;
   roll.disabled=true;roll.setAttribute('aria-disabled','true');
   select.querySelectorAll('button').forEach(b=>b.disabled=true);
   try{
@@ -203,13 +234,13 @@ button{font:inherit;cursor:pointer}
     const seat=document.getElementById(seats[id]);
     seat.classList.toggle('winner',winners.includes(id));
    });
-   round++;hasResults=true;
+   round++;hasResults=true;playMugSound();
    ids.forEach(id=>say(id,phrases[id][rnd(4)-1]));
    const resultLine=ids.map(id=>names[id]+' — '+results[id]).join(' · ');
    log.innerHTML='<strong>Раунд '+round+':</strong> '+resultLine+'. Очки и опьянение обновлены. Общий победитель будет объявлен после третьего раунда.';
    update();
    if(round>=3){
-    finished=true;const best=Math.max(...Object.values(scores));const champions=ids.filter(id=>scores[id]===best);
+    playWinSound();finished=true;const best=Math.max(...Object.values(scores));const champions=ids.filter(id=>scores[id]===best);
     const champion=champions.length===1?names[champions[0]]:champions.map(id=>names[id]).join(' и ');
     instructions.textContent=champions.includes('player')?'Все три раунда сыграны. '+(champions.length===1?'Ты победил!':'У тебя ничья за первое место!'):'Все три раунда сыграны. Победитель: '+champion+'.';
     log.innerHTML+='<br><strong>Бармен:</strong> «Победитель — '+champion+'! Остальные могут оплатить разбитые кружки».'; 
