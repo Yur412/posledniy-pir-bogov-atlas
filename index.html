@@ -1089,19 +1089,55 @@ body:has(.story-detail-page:target) .stories-page{display:none!important}
 @media(max-width:520px){.subboss-chest{min-width:174px;padding:9px 14px}.monster-navigation{gap:4px}.monster-navigation .back{font-size:12px;padding:7px 9px}}
 
 
-/* Chest opening animation and inline empty-state feedback */
+/* Full-screen treasure chest opening sequence */
 .subboss-chest{appearance:none;-webkit-appearance:none;font:inherit;cursor:pointer}
 .subboss-chest:focus-visible{outline:2px solid #f0cf7d;outline-offset:4px}
-.subboss-chest-art:before{transform-origin:left bottom;transition:transform .48s cubic-bezier(.2,.75,.15,1)}
-.subboss-chest-art:after{transition:box-shadow .35s ease,filter .35s ease}
-.subboss-chest-lock{transition:opacity .22s ease,transform .28s ease}
-.subboss-chest.is-open .subboss-chest-art:before{transform:rotate(-42deg) translate(-3px,-13px)}
-.subboss-chest.is-open .subboss-chest-art:after{box-shadow:inset 0 0 13px #f0cf7d88,0 3px 3px #0009;filter:brightness(1.16)}
-.subboss-chest.is-open .subboss-chest-lock{opacity:0;transform:translateY(9px)}
+.subboss-chest:disabled{cursor:wait}
 .subboss-empty-message{display:block;max-height:0;overflow:hidden;opacity:0;margin:0;font:12px/1.35 system-ui,sans-serif;letter-spacing:.02em;color:#f0d29a;transition:max-height .28s ease,opacity .28s ease,margin .28s ease}
 .subboss-chest.is-open .subboss-empty-message{max-height:28px;opacity:1;margin-top:6px}
-.subboss-chest:disabled{cursor:default}
-@media(prefers-reduced-motion:reduce){.subboss-chest,.subboss-chest-art:before,.subboss-chest-art:after,.subboss-chest-lock,.subboss-empty-message{transition:none}}
+.chest-opening{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;padding:18px;background:radial-gradient(ellipse at 50% 44%,#19222beF 0%,#090d14f5 58%,#030509fc 100%);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .38s ease,visibility .38s ease}
+.chest-opening.is-visible{opacity:1;visibility:visible;pointer-events:auto}
+.chest-opening.is-leaving{opacity:0}
+.chest-opening-panel{position:relative;display:flex;width:min(100%,520px);min-height:470px;flex-direction:column;align-items:center;justify-content:center;padding:28px 18px 24px;border:1px solid #94713f;background:linear-gradient(180deg,#17202b 0%,#0b111a 100%);box-shadow:0 0 0 5px #0b1018,0 0 0 6px #5d492e,0 24px 90px #000d;text-align:center;overflow:hidden}
+.chest-opening-panel:before,.chest-opening-panel:after{content:"";position:absolute;inset:9px;border:1px solid #74593355;pointer-events:none}
+.chest-opening-panel:after{inset:15px;border-color:#c6a36a22}
+.chest-opening-kicker{position:relative;z-index:2;margin:0;color:#bfa16c;font:11px/1.4 Georgia,serif;letter-spacing:.28em;text-transform:uppercase}
+.chest-opening-title{position:relative;z-index:2;margin:9px 0 0;color:#f2d9a4;font:clamp(19px,4vw,26px)/1.2 Georgia,serif;letter-spacing:.08em;text-shadow:0 2px 10px #000}
+.chest-opening-stage{position:relative;width:min(100%,360px);height:270px;margin:4px auto 0;isolation:isolate}
+.chest-opening-ground{position:absolute;left:50%;bottom:29px;width:260px;height:28px;transform:translateX(-50%);border-radius:50%;background:#0009;filter:blur(12px)}
+.chest-opening-rays{position:absolute;left:50%;top:46%;width:300px;height:300px;transform:translate(-50%,-50%) scale(.3) rotate(0);border-radius:50%;opacity:0;background:repeating-conic-gradient(from 0deg,#f8d98c00 0deg 8deg,#f8d98c44 9deg 11deg,#f8d98c00 12deg 20deg);mask-image:radial-gradient(circle,#000 0 8%,transparent 70%)}
+.chest-opening-rays.is-on{animation:rays-unfurl 2.8s ease-out forwards}
+.opening-dust{position:absolute;inset:0;z-index:4;overflow:hidden;pointer-events:none}
+.opening-dust i{position:absolute;left:50%;top:66%;width:5px;height:5px;border-radius:50%;background:#ffe8a7;box-shadow:0 0 9px 3px #e9b85c;opacity:0;transform:translate(-50%,0) scale(.3)}
+.opening-dust.is-on i{animation:dust-rise 1.8s ease-out var(--delay,0s) forwards}
+.opening-chest{position:absolute;z-index:3;left:50%;top:22px;width:260px;height:220px;transform:translateX(-50%);filter:drop-shadow(0 16px 12px #000b)}
+.opening-chest.is-rattling{animation:chest-rattle .72s ease-in-out both}
+.opening-body{position:absolute;left:17px;top:109px;width:226px;height:92px;border:5px ridge #d2a451;border-radius:4px 4px 13px 13px;background:repeating-linear-gradient(90deg,#4c2a16 0 24px,#754525 24px 31px,#593019 31px 44px);box-shadow:inset 0 0 0 4px #2d1b12,inset 0 -12px 20px #140c08,0 7px 0 #21150e}
+.opening-body:before{content:"";position:absolute;left:0;right:0;top:13px;height:11px;border-top:3px solid #e0b760;border-bottom:3px solid #936329;background:linear-gradient(90deg,#d9b46a,#7d542c,#d9b46a)}
+.opening-body:after{content:"";position:absolute;left:50%;top:0;bottom:0;width:9px;transform:translateX(-50%);border-left:2px solid #d2a451;border-right:2px solid #6c471f;background:#b48743}
+.opening-lid{position:absolute;z-index:4;left:10px;top:37px;width:240px;height:88px;transform-origin:12% 96%;transform:perspective(500px) rotateX(0deg);border:6px ridge #dcb45f;border-radius:23px 23px 7px 7px;background:repeating-linear-gradient(90deg,#573119 0 25px,#84502b 25px 33px,#62391e 33px 48px);box-shadow:inset 0 0 0 4px #321d11,0 7px 7px #0009}
+.opening-lid:before{content:"";position:absolute;left:0;right:0;top:12px;height:13px;border-top:3px solid #e8c16f;border-bottom:3px solid #8c602b;background:linear-gradient(90deg,#d8b063,#77502c,#d8b063)}
+.opening-lid:after{content:"";position:absolute;left:50%;top:0;bottom:0;width:10px;transform:translateX(-50%);border-left:2px solid #d7ad5d;border-right:2px solid #68451f;background:#a8793b}
+.opening-lid.is-open{animation:lid-fling 1.05s cubic-bezier(.18,.78,.18,1) forwards}
+.opening-lock{position:absolute;z-index:6;left:117px;top:111px;width:27px;height:34px;border:3px solid #f0cf7d;border-radius:4px;background:linear-gradient(135deg,#efce78,#93602a);box-shadow:0 2px 5px #000b}
+.opening-lock:before{content:"";position:absolute;left:4px;top:-17px;width:12px;height:15px;border:4px solid #f0cf7d;border-bottom:0;border-radius:10px 10px 0 0}
+.opening-lock:after{content:"";position:absolute;left:9px;top:10px;width:4px;height:8px;border-radius:3px;background:#4b2d16}
+.opening-lock.is-broken{animation:lock-burst .62s cubic-bezier(.2,.8,.3,1) forwards}
+.opening-light{position:absolute;z-index:2;left:50%;top:90px;width:130px;height:120px;transform:translateX(-50%) scale(.05);border-radius:50%;opacity:0;background:radial-gradient(ellipse,#fff8d4 0%,#ffdc76bd 19%,#f0ac3c66 43%,transparent 72%);filter:blur(7px)}
+.opening-light.is-burst{animation:treasure-burst 1.45s ease-out forwards}
+.chest-opening-status{position:relative;z-index:5;min-height:30px;margin:0;color:#ffe4a6;font:clamp(17px,4vw,22px)/1.3 Georgia,serif;letter-spacing:.15em;text-shadow:0 0 18px #f6c56c;opacity:0;transform:translateY(9px)}
+.chest-opening-status.is-shown{animation:status-reveal .55s ease-out forwards}
+.chest-opening-subtitle{position:relative;z-index:5;max-width:330px;margin:8px 0 0;color:#c5b18e;font:13px/1.5 system-ui,sans-serif;opacity:0;transition:opacity .5s ease .15s}
+.chest-opening-subtitle.is-shown{opacity:1}
+@keyframes chest-rattle{0%,100%{transform:translateX(-50%) rotate(0)}12%{transform:translateX(calc(-50% - 7px)) rotate(-2deg)}24%{transform:translateX(calc(-50% + 8px)) rotate(2deg)}38%{transform:translateX(calc(-50% - 6px)) rotate(-1.5deg)}52%{transform:translateX(calc(-50% + 6px)) rotate(1.5deg)}68%{transform:translateX(calc(-50% - 3px)) rotate(-.7deg)}82%{transform:translateX(calc(-50% + 3px)) rotate(.7deg)}}
+@keyframes lock-burst{0%{transform:translate(0,0) rotate(0);opacity:1}35%{transform:translate(0,5px) rotate(18deg)}100%{transform:translate(24px,30px) rotate(95deg) scale(.35);opacity:0}}
+@keyframes lid-fling{0%{transform:perspective(500px) rotateX(0deg) translateY(0)}35%{transform:perspective(500px) rotateX(-48deg) translateY(-10px)}100%{transform:perspective(500px) rotateX(-118deg) translateY(-20px)}}
+@keyframes treasure-burst{0%{opacity:0;transform:translateX(-50%) scale(.05)}25%{opacity:1;transform:translateX(-50%) scale(1.6)}70%{opacity:.85;transform:translateX(-50%) scale(2.1)}100%{opacity:.2;transform:translateX(-50%) scale(2.7)}}
+@keyframes rays-unfurl{0%{opacity:0;transform:translate(-50%,-50%) scale(.2) rotate(0)}22%{opacity:.9}100%{opacity:.2;transform:translate(-50%,-50%) scale(1.35) rotate(38deg)}}
+@keyframes dust-rise{0%{opacity:0;transform:translate(-50%,0) scale(.3)}18%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--drift,0px)),-150px) scale(1.5)}}
+@keyframes status-reveal{to{opacity:1;transform:translateY(0)}}
+@media(max-width:520px){.chest-opening{padding:10px}.chest-opening-panel{min-height:430px;padding:24px 12px}.chest-opening-stage{height:250px}.opening-chest{transform:translateX(-50%) scale(.88);transform-origin:top center}.chest-opening-rays{width:250px;height:250px}}
+@media(prefers-reduced-motion:reduce){.chest-opening,.chest-opening-subtitle{transition-duration:.15s}.opening-chest.is-rattling{animation-duration:.2s}.opening-lock.is-broken{animation-duration:.2s}.opening-lid.is-open{animation-duration:.3s}.opening-light.is-burst{animation-duration:.3s}.chest-opening-rays.is-on{animation-duration:.3s}.opening-dust.is-on i{animation-duration:.3s}.chest-opening-status.is-shown{animation-duration:.2s}}
 
 </style>
 <script src="assets-1.js"></script>
@@ -1120,27 +1156,104 @@ if(bgMusic) bgMusic.load();
 
 <script>
 (()=> {
+  if (window.__atlasChestSequenceInstalled) return;
+  window.__atlasChestSequenceInstalled = true;
+
+  const dust = Array.from({length:16}, (_,i) =>
+    '<i style="--delay:'+((i%8)*.075)+'s;--drift:'+((i%2 ? 1 : -1)*(18+(i*11)%45))+'px;left:'+(12+(i*17)%76)+'%;top:'+(38+(i*13)%42)+'%"></i>'
+  ).join('');
+
+  function makeOverlay(){
+    const overlay = document.createElement('div');
+    overlay.className = 'chest-opening';
+    overlay.setAttribute('role','dialog');
+    overlay.setAttribute('aria-modal','true');
+    overlay.setAttribute('aria-label','Открытие сундука');
+    overlay.innerHTML =
+      '<div class="chest-opening-panel">'+
+        '<p class="chest-opening-kicker">ТАЙНИК ОБНАРУЖЕН</p>'+
+        '<h2 class="chest-opening-title">ПЕЧАТИ СТАРОГО ХРАНИЛИЩА</h2>'+
+        '<div class="chest-opening-stage">'+
+          '<div class="chest-opening-rays"></div>'+
+          '<div class="opening-dust">'+dust+'</div>'+
+          '<div class="opening-ground"></div>'+
+          '<div class="opening-chest">'+
+            '<div class="opening-light"></div>'+
+            '<div class="opening-body"></div>'+
+            '<div class="opening-lid"></div>'+
+            '<div class="opening-lock"></div>'+
+          '</div>'+
+        '</div>'+
+        '<p class="chest-opening-status" aria-live="polite"></p>'+
+        '<p class="chest-opening-subtitle"></p>'+
+      '</div>';
+    return overlay;
+  }
+
   document.addEventListener('click', event => {
     const chest = event.target.closest('.subboss-chest');
-    if (!chest) return;
+    if (!chest || chest.dataset.opening === 'true') return;
 
     event.preventDefault();
-    if (chest.dataset.empty === 'true') {
-      const opened = chest.classList.toggle('is-open');
-      chest.setAttribute('aria-expanded', String(opened));
-      return;
-    }
-
+    const empty = chest.dataset.empty === 'true';
     const target = chest.dataset.target;
-    if (!target || chest.dataset.opening === 'true') return;
+    if (!empty && !target) return;
+
     chest.dataset.opening = 'true';
     chest.disabled = true;
-    chest.classList.add('is-open');
-    chest.setAttribute('aria-expanded', 'true');
+    chest.setAttribute('aria-expanded','true');
 
+    const overlay = makeOverlay();
+    document.body.appendChild(overlay);
+    const chestArt = overlay.querySelector('.opening-chest');
+    const lock = overlay.querySelector('.opening-lock');
+    const lid = overlay.querySelector('.opening-lid');
+    const light = overlay.querySelector('.opening-light');
+    const rays = overlay.querySelector('.chest-opening-rays');
+    const dustLayer = overlay.querySelector('.opening-dust');
+    const status = overlay.querySelector('.chest-opening-status');
+    const subtitle = overlay.querySelector('.chest-opening-subtitle');
+
+    const finish = () => {
+      overlay.classList.add('is-leaving');
+      window.setTimeout(() => {
+        overlay.remove();
+        chest.disabled = false;
+        delete chest.dataset.opening;
+        if (empty) {
+          chest.classList.add('is-open');
+          chest.setAttribute('aria-expanded','true');
+          const inlineMessage = chest.querySelector('.subboss-empty-message');
+          if (inlineMessage) inlineMessage.textContent = 'Тут пусто…';
+        } else {
+          window.location.hash = target;
+        }
+      }, 430);
+    };
+
+    requestAnimationFrame(() => overlay.classList.add('is-visible'));
+    window.setTimeout(() => chestArt.classList.add('is-rattling'), 100);
+    window.setTimeout(() => lock.classList.add('is-broken'), 820);
     window.setTimeout(() => {
-      window.location.hash = target;
-    }, 560);
+      chestArt.classList.remove('is-rattling');
+      lid.classList.add('is-open');
+    }, 1180);
+    window.setTimeout(() => {
+      light.classList.add('is-burst');
+      rays.classList.add('is-on');
+      dustLayer.classList.add('is-on');
+    }, 1650);
+    window.setTimeout(() => {
+      status.textContent = empty ? 'ТУТ ПУСТО…' : 'СУНДУК ОТКРЫТ';
+      subtitle.textContent = empty
+        ? 'Внутри не осталось ничего, кроме пыли.'
+        : 'За старой крышкой скрывается то, что было запечатано.';
+      status.classList.add('is-shown');
+      subtitle.classList.add('is-shown');
+    }, 2550);
+
+    // Let the full reveal finish before changing the atlas page.
+    window.setTimeout(finish, empty ? 4300 : 3400);
   });
 })();
 </script>
