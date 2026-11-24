@@ -328,6 +328,18 @@ body:has(.spirit-detail:target) #world,body:has(.spirit-detail:target) .characte
 .spirit-note{padding:10px 12px;border-left:2px solid #98703b;background:#171820;color:#c8b99b;font:12px/1.55 system-ui;margin:12px 0}
 @media(max-width:650px){.spirit-grid{gap:8px}.spirit-card{padding:6px}.spirit-card h3{font-size:14px}.spirit-card p{font-size:11px}.spirit-entry{grid-template-columns:1fr}.spirit-portrait{max-width:360px;width:100%;justify-self:center}.spirit-copy p,.spirit-copy li{font-size:13px}.spirit-title{font-size:25px}.spirit-page,.spirit-detail{margin:6px;padding:10px}}
 
+
+/* Isolated Games tab: the mini-game runs in its own same-origin document. */
+.games-page{display:none;max-width:1500px;margin:12px auto;padding:14px;border:3px ridge #a77b3c;background:linear-gradient(145deg,#1c1b22,#10151d);box-shadow:0 0 0 2px #3b2b1d inset;color:#eadfca}
+.games-page:target{display:block!important}
+body:has(.games-page:target) #world{display:none!important}
+body:has(.games-page:target)>section:not(.games-page){display:none!important}
+.games-title{text-align:center;color:#f0d29a;font-size:30px;font-weight:normal;margin:8px 0}
+.games-intro{text-align:center;color:#c8b99b;font:13px/1.5 system-ui;margin:0 auto 16px}
+.tavern-frame-wrap{width:100%;overflow:hidden;border:2px ridge #98703b;background:#0b1017}
+.tavern-game-frame{display:block;width:100%;height:1080px;border:0;background:#0b1017}
+@media(max-width:700px){.games-page{margin:6px;padding:7px}.tavern-game-frame{height:1160px}}
+
 </style><style>
 /* Confirmed 14 deity portraits from the GitHub-hosted 4x4 sprite sheet. */
 .god-img-1,.god-img-2,.god-img-3,.god-img-4,.god-img-5,.god-img-6,.god-img-7,.god-img-8,.god-img-9,.god-img-10,.god-img-11,.god-img-12,.god-img-13,.god-img-14{background-image:url('assets/gods/gods-strip.jpg')!important;background-size:400% 400%!important;background-repeat:no-repeat!important}
@@ -393,7 +405,7 @@ body:has(.spirit-detail:target) #world,body:has(.spirit-detail:target) .characte
 }
 </style>
 </head><body><audio id="bg-music" loop="" playsinline="" preload="auto"><source src="atlasdata:a001" type="audio/mpeg"/></audio>
-<header><div class="brand">✦ Последний пир богов ✦</div><nav class="tabs"><a href="#world">Карта мира</a><a href="#characters">Персонажи</a><a href="#bestiary">Бестиарий</a><a href="#stories">Истории</a><a href="#dice">Кубики</a></nav><button aria-pressed="true" id="sound-toggle" title="Включить или выключить фоновую музыку и звук кубиков" type="button">♫ Включить музыку</button></header>
+<header><div class="brand">✦ Последний пир богов ✦</div><nav class="tabs"><a href="#world">Карта мира</a><a href="#characters">Персонажи</a><a href="#bestiary">Бестиарий</a><a href="#stories">Истории</a><a href="#dice">Кубики</a><a href="#games">Игры</a></nav><button aria-pressed="true" id="sound-toggle" title="Включить или выключить фоновую музыку и звук кубиков" type="button">♫ Включить музыку</button></header>
 <main class="layout" id="world"><section class="mapbox"><div class="maphead">КАРТА ОСТРОВА · ВЫБЕРИ МЕСТО</div><div class="map">
 <a class="pin" href="#loc-veyr" style="left:48%;top:51%">Вейр</a>
 <a class="pin" href="#loc-sanctuary" style="left:34%;top:68%">Пепельное святилище Диониса</a>
@@ -787,6 +799,12 @@ body:has(.spirit-detail:target) #world,body:has(.spirit-detail:target) .characte
 <h3>Задача героев</h3>
 <p>Найти и защитить Сундук Пустого Места, разобраться в планах Братства, раскрыть тайну семи печатей и не дать Саверну Велю завершить обряд освобождения Голода. По мере путешествия героям придётся решать, кому доверять, какие тайны раскрывать и какую цену они готовы заплатить за спасение мира. А исход последнего пира ещё не предрешён.</p>
 </article>
+</section>
+<section class="games-page" id="games">
+<a class="back" href="#world">← Вернуться к карте острова</a>
+<h2 class="games-title">Игры</h2>
+<p class="games-intro">Заходи в таверну, занимай свободное место и попробуй обыграть местных завсегдатаев.</p>
+<div class="tavern-frame-wrap"><iframe class="tavern-game-frame" src="games/tavern/index.html" title="Пьяная таверна — анимированная мини-игра" loading="lazy" allow="autoplay"></iframe></div>
 </section>
 <section class="dice-page" id="dice">
 <a class="back" href="#world">← Вернуться к карте острова</a>
