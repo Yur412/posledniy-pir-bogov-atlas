@@ -6,61 +6,101 @@
       "number": 1,
       "id": "monster-1",
       "name": "Плачущий недоедок",
-      "file": "assets/bestiary/monster-01-plachushchiy-nedoedok.webp"
+      "file": "assets/bestiary/monster-01-plachushchiy-nedoedok.webp",
+      "sprite_number": 1,
+      "sprite_row": 1,
+      "sprite_column": 1
     },
     {
       "number": 2,
       "id": "monster-2",
       "name": "Господин Обратная Сторона",
-      "file": "assets/bestiary/monster-02-gospodin-obratnaya-storona.webp"
+      "file": "assets/bestiary/monster-02-gospodin-obratnaya-storona.webp",
+      "sprite_number": 2,
+      "sprite_row": 1,
+      "sprite_column": 2
     },
     {
       "number": 3,
       "id": "monster-3",
       "name": "Матушка Карман",
-      "file": "assets/bestiary/monster-03-matushka-karman.webp"
+      "file": "assets/bestiary/monster-03-matushka-karman.webp",
+      "sprite_number": 3,
+      "sprite_row": 1,
+      "sprite_column": 3
     },
     {
       "number": 4,
       "id": "monster-4",
       "name": "Хор из одного горла",
-      "file": "assets/bestiary/monster-04-khor-iz-odnogo-gorla.webp"
+      "file": "assets/bestiary/monster-04-khor-iz-odnogo-gorla.webp",
+      "sprite_number": 4,
+      "sprite_row": 1,
+      "sprite_column": 4
     },
     {
       "number": 5,
       "id": "monster-5",
       "name": "Святой Иоанносник",
-      "file": "assets/bestiary/monster-05-svyatoy-ioannosnik.webp"
+      "file": "assets/bestiary/monster-05-svyatoy-ioannosnik.webp",
+      "sprite_number": 5,
+      "sprite_row": 1,
+      "sprite_column": 5
     },
     {
       "number": 6,
       "id": "monster-6",
       "name": "Князь Зажирайло",
-      "file": "assets/bestiary/monster-06-knyaz-zazhiraylo.webp"
+      "file": "assets/bestiary/monster-06-knyaz-zazhiraylo.webp",
+      "sprite_number": 6,
+      "sprite_row": 2,
+      "sprite_column": 1
     },
     {
       "number": 7,
       "id": "monster-7",
       "name": "Цензор",
-      "file": "assets/bestiary/monster-07-tsenzor.webp"
+      "file": "assets/bestiary/monster-07-tsenzor.webp",
+      "sprite_number": 7,
+      "sprite_row": 2,
+      "sprite_column": 2
     },
     {
       "number": 8,
       "id": "monster-8",
       "name": "Отходный Король",
-      "file": "assets/bestiary/monster-08-otkhodny-korol.webp"
+      "file": "assets/bestiary/monster-08-otkhodny-korol.webp",
+      "sprite_number": 8,
+      "sprite_row": 2,
+      "sprite_column": 3
     },
     {
       "number": 9,
       "id": "monster-9",
       "name": "Кукуха",
-      "file": "assets/bestiary/monster-09-kukukha.webp"
+      "file": "assets/bestiary/monster-09-kukukha.webp",
+      "sprite_number": 9,
+      "sprite_row": 2,
+      "sprite_column": 4
     },
     {
       "number": 10,
       "id": "monster-10",
       "name": "Банный дух",
-      "file": "assets/bestiary/monster-10-banny-duk.webp"
+      "file": "assets/bestiary/monster-10-banny-duk.webp",
+      "sprite_number": 10,
+      "sprite_row": 2,
+      "sprite_column": 5
     }
-  ]
+  ],
+  "sprite_sheet": {
+    "file": "assets/monsters/monsters-strip.jpg",
+    "columns": 5,
+    "rows": 2,
+    "tile_width": 768,
+    "tile_height": 1024,
+    "source_order": "User-confirmed order 1-10",
+    "usage": "Used by monster cards and detail pages in index.html",
+    "quality_note": "Uploaded high-quality JPEG; individual original WEBP files retained as backups."
+  }
 }
