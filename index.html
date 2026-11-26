@@ -350,18 +350,6 @@ body:has(.spirit-detail:target) #world,body:has(.spirit-detail:target) .characte
 
 
 
-/* Fill the framed square with the original GIF, keeping clear space around title, nav and sound controls */
-header{overflow:visible;min-height:270px}
-.header-tavern-frame{position:absolute;box-sizing:border-box;left:18px;top:68px;bottom:64px;width:calc(48% - 25px);padding:5px;border:4px ridge #a77b3c;background:linear-gradient(145deg,#27232a,#10151d);box-shadow:0 0 0 2px #3b2b1d,inset 0 0 0 1px #e0b76b,0 6px 16px #0009;overflow:hidden}
-.header-tavern-art{position:absolute;inset:5px;width:calc(100% - 10px);height:calc(100% - 10px);display:block;object-fit:cover;object-position:center;image-rendering:auto}
-@media(max-width:850px){
- header{min-height:280px}
- .header-tavern-frame{left:12px;top:42px;bottom:auto;width:calc(60% - 18px);max-width:420px;height:clamp(150px,46vw,190px);aspect-ratio:auto}
-}
-@media(max-width:480px){
- header{min-height:280px}
- .header-tavern-frame{left:10px;top:42px;bottom:auto;width:calc(60% - 15px);max-width:420px;height:clamp(150px,46vw,190px);aspect-ratio:auto}
-}
 /* Sound settings */
 header{position:relative;z-index:30}
 .sound-controls{display:flex;align-items:stretch;position:relative;flex:1 1 100%;width:100%}
@@ -441,7 +429,7 @@ header{position:relative;z-index:30}
 }
 </style>
 <style id="athena-memory-placement">.athena-slot{display:flex;justify-content:space-between;gap:10px}.athena-game-link,.athena-slot .subboss-chest{width:calc(50% - 5px);min-width:0;min-height:116px}.athena-game-link{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:10px 8px;border:2px ridge #98703b;background:radial-gradient(circle at 50% 0,#45576b,#18212c 65%,#10151d);color:#e8c980;text-decoration:none;box-shadow:inset 0 0 0 1px #3b2b1d;transition:transform .15s,border-color .15s,filter .15s}.athena-game-link:hover,.athena-game-link:focus{transform:translateY(-2px);border-color:#e2b96e;filter:brightness(1.12);outline:2px solid #d7aa5b;outline-offset:2px}.athena-game-mark{display:grid;place-items:center;width:58px;height:58px;border:3px ridge #d9ad5b;background:linear-gradient(#6b8295,#293c50);font-size:38px;text-shadow:0 2px 5px #000;box-shadow:0 3px 5px #0009}.athena-game-link small{font:11px system-ui;color:#c7b795;text-align:center}@media(max-width:700px){.athena-game-link,.athena-slot .subboss-chest{min-height:108px;padding:9px 5px}.athena-game-mark{width:48px;height:48px;font-size:32px}}</style></head><body><audio id="bg-music" loop="" playsinline="" preload="auto"><source src="atlasdata:a001" type="audio/mpeg"/></audio>
-<header><div class="brand">✦ Последний пир богов ✦</div><div class="header-tavern-frame"><img class="header-tavern-art" src="assets/tavern-sign.gif" alt="Анимированная вывеска средневековой таверны с фонарём"></div><nav class="tabs"><a href="#world">Карта мира</a><a href="#characters">Персонажи</a><a href="#bestiary">Бестиарий</a><a href="#stories">Истории</a><a href="#dice">Кубики</a></nav><div class="sound-controls">
+<header><div class="brand">✦ Последний пир богов ✦</div><nav class="tabs"><a href="#world">Карта мира</a><a href="#characters">Персонажи</a><a href="#bestiary">Бестиарий</a><a href="#stories">Истории</a><a href="#dice">Кубики</a></nav><div class="sound-controls">
 <button aria-expanded="false" aria-controls="sound-settings" id="sound-settings-toggle" type="button">⚙ Настройки звука</button>
 <div id="sound-settings" class="sound-settings" hidden>
 <div class="sound-settings-title">НАСТРОЙКИ ЗВУКА</div>
