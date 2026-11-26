@@ -15,7 +15,7 @@ document.getElementById('left').onpointerdown=e=>{e.preventDefault();move(-1)};d
 addEventListener('keydown',e=>{if(['ArrowLeft','a','A'].includes(e.key)){e.preventDefault();move(-1)}if(['ArrowRight','d','D'].includes(e.key)){e.preventDefault();move(1)}});
 function start(){audio();running=true;last=0;elapsed=0;lives=3;lane=1;rocks=[];warns=[];dust=[];shake=0;frame=0;invul=0;spawn=1.1;scroll=0;intro.classList.add('hidden');end.classList.add('hidden');document.getElementById('lives').textContent='♥ ♥ ♥';requestAnimationFrame(loop)}
 document.getElementById('start').onclick=start;document.getElementById('retry').onclick=start;
-function rockSpawn(){let l=Math.floor(Math.random()*3),big=Math.random()<.22;warns.push({lane:l,y:245,ttl:big?1.05:.72,big});setTimeout(()=>{if(!running)return;rocks.push({lane:l,y:-70,size:big?58:36+Math.random()*20,big,hit:false,fall:Math.random()<.25});rumble()},Math.max(100,(big?1050:720)*Math.max(.5,1-elapsed/170))}
+function rockSpawn(){let l=Math.floor(Math.random()*3),big=Math.random()<.22;warns.push({lane:l,y:245,ttl:big?1.05:.72,big});setTimeout(()=>{if(!running)return;rocks.push({lane:l,y:-70,size:big?58:36+Math.random()*20,big,hit:false,fall:Math.random()<.25});rumble()},Math.max(100,(big?1050:720)*Math.max(.5,1-elapsed/170)));}
 function addDust(x,y,n){for(let i=0;i<n;i++)dust.push({x,y,vx:(Math.random()-.5)*5,vy:-Math.random()*4,life:25+Math.random()*30,size:2+Math.random()*5})}
 function draw(){ctx.save();if(shake)ctx.translate((Math.random()-.5)*shake,(Math.random()-.5)*shake);ctx.fillStyle='#263642';ctx.fillRect(0,0,800,420);
 // far peaks
