@@ -1584,7 +1584,7 @@ if(bgMusic) bgMusic.load();
     return overlay;
   }
 
-  try{const opened=JSON.parse(localStorage.getItem('atlasOpenedChests')||'[]');document.querySelectorAll('.subboss-chest[data-chest-id]').forEach(ch=>{if(opened.includes(ch.dataset.chestId)){ch.classList.add('is-looted');ch.setAttribute('aria-expanded','true');const lab=ch.querySelector('.subboss-chest-label');if(lab)lab.textContent=ch.dataset.rewardName?'НАЙДЕНО: '+ch.dataset.rewardName.toUpperCase():'СУНДУК ОТКРЫТ';const msg=ch.querySelector('.subboss-empty-message');if(msg&&ch.dataset.rewardName)msg.textContent=(ch.dataset.rewardIcon||'🎁')+' '+ch.dataset.rewardName;}});}catch(e){}
+  try{const opened=JSON.parse(localStorage.getItem('atlasOpenedChests')||'[]');document.querySelectorAll('.subboss-chest[data-chest-id]').forEach(ch=>{if(opened.includes(ch.dataset.chestId)){const msg=ch.querySelector('.subboss-empty-message');if(msg&&ch.dataset.rewardName)msg.textContent=(ch.dataset.rewardIcon||'🎁')+' '+ch.dataset.rewardName;}});}catch(e){}
   document.addEventListener('click', event => {
     const chest = event.target.closest('.subboss-chest');
     if (!chest || chest.dataset.opening === 'true') return;
@@ -1599,7 +1599,7 @@ if(bgMusic) bgMusic.load();
     if (!empty && !target && !rewardName) return;
     let savedOpened=[];
     try{savedOpened=JSON.parse(localStorage.getItem('atlasOpenedChests')||'[]');}catch(e){}
-    if(chestId&&savedOpened.includes(chestId)){chest.classList.add('is-looted');const label=chest.querySelector('.subboss-chest-label');if(label)label.textContent=rewardName?'НАЙДЕНО: '+rewardName.toUpperCase():'СУНДУК ОТКРЫТ';return;}
+    // Previously opened chests remain interactive so their contents can be reviewed again.
 
     chest.dataset.opening = 'true';
     chest.disabled = true;
@@ -1635,12 +1635,11 @@ if(bgMusic) bgMusic.load();
           const inlineMessage = chest.querySelector('.subboss-empty-message');
           if (inlineMessage) inlineMessage.textContent = 'Тут пусто…';
         } else if (rewardName) {
-          chest.classList.add('is-looted');
           chest.setAttribute('aria-expanded','true');
           const inlineMessage = chest.querySelector('.subboss-empty-message');
           if (inlineMessage) inlineMessage.textContent = (rewardIcon||'🎁')+' '+rewardName;
           const label=chest.querySelector('.subboss-chest-label');
-          if(label) label.textContent='НАЙДЕНО: '+rewardName.toUpperCase();
+          if(label) label.textContent='ОТКРЫТЬ СУНДУК';
           if(chestId){let opened=[];try{opened=JSON.parse(localStorage.getItem('atlasOpenedChests')||'[]');}catch(e){}if(!opened.includes(chestId)){opened.push(chestId);localStorage.setItem('atlasOpenedChests',JSON.stringify(opened));}}
         } else {
           window.location.hash = target;
