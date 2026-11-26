@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ритуал круга печатей</title>
+<style>
+:root{--gold:#e6bd70;--stone:#5b5c68;--cream:#e9ddc4;--dark:#0b1018;--glow:#70d8e9}
+*{box-sizing:border-box}html,body{margin:0;background:#090e16;color:var(--cream);font-family:Georgia,serif}body{padding:10px}
+.wrap{max-width:900px;margin:auto;border:4px ridge #99713b;background:radial-gradient(ellipse at center,#252634 0,#11141d 68%);box-shadow:0 0 0 3px #3a291b,0 0 30px #000a;overflow:hidden}
+header{text-align:center;padding:14px 12px 8px;border-bottom:1px solid #80603b;background:linear-gradient(#24212a,#11141c)}
+h1{margin:0;color:#e9c778;font-size:clamp(20px,4vw,30px);text-shadow:2px 2px #38231a;letter-spacing:2px}
+.subtitle{font-size:13px;opacity:.85;margin:8px auto 0;max-width:600px}
+.gamearea{display:grid;grid-template-columns:minmax(0,1fr) 245px;gap:12px;padding:14px}
+.stage{min-height:390px;position:relative;display:grid;place-items:center;border:2px ridge #77603f;background:radial-gradient(circle,#252b37 0,#141923 68%,#0b1017 100%);overflow:hidden}
+.stars{position:absolute;inset:0;background-image:radial-gradient(#b6a36b 1px,transparent 1px),radial-gradient(#748ca0 1px,transparent 1px);background-size:38px 38px,61px 61px;background-position:4px 7px,20px 15px;opacity:.25}
+.circle{position:relative;width:min(76vw,330px);aspect-ratio:1;border-radius:50%;border:4px ridge #8e754a;background:radial-gradient(circle,#222630 0 43%,#11151d 44% 60%,#2b2b32 61% 64%,#10151c 65%);box-shadow:0 0 0 9px #1b1c25,0 0 0 12px #7e6544,0 0 25px #000;transition:filter .3s}
+.circle:before,.circle:after{content:"";position:absolute;inset:12%;border:2px solid #716044;border-radius:50%;opacity:.85}
+.circle:after{inset:24%;border-color:#9b8053}
+.cross{position:absolute;inset:0;display:grid;place-items:center;color:#766548;font-size:clamp(65px,17vw,115px);opacity:.15;pointer-events:none}
+.rune{position:absolute;width:56px;height:56px;border:2px ridge #8d7650;background:linear-gradient(#2b303a,#131820);border-radius:50%;display:grid;place-items:center;font-size:29px;color:#a9a18b;box-shadow:0 4px 0 #080b10, inset 0 0 8px #0008;cursor:pointer;transition:transform .15s,filter .2s,background .2s,border-color .2s}
+.rune:hover{transform:scale(1.08);border-color:#d6b16a}
+.rune.active{color:#fff2c8;border-color:#b9eaff;background:radial-gradient(#6bbbcf,#23404a);box-shadow:0 0 12px #7ce6ff,0 0 25px #42c8e9,0 0 0 3px #a5eaff55;animation:pulse .65s ease-in-out}
+.rune.correct{color:#f9e7a8;border-color:#e8c878;background:radial-gradient(#bb974d,#44331c);box-shadow:0 0 15px #e5bd65}
+.rune.wrong{animation:shake .32s;background:#642d31;border-color:#f37a72}
+.rune:nth-child(1){top:-5%;left:calc(50% - 28px)}.rune:nth-child(2){top:18%;right:-5%}.rune:nth-child(3){bottom:18%;right:-5%}.rune:nth-child(4){bottom:-5%;left:calc(50% - 28px)}.rune:nth-child(5){bottom:18%;left:-5%}.rune:nth-child(6){top:18%;left:-5%}
+@keyframes pulse{50%{transform:scale(1.16)}}@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.particles{position:absolute;inset:0;pointer-events:none;opacity:0;background:radial-gradient(circle,#fff8a8 1px,transparent 2px);background-size:15px 15px;animation:spark 1.5s ease-out}
+@keyframes spark{0%{opacity:0;transform:scale(.4)}30%{opacity:.8}100%{opacity:0;transform:scale(1.5)}}
+.side{border:2px ridge #80603b;background:#141820;padding:12px;display:flex;flex-direction:column;gap:10px}
+.status{font-size:15px;line-height:1.45;text-align:center;min-height:72px;color:#e9d6ae}
+.round{color:#e9c778;font-size:14px;text-align:center;letter-spacing:1px}
+.progress{display:flex;gap:5px;justify-content:center}.pip{height:9px;flex:1;border:1px solid #776143;background:#28252a}.pip.done{background:#d5ad60;box-shadow:0 0 8px #d5ad60}
+button{font-family:inherit;color:var(--cream);cursor:pointer}
+.action{padding:11px 8px;border:2px ridge #a27a42;background:linear-gradient(#392b25,#17151a);color:#e9c778;font-size:15px}
+.action:hover{filter:brightness(1.2)}.action:disabled{opacity:.45;cursor:default}
+.sound{padding:6px;background:none;border:1px solid #54452e;font-size:13px}
+.legend{font-size:12px;opacity:.75;text-align:center;line-height:1.4}
+.result{position:absolute;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;background:#080b11d9;z-index:5;padding:20px}
+.result.show{display:flex;animation:appear .5s}.result h2{color:#edca7a;font-size:26px;text-shadow:0 0 18px #f3d16a}.result p{max-width:440px;line-height:1.5}
+@keyframes appear{from{opacity:0}to{opacity:1}}
+@media(max-width:620px){body{padding:5px}.gamearea{grid-template-columns:1fr;padding:9px}.stage{min-height:330px}.circle{width:min(72vw,285px)}.rune{width:49px;height:49px;font-size:26px}.side{display:grid;grid-template-columns:1fr 1fr;align-items:center}.status{grid-column:1/-1;min-height:58px}.round,.progress,.action,.legend{grid-column:1/-1}.action{min-height:45px}}
+</style></head><body><main class="wrap">
+<header><h1>КРУГ ПЕЧАТЕЙ</h1><p class="subtitle">Восстанови древнюю последовательность. Не торопись: камень помнит каждый неверный знак.</p></header>
+<div class="gamearea"><section class="stage" aria-label="Ритуальный круг"><div class="stars"></div><div class="circle" id="circle"><div class="cross">✧</div><button class="rune" data-r="0" aria-label="Руна солнца">☼</button><button class="rune" data-r="1" aria-label="Руна волны">≈</button><button class="rune" data-r="2" aria-label="Руна глаза">◉</button><button class="rune" data-r="3" aria-label="Руна звезды">✦</button><button class="rune" data-r="4" aria-label="Руна спирали">☯</button><button class="rune" data-r="5" aria-label="Руна трезубца">♆</button></div><div class="particles" id="particles"></div><div class="result" id="result"><h2 id="resultTitle"></h2><p id="resultText"></p><button class="action" id="again">Провести ритуал снова</button></div></section>
+<aside class="side"><div class="round" id="round">ЭТАП 1 / 3</div><div class="progress" id="progress"><span class="pip"></span><span class="pip"></span><span class="pip"></span></div><div class="status" id="status">Нажми «Начать ритуал». Запомни, какие печати вспыхнут, и повтори их в том же порядке.</div><button class="action" id="start">Начать ритуал</button><button class="sound" id="sound">Звук: включён</button><div class="legend">Ошибся — последовательность начнётся заново. Пройди три этапа, чтобы зажечь весь круг.</div></aside></div></main>
+<script>
+const runes=[...document.querySelectorAll('.rune')],statusEl=document.getElementById('status'),start=document.getElementById('start'),roundEl=document.getElementById('round'),pips=[...document.querySelectorAll('.pip')],result=document.getElementById('result'),circle=document.getElementById('circle'),particles=document.getElementById('particles');
+let stage=0,sequence=[],input=[],playing=false,soundOn=true,ctx=null;
+const glyphs=['☼','≈','◉','✦','☯','♆'];
+function audio(){if(!soundOn)return;try{ctx=ctx||new(window.AudioContext||window.webkitAudioContext)();if(ctx.state==='suspended')ctx.resume()}catch(e){}}
+function tone(freq=440,dur=.16,type='sine',vol=.06){if(!soundOn)return;audio();if(!ctx)return;const o=ctx.createOscillator(),g=ctx.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(vol,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+dur);o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+dur)}
+function chime(){tone(660,.18,'sine');setTimeout(()=>tone(880,.23,'sine'),100)}
+function errorSound(){tone(150,.28,'sawtooth',.045);setTimeout(()=>tone(110,.32,'triangle',.04),100)}
+function reset(){stage=0;sequence=[];input=[];playing=false;result.classList.remove('show');runes.forEach(b=>b.classList.remove('active','correct','wrong'));pips.forEach(p=>p.classList.remove('done'));roundEl.textContent='ЭТАП 1 / 3';statusEl.textContent='Нажми «Начать ритуал». Запомни, какие печати вспыхнут, и повтори их в том же порядке.';start.disabled=false;start.textContent='Начать ритуал';circle.style.filter='';}
+function newStage(){stage++;input=[];sequence=Array.from({length:stage+2},()=>Math.floor(Math.random()*6));roundEl.textContent='ЭТАП '+stage+' / 3';statusEl.textContent='Смотри внимательно. Камень показывает порядок печатей…';start.disabled=true;start.textContent='Слушай камень';playing=true;showSequence();}
+async function showSequence(){await wait(500);for(const n of sequence){if(!playing)return;await flash(n);await wait(260)}playing=false;statusEl.textContent='Теперь повтори последовательность, нажимая на руны.';start.textContent='Твой ход';}
+function flash(n){return new Promise(resolve=>{const b=runes[n];b.classList.add('active');tone([330,392,440,523,587,659][n],.23,'sine');setTimeout(()=>{b.classList.remove('active');resolve()},440)})}
+function wait(ms){return new Promise(r=>setTimeout(r,ms))}
+function clickRune(n){if(playing||stage===0||result.classList.contains('show'))return;audio();input.push(n);const b=runes[n];if(sequence[input.length-1]===n){b.classList.add('correct');tone([350,400,470,520,590,680][n],.12,'triangle',.045);setTimeout(()=>b.classList.remove('correct'),260);if(input.length===sequence.length){playing=true;chime();statusEl.textContent='Печати совпали. Камень откликается…';pips[stage-1].classList.add('done');particles.style.animation='none';void particles.offsetWidth;particles.style.animation='spark 1.5s ease-out';circle.style.filter='drop-shadow(0 0 16px #e4c66c)';setTimeout(()=>{circle.style.filter='';if(stage===3)win();else newStage()},800)}}else{b.classList.add('wrong');errorSound();playing=true;statusEl.textContent='Печать отвергла прикосновение. Последовательность сбилась — попробуй этот этап снова.';setTimeout(()=>{b.classList.remove('wrong');playing=false;input=[];runes.forEach(x=>x.classList.remove('correct'));showSequence()},700)}}
+function win(){result.classList.add('show');document.getElementById('resultTitle').textContent='КРУГ ЗАЖЁГСЯ';document.getElementById('resultText').textContent='Последняя печать встала на место. Свет пробежал по древним линиям, и ритуал завершён. Камень на мгновение стал тёплым, будто под ним проснулось сердце.';tone(523,.35);setTimeout(()=>tone(784,.4),150);setTimeout(()=>tone(1046,.6),330);statusEl.textContent='Ритуал успешно завершён!';}
+start.addEventListener('click',()=>{audio();if(stage===0){newStage()}else if(!playing){statusEl.textContent='Нажми руны в правильном порядке.'}});
+runes.forEach(b=>b.addEventListener('click',()=>clickRune(+b.dataset.r)));
+document.getElementById('again').addEventListener('click',()=>{audio();reset();tone(330,.12);});
+document.getElementById('sound').addEventListener('click',e=>{soundOn=!soundOn;e.target.textContent='Звук: '+(soundOn?'включён':'выключен');if(soundOn){audio();tone(440,.1)}});
+reset();
+</script></body></html>
