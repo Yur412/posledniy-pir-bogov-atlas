@@ -23,8 +23,19 @@
 <rect x="105" y="35" width="42" height="24" fill="#3b3546"/><rect x="110" y="29" width="32" height="7" fill="#66556a"/><rect x="114" y="25" width="24" height="4" fill="#88707b"/><rect x="108" y="38" width="36" height="19" fill="#55475b"/><rect x="115" y="40" width="22" height="17" fill="#292638"/><rect x="119" y="43" width="14" height="14" fill="#111425"/><rect x="117" y="40" width="18" height="3" fill="#9b744c"/><rect x="108" y="54" width="36" height="3" fill="#9a7547"/><rect x="105" y="58" width="42" height="3" fill="#6d5740"/><rect x="118" y="45" width="3" height="6" fill="#f5a447"/><rect x="131" y="45" width="3" height="6" fill="#f5a447"/>
 <!-- candles -->
 <rect x="27" y="74" width="3" height="7" fill="#f0bd62"/><rect x="28" y="71" width="1" height="3" fill="#ffe39a"/><rect x="25" y="81" width="7" height="2" fill="#8b6441"/><rect x="45" y="78" width="3" height="6" fill="#f0bd62"/><rect x="46" y="75" width="1" height="3" fill="#ffe39a"/><rect x="43" y="84" width="7" height="2" fill="#8b6441"/>
-<!-- fog pixel layers -->
-<rect x="3" y="72" width="15" height="3" fill="#8791a3" opacity=".23"/><rect x="60" y="77" width="12" height="3" fill="#8791a3" opacity=".22"/><rect x="114" y="80" width="22" height="3" fill="#8791a3" opacity=".2"/>
+<!-- gently drifting pixel fog -->
+<g opacity=".18">
+ <g><rect x="0" y="72" width="18" height="3" fill="#a5b3c5"/><rect x="8" y="75" width="10" height="2" fill="#a5b3c5"/>
+ <animateTransform attributeName="transform" type="translate" values="-20 0;12 0;-20 0" dur="12s" repeatCount="indefinite"/></g>
+ <g><rect x="58" y="77" width="20" height="3" fill="#a5b3c5"/><rect x="65" y="80" width="12" height="2" fill="#a5b3c5"/>
+ <animateTransform attributeName="transform" type="translate" values="18 0;-18 0;18 0" dur="16s" repeatCount="indefinite"/></g>
+ <g><rect x="111" y="73" width="25" height="3" fill="#a5b3c5"/><rect x="119" y="76" width="13" height="2" fill="#a5b3c5"/>
+ <animateTransform attributeName="transform" type="translate" values="-12 0;18 0;-12 0" dur="14s" repeatCount="indefinite"/></g>
+</g>
+<!-- candle flicker -->
+<g opacity=".65"><rect x="26" y="70" width="4" height="3" fill="#ffc85b"><animate attributeName="opacity" values=".4;1;.65;.25;1;.5" dur="1.8s" repeatCount="indefinite"/></rect><rect x="45" y="74" width="3" height="2" fill="#ffc85b"><animate attributeName="opacity" values=".5;1;.3;.85;.45" dur="2.2s" repeatCount="indefinite"/></rect></g>
+<!-- moon shimmer -->
+<rect x="66" y="4" width="23" height="2" fill="#fff0bd" opacity=".15"><animate attributeName="opacity" values=".08;.28;.08" dur="5s" repeatCount="indefinite"/></rect>
 <!-- grass -->
 <rect x="0" y="87" width="160" height="3" fill="#303c35"/><rect x="8" y="83" width="4" height="4" fill="#657044"/><rect x="38" y="86" width="5" height="3" fill="#657044"/><rect x="56" y="83" width="3" height="5" fill="#657044"/><rect x="130" y="85" width="5" height="4" fill="#657044"/><rect x="150" y="82" width="4" height="5" fill="#657044"/>
 </svg>
