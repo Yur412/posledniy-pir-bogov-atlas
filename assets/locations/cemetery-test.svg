@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="90" viewBox="0 0 160 90" shape-rendering="crispEdges">
+<rect width="160" height="90" fill="#111a32"/>
+<rect y="10" width="160" height="40" fill="#233a60"/>
+<rect y="5" width="160" height="7" fill="#172440"/>
+<rect x="17" y="12" width="8" height="5" fill="#304e77"/><rect x="35" y="18" width="12" height="4" fill="#304e77"/><rect x="61" y="10" width="10" height="4" fill="#304e77"/><rect x="83" y="20" width="12" height="4" fill="#304e77"/><rect x="110" y="14" width="8" height="5" fill="#304e77"/><rect x="133" y="21" width="14" height="4" fill="#304e77"/>
+<rect x="66" y="5" width="23" height="20" fill="#f3ce83"/><rect x="70" y="2" width="15" height="3" fill="#f3ce83"/><rect x="62" y="8" width="4" height="14" fill="#e5b767"/><rect x="89" y="9" width="4" height="12" fill="#e5b767"/><rect x="70" y="5" width="15" height="15" fill="#ffe5a7"/>
+<rect y="40" width="160" height="50" fill="#171c2d"/><rect y="46" width="160" height="44" fill="#222b3c"/>
+<!-- far grave silhouettes -->
+<g fill="#34445b"><rect x="8" y="37" width="7" height="12"/><rect x="10" y="34" width="3" height="3"/><rect x="23" y="39" width="6" height="11"/><rect x="25" y="36" width="2" height="3"/><rect x="42" y="38" width="8" height="12"/><rect x="45" y="35" width="2" height="3"/><rect x="57" y="40" width="7" height="10"/><rect x="60" y="37" width="2" height="3"/><rect x="95" y="39" width="8" height="11"/><rect x="98" y="36" width="2" height="3"/><rect x="111" y="37" width="7" height="13"/><rect x="113" y="34" width="3" height="3"/><rect x="132" y="39" width="8" height="12"/><rect x="135" y="36" width="2" height="3"/><rect x="148" y="40" width="6" height="10"/></g>
+<!-- old oak -->
+<rect x="0" y="23" width="9" height="12" fill="#542d22"/><rect x="7" y="19" width="6" height="13" fill="#6c3a25"/><rect x="4" y="14" width="6" height="9" fill="#763d27"/><rect x="0" y="9" width="10" height="7" fill="#bd5a25"/><rect x="10" y="6" width="8" height="7" fill="#e17b2c"/><rect x="18" y="10" width="8" height="5" fill="#bd5a25"/><rect x="3" y="17" width="6" height="5" fill="#e17b2c"/><rect x="22" y="5" width="7" height="4" fill="#bd5a25"/>
+<!-- cemetery fence -->
+<rect x="9" y="49" width="142" height="2" fill="#6b5b4a"/><rect x="12" y="46" width="2" height="9" fill="#806b54"/><rect x="22" y="46" width="2" height="9" fill="#806b54"/><rect x="32" y="46" width="2" height="9" fill="#806b54"/><rect x="42" y="46" width="2" height="9" fill="#806b54"/><rect x="52" y="46" width="2" height="9" fill="#806b54"/><rect x="62" y="46" width="2" height="9" fill="#806b54"/><rect x="72" y="46" width="2" height="9" fill="#806b54"/><rect x="82" y="46" width="2" height="9" fill="#806b54"/><rect x="92" y="46" width="2" height="9" fill="#806b54"/><rect x="102" y="46" width="2" height="9" fill="#806b54"/><rect x="112" y="46" width="2" height="9" fill="#806b54"/><rect x="122" y="46" width="2" height="9" fill="#806b54"/><rect x="132" y="46" width="2" height="9" fill="#806b54"/><rect x="142" y="46" width="2" height="9" fill="#806b54"/>
+<!-- path -->
+<path d="M75 90 L70 78 L82 67 L92 58 L110 53 L116 58 L103 70 L96 82 L103 90Z" fill="#4a4650"/><path d="M80 90 L76 79 L87 69 L96 60 L108 56 L111 59 L101 72 L94 84 L100 90Z" fill="#625b62"/>
+<!-- stones -->
+<g><rect x="15" y="58" width="11" height="15" fill="#55566a"/><rect x="18" y="55" width="5" height="3" fill="#777789"/><rect x="16" y="60" width="2" height="10" fill="#353849"/>
+<rect x="31" y="63" width="12" height="12" fill="#625c69"/><rect x="34" y="60" width="6" height="3" fill="#8b7b7d"/><rect x="33" y="66" width="3" height="6" fill="#3c3b4c"/>
+<rect x="50" y="55" width="8" height="17" fill="#514c62"/><rect x="52" y="52" width="4" height="3" fill="#837b89"/><rect x="51" y="58" width="2" height="11" fill="#33384c"/>
+<rect x="121" y="60" width="10" height="14" fill="#565367"/><rect x="123" y="57" width="6" height="3" fill="#89818d"/><rect x="122" y="63" width="2" height="9" fill="#34384c"/>
+<rect x="139" y="56" width="8" height="17" fill="#4d4b5e"/><rect x="141" y="53" width="4" height="3" fill="#827a89"/><rect x="140" y="59" width="2" height="11" fill="#33364b"/></g>
+<!-- crypt -->
+<rect x="105" y="35" width="42" height="24" fill="#3b3546"/><rect x="110" y="29" width="32" height="7" fill="#66556a"/><rect x="114" y="25" width="24" height="4" fill="#88707b"/><rect x="108" y="38" width="36" height="19" fill="#55475b"/><rect x="115" y="40" width="22" height="17" fill="#292638"/><rect x="119" y="43" width="14" height="14" fill="#111425"/><rect x="117" y="40" width="18" height="3" fill="#9b744c"/><rect x="108" y="54" width="36" height="3" fill="#9a7547"/><rect x="105" y="58" width="42" height="3" fill="#6d5740"/><rect x="118" y="45" width="3" height="6" fill="#f5a447"/><rect x="131" y="45" width="3" height="6" fill="#f5a447"/>
+<!-- candles -->
+<rect x="27" y="74" width="3" height="7" fill="#f0bd62"/><rect x="28" y="71" width="1" height="3" fill="#ffe39a"/><rect x="25" y="81" width="7" height="2" fill="#8b6441"/><rect x="45" y="78" width="3" height="6" fill="#f0bd62"/><rect x="46" y="75" width="1" height="3" fill="#ffe39a"/><rect x="43" y="84" width="7" height="2" fill="#8b6441"/>
+<!-- fog pixel layers -->
+<rect x="3" y="72" width="15" height="3" fill="#8791a3" opacity=".23"/><rect x="60" y="77" width="12" height="3" fill="#8791a3" opacity=".22"/><rect x="114" y="80" width="22" height="3" fill="#8791a3" opacity=".2"/>
+<!-- grass -->
+<rect x="0" y="87" width="160" height="3" fill="#303c35"/><rect x="8" y="83" width="4" height="4" fill="#657044"/><rect x="38" y="86" width="5" height="3" fill="#657044"/><rect x="56" y="83" width="3" height="5" fill="#657044"/><rect x="130" y="85" width="5" height="4" fill="#657044"/><rect x="150" y="82" width="4" height="5" fill="#657044"/>
+</svg>
