@@ -1773,3 +1773,11 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")closeCreatureDetail(
 .other-creature-photo.healer-photo{background-image:url("assets/characters/1537CF6A-C69A-431D-9952-E9EB43454009.png")!important;background-size:cover;background-position:center 25%}
 .creature-detail-portrait.healer{background-image:url("assets/characters/1537CF6A-C69A-431D-9952-E9EB43454009.png");background-size:cover;background-position:center 25%}
 </style>
+
+<style id="uniform-creature-portrait-frames">
+/* Единое положение рамок портретов персонажей в карточках существ */
+.creature-detail-overlay.open{align-items:flex-start;padding:14px 12px;overflow-y:auto}
+.creature-detail-box{width:100%;max-width:680px;max-height:none;margin:0 auto;overflow:visible;padding:14px}
+.creature-detail-portrait{display:block;width:100%;max-width:440px;aspect-ratio:3/4;height:auto;margin:12px auto 16px;border:3px ridge #98703b;box-sizing:border-box;background-size:cover!important;background-position:center 25%!important;background-repeat:no-repeat!important}
+@media(max-width:650px){.creature-detail-overlay.open{padding:10px 8px}.creature-detail-box{padding:10px}.creature-detail-portrait{max-width:100%;margin:8px auto 14px;border-width:2px}}
+</style>
