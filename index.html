@@ -685,7 +685,81 @@ body:has(.games-page:target) #world,body:has(.games-page:target) .characters,bod
 <p><strong>Способности:</strong> Крылатый рывок — быстро меняет позицию. Когтистая расправа — атака D8. Птичий крик — резкий крик, способный ошеломить. Богохульная ненависть — при атаке божественного существа дополнительно бросает D4 и прибавляет результат к основному урону.</p>
 <p><strong>Недостаток:</strong> Патологическая клептомания; тянется к украшениям и не умеет хранить секреты дольше пяти минут.</p>
 <p><strong>Снаряжение:</strong> Два коротких клинка, кожаный жилет, украденные украшения.</p>
-<p><strong>Цель:</strong> Вернуть украденный сундук, не зная, что находится внутри.</p></div></a></div></section>
+<p><strong>Цель:</strong> Вернуть украденный сундук, не зная, что находится внутри.</p></div></a></div><div class="character-d6-box" id="character-d6">
+  <h2 class="character-d6-title">Кубик выбора героя · D6</h2>
+  <p class="character-d6-note">Этот кубик предназначен только для случайного выбора персонажа. Бросок не назначает героя автоматически: результат показывает, кого выбрать по списку.</p>
+  <button type="button" class="character-d6-button" aria-label="Бросить кубик D6 для выбора героя">
+    <span class="character-d6-cube" aria-hidden="true">
+      <svg viewBox="0 0 120 120">
+        <path d="M60 8 105 33 105 87 60 112 15 87 15 33Z" fill="#6c3e2d" stroke="#e6c27b" stroke-width="4"/>
+        <path d="M60 8 60 60 15 33M60 60 105 33M60 60 60 112" fill="none" stroke="#d6a65e" stroke-width="3"/>
+        <path d="M15 33 60 60 105 33 60 8Z" fill="#a76b3d" opacity=".8"/>
+        <path d="M15 33 60 60 60 112 15 87Z" fill="#74442e"/>
+        <path d="M60 60 105 33 105 87 60 112Z" fill="#4a2d25"/>
+        <g fill="#f3dfaa"><circle cx="60" cy="27" r="5"/><circle cx="38" cy="46" r="5"/><circle cx="82" cy="46" r="5"/><circle cx="38" cy="78" r="5"/><circle cx="82" cy="78" r="5"/><circle cx="60" cy="94" r="5"/></g>
+      </svg>
+    </span>
+    <span class="character-d6-name">D6</span>
+    <span class="character-d6-range">1–6 · нажми, чтобы бросить</span>
+    <output class="character-d6-result" aria-live="polite">—</output>
+  </button>
+  <p class="character-d6-character" aria-live="polite">Результат броска появится здесь.</p>
+</div>
+<style>
+.character-d6-box{margin:28px auto 10px;padding:18px 12px;max-width:560px;border:3px ridge #a77b3c;background:linear-gradient(145deg,#29232a,#111720);text-align:center;box-shadow:0 0 0 2px #3b2b1d inset}
+.character-d6-title{color:#f0d29a;font-size:23px;font-weight:normal;margin:6px 0 8px}
+.character-d6-note{font:13px/1.5 system-ui;color:#c8b99b;max-width:460px;margin:0 auto 15px}
+.character-d6-button{display:flex;flex-direction:column;align-items:center;gap:7px;margin:0 auto;border:2px ridge #a77b3c;padding:12px 20px;background:linear-gradient(180deg,#29252a,#151820);color:#eedbb5;cursor:pointer;min-width:190px}
+.character-d6-button:hover{filter:brightness(1.16)}
+.character-d6-button:active{transform:translateY(2px)}
+.character-d6-button.rolling .character-d6-cube{animation:character-d6-tumble .9s cubic-bezier(.2,.75,.25,1)}
+.character-d6-cube{display:block;width:112px;height:112px;filter:drop-shadow(0 7px 5px #0009)}
+.character-d6-cube svg{width:100%;height:100%}
+@keyframes character-d6-tumble{0%{transform:translateY(0) rotate(0) scale(1)}20%{transform:translateY(-20px) rotate(90deg) scale(1.12)}45%{transform:translateY(7px) rotate(230deg) scale(.92)}70%{transform:translateY(-9px) rotate(400deg) scale(1.05)}100%{transform:translateY(0) rotate(720deg) scale(1)}}
+.character-d6-name{font-size:27px;color:#f3d18a;letter-spacing:.08em}
+.character-d6-range{font:11px system-ui;color:#aaa08b}
+.character-d6-result{display:grid;place-items:center;min-width:78px;min-height:56px;padding:2px 16px;border:1px solid #815f35;background:#0f121a;color:#ffe4a8;font-size:34px;text-shadow:0 0 9px #d99e48}
+.character-d6-character{min-height:26px;margin:12px 0 0;color:#e4bd71;font:15px/1.5 system-ui}
+@media(max-width:520px){.character-d6-box{padding:14px 8px}.character-d6-cube{width:88px;height:88px}.character-d6-result{font-size:28px;min-width:60px;min-height:48px}}
+</style>
+<script>
+(function(){
+  const button=document.querySelector('.character-d6-button');
+  if(!button||button.dataset.ready)return;
+  button.dataset.ready='1';
+  const output=button.querySelector('.character-d6-result');
+  const character=document.querySelector('.character-d6-character');
+  const names=['Борислав «Три кишки»','Жоппер Кривозуб','Отец Пузаний','Прокопий Заклинатель','Филимон Четыре Подковы','Клавдия Клювоносная'];
+  let audio=null;
+  function playRollSound(){
+    const toggle=document.querySelector('#sound-toggle');
+    if(toggle&&toggle.getAttribute('aria-pressed')==='false')return;
+    try{
+      audio=audio||new (window.AudioContext||window.webkitAudioContext)();
+      if(audio.state==='suspended')audio.resume();
+      const now=audio.currentTime;
+      const master=audio.createGain();master.gain.setValueAtTime(.0001,now);master.gain.linearRampToValueAtTime(.24,now+.025);master.gain.exponentialRampToValueAtTime(.0001,now+.42);master.connect(audio.destination);
+      for(let n=0;n<5;n++){
+        const t=now+n*.065,osc=audio.createOscillator(),gain=audio.createGain();
+        osc.type=n%2?'triangle':'square';osc.frequency.setValueAtTime(190+Math.random()*180,t);osc.frequency.exponentialRampToValueAtTime(75+Math.random()*70,t+.055);
+        gain.gain.setValueAtTime(.0001,t);gain.gain.linearRampToValueAtTime(.22,t+.006);gain.gain.exponentialRampToValueAtTime(.0001,t+.06);
+        osc.connect(gain);gain.connect(master);osc.start(t);osc.stop(t+.065);
+      }
+      const hit=audio.createOscillator(),hg=audio.createGain();hit.type='triangle';hit.frequency.setValueAtTime(420,now+.34);hit.frequency.exponentialRampToValueAtTime(110,now+.46);hg.gain.setValueAtTime(.0001,now+.34);hg.gain.linearRampToValueAtTime(.35,now+.355);hg.gain.exponentialRampToValueAtTime(.0001,now+.48);hit.connect(hg);hg.connect(master);hit.start(now+.34);hit.stop(now+.49);
+    }catch(e){}
+  }
+  button.addEventListener('click',()=>{
+    if(button.disabled)return;
+    button.disabled=true;button.classList.add('rolling');output.textContent='…';character.textContent='Кубик катится…';
+    playRollSound();
+    window.setTimeout(()=>{
+      const value=window.crypto&&crypto.getRandomValues?(()=>{const a=new Uint32Array(1);crypto.getRandomValues(a);return a[0]%6+1})():Math.floor(Math.random()*6)+1;
+      output.textContent=value;character.textContent=value+' — '+names[value-1];
+      button.classList.remove('rolling');button.disabled=false;
+    },900);
+  });
+})();
+</script></section>
 <section class="char-detail" id="character-borislav">
 <a class="back" href="#characters">← Ко всем персонажам</a>
 <h2 class="char-detail-title">Борислав «Три кишки»</h2>
@@ -883,81 +957,7 @@ body:has(.games-page:target) #world,body:has(.games-page:target) .characters,bod
 <h3>Задача героев</h3>
 <p>Найти Сундук Пустого Места, раскрыть планы Братства, выяснить правду о Голоде и древнем заточении, а главное — не позволить Саверну Велю завершить задуманное. Время ограничено, а исход последнего пира богов зависит от самих героев.</p>
 </article>
-<div class="character-d6-box" id="character-d6">
-  <h2 class="character-d6-title">Кубик выбора героя · D6</h2>
-  <p class="character-d6-note">Этот кубик предназначен только для случайного выбора персонажа. Бросок не назначает героя автоматически: результат показывает, кого выбрать по списку.</p>
-  <button type="button" class="character-d6-button" aria-label="Бросить кубик D6 для выбора героя">
-    <span class="character-d6-cube" aria-hidden="true">
-      <svg viewBox="0 0 120 120">
-        <path d="M60 8 105 33 105 87 60 112 15 87 15 33Z" fill="#6c3e2d" stroke="#e6c27b" stroke-width="4"/>
-        <path d="M60 8 60 60 15 33M60 60 105 33M60 60 60 112" fill="none" stroke="#d6a65e" stroke-width="3"/>
-        <path d="M15 33 60 60 105 33 60 8Z" fill="#a76b3d" opacity=".8"/>
-        <path d="M15 33 60 60 60 112 15 87Z" fill="#74442e"/>
-        <path d="M60 60 105 33 105 87 60 112Z" fill="#4a2d25"/>
-        <g fill="#f3dfaa"><circle cx="60" cy="27" r="5"/><circle cx="38" cy="46" r="5"/><circle cx="82" cy="46" r="5"/><circle cx="38" cy="78" r="5"/><circle cx="82" cy="78" r="5"/><circle cx="60" cy="94" r="5"/></g>
-      </svg>
-    </span>
-    <span class="character-d6-name">D6</span>
-    <span class="character-d6-range">1–6 · нажми, чтобы бросить</span>
-    <output class="character-d6-result" aria-live="polite">—</output>
-  </button>
-  <p class="character-d6-character" aria-live="polite">Результат броска появится здесь.</p>
-</div>
-<style>
-.character-d6-box{margin:28px auto 10px;padding:18px 12px;max-width:560px;border:3px ridge #a77b3c;background:linear-gradient(145deg,#29232a,#111720);text-align:center;box-shadow:0 0 0 2px #3b2b1d inset}
-.character-d6-title{color:#f0d29a;font-size:23px;font-weight:normal;margin:6px 0 8px}
-.character-d6-note{font:13px/1.5 system-ui;color:#c8b99b;max-width:460px;margin:0 auto 15px}
-.character-d6-button{display:flex;flex-direction:column;align-items:center;gap:7px;margin:0 auto;border:2px ridge #a77b3c;padding:12px 20px;background:linear-gradient(180deg,#29252a,#151820);color:#eedbb5;cursor:pointer;min-width:190px}
-.character-d6-button:hover{filter:brightness(1.16)}
-.character-d6-button:active{transform:translateY(2px)}
-.character-d6-button.rolling .character-d6-cube{animation:character-d6-tumble .9s cubic-bezier(.2,.75,.25,1)}
-.character-d6-cube{display:block;width:112px;height:112px;filter:drop-shadow(0 7px 5px #0009)}
-.character-d6-cube svg{width:100%;height:100%}
-@keyframes character-d6-tumble{0%{transform:translateY(0) rotate(0) scale(1)}20%{transform:translateY(-20px) rotate(90deg) scale(1.12)}45%{transform:translateY(7px) rotate(230deg) scale(.92)}70%{transform:translateY(-9px) rotate(400deg) scale(1.05)}100%{transform:translateY(0) rotate(720deg) scale(1)}}
-.character-d6-name{font-size:27px;color:#f3d18a;letter-spacing:.08em}
-.character-d6-range{font:11px system-ui;color:#aaa08b}
-.character-d6-result{display:grid;place-items:center;min-width:78px;min-height:56px;padding:2px 16px;border:1px solid #815f35;background:#0f121a;color:#ffe4a8;font-size:34px;text-shadow:0 0 9px #d99e48}
-.character-d6-character{min-height:26px;margin:12px 0 0;color:#e4bd71;font:15px/1.5 system-ui}
-@media(max-width:520px){.character-d6-box{padding:14px 8px}.character-d6-cube{width:88px;height:88px}.character-d6-result{font-size:28px;min-width:60px;min-height:48px}}
-</style>
-<script>
-(function(){
-  const button=document.querySelector('.character-d6-button');
-  if(!button||button.dataset.ready)return;
-  button.dataset.ready='1';
-  const output=button.querySelector('.character-d6-result');
-  const character=document.querySelector('.character-d6-character');
-  const names=['Борислав «Три кишки»','Жоппер Кривозуб','Отец Пузаний','Прокопий Заклинатель','Филимон Четыре Подковы','Клавдия Клювоносная'];
-  let audio=null;
-  function playRollSound(){
-    const toggle=document.querySelector('#sound-toggle');
-    if(toggle&&toggle.getAttribute('aria-pressed')==='false')return;
-    try{
-      audio=audio||new (window.AudioContext||window.webkitAudioContext)();
-      if(audio.state==='suspended')audio.resume();
-      const now=audio.currentTime;
-      const master=audio.createGain();master.gain.setValueAtTime(.0001,now);master.gain.linearRampToValueAtTime(.24,now+.025);master.gain.exponentialRampToValueAtTime(.0001,now+.42);master.connect(audio.destination);
-      for(let n=0;n<5;n++){
-        const t=now+n*.065,osc=audio.createOscillator(),gain=audio.createGain();
-        osc.type=n%2?'triangle':'square';osc.frequency.setValueAtTime(190+Math.random()*180,t);osc.frequency.exponentialRampToValueAtTime(75+Math.random()*70,t+.055);
-        gain.gain.setValueAtTime(.0001,t);gain.gain.linearRampToValueAtTime(.22,t+.006);gain.gain.exponentialRampToValueAtTime(.0001,t+.06);
-        osc.connect(gain);gain.connect(master);osc.start(t);osc.stop(t+.065);
-      }
-      const hit=audio.createOscillator(),hg=audio.createGain();hit.type='triangle';hit.frequency.setValueAtTime(420,now+.34);hit.frequency.exponentialRampToValueAtTime(110,now+.46);hg.gain.setValueAtTime(.0001,now+.34);hg.gain.linearRampToValueAtTime(.35,now+.355);hg.gain.exponentialRampToValueAtTime(.0001,now+.48);hit.connect(hg);hg.connect(master);hit.start(now+.34);hit.stop(now+.49);
-    }catch(e){}
-  }
-  button.addEventListener('click',()=>{
-    if(button.disabled)return;
-    button.disabled=true;button.classList.add('rolling');output.textContent='…';character.textContent='Кубик катится…';
-    playRollSound();
-    window.setTimeout(()=>{
-      const value=window.crypto&&crypto.getRandomValues?(()=>{const a=new Uint32Array(1);crypto.getRandomValues(a);return a[0]%6+1})():Math.floor(Math.random()*6)+1;
-      output.textContent=value;character.textContent=value+' — '+names[value-1];
-      button.classList.remove('rolling');button.disabled=false;
-    },900);
-  });
-})();
-</script>
+
 </section>
 <section class="dice-page" id="dice">
 <a class="back" href="#world">← Вернуться к карте острова</a>
