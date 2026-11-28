@@ -1790,7 +1790,17 @@ herbalist:{title:"ТРАВНИЦА",role:"Хозяйка Пепельной То
 };const d=data[which];if(!d)return;document.getElementById("creature-detail-portrait").className="creature-detail-portrait "+which;document.getElementById("creature-detail-title").textContent=d.title;document.getElementById("creature-detail-role").textContent=d.role;document.getElementById("creature-detail-content").innerHTML=d.content;document.getElementById("creature-detail-overlay").classList.add("open");document.body.style.overflow="hidden"}
 function closeCreatureDetail(){document.getElementById("creature-detail-overlay").classList.remove("open");document.body.style.overflow=""}
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeCreatureDetail()});
-</script></body></html>
+</script>
+<style id="mobile-overflow-guard">
+/* Keep atlas location cards and images inside narrow mobile viewports. */
+html,body{max-width:100%;overflow-x:hidden}
+.detail{width:calc(100% - 12px);min-width:0}
+.detail img,.detail video,.detail iframe{max-width:100%;min-width:0}
+.detail .location-hero,.detail .tile img{width:100%;max-width:100%;display:block}
+.detail .subtiles,.detail .tile{min-width:0}
+@media(max-width:520px){.detail{width:calc(100% - 12px);margin:6px auto;padding:8px}.detail .location-hero{border-width:2px}}
+</style>
+</body></html>
 <style id="healer-portrait-style">
 .other-creature-photo.healer-photo{background-image:url("assets/characters/1537CF6A-C69A-431D-9952-E9EB43454009.png")!important;background-size:cover;background-position:center 25%}
 .creature-detail-portrait.healer{background-image:url("assets/characters/1537CF6A-C69A-431D-9952-E9EB43454009.png");background-size:cover;background-position:center 25%}
