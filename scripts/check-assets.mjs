@@ -1,21 +1,16 @@
 import fs from "node:fs";
 import path from "node:path";
-
 const root = process.cwd();
 const scanExt = new Set([".html", ".css", ".js"]);
 const ignoreDirs = new Set([".git", "node_modules", ".github"]);
 const sources = [];
 function walk(dir) {
   for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (ent.isDirectory()) {
-      if (!ignoreDirs.has(ent.name)) walk(path.join(dir, ent.name));
-    } else if (scanExt.has(path.extname(ent.name).toLowerCase())) {
-      sources.push(path.join(dir, ent.name));
-    }
+    if (ent.isDirectory()) { if (!ignoreDirs.has(ent.name)) walk(path.join(dir, ent.name)); }
+    else if (scanExt.has(path.extname(ent.name).toLowerCase())) sources.push(path.join(dir, ent.name));
   }
 }
 walk(root);
-
 const missing = new Set();
 const adobe = [];
 const localRefs = [];
@@ -37,15 +32,13 @@ for (const file of sources) {
     if (!fs.existsSync(target)) missing.add(path.relative(root, target));
   }
 }
-console.log(\`Scanned \${sources.length} HTML/CSS/JS files; found \${localRefs.length} local resource references.\`);
+console.log("Scanned " + sources.length + " HTML/CSS/JS files; found " + localRefs.length + " local resource references.");
 if (missing.size) {
   console.error("Missing local resources:");
   for (const file of [...missing].sort()) console.error(" - " + file);
   process.exitCode = 1;
-} else {
-  console.log("PASS: all explicitly referenced local resources exist.");
-}
+} else console.log("PASS: all explicitly referenced local resources exist.");
 if (adobe.length) {
-  console.warn(\`WARNING: \${adobe.length} Adobe-hosted links remain (external availability is not checked).\`);
-  for (const item of adobe) console.warn(\` - \${item.file}: \${item.ref}\`);
+  console.warn("WARNING: " + adobe.length + " Adobe-hosted links remain (external availability is not checked).");
+  for (const item of adobe) console.warn(" - " + item.file + ": " + item.ref);
 }
