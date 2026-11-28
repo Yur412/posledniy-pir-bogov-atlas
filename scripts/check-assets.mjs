@@ -19,14 +19,14 @@ walk(root);
 const missing = new Set();
 const adobe = [];
 const localRefs = [];
-const refPattern = /(?:src|href)\\s*=\\s*["']([^"']+)["']|url\\(\\s*["']?([^)'" ]+)["']?\\s*\\)/gi;
+const refPattern = /(?:src|href)\s*=\s*["']([^"']+)["']|url\(\s*["']?([^)'" ]+)["']?\s*\)/gi;
 for (const file of sources) {
   const text = fs.readFileSync(file, "utf8");
   let match;
   while ((match = refPattern.exec(text))) {
     const ref = (match[1] || match[2] || "").trim();
-    if (!ref || /^(?:[a-z][a-z0-9+.-]*:|#|\\/\\/|data:|atlasdata:)/i.test(ref)) {
-      if (/^https?:\\/\\/(?:www\\.)?at\\.adobe\\.com\\//i.test(ref)) adobe.push({ file: path.relative(root, file), ref });
+    if (!ref || /^(?:[a-z][a-z0-9+.-]*:|#|\/\/|data:|atlasdata:)/i.test(ref)) {
+      if (/^https?:\/\/(?:www\.)?at\.adobe\.com\//i.test(ref)) adobe.push({ file: path.relative(root, file), ref });
       continue;
     }
     const clean = decodeURIComponent(ref.split(/[?#]/, 1)[0]);
@@ -37,7 +37,7 @@ for (const file of sources) {
     if (!fs.existsSync(target)) missing.add(path.relative(root, target));
   }
 }
-console.log(`Scanned ${sources.length} HTML/CSS/JS files; found ${localRefs.length} local resource references.`);
+console.log(\`Scanned \${sources.length} HTML/CSS/JS files; found \${localRefs.length} local resource references.\`);
 if (missing.size) {
   console.error("Missing local resources:");
   for (const file of [...missing].sort()) console.error(" - " + file);
@@ -46,6 +46,6 @@ if (missing.size) {
   console.log("PASS: all explicitly referenced local resources exist.");
 }
 if (adobe.length) {
-  console.warn(`WARNING: ${adobe.length} Adobe-hosted links remain (external availability is not checked).`);
-  for (const item of adobe) console.warn(` - ${item.file}: ${item.ref}`);
+  console.warn(\`WARNING: \${adobe.length} Adobe-hosted links remain (external availability is not checked).\`);
+  for (const item of adobe) console.warn(\` - \${item.file}: \${item.ref}\`);
 }
