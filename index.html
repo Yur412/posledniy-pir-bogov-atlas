@@ -448,7 +448,7 @@ body:has(.games-page:target) #world,body:has(.games-page:target) .characters,bod
 .game-card:hover,.game-card:focus{transform:translateY(-2px);filter:brightness(1.15);outline:2px solid #d7aa5b}
 .game-symbol{font-size:38px;margin-bottom:6px}.game-card h3{margin:5px 0;font-size:18px}.game-card p{font:12px/1.5 system-ui;color:#cfc2a8;margin:5px 0}
 @media(max-width:650px){.games-page{margin:6px;padding:10px}.games-grid{gap:8px}.game-card{padding:10px 7px}.game-card h3{font-size:15px}.game-card p{font-size:11px}}
-</style></head><body><audio id="bg-music" playsinline="" preload="auto" src="assets/music/1-Тёмная Русь.mp3"></audio>
+</style></head><body><audio id="bg-music" playsinline="" preload="auto" src="assets/music/2-Underneath the Stars.mp3"></audio>
 <header><div class="brand">✦ Последний пир богов ✦</div><a class="story-round-button" href="#stories" aria-label="Открыть истории"><span class="story-round-art" aria-hidden="true"></span><span class="story-round-label">ИСТОРИИ</span></a><nav class="tabs"><a href="#world">Карта мира</a><a href="#characters">Персонажи</a><a href="#bestiary">Бестиарий</a><a href="#games">Игры</a><a href="#dice">Кубики</a></nav><div class="sound-controls">
 <button aria-expanded="false" aria-controls="sound-settings" id="sound-settings-toggle" type="button">⚙ Настройки звука</button>
 <div id="sound-settings" class="sound-settings" hidden>
@@ -999,7 +999,6 @@ body:has(.games-page:target) #world,body:has(.games-page:target) .characters,bod
   if(!music || !soundButton) return;
 
   const musicTracks = [
-    'assets/music/1-Тёмная Русь.mp3',
     'assets/music/2-Underneath the Stars.mp3'
   ];
   let musicTrackIndex = 0;
